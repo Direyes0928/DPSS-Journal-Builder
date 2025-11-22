@@ -1389,114 +1389,14 @@
         }
 
         // 2025-11-21 // ORIGINAL journal text generator (from template)
-        // 2025-11-21 NEW: generic Journal Builder export based on visible sections + fields
-        const generateJournalText = () => {
-            // // 2025-11-21 NEW: helper to trim text safely
-            const safeText = (el) => (el && el.textContent ? el.textContent.trim() : "").replace(/\s+/g, " ");
-
-            // // 2025-11-21 NEW: helper to get a label for a field
-            const getFieldLabel = (field) => {
-                if (!field) return "";
-
-                // look for a <label> in the same container (most of your layout)
-                const wrapper = field.closest("div");
-                if (wrapper) {
-                    const lbl = wrapper.querySelector("label");
-                    if (lbl) return safeText(lbl);
-                }
-
-                // fallback to aria-label, placeholder, name, or id
-                if (field.getAttribute("aria-label")) return field.getAttribute("aria-label");
-                if (field.placeholder) return field.placeholder;
-                if (field.name) return field.name;
-                if (field.id) return field.id;
-                return "Field";
-            };
-
-            // // 2025-11-21 NEW: helper to get value in human text form
-            const getFieldValue = (field) => {
-                if (!field) return "";
-
-                const tag = (field.tagName || "").toLowerCase();
-                const type = (field.type || "").toLowerCase();
-
-                if (tag === "textarea") {
-                    return field.value || "";
-                }
-
-                if (tag === "select") {
-                    return field.options && field.selectedIndex >= 0
-                        ? field.options[field.selectedIndex].text || field.value || ""
-                        : field.value || "";
-                }
-
-                if (type === "checkbox") {
-                    return field.checked ? "Yes" : "No";
-                }
-
-                if (type === "radio") {
-                    // only record a radio individually if it is checked
-                    return field.checked ? (field.value || "Yes") : "";
-                }
-
-                // text / date / number / etc
-                return field.value || "";
-            };
-
-            // // 2025-11-21 NEW: collect all sections
-            const sectionCards = Array.from(document.querySelectorAll(".section-card"));
-            const allSectionText = [];
-
-            sectionCards.forEach((card) => {
-                // skip admin-only card entirely
-                if (card.closest(".admin-only")) return;
-
-                const sectionLabel = safeText(card.querySelector(".section-label"));
-                const sectionTitle = safeText(card.querySelector(".section-title"));
-
-                const lines = [];
-
-                // Section header line
-                if (sectionTitle) {
-                    if (sectionLabel) {
-                        lines.push(`${sectionLabel} – ${sectionTitle}`);
-                    } else {
-                        lines.push(sectionTitle);
-                    }
-                }
-
-                // Find all inputs, selects, textareas inside this section
-                const fields = Array.from(
-                    card.querySelectorAll("input, select, textarea")
-                );
-
-                fields.forEach((field) => {
-                    // skip buttons / hidden / admin-only controls
-                    const type = (field.type || "").toLowerCase();
-                    if (["button", "submit", "reset", "hidden"].includes(type)) return;
-                    if (field.closest(".admin-only")) return;
-
-                    const label = getFieldLabel(field);
-                    const value = getFieldValue(field);
-
-                    // If you want to show *every* question, even when blank, remove this "if"
-                    // and always push the line.
-                    // For now we include empty fields too so it mirrors the template.
-                    const showEvenIfBlank = true;
-
-                    if (showEvenIfBlank || value) {
-                        lines.push(`${label}: ${value}`);
-                    }
-                });
-
-                if (lines.length) {
-                    allSectionText.push(lines.join("\n"));
-                }
-            });
-
-            // // 2025-11-21 NEW: join sections with a blank line between them
-            return allSectionText.join("\n\n");
-        };
+        function generateJournalText() {
+            // Simple demo: just output a static string. Replace with real logic as needed.
+            return '--- Journal Entry ---\n' +
+                'Date: ' + (document.getElementById('journalDate')?.value || '') + '\n' +
+                'Worker: ' + (document.getElementById('workerName')?.value || '') + '\n' +
+                'Template: ' + (document.getElementById('templateSelector')?.value || '') + '\n' +
+                '\n[General/Household/Other fields would go here]\n';
+        }
 
         // 2025-11-21 // NEW/ORIGINAL: wire Journal Export buttons
         function attachJournalHandlers() {
