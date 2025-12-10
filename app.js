@@ -521,8 +521,50 @@ const originalRenderTemplateSections = renderTemplateSections;
 renderTemplateSections = function(tpl) {
     originalRenderTemplateSections(tpl);
     // Small timeout to allow DOM inserts
-    setTimeout(() => setupLazySelects(document.getElementById('dynamicCoreSections') || document), 50);
+    setTimeout(() => {
+        setupLazySelects(document.getElementById('dynamicCoreSections') || document);
+        try { if (typeof enableSpellcheck === 'function') enableSpellcheck(document.getElementById('dynamicCoreSections') || document); } catch (e) {}
+    }, 50);
 };
+
+// Enable browser spellcheck on journal input fields and observe dynamically added fields
+function enableSpellcheck(root=document) {
+    try {
+        const scope = root || document;
+        const applyTo = (el) => {
+            if (!el) return;
+            if (el.setAttribute) {
+                el.setAttribute('spellcheck', 'true');
+                el.setAttribute('autocorrect', 'on');
+                el.setAttribute('autocapitalize', 'sentences');
+            }
+        };
+
+        const els = scope.querySelectorAll('textarea.journal-input, input.journal-input[type="text"]');
+        els.forEach(e => applyTo(e));
+
+        // Install a MutationObserver once to catch dynamically injected fields
+        if (!window._ssdSpellcheckObserver) {
+            const mo = new MutationObserver(muts => {
+                muts.forEach(m => {
+                    m.addedNodes && m.addedNodes.forEach(node => {
+                        if (!node) return;
+                        if (node.nodeType !== 1) return;
+                        if (node.matches && (node.matches('textarea.journal-input') || node.matches('input.journal-input[type="text"]'))) {
+                            applyTo(node);
+                        }
+                        const nested = node.querySelectorAll && node.querySelectorAll('textarea.journal-input, input.journal-input[type="text"]');
+                        if (nested && nested.length) nested.forEach(n => applyTo(n));
+                    });
+                });
+            });
+            mo.observe(document.body, { childList: true, subtree: true });
+            window._ssdSpellcheckObserver = mo;
+        }
+    } catch (e) {
+        console.warn('enableSpellcheck failed:', e);
+    }
+}
 
 // --- Header search suggestion helpers ---
 function getOrCreateHeaderSearchContainer() {
