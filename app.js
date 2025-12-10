@@ -146,10 +146,16 @@ function buildJournalOutput() {
                             const subfields = row.querySelectorAll('.repeatable-inner input, .repeatable-inner select');
                             subfields.forEach((sf, sfi) => {
                                 const sublabel = sf.getAttribute('placeholder') || '';
-                                let val = '';
-                                if (sf.tagName === 'INPUT' || sf.tagName === 'TEXTAREA') val = sf.value;
-                                else if (sf.tagName === 'SELECT') val = sf.options[sf.selectedIndex]?.text || '';
-                                output += `    ${sublabel}:\n    ${val}\n`;
+                                    // 2025-12-09 new
+                                    if (!sublabel || !sublabel.trim()) return;
+                                    // 2025-12-09 new
+                                    const sLower = sublabel.trim().toLowerCase();
+                                    // 2025-12-09 new
+                                    if (sLower === 'field' || sLower === ':') return;
+                                    let val = '';
+                                    if (sf.tagName === 'INPUT' || sf.tagName === 'TEXTAREA') val = sf.value;
+                                    else if (sf.tagName === 'SELECT') val = sf.options[sf.selectedIndex]?.text || '';
+                                    output += `    ${sublabel}:\n    ${val}\n`;
                             });
                         });
                     } else {
@@ -158,7 +164,13 @@ function buildJournalOutput() {
                         let val = '';
                         if (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA') val = field.value;
                         else if (field.tagName === 'SELECT') val = field.options[field.selectedIndex]?.text || '';
-                        output += `  ${label}:\n  ${val}\n`;
+                            // 2025-12-09 new
+                            if (!label || !label.trim()) return;
+                            // 2025-12-09 new
+                            const lower = label.trim().toLowerCase();
+                            // 2025-12-09 new
+                            if (lower === 'field' || lower === ':') return;
+                            output += `  ${label}:\n  ${val}\n`;
                     }
                 });
                 output += '\n';
