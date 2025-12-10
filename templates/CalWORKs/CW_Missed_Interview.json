@@ -1,0 +1,123 @@
+{
+  "id": "CW_Missed_Interview",
+  "name": "CalWORKs – Missed Interview",
+  "file": "CW_Missed_Interview.json",
+  "program": "CalWORKs",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+
+  "sections": [
+
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        { "id": "shortDescription", "label": "Short Description", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_2",
+      "title": "ACTION",
+      "fields": [
+        {
+          "id": "interviewAction",
+          "label": "Missed Interview Action",
+          "type": "choice",
+          "choices": [
+            "Missed — Appointment Letter Sent",
+            "Missed — Voicemail Left",
+            "Missed — Rescheduled",
+            "Missed — No Contact",
+            "Missed — Good Cause Evaluation Needed",
+            "Other"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_3",
+      "title": "INTERVIEW DETAILS",
+      "fields": [
+        { "id": "scheduledDate", "label": "Scheduled Interview Date", "type": "date" },
+        { "id": "scheduledMethod", "label": "Interview Method", "type": "choice",
+          "choices": ["Phone", "In Person", "Video", "Tele-Interview"] },
+        { "id": "attemptedContact", "label": "Contact Attempts Made", "type": "textarea" },
+        {
+          "id": "rescheduleOffered",
+          "label": "Reschedule Offered?",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+        { "id": "rescheduleDate", "label": "Rescheduled Date (If Applicable)", "type": "date" }
+      ]
+    },
+
+    {
+      "id": "section_4",
+      "title": "CONTACT ATTEMPTS",
+      "fields": [
+        {
+          "id": "contactAttempts",
+          "label": "Contact Attempts",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "attemptDate", "label": "Attempt Date", "type": "date" },
+            { "id": "method", "label": "Method", "type": "choice",
+              "choices": ["Phone Call", "Voicemail", "Letter", "Text", "Email"] },
+            { "id": "result", "label": "Result", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_5",
+      "title": "GOOD CAUSE REVIEW",
+      "fields": [
+        {
+          "id": "goodCause",
+          "label": "Good Cause Determination",
+          "type": "choice",
+          "choices": [
+            "Good Cause Established",
+            "Good Cause Not Established",
+            "Pending Verification",
+            "Not Applicable"
+          ]
+        },
+        { "id": "goodCauseNotes", "label": "Good Cause Notes", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_6",
+      "title": "NOTICE OF ACTION (NOA)",
+      "fields": [
+        {
+          "id": "noaType",
+          "label": "NOA Type",
+          "type": "choice",
+          "choices": [
+            "Missed Interview — Appointment Letter",
+            "Missed Interview — Denial NOA",
+            "Missed Interview — Pending Additional Information",
+            "Not Required"
+          ]
+        },
+        { "id": "noaDate", "label": "NOA Date", "type": "date" }
+      ]
+    },
+
+    {
+      "id": "section_7",
+      "title": "FINAL NOTES",
+      "fields": [
+        { "id": "finalNotes", "label": "Final Notes", "type": "textarea" }
+      ]
+    }
+
+  ]
+}

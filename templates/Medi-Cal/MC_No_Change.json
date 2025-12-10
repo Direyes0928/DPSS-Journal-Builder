@@ -1,0 +1,196 @@
+{
+  "id": "mc_no_change",
+  "name": "Medi-Cal – No Change",
+  "program": "Medi-Cal",
+  "file": "MC_No_Change.json", 
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+
+  "sections": [
+    {
+  "id": "section_1",
+  "title": "SHORT DESCRIPTION",
+  "fields": [
+    {
+      "id": "shortDescription",
+      "label": "Short Description",
+      "type": "note",
+      "content": "MC: Case Reviewed"
+    }
+  ]
+},
+{
+  
+{
+  "id": "section_3",
+  "title": "FAMILY CONTACT",
+  "fields": [
+    {
+      "id": "contactSource",
+      "label": "Source",
+      "type": "choice",
+      "choices": [
+        "Phone",
+        "In Person",
+        "Mail",
+        "Email",
+        "Fax",
+        "Client Portal",
+        "Other"
+      ]
+    },
+    {
+      "id": "familyContactDate",
+      "label": "Family Contact Date",
+      "type": "date"
+    },
+    {
+      "id": "familyContactWith",
+      "label": "Family Contact Conducted With",
+      "type": "text"
+    },
+    {
+      "id": "familyAuthentication",
+      "label": "Family Authentication (Specify what authentication factors were used)",
+      "type": "textarea"
+    }
+  ]
+},
+{
+  "id": "section_4",
+  "title": "INFORMATION REPORTED",
+  "fields": [
+    {
+      "id": "infoReportedStatic",
+      "label": "Information Reported",
+      "type": "note",
+      "content": "No Change"
+    },
+    {
+      "id": "infoReportedNotes",
+      "label": "Additional Notes (If applicable)",
+      "type": "textarea"
+    }
+  ]
+},
+{
+  "id": "section_5",
+  "title": "REASON FOR NO CHANGE",
+  "fields": [
+    {
+      "id": "reasonNoChange",
+      "label": "Reason for No Change",
+      "type": "note",
+      "content": "No changes to case circumstances were reported or verified."
+    }
+  ]
+},
+{
+  "id": "section_6",
+  "title": "IEVS / PVS / NHR / MEDS",
+  "fields": [
+    {
+      "id": "ievsNote",
+      "label": "IEVS Information",
+      "type": "note",
+      "content": "All IEVS, PVS, and NHR reports are to be reviewed and dispositioned each time the case is touched. Complete the drop down for each IEVS report below."
+    },
+    {
+      "id": "ievsApplicant",
+      "label": "IEVS Applicant Report",
+      "type": "choice",
+      "choices": [
+        "Reviewed – No Change",
+        "Reviewed – Requires Action",
+        "Reviewed – Not Applicable",
+        "IEVS Not Returned",
+        "Other (Specify)"
+      ]
+    },
+    {
+      "id": "pvsReport",
+      "label": "Payment Verification System (PVS)",
+      "type": "choice",
+      "choices": [
+        "Reviewed – No Change",
+        "Reviewed – Requires Action",
+        "Reviewed – Not Applicable",
+        "PVS Not Returned",
+        "Other (Specify)"
+      ]
+    },
+    {
+      "id": "nhrReport",
+      "label": "New Hire Registry (NHR)",
+      "type": "choice",
+      "choices": [
+        "Reviewed – No Change",
+        "Reviewed – Requires Action",
+        "Reviewed – Not Applicable",
+        "Hit – Confirmed Not the Client",
+        "NHR Not Returned",
+        "Other (Specify)"
+      ]
+    },
+    {
+      "id": "medsAlerts",
+      "label": "Medi-Cal Eligibility Data System (MEDS) Alerts",
+      "type": "choice",
+      "choices": [
+        "Reviewed – No Discrepancy",
+        "Reviewed – Requires Action",
+        "Reviewed – Not Applicable",
+        "Other (Specify)"
+      ]
+    }
+  ]
+},
+{
+  "id": "section_7",
+  "title": "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS",
+  "fields": [
+    {
+      "id": "edbcResults",
+      "label": "EDBC Results",
+      "type": "choice",
+      "choices": [
+        "EDBC Results: No Change",
+        "EDBC Results: Approved",
+        "EDBC Results: Denied",
+        "EDBC Results: Pending",
+        "EDBC Results: Other"
+      ]
+    }
+  ]
+},
+{
+  "id": "section_8",
+  "title": "NOTICE OF ACTION (NOA)",
+  "fields": [
+    {
+      "id": "noaStatus",
+      "label": "Notice of Action (NOA)",
+      "type": "choice",
+      "choices": [
+        "NOA: No Action",
+        "NOA: Generated",
+        "NOA: Reviewed",
+        "NOA: Provided to Customer",
+        "NOA: Not Required",
+        "NOA: Other"
+      ]
+    }
+  
+      ]
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

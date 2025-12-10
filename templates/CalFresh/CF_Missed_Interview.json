@@ -1,0 +1,221 @@
+{
+  "id": "cf_missed_interview",
+  "name": "CalFresh \u2013 Missed Interview",
+  "program": "CalFresh",
+  "file": "CF_MissedInterview.json",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "Short Description",
+          "type": "note",
+          "content": "MISSED INTERVIEW ACTION"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "APPLICATION & INTERVIEW DETAILS",
+      "fields": [
+        {
+          "id": "appType",
+          "label": "Application / Recertification",
+          "type": "choice",
+          "choices": [
+            "Application",
+            "Recertification"
+          ]
+        },
+        {
+          "id": "interviewMethod",
+          "label": "Interview Method",
+          "type": "choice",
+          "choices": [
+            "Telephone",
+            "In Person",
+            "Video Call",
+            "Other"
+          ]
+        },
+        {
+          "id": "interviewDateTime",
+          "label": "Interview Date and Time",
+          "type": "text"
+        },
+        {
+          "id": "language",
+          "label": "Language",
+          "type": "choice",
+          "choices": [
+            "English",
+            "Spanish",
+            "Vietnamese",
+            "Chinese",
+            "Arabic",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "FIRST CALL ATTEMPT",
+      "fields": [
+        {
+          "id": "firstCallNumber",
+          "label": "Phone Number",
+          "type": "text"
+        },
+        {
+          "id": "firstCallResult",
+          "label": "Result",
+          "type": "choice",
+          "choices": [
+            "Left Voicemail",
+            "No Answer",
+            "Wrong Number",
+            "Disconnected",
+            "Contacted \u2013 Unable to Complete Interview",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "SECOND CALL ATTEMPT",
+      "fields": [
+        {
+          "id": "secondCallNumber",
+          "label": "Phone Number",
+          "type": "text"
+        },
+        {
+          "id": "secondCallResult",
+          "label": "Result",
+          "type": "choice",
+          "choices": [
+            "Left Voicemail",
+            "No Answer",
+            "Wrong Number",
+            "Disconnected",
+            "Contacted \u2013 Unable to Complete Interview",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "IEVS / PVS / NHR / MEDS",
+      "fields": [
+        {
+          "id": "ievsApplicant",
+          "label": "IEVS Applicant Report",
+          "type": "choice",
+          "choices": [
+            "Reviewed \u2013 No Change",
+            "Reviewed \u2013 Requires Action",
+            "Reviewed \u2013 Not Applicable",
+            "IEVS Not Returned",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "pvsReport",
+          "label": "Payment Verification System (PVS)",
+          "type": "choice",
+          "choices": [
+            "Reviewed \u2013 No Change",
+            "Reviewed \u2013 Requires Action",
+            "Reviewed \u2013 Not Applicable",
+            "PVS Not Returned",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "nhrReport",
+          "label": "New Hire Registry (NHR)",
+          "type": "choice",
+          "choices": [
+            "Reviewed \u2013 No Change",
+            "Reviewed \u2013 Requires Action",
+            "Reviewed \u2013 Not Applicable",
+            "Hit \u2013 Confirmed Not the Client",
+            "NHR Not Returned",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "medsAlerts",
+          "label": "Medi-Cal Eligibility Data System (MEDS) Alerts",
+          "type": "choice",
+          "choices": [
+            "Reviewed \u2013 No Discrepancy",
+            "Reviewed \u2013 Requires Action",
+            "Reviewed \u2013 Not Applicable",
+            "Other (Specify):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "FIRST CONTACT RESOLUTION",
+      "fields": [
+        {
+          "id": "fcrImpact",
+          "label": "Impact to Other Programs",
+          "type": "choice",
+          "choices": [
+            "No Impact",
+            "Impact Identified",
+            "Referred to Worker",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "EXPEDITED SERVICE",
+      "fields": [
+        {
+          "id": "expeditedNote",
+          "label": "Expedited Service",
+          "type": "note",
+          "content": "Ineligible. CF HH did not complete the interview."
+        }
+      ]
+    },
+    {
+      "id": "section_8",
+      "title": "EDBC RESULTS",
+      "fields": [
+        {
+          "id": "edbcNote",
+          "label": "EDBC Results",
+          "type": "note",
+          "content": "Negative action EDBC not ran. Customer schedule updated to \u201cNo Show\u201d to allow automated process in CalSAWS."
+        }
+      ]
+    },
+    {
+      "id": "section_9",
+      "title": "NOTICE OF ACTION (NOA)",
+      "fields": [
+        {
+          "id": "noaNote",
+          "label": "NOA",
+          "type": "note",
+          "content": "No action. Automated process in CalSAWS."
+        }
+      ]
+    }
+  ]
+}

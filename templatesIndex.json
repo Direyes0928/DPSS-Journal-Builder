@@ -1,0 +1,266 @@
+{
+  "CalFresh": [
+    {
+      "id": "cf_application",
+      "name": "CalFresh – Application",
+      "file": "CF_Application.json",
+      "program": "CalFresh",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "cf_application_interview_scheduled",
+      "name": "CalFresh – Application Interview Scheduled",
+      "file": "CF_Application_Interview_Scheduled.json",
+      "program": "CalFresh",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "cf_application_withdrawal",
+      "name": "CalFresh – Application Withdrawal",
+      "file": "CF_Application_Withdrawal.json",
+      "program": "CalFresh",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "cf_benefit_replacement_disaster",
+      "name": "CalFresh – Benefit Replacement (Misfortune/Disaster)",
+      "file": "CF_Benefit_Replacement_Misfortune.json",
+      "program": "CalFresh",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "cf_benefit_replacement_power_outage",
+      "name": "CalFresh – Benefit Replacement (Power Outage)",
+      "file": "CF_Benefit_Replacement_Power_Outage.json",
+      "program": "CalFresh",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "cf_changes",
+      "name": "CalFresh – Changes",
+      "file": "CF_Changes.json",
+      "program": "CalFresh",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "cf_expedited_service_screening",
+      "name": "CalFresh – Expedited Service Screening",
+      "file": "CF_Expedited_Service_Screening.json",
+      "program": "CalFresh",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "cf_failure_to_provide",
+      "name": "CalFresh – Failure to Provide",
+      "file": "CF_Failure_To_Provide.json",
+      "program": "CalFresh",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "cf_incoming_ict_processed",
+      "name": "CalFresh – Incoming ICT Processed",
+      "file": "CF_Incoming_ICT_Processed.json",
+      "program": "CalFresh",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "cf_missed_interview",
+      "name": "CalFresh – Missed Interview",
+      "file": "CF_Missed_Interview.json",
+      "program": "CalFresh",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "cf_no_change",
+      "name": "CalFresh – No Change",
+      "file": "CF_No_Change.json",
+      "program": "CalFresh",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "cf_recertification",
+      "name": "CalFresh – Recertification",
+      "file": "CF_Recertification.json",
+      "program": "CalFresh",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "cf_sar",
+      "name": "CalFresh – SAR 7",
+      "file": "CF_SAR.json",
+      "program": "CalFresh",
+      "updated": "2025-12-02"
+    }
+  ],
+
+  "CalWORKs": [
+    {
+      "id": "CW_Application",
+      "name": "CalWORKs – Application",
+      "file": "CW_Application.json",
+      "program": "CalWORKs",
+      "updated": "2025-12-01"
+    },
+    {
+      "id": "CW_Application_Interview_Scheduled",
+      "name": "CalWORKs – Application Interview Scheduled",
+      "file": "CW_Application_Interview_Scheduled.json",
+      "program": "CalWORKs",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "CW_Application_Withdrawal",
+      "name": "CalWORKs – Application Withdrawal",
+      "file": "CW_Application_Withdrawal.json",
+      "program": "CalWORKs",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "CW_Changes",
+      "name": "CalWORKs – Changes",
+      "file": "CW_Changes.json",
+      "program": "CalWORKs",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "CW_Failure_To_Provide",
+      "name": "CalWORKs – Failure to Provide",
+      "file": "CW_Failure_To_Provide.json",
+      "program": "CalWORKs",
+      "updated": "2025-12-01"
+    },
+    {
+      "id": "CW_Immediate_Need_Screening",
+      "name": "CalWORKs – Immediate Need Screening",
+      "file": "CW_Immediate_Need_Screening.json",
+      "program": "CalWORKs",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "CW_Incoming_ICT_Processed",
+      "name": "CalWORKs – Incoming ICT Processed",
+      "file": "CW_Incoming_ICT_Processed.json",
+      "program": "CalWORKs",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "CW_Missed_Interview",
+      "name": "CalWORKs – Missed Interview",
+      "file": "CW_Missed_Interview.json",
+      "program": "CalWORKs",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "CW_No_Change",
+      "name": "CalWORKs – No Change",
+      "file": "CW_No_Change.json",
+      "program": "CalWORKs",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "CW_Redetermination",
+      "name": "CalWORKs – Redetermination",
+      "file": "CW_Redetermination.json",
+      "program": "CalWORKs",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "CW_SAR",
+      "name": "CalWORKs – SAR 7",
+      "file": "CW_SAR.json",
+      "program": "CalWORKs",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "CW_THA_Application",
+      "name": "CalWORKs – THA Application",
+      "file": "CW_THA_Application.json",
+      "program": "CalWORKs",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "CW_WTW_Sanctions",
+      "name": "CalWORKs – WTW Sanctions",
+      "file": "CW_WTW_Sanctions.json",
+      "program": "CalWORKs",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "FC_ARC_IPT",
+      "name": "Foster Care – ARC IPT",
+      "file": "FC_ARC_IPT.json",
+      "program": "CalWORKs",
+      "updated": "2025-12-02"
+    }
+  ],
+
+  "Medi-Cal": [
+    {
+      "id": "MC_application",
+      "name": "Medi-Cal – Application",
+      "file": "MC_Application.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "MC_changes",
+      "name": "Medi-Cal – Changes",
+      "file": "MC_Changes.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "mc_failure_to_provide",
+      "name": "Medi-Cal – Failure to Provide",
+      "file": "MC_FailureToProvide.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "mc_Incoming_ICT_Processed",
+      "name": "Medi-Cal – Incoming ICT Processed",
+      "file": "MC_IncomingICTProcessed.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "mc_no_change",
+      "name": "Medi-Cal – No Change",
+      "file": "MC_No_Change.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "mc_re_advanced",
+      "name": "Medi-Cal – RE Advanced",
+      "file": "MC_RE_Advanced.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "mc_re_not_advanced",
+      "name": "Medi-Cal – RE Not Advanced Journal",
+      "file": "MC_RE_Not_Advanced.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
+    },
+    {
+  "id": "mc_re_abbreviated",
+  "name": "Medi-Cal – RE Processed (Abbreviated)",
+  "file": "MC_RE_Abbreviated.json",
+  "program": "Medi-Cal",
+  "updated": "2025-12-02"
+    },
+    {
+  "id": "mc_redetermination",
+  "name": "Medi-Cal – Redetermination",
+  "file": "MC_Redetermination.json",
+  "program": "Medi-Cal",
+  "updated": "2025-12-02"
+    }
+  ],
+
+  "ChildCare": [],
+
+  "General": []
+}

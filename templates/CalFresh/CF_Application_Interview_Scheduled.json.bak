@@ -1,0 +1,196 @@
+{
+  "id": "CF_Application_Interview_Scheduled",
+  "name": "CalFresh \u2013 Application Interview Scheduled",
+  "file": "CF_Application_Interview_Scheduled.json",
+  "program": "CalFresh",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "Short Description",
+          "type": "note",
+          "content": "Application Interview Scheduled"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "LONG DESCRIPTION",
+      "fields": [
+        {
+          "id": "longDescription",
+          "label": "Long Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "APPLICATION INFORMATION",
+      "fields": [
+        {
+          "id": "applicationDate",
+          "label": "Application Date",
+          "type": "date"
+        },
+        {
+          "id": "applicationType",
+          "label": "Application Type",
+          "type": "choice",
+          "choices": [
+            "Initial",
+            "Reapplication",
+            "Restoration",
+            "Late Reapplication",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "INTERVIEW DETAILS",
+      "fields": [
+        {
+          "id": "interviewMethod",
+          "label": "Interview Method",
+          "type": "choice",
+          "choices": [
+            "In Person",
+            "Phone",
+            "Tele-Interview",
+            "Video",
+            "Waived"
+          ]
+        },
+        {
+          "id": "interviewDate",
+          "label": "Scheduled Interview Date",
+          "type": "date"
+        },
+        {
+          "id": "interviewTime",
+          "label": "Scheduled Interview Time",
+          "type": "text"
+        },
+        {
+          "id": "interviewContact",
+          "label": "Interview Contact Name",
+          "type": "text"
+        },
+        {
+          "id": "interviewPhone",
+          "label": "Interview Contact Phone",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "REQUIRED ACTIONS",
+      "fields": [
+        {
+          "id": "verificationRequest",
+          "label": "Verifications Requested Before Interview",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "item",
+              "label": "Verification Item",
+              "type": "text"
+            },
+            {
+              "id": "status",
+              "label": "Status",
+              "type": "choice",
+              "choices": [
+                "Requested",
+                "Provided",
+                "Pending",
+                "Not Needed"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "COMMUNICATION DETAILS",
+      "fields": [
+        {
+          "id": "noticeProvided",
+          "label": "Interview Notice Provided",
+          "type": "choice",
+          "choices": [
+            "Mailed",
+            "Text Message",
+            "Phone Call",
+            "Email",
+            "Client Portal",
+            "Other"
+          ]
+        },
+        {
+          "id": "contactAttempts",
+          "label": "Contact Attempts",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "date",
+              "label": "Date",
+              "type": "date"
+            },
+            {
+              "id": "method",
+              "label": "Method",
+              "type": "choice",
+              "choices": [
+                "Phone Call",
+                "Voicemail Left",
+                "Text Message",
+                "Email",
+                "Mail Notice",
+                "In-Person",
+                "Other"
+              ]
+            },
+            {
+              "id": "notes",
+              "label": "Notes",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "NOTICE OF ACTION (NOA)",
+      "fields": [
+        {
+          "id": "noaStatus",
+          "label": "NOA Status",
+          "type": "choice",
+          "choices": [
+            "Generated",
+            "Pending",
+            "Not Required"
+          ]
+        },
+        {
+          "id": "noaDate",
+          "label": "NOA Date",
+          "type": "date"
+        }
+      ]
+    }
+  ]
+}

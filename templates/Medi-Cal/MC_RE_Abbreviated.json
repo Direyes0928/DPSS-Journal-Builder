@@ -1,0 +1,87 @@
+{
+  "id": "mc_re_abbreviated",
+  "name": "Medi-Cal – RE Processed (Abbreviated)",
+  "program": "Medi-Cal",
+  "file": "MC_RE_Abbreviated.json",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+
+  "sections": [
+{
+  "id": "section_1",
+  "title": "ABBREVIATED RE PROCESSING",
+  "fields": [
+    {
+      "id": "currentUpdatedReMonth",
+      "label": "Current RE Month / Updated RE Month",
+      "type": "text"
+    },
+    {
+      "id": "reInfoObtained",
+      "label": "How was RE information obtained",
+      "type": "text"
+    },
+    {
+      "id": "taxHousehold",
+      "label": "Tax HH",
+      "type": "text"
+    },
+    {
+      "id": "expectedFilingStatus",
+      "label": "Expected Filing Status",
+      "type": "text"
+    },
+    {
+      "id": "taxDependents",
+      "label": "Tax Dependents",
+      "type": "text"
+    },
+    {
+      "id": "requestingMembers",
+      "label": "Requesting Members",
+      "type": "text"
+    },
+    {
+      "id": "ohcMedicare",
+      "label": "OHC / Medicare",
+      "type": "text"
+    },
+    {
+      "id": "income",
+      "label": "Income",
+      "type": "text"
+    },
+    {
+      "id": "expensesDeductions",
+      "label": "Expenses / Deductions",
+      "type": "text"
+    },
+    {
+      "id": "tasksSet",
+      "label": "Tasks Set",
+      "type": "text"
+    },
+    {
+      "id": "magiedbcMonths",
+      "label": "MAGI / EDBC Months",
+      "type": "text"
+    },
+    {
+      "id": "benefitsIssued",
+      "label": "Benefits Issued",
+      "type": "text"
+    },
+    {
+      "id": "noaSent",
+      "label": "NOA Sent",
+      "type": "text"
+    },
+    {
+      "id": "alertsCleared",
+      "label": "Alerts Cleared",
+      "type": "text"
+    }
+  ]
+}
+  ]
+}

@@ -1,0 +1,323 @@
+{
+  "id": "CW_SAR",
+  "name": "CalWORKs \u2013 SAR 7",
+  "file": "CW_SAR.json",
+  "program": "CalWORKs",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "Short Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "LONG DESCRIPTION",
+      "fields": [
+        {
+          "id": "longDescription",
+          "label": "Long Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "SAR 7 DETAILS",
+      "fields": [
+        {
+          "id": "sarMonthYear",
+          "label": "SAR 7 Month / Year",
+          "type": "text"
+        },
+        {
+          "id": "sarStatus",
+          "label": "SAR 7 Status",
+          "type": "choice",
+          "choices": [
+            "Received",
+            "Not Received",
+            "Incomplete",
+            "Pending Verification",
+            "Accepted",
+            "Rejected"
+          ]
+        },
+        {
+          "id": "receivedDate",
+          "label": "SAR 7 Received Date",
+          "type": "date"
+        },
+        {
+          "id": "reportType",
+          "label": "Reporting Type",
+          "type": "choice",
+          "choices": [
+            "SAR 7",
+            "Mid-Period Report",
+            "Change Report"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "HOUSEHOLD COMPOSITION",
+      "fields": [
+        {
+          "id": "householdMembers",
+          "label": "Household Members",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "ageDob",
+              "label": "Age / DOB",
+              "type": "text"
+            },
+            {
+              "id": "relationship",
+              "label": "Relationship",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "INCOME INFORMATION",
+      "fields": [
+        {
+          "id": "incomeReview",
+          "label": "Income Review",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "Change Reported",
+            "New Income",
+            "Ended",
+            "Pending Verification"
+          ]
+        },
+        {
+          "id": "incomeItems",
+          "label": "Income Items",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "source",
+              "label": "Source",
+              "type": "text"
+            },
+            {
+              "id": "amount",
+              "label": "Amount",
+              "type": "text"
+            },
+            {
+              "id": "frequency",
+              "label": "Frequency",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "choice",
+              "choices": [
+                "Verified",
+                "Not Verified",
+                "Pending"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "EXPENSE INFORMATION",
+      "fields": [
+        {
+          "id": "housingExpense",
+          "label": "Housing Expense Review",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "Updated",
+            "Not Applicable"
+          ]
+        },
+        {
+          "id": "utilities",
+          "label": "Utility Allowance Review",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "Updated",
+            "Not Applicable"
+          ]
+        },
+        {
+          "id": "dependentCare",
+          "label": "Dependent Care Expense Review",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "Updated",
+            "Not Applicable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "RESOURCES",
+      "fields": [
+        {
+          "id": "resourcesReview",
+          "label": "Resources Review",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "Updated",
+            "New Resources",
+            "Ended"
+          ]
+        },
+        {
+          "id": "resourceItems",
+          "label": "Resource Items",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "type",
+              "label": "Resource Type",
+              "type": "text"
+            },
+            {
+              "id": "owner",
+              "label": "Owner",
+              "type": "text"
+            },
+            {
+              "id": "value",
+              "label": "Value",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_8",
+      "title": "VERIFICATIONS RECEIVED",
+      "fields": [
+        {
+          "id": "verifications",
+          "label": "Verification Items",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "item",
+              "label": "Item",
+              "type": "text"
+            },
+            {
+              "id": "status",
+              "label": "Status",
+              "type": "choice",
+              "choices": [
+                "Provided",
+                "Not Provided",
+                "Insufficient",
+                "Pending"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_9",
+      "title": "EDBC RESULTS",
+      "fields": [
+        {
+          "id": "month",
+          "label": "Month",
+          "type": "text"
+        },
+        {
+          "id": "au",
+          "label": "AU",
+          "type": "text"
+        },
+        {
+          "id": "excluded",
+          "label": "Excluded",
+          "type": "text"
+        },
+        {
+          "id": "allotment",
+          "label": "Allotment",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_10",
+      "title": "NOTICE OF ACTION (NOA)",
+      "fields": [
+        {
+          "id": "noaStatus",
+          "label": "NOA Status",
+          "type": "choice",
+          "choices": [
+            "Generated",
+            "Pending",
+            "Not Required"
+          ]
+        },
+        {
+          "id": "noaDate",
+          "label": "NOA Date",
+          "type": "date"
+        }
+      ]
+    },
+    {
+      "id": "section_11",
+      "title": "FINAL NOTES",
+      "fields": [
+        {
+          "id": "finalNotes",
+          "label": "Final Notes",
+          "type": "textarea"
+        }
+      ]
+    }
+  ]
+}

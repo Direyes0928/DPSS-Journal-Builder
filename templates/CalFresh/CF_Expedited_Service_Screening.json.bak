@@ -1,0 +1,120 @@
+{
+  "id": "cf_expedited_service_screening",
+  "name": "CalFresh \u2013 Expedited Service Screening (Pending)",
+  "program": "CalFresh",
+  "file": "CF_ExpeditedServiceScreening.json",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "Short Description",
+          "type": "note",
+          "content": "ES Screening \u2013 Initial Application"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "LONG DESCRIPTION",
+      "fields": [
+        {
+          "id": "longDescription",
+          "label": "Long Description",
+          "type": "text",
+          "placeholder": "Enter long description if needed"
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "APPLICATION DETAILS",
+      "fields": [
+        {
+          "id": "cfHeader",
+          "label": "CF Header",
+          "type": "note",
+          "content": "CF: Expedited Service Screening"
+        },
+        {
+          "id": "applicationDate",
+          "label": "Application Date",
+          "type": "date"
+        },
+        {
+          "id": "screeningPolicy",
+          "label": "Screening Policy",
+          "type": "note",
+          "content": "Application screened for Expedited Service per Department Policy 63-301.5."
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "EXPEDITED SERVICE DETERMINATION",
+      "fields": [
+        {
+          "id": "expeditedServiceStatus",
+          "label": "Expedited Service Status",
+          "type": "note",
+          "content": "Ineligible. CF HH reported more than $150 in Gross Monthly Income or more than $100 in Liquid Resources that exceed reported monthly housing expenses."
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "EXPEDITED SERVICE QUESTIONS",
+      "fields": [
+        {
+          "id": "reportedIncome",
+          "label": "Reported Income",
+          "type": "choice",
+          "choices": [
+            "Reported Income: Less than $150",
+            "Reported Income: More than $150",
+            "Reported Income: Information Not Provided",
+            "Reported Income: Other (Specify)"
+          ]
+        },
+        {
+          "id": "housingExpenses",
+          "label": "Housing Expenses (Mortgage / Rent)",
+          "type": "choice",
+          "choices": [
+            "Housing Expenses: Less than reported resources",
+            "Housing Expenses: More than reported resources",
+            "Housing Expenses: Information Not Provided",
+            "Housing Expenses: Other (Specify)"
+          ]
+        },
+        {
+          "id": "utilityAllowance",
+          "label": "Utility Allowance",
+          "type": "choice",
+          "choices": [
+            "Standard Utility Allowance (SUA)",
+            "Basic Utility Allowance (BUA)",
+            "Heating and Cooling Allowance (HCA)",
+            "No Allowance",
+            "Other (Specify)"
+          ]
+        },
+        {
+          "id": "liquidResources",
+          "label": "Liquid Resources",
+          "type": "choice",
+          "choices": [
+            "Liquid Resources: Less than $100",
+            "Liquid Resources: More than $100",
+            "Liquid Resources: Information Not Provided",
+            "Liquid Resources: Other (Specify)"
+          ]
+        }
+      ]
+    }
+  ]
+}

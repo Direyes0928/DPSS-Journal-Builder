@@ -1,0 +1,306 @@
+{
+  "id": "CW_Redetermination",
+  "name": "CalWORKs \u2013 Redetermination",
+  "file": "CW_Redetermination.json",
+  "program": "CalWORKs",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "Short Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "REDETERMINATION DETAILS",
+      "fields": [
+        {
+          "id": "rdtMonthYear",
+          "label": "Redetermination Month / Year",
+          "type": "text"
+        },
+        {
+          "id": "rdtType",
+          "label": "Redetermination Type",
+          "type": "choice",
+          "choices": [
+            "Annual Redetermination",
+            "Mid-Period Review",
+            "SAR 7",
+            "Interim Report",
+            "Case Maintenance",
+            "Other"
+          ]
+        },
+        {
+          "id": "interviewDate",
+          "label": "Interview Date",
+          "type": "date"
+        },
+        {
+          "id": "interviewMethod",
+          "label": "Interview Method",
+          "type": "choice",
+          "choices": [
+            "In Person",
+            "Phone",
+            "Video",
+            "Tele-Interview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "HOUSEHOLD COMPOSITION",
+      "fields": [
+        {
+          "id": "householdMembers",
+          "label": "Household Members",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "ageDob",
+              "label": "Age / DOB",
+              "type": "text"
+            },
+            {
+              "id": "relationship",
+              "label": "Relationship",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "INCOME VERIFICATION",
+      "fields": [
+        {
+          "id": "incomeStatus",
+          "label": "Income Status",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "Increased",
+            "Decreased",
+            "New Income",
+            "Ended",
+            "Pending Verification"
+          ]
+        },
+        {
+          "id": "incomeItems",
+          "label": "Income Items",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "source",
+              "label": "Source",
+              "type": "text"
+            },
+            {
+              "id": "amount",
+              "label": "Amount",
+              "type": "text"
+            },
+            {
+              "id": "frequency",
+              "label": "Frequency",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "choice",
+              "choices": [
+                "Verified",
+                "Not Verified",
+                "Pending"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "EXPENSES REVIEW",
+      "fields": [
+        {
+          "id": "housing",
+          "label": "Housing Expense Review",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "Updated",
+            "Not Applicable"
+          ]
+        },
+        {
+          "id": "utilities",
+          "label": "Utility Allowance Review",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "Updated",
+            "Not Applicable"
+          ]
+        },
+        {
+          "id": "dependentCare",
+          "label": "Dependent Care Expense Review",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "Updated",
+            "Not Applicable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "VERIFICATIONS RECEIVED",
+      "fields": [
+        {
+          "id": "verifications",
+          "label": "Verification Items",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "item",
+              "label": "Item",
+              "type": "text"
+            },
+            {
+              "id": "status",
+              "label": "Status",
+              "type": "choice",
+              "choices": [
+                "Provided",
+                "Not Provided",
+                "Insufficient",
+                "Pending"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "CASE INFORMATION UPDATED",
+      "fields": [
+        {
+          "id": "addressUpdated",
+          "label": "Address Updated",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No",
+            "Verified"
+          ]
+        },
+        {
+          "id": "phoneUpdated",
+          "label": "Phone Updated",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No",
+            "Verified"
+          ]
+        },
+        {
+          "id": "emailUpdated",
+          "label": "Email Updated",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No",
+            "Verified"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_8",
+      "title": "EDBC RESULTS",
+      "fields": [
+        {
+          "id": "month",
+          "label": "Month",
+          "type": "text"
+        },
+        {
+          "id": "au",
+          "label": "AU",
+          "type": "text"
+        },
+        {
+          "id": "excluded",
+          "label": "Excluded",
+          "type": "text"
+        },
+        {
+          "id": "allotment",
+          "label": "Allotment",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_9",
+      "title": "NOTICE OF ACTION (NOA)",
+      "fields": [
+        {
+          "id": "noaStatus",
+          "label": "NOA Status",
+          "type": "choice",
+          "choices": [
+            "Generated",
+            "Pending",
+            "Not Required"
+          ]
+        },
+        {
+          "id": "noaDate",
+          "label": "NOA Date",
+          "type": "date"
+        }
+      ]
+    },
+    {
+      "id": "section_10",
+      "title": "CASE NOTES",
+      "fields": [
+        {
+          "id": "caseNotes",
+          "label": "Case Notes",
+          "type": "textarea"
+        }
+      ]
+    }
+  ]
+}

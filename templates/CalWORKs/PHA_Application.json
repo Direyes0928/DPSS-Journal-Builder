@@ -1,0 +1,190 @@
+{
+  "id": "PHA_Application",
+  "name": "PHA – Application",
+  "file": "PHA_Application.json",
+  "program": "CalWORKs",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+
+  "sections": [
+
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        { "id": "shortDescription", "label": "Short Description", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_2",
+      "title": "APPLICATION DETAILS",
+      "fields": [
+        { "id": "applicationDate", "label": "Application Date", "type": "date" },
+
+        {
+          "id": "applicationStatus",
+          "label": "Application Status",
+          "type": "choice",
+          "choices": [
+            "Submitted",
+            "Pending",
+            "Approved",
+            "Denied",
+            "Withdrawn",
+            "Other"
+          ]
+        },
+
+        { "id": "applicantName", "label": "Applicant Name", "type": "text" },
+        { "id": "caseNumber", "label": "Case Number", "type": "text" },
+        { "id": "workerName", "label": "Worker Name", "type": "text" }
+      ]
+    },
+
+    {
+      "id": "section_3",
+      "title": "HOUSING NEED",
+      "fields": [
+        {
+          "id": "housingSituation",
+          "label": "Current Housing Situation",
+          "type": "choice",
+          "choices": [
+            "Homeless",
+            "Imminent Risk of Homelessness",
+            "Doubled Up",
+            "Fleeing Domestic Violence",
+            "Uninhabitable Housing",
+            "Other"
+          ]
+        },
+
+        { "id": "housingDetails", "label": "Housing Details", "type": "textarea" },
+
+        {
+          "id": "verificationType",
+          "label": "Verification Type",
+          "type": "choice",
+          "choices": [
+            "Eviction Notice",
+            "Rent Statement",
+            "Landlord Verification",
+            "Self-Certification",
+            "Other"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_4",
+      "title": "INCOME INFORMATION",
+      "fields": [
+        {
+          "id": "incomeSources",
+          "label": "Income Sources",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Person Name", "type": "text" },
+            { "id": "source", "label": "Income Source", "type": "text" },
+            { "id": "amount", "label": "Amount", "type": "text" },
+            { "id": "frequency", "label": "Frequency", "type": "text" }
+          ]
+        },
+
+        { "id": "incomeSummary", "label": "Income Summary", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_5",
+      "title": "HOUSING COSTS",
+      "fields": [
+        {
+          "id": "housingExpenses",
+          "label": "Housing Expenses",
+          "type": "repeatable",
+          "fields": [
+            { "id": "expenseType", "label": "Expense Type", "type": "text" },
+            { "id": "amount", "label": "Amount", "type": "text" },
+            { "id": "frequency", "label": "Frequency", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_6",
+      "title": "HOUSING SEARCH",
+      "fields": [
+        {
+          "id": "searchActivities",
+          "label": "Housing Search Activities",
+          "type": "repeatable",
+          "fields": [
+            { "id": "date", "label": "Date", "type": "date" },
+            { "id": "location", "label": "Location / Property", "type": "text" },
+            { "id": "result", "label": "Result", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_7",
+      "title": "VERIFICATIONS",
+      "fields": [
+        {
+          "id": "verificationItems",
+          "label": "Verification Items",
+          "type": "repeatable",
+          "fields": [
+            { "id": "item", "label": "Item", "type": "text" },
+            {
+              "id": "status",
+              "label": "Status",
+              "type": "choice",
+              "choices": ["Provided", "Not Provided", "Pending", "Insufficient"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_8",
+      "title": "FINAL DETERMINATION",
+      "fields": [
+        {
+          "id": "determinationResult",
+          "label": "Determination Result",
+          "type": "choice",
+          "choices": [
+            "Approved",
+            "Approved with Conditions",
+            "Denied",
+            "Pending",
+            "Other"
+          ]
+        },
+
+        {
+          "id": "benefitType",
+          "label": "Benefit Type",
+          "type": "choice",
+          "choices": [
+            "Rental Assistance",
+            "Deposit Assistance",
+            "Utility Assistance",
+            "Housing Search Support",
+            "Other"
+          ]
+        },
+
+        { "id": "determinationNotes", "label": "Notes", "type": "textarea" }
+      ]
+    }
+  ]
+}

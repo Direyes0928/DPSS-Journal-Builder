@@ -1,0 +1,838 @@
+{
+  "id": "CW_Application",
+  "name": "CalWORKs – Application",
+  "file": "CW_Application.json",
+  "program": "CalWORKs",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+
+  "sections": [
+
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        { "id": "shortDescription", "label": "Short Description", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_2",
+      "title": "ACTION",
+      "fields": [
+        {
+          "id": "applicationAction",
+          "label": "Application Action",
+          "type": "choice",
+          "choices": [
+            "Received",
+            "Pending",
+            "Withdrawn",
+            "Incomplete",
+            "Processed",
+            "Interview Scheduled",
+            "Approved",
+            "Denied"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_3",
+      "title": "APPLICATION DETAILS",
+      "fields": [
+        { "id": "applicationDate", "label": "Application Date", "type": "date" },
+        {
+          "id": "applicationType",
+          "label": "Application Type",
+          "type": "choice",
+          "choices": ["Initial", "Reapplication", "Restoration", "Late Reapplication"]
+        },
+        {
+          "id": "signedMandatory",
+          "label": "Application Signed by Mandatory Members (CW)",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+        {
+          "id": "beginAid",
+          "label": "Beginning Date of Aid",
+          "type": "choice",
+          "choices": ["Immediate", "First of Month", "Other"]
+        },
+        {
+          "id": "interviewMethod",
+          "label": "Interview Method",
+          "type": "choice",
+          "choices": ["In Person", "Phone", "Tele-Interview", "Video"]
+        },
+        { "id": "interviewDate", "label": "Interview Date", "type": "date" },
+        { "id": "interviewWith", "label": "Interview Conducted With", "type": "text" },
+        { "id": "familyAuth", "label": "Family Authentication Factors Used", "type": "text" },
+        {
+          "id": "language",
+          "label": "Language",
+          "type": "choice",
+          "choices": [
+            "English",
+            "Spanish",
+            "Vietnamese",
+            "Arabic",
+            "Mandarin",
+            "Other"
+          ]
+        },
+        {
+          "id": "authorizedRep",
+          "label": "Authorized Representative (CF)",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        }
+      ]
+    },
+
+    {
+      "id": "section_4",
+      "title": "RIGHTS & RESPONSIBILITIES (R&R)",
+      "fields": [
+        {
+          "id": "rrMethod",
+          "label": "How R&R Were Reviewed",
+          "type": "choice",
+          "choices": [
+            "Verbally Reviewed",
+            "Reviewed With Script",
+            "Provided Written Packet",
+            "SAR 7 Video Reviewed",
+            "Other"
+          ]
+        },
+        {
+          "id": "saws2a",
+          "label": "SAWS 2A SAR Signed by Mandatory Members (CW)",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+        { "id": "sar7example", "label": "SAR 7 Example Provided", "type": "choice", "choices": ["Yes", "No"] },
+        { "id": "sar7video", "label": "SAR 7 YouTube Video Explained", "type": "choice", "choices": ["Yes", "No"] },
+        { "id": "pub275", "label": "PUB 275 Reviewed", "type": "choice", "choices": ["Yes", "No"] },
+        { "id": "ebtEdge", "label": "ebtEDGE App Info Reviewed", "type": "choice", "choices": ["Yes", "No"] },
+        {
+          "id": "suppPacket",
+          "label": "Supplemental Packet Provided",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        }
+      ]
+    },
+
+    {
+      "id": "section_5",
+      "title": "CONTACT INFORMATION",
+      "fields": [
+        {
+          "id": "physicalAddress",
+          "label": "Physical Address",
+          "type": "choice",
+          "choices": ["Verified", "Updated", "No Change"]
+        },
+        {
+          "id": "mailingAddress",
+          "label": "Mailing Address",
+          "type": "choice",
+          "choices": ["Verified", "Updated", "No Change"]
+        },
+        { "id": "telephone", "label": "Telephone", "type": "text" },
+        {
+          "id": "ivrPinLetter",
+          "label": "IVR PIN Letter",
+          "type": "choice",
+          "choices": ["Provided", "Not Provided"]
+        },
+        {
+          "id": "ivrOutbound",
+          "label": "Outbound IVR System",
+          "type": "choice",
+          "choices": ["Reviewed", "Not Reviewed"]
+        },
+        {
+          "id": "textMessage",
+          "label": "Text Messaging",
+          "type": "choice",
+          "choices": ["Reviewed", "Not Reviewed"]
+        },
+        {
+          "id": "email",
+          "label": "Email",
+          "type": "choice",
+          "choices": ["Reviewed", "Updated", "Not Updated"]
+        }
+      ]
+    },
+
+    {
+      "id": "section_6",
+      "title": "HOUSEHOLD COMPOSITION",
+      "fields": [
+        {
+          "id": "householdMembers",
+          "label": "Household Members",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "ageDob", "label": "Age / DOB", "type": "text" },
+            { "id": "relationship", "label": "Relationship", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_7",
+      "title": "ELIGIBILITY FACTORS",
+      "fields": [
+
+        {
+          "id": "pregnancy",
+          "label": "Pregnancy (CW)",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "edc", "label": "Expected Date of Confinement", "type": "date" },
+            { "id": "verification", "label": "Verification", "type": "choice", "choices": ["Verified", "Not Verified"] }
+          ]
+        },
+
+        {
+          "id": "unrelatedAdult",
+          "label": "Unrelated Adult (CW)",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "reason", "label": "Reason", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "choice", "choices": ["Verified", "Not Verified"] }
+          ]
+        },
+
+        {
+          "id": "deprivation",
+          "label": "Deprivation (CW)",
+          "type": "choice",
+          "choices": [
+            "Death",
+            "Incapacitated",
+            "Unemployment",
+            "Absent Parent",
+            "Other"
+          ]
+        },
+
+        {
+          "id": "absentParent",
+          "label": "Absent Parent (CW)",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+
+        {
+          "id": "purchasePrepare",
+          "label": "Purchase & Prepare (CF)",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "status", "label": "Status", "type": "choice", "choices": ["Yes", "No"] }
+          ]
+        },
+
+        {
+          "id": "caseIdentity",
+          "label": "Case Identity",
+          "type": "choice",
+          "choices": ["Verified", "Not Verified", "Pending"]
+        },
+
+        {
+          "id": "ssn",
+          "label": "Social Security Number Verification",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "choice", "choices": ["Verified", "Not Verified"] }
+          ]
+        },
+
+        {
+          "id": "citizenship",
+          "label": "Citizenship",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "verifiedBy", "label": "Verified By", "type": "text" },
+            { "id": "citType", "label": "Naturalized / Non-Citizen Type", "type": "text" },
+            { "id": "nonCitizenOption", "label": "Non-Citizen Option", "type": "text" },
+            { "id": "status", "label": "Non-Citizen Status", "type": "text" },
+            { "id": "alienNumber", "label": "Alien Number", "type": "text" },
+            { "id": "docNumber", "label": "Document Number", "type": "text" },
+            { "id": "catCode", "label": "Category Code", "type": "text" },
+            { "id": "entryDate", "label": "Entry Date", "type": "date" },
+            { "id": "sponsor", "label": "Sponsor", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "text" },
+            {
+              "id": "saveVerified",
+              "label": "SAVE Verification",
+              "type": "choice",
+              "choices": ["Verified", "Not Verified"]
+            }
+          ]
+        },
+
+        {
+          "id": "residencyCW",
+          "label": "Residency (CW)",
+          "type": "choice",
+          "choices": ["Verified", "Not Verified"]
+        },
+
+        {
+          "id": "residencyCF",
+          "label": "Residency (CF)",
+          "type": "choice",
+          "choices": ["Verified", "Not Verified"]
+        }
+      ]
+    },
+
+    {
+      "id": "section_8",
+      "title": "NON-COMPLIANCE QUESTIONS",
+      "fields": [
+
+        {
+          "id": "dupSnap",
+          "label": "Duplicate SNAP Benefits After 09/22/96?",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+        {
+          "id": "trafficking500",
+          "label": "Trafficking SNAP Benefits ($500+)?",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+        {
+          "id": "drugsTrade",
+          "label": "Trading SNAP Benefits for Drugs?",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+        {
+          "id": "weaponsTrade",
+          "label": "Trading SNAP Benefits for Guns / Ammunition?",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+        {
+          "id": "fleeingFelony",
+          "label": "Fleeing Felony / Avoiding Custody?",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+        {
+          "id": "paroleViolation",
+          "label": "Violation of Parole or Probation?",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+
+        {
+          "id": "ncDetail",
+          "label": "Non-Compliance Details",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "type", "label": "Type", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_9",
+      "title": "EMPLOYMENT & INCOME HISTORY",
+      "fields": [
+
+        {
+          "id": "employmentHistory",
+          "label": "Employment History",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "employer", "label": "Employer", "type": "text" },
+            { "id": "lastWorked", "label": "Last Date Worked", "type": "date" },
+            { "id": "lastPaid", "label": "Last Date Paid", "type": "date" },
+            { "id": "reasonEnded", "label": "Reason Ended", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "striker",
+          "label": "Striker",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "union", "label": "Union", "type": "text" },
+            { "id": "employer", "label": "Employer", "type": "text" },
+            { "id": "incomeBefore", "label": "Before Strike Income", "type": "text" },
+            { "id": "lastPay", "label": "Last Pay Date", "type": "date" },
+            { "id": "startDate", "label": "Start Date", "type": "date" }
+          ]
+        },
+
+        {
+          "id": "currentIncome",
+          "label": "Current Employment / Income",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "source", "label": "Employer / Source", "type": "text" },
+            { "id": "startDate", "label": "Start Date", "type": "date" },
+            { "id": "hourlyRate", "label": "Hourly Rate", "type": "text" },
+            { "id": "hoursWeekly", "label": "Hours Weekly", "type": "text" },
+            { "id": "frequency", "label": "Frequency", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "text" },
+            { "id": "amount", "label": "Amount Used", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "wins",
+          "label": "WINS (CF)",
+          "type": "choice",
+          "choices": ["Eligible", "Not Eligible", "Pending"]
+        }
+      ]
+    },
+
+    {
+      "id": "section_10",
+      "title": "EDUCATION & IMMUNIZATIONS",
+      "fields": [
+
+        {
+          "id": "schoolAttendance",
+          "label": "School Attendance",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "schoolName", "label": "School Name", "type": "text" },
+            { "id": "schoolType", "label": "School Type", "type": "text" },
+            { "id": "units", "label": "Units Enrolled", "type": "text" },
+            { "id": "cfDet", "label": "CF Student Determination", "type": "text" },
+            { "id": "exemption", "label": "Student Exemption", "type": "text" },
+            { "id": "financialAid", "label": "Financial Aid", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "immunizations",
+          "label": "Immunizations (CW)",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "choice",
+              "choices": ["Verified", "Not Verified"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_11",
+      "title": "TIME LIMITS & MONEY MANAGEMENT",
+      "fields": [
+
+        {
+          "id": "moneyManagement",
+          "label": "Money Management",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "sanctionDate", "label": "GAIN Sanction Date", "type": "date" },
+            { "id": "vendor", "label": "Vendor Information", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "timeLimits",
+          "label": "Time Limits",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "tanfMonths", "label": "TANF Months", "type": "text" },
+            { "id": "cwMonths", "label": "CalWORKs Months", "type": "text" },
+            {
+              "id": "medsVerified",
+              "label": "MEDS Verified",
+              "type": "choice",
+              "choices": ["Yes", "No"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_12",
+      "title": "PROPERTY (CW & CF)",
+      "fields": [
+
+        {
+          "id": "realProperty",
+          "label": "Real Property",
+          "type": "repeatable",
+          "fields": [
+            { "id": "owner", "label": "Owner", "type": "text" },
+            { "id": "type", "label": "Type", "type": "text" },
+            { "id": "verifyCW", "label": "Verification (CW)", "type": "text" },
+            { "id": "verifyCF", "label": "Verification (CF)", "type": "text" },
+            { "id": "value", "label": "Value", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "vehicles",
+          "label": "Vehicles",
+          "type": "repeatable",
+          "fields": [
+            { "id": "owner", "label": "Owner", "type": "text" },
+            { "id": "make", "label": "Make", "type": "text" },
+            { "id": "model", "label": "Model", "type": "text" },
+            { "id": "year", "label": "Year", "type": "text" },
+            { "id": "verifyCW", "label": "Verification (CW)", "type": "text" },
+            { "id": "verifyCF", "label": "Verification (CF)", "type": "text" },
+            { "id": "value", "label": "Value", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "bankAccounts",
+          "label": "Bank Accounts",
+          "type": "repeatable",
+          "fields": [
+            { "id": "institution", "label": "Institution", "type": "text" },
+            { "id": "owner", "label": "Owner", "type": "text" },
+            { "id": "type", "label": "Account Type", "type": "text" },
+            { "id": "acctNumber", "label": "Account Number", "type": "text" },
+            { "id": "verifyCW", "label": "Verification (CW)", "type": "text" },
+            { "id": "verifyCF", "label": "Verification (CF)", "type": "text" },
+            { "id": "value", "label": "Value", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "retirementAccounts",
+          "label": "Retirement Accounts",
+          "type": "repeatable",
+          "fields": [
+            { "id": "owner", "label": "Owner", "type": "text" },
+            { "id": "type", "label": "Type", "type": "text" },
+            { "id": "acctNumber", "label": "Account Number", "type": "text" },
+            { "id": "verifyCW", "label": "Verification (CW)", "type": "text" },
+            { "id": "verifyCF", "label": "Verification (CF)", "type": "text" },
+            { "id": "value", "label": "Value", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "payCards",
+          "label": "Pay Cards",
+          "type": "repeatable",
+          "fields": [
+            { "id": "owner", "label": "Owner", "type": "text" },
+            { "id": "company", "label": "Company", "type": "text" },
+            { "id": "verifyCW", "label": "Verification (CW)", "type": "text" },
+            { "id": "verifyCF", "label": "Verification (CF)", "type": "text" },
+            { "id": "value", "label": "Value", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "cashOnHand",
+          "label": "Cash on Hand",
+          "type": "repeatable",
+          "fields": [
+            { "id": "owner", "label": "Owner", "type": "text" },
+            { "id": "verifyCW", "label": "Verification (CW)", "type": "text" },
+            { "id": "verifyCF", "label": "Verification (CF)", "type": "text" },
+            { "id": "value", "label": "Value", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "otherProperty",
+          "label": "Other Property",
+          "type": "repeatable",
+          "fields": [
+            { "id": "owner", "label": "Owner", "type": "text" },
+            { "id": "type", "label": "Type", "type": "text" },
+            { "id": "verifyCW", "label": "Verification (CW)", "type": "text" },
+            { "id": "verifyCF", "label": "Verification (CF)", "type": "text" },
+            { "id": "value", "label": "Value", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_13",
+      "title": "EXPENSES",
+      "fields": [
+
+        {
+          "id": "housingExpense",
+          "label": "Housing Expense (CF)",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "type", "label": "Type", "type": "text" },
+            { "id": "frequency", "label": "Frequency", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "text" },
+            { "id": "incurred", "label": "Amount Incurred", "type": "text" },
+            { "id": "paid", "label": "Amount Paid", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "utilityAllowance",
+          "label": "Utility Allowance (CF)",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+
+        {
+          "id": "suas",
+          "label": "Standard Utility Allowance Subsidy (CF)",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+
+        {
+          "id": "selfEmploymentExpenses",
+          "label": "Self-Employment Expenses",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "type", "label": "Type", "type": "text" },
+            { "id": "frequency", "label": "Frequency", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "text" },
+            { "id": "amount", "label": "Amount", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "courtOrderedCS",
+          "label": "Court-Ordered Child Support Paid (CF)",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "frequency", "label": "Frequency", "type": "text" },
+            { "id": "verifyOrder", "label": "Verification Ordered", "type": "text" },
+            { "id": "verifyPaid", "label": "Verification Paid", "type": "text" },
+            { "id": "amount", "label": "Amount", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "dependentCare",
+          "label": "Dependent Care (CF)",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "frequency", "label": "Frequency", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "text" },
+            { "id": "amount", "label": "Amount", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "medicalExpenses",
+          "label": "Medical Expenses (CF)",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "frequency", "label": "Frequency", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "text" },
+            { "id": "amount", "label": "Amount", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "medicare",
+          "label": "Medicare (CF)",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "text" },
+            { "id": "amount", "label": "Amount", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_14",
+      "title": "IEVS & VERIFICATIONS",
+      "fields": [
+        {
+          "id": "ievsApplicant",
+          "label": "IEVS Applicant Report",
+          "type": "choice",
+          "choices": ["Match - Verified", "Discrepancy", "Pending", "Not Applicable"]
+        },
+        {
+          "id": "pvs",
+          "label": "Payment Verification System (PVS)",
+          "type": "choice",
+          "choices": ["Match - Verified", "Discrepancy", "Pending", "Not Applicable"]
+        },
+        {
+          "id": "nhr",
+          "label": "New Hire Registry (NHR)",
+          "type": "choice",
+          "choices": ["Match - Verified", "Discrepancy", "Pending", "Not Applicable"]
+        },
+        {
+          "id": "medsAlerts",
+          "label": "MEDS Alerts",
+          "type": "choice",
+          "choices": ["No Alerts", "Reviewed - No Discrepancy", "Discrepancy Found", "Pending"]
+        },
+
+        {
+          "id": "eSignatureList",
+          "label": "E-Signature List",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "sigItem", "label": "Signature Item", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "pendingVerifications",
+          "label": "Pending Verifications",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "pendingItem", "label": "Pending Item", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "tasksDueFuture",
+          "label": "Tasks Due Future",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "task", "label": "Task Item", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_15",
+      "title": "PROGRAMS & SPECIAL DETERMINATIONS",
+      "fields": [
+        { "id": "ebtHolder", "label": "Designated EBT Card Holder", "type": "text" },
+        {
+          "id": "hvp",
+          "label": "Home Visiting Program (HVP)",
+          "type": "choice",
+          "choices": ["Referred", "Not Referred"]
+        },
+        {
+          "id": "hvpNotice",
+          "label": "HVP Notice Sent (CW 2224)",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+        {
+          "id": "immediateNeed",
+          "label": "Immediate Need (CW)",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+        {
+          "id": "rmp",
+          "label": "Restaurant Meals Program (CF)",
+          "type": "choice",
+          "choices": ["Eligible", "Ineligible", "Pending"]
+        },
+        {
+          "id": "expeditedService",
+          "label": "Expedited Service Determination (CF)",
+          "type": "choice",
+          "choices": ["Reviewed with Family", "Not Reviewed"]
+        }
+      ]
+    },
+
+    {
+      "id": "section_16",
+      "title": "EDBC RESULTS",
+      "fields": [
+        { "id": "cw_month", "label": "Month", "type": "text" },
+        { "id": "cw_au", "label": "AU", "type": "text" },
+        { "id": "cw_excluded", "label": "Excluded", "type": "text" },
+        { "id": "cw_allotment", "label": "Allotment", "type": "text" },
+
+        {
+          "id": "cf_edbc",
+          "label": "CF EDBC Results",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "cf_item", "label": "Item", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_17",
+      "title": "FINAL ACTIONS",
+      "fields": [
+        { "id": "redetMonth", "label": "Redetermination Month / Year", "type": "text" },
+        {
+          "id": "reportingType",
+          "label": "Reporting Type",
+          "type": "choice",
+          "choices": ["SAR", "Change Reporting", "Other"]
+        },
+        {
+          "id": "noa",
+          "label": "Notice of Action (NOA)",
+          "type": "choice",
+          "choices": ["Generated", "Pending", "Not Required"]
+        },
+        {
+          "id": "mcReferral",
+          "label": "Medi-Cal Referral",
+          "type": "choice",
+          "choices": ["Referred", "Not Referred", "Pending"]
+        }
+      ]
+    }
+
+  ]
+}

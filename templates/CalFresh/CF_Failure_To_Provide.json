@@ -1,0 +1,181 @@
+{
+  "id": "cf_failure_to_provide",
+  "name": "CalFresh \u2013 Failure to Provide",
+  "program": "CalFresh",
+  "file": "CF_FailureToProvide.json",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "Short Description",
+          "type": "note",
+          "content": "ACTION"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "FOLLOW UP ACTION",
+      "fields": [
+        {
+          "id": "followUpAction",
+          "label": "Follow Up Action",
+          "type": "choice",
+          "choices": [
+            "Requested Verification",
+            "Sent Reminder",
+            "Contact Attempted",
+            "No Response from Client",
+            "Other"
+          ]
+        },
+        {
+          "id": "journalEntryDate",
+          "label": "See Journal Entry on (Specify date)",
+          "type": "date"
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "PENDING VERIFICATIONS",
+      "fields": [
+        {
+          "id": "pendingVerifications",
+          "label": "Pending Verifications (List verifications not provided):",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "item",
+              "label": "Item",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "FIRST CONTACT RESOLUTION",
+      "fields": [
+        {
+          "id": "fcrElectronic",
+          "label": "Electronic Verification Sources",
+          "type": "note",
+          "content": "Electronic Verification Sources: Attempted. Unable to obtain verifications.\nCollateral Contact: Attempted. Unable to obtain verifications."
+        },
+        {
+          "id": "impactOtherPrograms",
+          "label": "Impact to Other Programs",
+          "type": "choice",
+          "choices": [
+            "Impact to Other Programs: No other open programs.",
+            "Impact to Other Programs: No impact as family did not provide verifications.",
+            "Impact to Other Programs: Unable to determine due to lack of skill. Team member skilled for that program notified.",
+            "Impact to Other Programs: See separate Journal Entry for impact determination."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "IEVS / PVS / NHR / MEDS",
+      "fields": [
+        {
+          "id": "fcrElectronic",
+          "label": "Electronic Verification Sources",
+          "type": "note",
+          "content": "All IEVS, PVS, and NHR reports are to be reviewed and dispositioned each time the case is touched. Complete the drop down for each IEVS report below"
+        },
+        {
+          "id": "ievsApplicant",
+          "label": "IEVS Applicant Report",
+          "type": "choice",
+          "choices": [
+            "Reviewed \u2013 No Change",
+            "Reviewed \u2013 Requires Action",
+            "Reviewed \u2013 Not Applicable",
+            "IEVS Not Returned",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "pvsReport",
+          "label": "Payment Verification System (PVS)",
+          "type": "choice",
+          "choices": [
+            "Reviewed \u2013 No Change",
+            "Reviewed \u2013 Requires Action",
+            "Reviewed \u2013 Not Applicable",
+            "PVS Not Returned",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "nhrReport",
+          "label": "New Hire Registry (NHR)",
+          "type": "choice",
+          "choices": [
+            "Reviewed \u2013 No Change",
+            "Reviewed \u2013 Requires Action",
+            "Reviewed \u2013 Not Applicable",
+            "Hit \u2013 Confirmed Not the Client",
+            "NHR Not Returned",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "medsAlerts",
+          "label": "Medi-Cal Eligibility Data System (MEDS) Alerts",
+          "type": "choice",
+          "choices": [
+            "Reviewed \u2013 No Discrepancy",
+            "Reviewed \u2013 Requires Action",
+            "Reviewed \u2013 Not Applicable",
+            "Other (Specify):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "EDBC RESULTS",
+      "fields": [
+        {
+          "id": "edbcResults",
+          "label": "EDBC Results",
+          "type": "choice",
+          "choices": [
+            "Unable to Run \u2013 Pending Verifications",
+            "EDBC Not Required",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "NOTICE OF ACTION (NOA)",
+      "fields": [
+        {
+          "id": "noaType",
+          "label": "NOA",
+          "type": "choice",
+          "choices": [
+            "No Action",
+            "Pending",
+            "Discontinuance",
+            "Denial",
+            "Other"
+          ]
+        }
+      ]
+    }
+  ]
+}

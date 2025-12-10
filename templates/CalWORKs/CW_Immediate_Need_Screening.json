@@ -1,0 +1,143 @@
+{
+  "id": "CW_Immediate_Need_Screening",
+  "name": "CalWORKs – Immediate Need Screening",
+  "file": "CW_Immediate_Need_Screening.json",
+  "program": "CalWORKs",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+
+  "sections": [
+
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        { "id": "shortDescription", "label": "Short Description", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_2",
+      "title": "ACTION",
+      "fields": [
+        {
+          "id": "screeningAction",
+          "label": "Application Screening Action",
+          "type": "choice",
+          "choices": [
+            "Screened",
+            "Not Screened",
+            "Screened – IN",
+            "Screened – ES",
+            "Screened – Both",
+            "Other"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_3",
+      "title": "APPLICATION DETAILS",
+      "fields": [
+        { "id": "applicationDate", "label": "Application Date", "type": "date" },
+
+        {
+          "id": "programsScreened",
+          "label": "Programs Screened",
+          "type": "choice",
+          "choices": [
+            "CalWORKs (CW)",
+            "CalFresh (CF)",
+            "Medi-Cal (MC)",
+            "GA/GR",
+            "All Programs",
+            "Other"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_4",
+      "title": "IMMEDIATE NEED (IN) – CALWORKS",
+      "fields": [
+        {
+          "id": "inDetermination",
+          "label": "Immediate Need Result",
+          "type": "textarea",
+          "placeholder": "Example: Potential. Pending eviction."
+        }
+      ]
+    },
+
+    {
+      "id": "section_5",
+      "title": "EXPEDITED SERVICE (CF)",
+      "fields": [
+        {
+          "id": "expeditedService",
+          "label": "Expedited Service Determination",
+          "type": "choice",
+          "choices": [
+            "Met",
+            "Not Met",
+            "Pending",
+            "Insufficient Information"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_6",
+      "title": "IF ES/IN QUESTIONS ARE BLANK, REVIEW:",
+      "fields": [
+
+        {
+          "id": "reportedIncome",
+          "label": "Reported Income",
+          "type": "choice",
+          "choices": [
+            "Choose REPORTED INCOME",
+            "REPORTED INCOME: Income questions were incomplete on the application.",
+            "REPORTED INCOME:"
+          ]
+        },
+
+        {
+          "id": "housingExpenses",
+          "label": "Housing Expenses (Mortgage / Rent)",
+          "type": "choice",
+          "choices": [
+            "Choose HOUSING EXPENSES (MORTGAGE / RENT)",
+            "HOUSING EXPENSES (MORTGAGE / RENT): Housing questions were incomplete on the application.",
+            "HOUSING EXPENSES (MORTGAGE / RENT):"
+          ]
+        },
+
+        {
+          "id": "utilityAllowance",
+          "label": "Utility Allowance",
+          "type": "choice",
+          "choices": [
+            "Choose UTILITY ALLOWANCE",
+            "UTILITY ALLOWANCE: Utility information was incomplete on the application.",
+            "UTILITY ALLOWANCE:"
+          ]
+        },
+
+        {
+          "id": "liquidResources",
+          "label": "Liquid Resources",
+          "type": "choice",
+          "choices": [
+            "Choose LIQUID RESOURCES",
+            "LIQUID RESOURCES: Liquid resource questions were incomplete on the application.",
+            "LIQUID RESOURCES:"
+          ]
+        }
+      ]
+    }
+  ]
+}

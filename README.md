@@ -1,6 +1,6 @@
-# DPSS Journal Builder
+# SSD Journal Builder
 
-A prototype app to build and manage journal-style templates for DPSS-style case notes and documentation.
+A prototype app to build and manage journal-style templates for SSD-style case notes and documentation.
 
 ## Current Status
 

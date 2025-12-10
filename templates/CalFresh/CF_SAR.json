@@ -1,0 +1,237 @@
+{
+  "id": "CF_SAR",
+  "name": "CalFresh – SAR 7",
+  "file": "CF_SAR.json",
+  "program": "CalFresh",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+
+  "sections": [
+
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        { "id": "shortDescription", "label": "Short Description", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_2",
+      "title": "SAR 7 ACTION",
+      "fields": [
+        {
+          "id": "sarAction",
+          "label": "SAR 7 Action",
+          "type": "choice",
+          "choices": [
+            "Received",
+            "Incomplete",
+            "Complete",
+            "Late",
+            "Withdrawn",
+            "Denied",
+            "Other"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_3",
+      "title": "SAR 7 DETAILS",
+      "fields": [
+        { "id": "receivedDate", "label": "SAR 7 Received Date", "type": "date" },
+        {
+          "id": "signatureStatus",
+          "label": "Signature Status",
+          "type": "choice",
+          "choices": ["Signed", "Unsigned", "E-Signature", "Missing", "Other"]
+        },
+        {
+          "id": "reviewMethod",
+          "label": "Method Reviewed With Family",
+          "type": "choice",
+          "choices": [
+            "Phone",
+            "In Person",
+            "Tele-Interview",
+            "Video",
+            "Written",
+            "Other"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_4",
+      "title": "HOUSEHOLD COMPOSITION",
+      "fields": [
+        {
+          "id": "householdMembers",
+          "label": "Household Members",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "ageDob", "label": "Age / DOB", "type": "text" },
+            { "id": "relationship", "label": "Relationship", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_5",
+      "title": "INCOME",
+      "fields": [
+        {
+          "id": "incomeStatus",
+          "label": "Income Status",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "Reported New Income",
+            "Income Ended",
+            "Income Changed",
+            "Pending Verification",
+            "Other"
+          ]
+        },
+        {
+          "id": "incomeDetails",
+          "label": "Income Details",
+          "type": "repeatable",
+          "fields": [
+            { "id": "source", "label": "Income Source", "type": "text" },
+            { "id": "amount", "label": "Amount", "type": "text" },
+            { "id": "frequency", "label": "Frequency", "type": "choice",
+              "choices": ["Weekly", "Biweekly", "Monthly", "Semi-Monthly", "Irregular", "Other"] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_6",
+      "title": "EXPENSES",
+      "fields": [
+        {
+          "id": "expensesStatus",
+          "label": "Expenses Status",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "New Expense Reported",
+            "Expense Ended",
+            "Expense Changed",
+            "Pending Verification",
+            "Other"
+          ]
+        },
+        {
+          "id": "expenseDetails",
+          "label": "Expense Details",
+          "type": "repeatable",
+          "fields": [
+            { "id": "type", "label": "Expense Type", "type": "text" },
+            { "id": "amount", "label": "Amount", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "choice",
+              "choices": ["Verified", "Not Verified", "Pending"] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_7",
+      "title": "RESOURCES",
+      "fields": [
+        {
+          "id": "resourcesStatus",
+          "label": "Resource Status",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "New Resource Reported",
+            "Resource Ended",
+            "Resource Changed",
+            "Pending Verification",
+            "Other"
+          ]
+        },
+        {
+          "id": "resourceDetails",
+          "label": "Resource Details",
+          "type": "repeatable",
+          "fields": [
+            { "id": "resourceType", "label": "Resource Type", "type": "text" },
+            { "id": "value", "label": "Value", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "choice",
+              "choices": ["Verified", "Not Verified", "Pending"] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_8",
+      "title": "VERIFICATIONS",
+      "fields": [
+        {
+          "id": "verificationsNeeded",
+          "label": "Verifications Needed",
+          "type": "choice",
+          "choices": ["None", "Pending", "Requested", "Provided", "Other"]
+        },
+        {
+          "id": "verificationItems",
+          "label": "Verification Items",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "item", "label": "Item", "type": "text" },
+            { "id": "status", "label": "Status", "type": "choice",
+              "choices": ["Provided", "Not Provided", "Pending"] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_9",
+      "title": "FINAL DETERMINATION",
+      "fields": [
+        {
+          "id": "sarDetermination",
+          "label": "Final Determination",
+          "type": "choice",
+          "choices": [
+            "Approved",
+            "Denied",
+            "Incomplete",
+            "Pending Additional Information",
+            "Other"
+          ]
+        },
+        { "id": "sarNotes", "label": "Determination Notes", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_10",
+      "title": "NOTICE OF ACTION (NOA)",
+      "fields": [
+        {
+          "id": "noaStatus",
+          "label": "NOA Status",
+          "type": "choice",
+          "choices": ["Generated", "Pending", "Not Required"]
+        },
+        { "id": "noaDate", "label": "NOA Date", "type": "date" }
+      ]
+    }
+
+  ]
+}

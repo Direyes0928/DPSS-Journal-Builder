@@ -1,0 +1,104 @@
+{
+  "id": "CW_Application_Interview_Scheduled",
+  "name": "CalWORKs – Application Interview Scheduled",
+  "file": "CW_Application_Interview_Scheduled.json",
+  "program": "CalWORKs",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+
+  "sections": [
+
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        { "id": "shortDescription", "label": "Short Description", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_2",
+      "title": "INTERVIEW DETAILS",
+      "fields": [
+        { "id": "interviewDate", "label": "Interview Date", "type": "date" },
+        {
+          "id": "interviewMethod",
+          "label": "Interview Method",
+          "type": "choice",
+          "choices": ["In Person", "Phone", "Tele-Interview", "Video"]
+        },
+        { "id": "contactPerson", "label": "Interview Contact Person", "type": "text" },
+        { "id": "notes", "label": "Interview Notes", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_3",
+      "title": "CONTACT ATTEMPTS",
+      "fields": [
+        {
+          "id": "attempts",
+          "label": "Contact Attempts",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "attemptDate", "label": "Attempt Date", "type": "date" },
+            { "id": "method", "label": "Method", "type": "text" },
+            { "id": "result", "label": "Result", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_4",
+      "title": "LANGUAGE & COMMUNICATION",
+      "fields": [
+        {
+          "id": "language",
+          "label": "Language",
+          "type": "choice",
+          "choices": ["English", "Spanish", "Vietnamese", "Arabic", "Mandarin", "Other"]
+        },
+        {
+          "id": "primaryContactMethod",
+          "label": "Preferred Contact Method",
+          "type": "choice",
+          "choices": ["Phone", "Mail", "Email", "Text", "IVR"]
+        }
+      ]
+    },
+
+    {
+      "id": "section_5",
+      "title": "NOTICE OF ACTION (NOA)",
+      "fields": [
+        {
+          "id": "noaStatus",
+          "label": "NOA Status",
+          "type": "choice",
+          "choices": ["Generated", "Pending", "Not Required"]
+        },
+        { "id": "noaDate", "label": "NOA Date Sent", "type": "date" }
+      ]
+    },
+
+    {
+      "id": "section_6",
+      "title": "FOLLOW-UP TASKS",
+      "fields": [
+        {
+          "id": "tasks",
+          "label": "Tasks Due",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "task", "label": "Task Description", "type": "text" },
+            { "id": "dueDate", "label": "Due Date", "type": "date" }
+          ]
+        }
+      ]
+    }
+
+  ]
+}

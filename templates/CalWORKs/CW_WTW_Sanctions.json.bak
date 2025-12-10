@@ -1,0 +1,264 @@
+{
+  "id": "CW_WTW_Sanctions",
+  "name": "CalWORKs \u2013 WTW Sanctions",
+  "file": "CW_WTW_Sanctions.json",
+  "program": "CalWORKs",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "Short Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "ACTION",
+      "fields": [
+        {
+          "id": "sanctionAction",
+          "label": "WTW Sanction Action",
+          "type": "choice",
+          "choices": [
+            "Initiated",
+            "Continued",
+            "Lifted",
+            "Cured",
+            "Re-engagement",
+            "Pending",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "LONG DESCRIPTION",
+      "fields": [
+        {
+          "id": "longDescription",
+          "label": "Long Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "PARTICIPANT INFORMATION",
+      "fields": [
+        {
+          "id": "participantName",
+          "label": "Participant Name",
+          "type": "text"
+        },
+        {
+          "id": "caseNumber",
+          "label": "Case Number",
+          "type": "text"
+        },
+        {
+          "id": "assessmentDate",
+          "label": "Assessment Date",
+          "type": "date"
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "SANCTION REASON",
+      "fields": [
+        {
+          "id": "reasonForSanction",
+          "label": "Reason",
+          "type": "choice",
+          "choices": [
+            "Failure to Comply",
+            "Failure to Attend Appointment",
+            "Refused Assignment",
+            "Voluntary Quit",
+            "No Good Cause",
+            "Other"
+          ]
+        },
+        {
+          "id": "goodCauseAssessment",
+          "label": "Good Cause Assessment",
+          "type": "textarea"
+        },
+        {
+          "id": "goodCauseResult",
+          "label": "Good Cause Result",
+          "type": "choice",
+          "choices": [
+            "Good Cause Found",
+            "Good Cause Not Found",
+            "Pending Additional Information"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "COMMUNICATION ATTEMPTS",
+      "fields": [
+        {
+          "id": "communicationAttempts",
+          "label": "Communication Attempts",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "attemptDate",
+              "label": "Date",
+              "type": "date"
+            },
+            {
+              "id": "method",
+              "label": "Method",
+              "type": "choice",
+              "choices": [
+                "Phone Call",
+                "Voicemail Left",
+                "Written Notice",
+                "Text Message",
+                "Email",
+                "In-Person",
+                "Other"
+              ]
+            },
+            {
+              "id": "result",
+              "label": "Result",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "RE-ENGAGEMENT PLAN",
+      "fields": [
+        {
+          "id": "reengagementActivities",
+          "label": "Re-engagement Activities",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "activity",
+              "label": "Activity",
+              "type": "text"
+            },
+            {
+              "id": "startDate",
+              "label": "Start Date",
+              "type": "date"
+            },
+            {
+              "id": "notes",
+              "label": "Notes",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "id": "participantAgreement",
+          "label": "Participant Agreement",
+          "type": "choice",
+          "choices": [
+            "Agreed",
+            "Refused",
+            "Pending",
+            "Unable to Contact"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_8",
+      "title": "SANCTION STATUS",
+      "fields": [
+        {
+          "id": "sanctionLevel",
+          "label": "Sanction Level",
+          "type": "choice",
+          "choices": [
+            "1st Month",
+            "2nd Month",
+            "3rd Month",
+            "Cured",
+            "Lifted",
+            "Pending"
+          ]
+        },
+        {
+          "id": "sanctionStartDate",
+          "label": "Sanction Start Date",
+          "type": "date"
+        },
+        {
+          "id": "sanctionEndDate",
+          "label": "Sanction End Date",
+          "type": "date"
+        }
+      ]
+    },
+    {
+      "id": "section_9",
+      "title": "VERIFICATIONS",
+      "fields": [
+        {
+          "id": "verificationItems",
+          "label": "Verification Items",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "item",
+              "label": "Item",
+              "type": "text"
+            },
+            {
+              "id": "status",
+              "label": "Status",
+              "type": "choice",
+              "choices": [
+                "Provided",
+                "Not Provided",
+                "Pending"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_10",
+      "title": "NOTICE OF ACTION (NOA)",
+      "fields": [
+        {
+          "id": "noaStatus",
+          "label": "NOA Status",
+          "type": "choice",
+          "choices": [
+            "Generated",
+            "Pending",
+            "Provided",
+            "Not Required"
+          ]
+        },
+        {
+          "id": "noaDate",
+          "label": "NOA Date",
+          "type": "date"
+        }
+      ]
+    }
+  ]
+}

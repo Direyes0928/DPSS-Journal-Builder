@@ -1,0 +1,250 @@
+{
+  "id": "CF_Recertification",
+  "name": "CalFresh – Recertification",
+  "file": "CF_Recertification.json",
+  "program": "CalFresh",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+
+  "sections": [
+
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        { "id": "shortDescription", "label": "Short Description", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_2",
+      "title": "ACTION",
+      "fields": [
+        {
+          "id": "recertAction",
+          "label": "Recertification Action",
+          "type": "choice",
+          "choices": [
+            "Received",
+            "Complete",
+            "Incomplete",
+            "Denied",
+            "Late",
+            "Withdrawn",
+            "Other"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_3",
+      "title": "RECERTIFICATION DETAILS",
+      "fields": [
+        { "id": "recertDate", "label": "Recertification Interview Date", "type": "date" },
+        {
+          "id": "interviewMethod",
+          "label": "Interview Method",
+          "type": "choice",
+          "choices": ["In Person", "Phone", "Tele-Interview", "Video", "Waived", "Other"]
+        },
+        { "id": "interviewWith", "label": "Interview Conducted With", "type": "text" }
+      ]
+    },
+
+    {
+      "id": "section_4",
+      "title": "HOUSEHOLD COMPOSITION",
+      "fields": [
+        {
+          "id": "hhComposition",
+          "label": "Household Members",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "ageDob", "label": "Age / DOB", "type": "text" },
+            { "id": "relationship", "label": "Relationship", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_5",
+      "title": "INCOME",
+      "fields": [
+        {
+          "id": "incomeReview",
+          "label": "Income",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "New Income Reported",
+            "Income Ended",
+            "Income Changed",
+            "Pending Verification",
+            "Other"
+          ]
+        },
+        {
+          "id": "incomeDetails",
+          "label": "Income Details",
+          "type": "repeatable",
+          "fields": [
+            { "id": "source", "label": "Source", "type": "text" },
+            { "id": "amount", "label": "Amount", "type": "text" },
+            { "id": "frequency", "label": "Frequency", "type": "choice",
+              "choices": ["Weekly", "Biweekly", "Monthly", "Semi-Monthly", "Irregular", "Other"] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_6",
+      "title": "EXPENSES",
+      "fields": [
+        {
+          "id": "expenseReview",
+          "label": "Expenses",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "New Expenses",
+            "Expense Ended",
+            "Expense Changed",
+            "Pending Verification",
+            "Other"
+          ]
+        },
+        {
+          "id": "expenseDetails",
+          "label": "Expense Details",
+          "type": "repeatable",
+          "fields": [
+            { "id": "type", "label": "Expense Type", "type": "text" },
+            { "id": "amount", "label": "Amount", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "choice",
+              "choices": ["Verified", "Not Verified", "Pending"] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_7",
+      "title": "RESIDENCY & IDENTITY",
+      "fields": [
+        {
+          "id": "residency",
+          "label": "Residency",
+          "type": "choice",
+          "choices": ["Verified", "No Change", "Not Verified", "Pending", "Other"]
+        },
+        {
+          "id": "identity",
+          "label": "Identity",
+          "type": "choice",
+          "choices": ["Verified", "No Change", "Not Verified", "Pending", "Other"]
+        }
+      ]
+    },
+
+    {
+      "id": "section_8",
+      "title": "RESOURCES",
+      "fields": [
+        {
+          "id": "resourcesReview",
+          "label": "Liquid / Non-Liquid Resources",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "New Resources Reported",
+            "Resource Ended",
+            "Resource Changed",
+            "Pending Verification",
+            "Other"
+          ]
+        },
+        {
+          "id": "resourceDetails",
+          "label": "Resource Details",
+          "type": "repeatable",
+          "fields": [
+            { "id": "resourceType", "label": "Resource Type", "type": "text" },
+            { "id": "value", "label": "Value", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "choice",
+              "choices": ["Verified", "Not Verified", "Pending"] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_9",
+      "title": "VERIFICATIONS",
+      "fields": [
+        {
+          "id": "verificationsNeeded",
+          "label": "Verifications Needed",
+          "type": "choice",
+          "choices": [
+            "None",
+            "Pending",
+            "Requested",
+            "Provided",
+            "Other"
+          ]
+        },
+        {
+          "id": "verificationItems",
+          "label": "Verification Items",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "item", "label": "Item", "type": "text" },
+            { "id": "status", "label": "Status", "type": "choice",
+              "choices": ["Provided", "Not Provided", "Pending"] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_10",
+      "title": "DETERMINATION",
+      "fields": [
+        {
+          "id": "determination",
+          "label": "Final Determination",
+          "type": "choice",
+          "choices": [
+            "Approved",
+            "Denied",
+            "Pending Additional Information",
+            "Incomplete",
+            "Other"
+          ]
+        },
+        { "id": "determinationNotes", "label": "Determination Notes", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_11",
+      "title": "NOTICE OF ACTION (NOA)",
+      "fields": [
+        {
+          "id": "noaStatus",
+          "label": "NOA Status",
+          "type": "choice",
+          "choices": ["Generated", "Pending", "Not Required"]
+        },
+        { "id": "noaDate", "label": "NOA Date", "type": "date" }
+      ]
+    }
+
+  ]
+}

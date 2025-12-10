@@ -1,0 +1,223 @@
+{
+  "id": "CW_No_Change",
+  "name": "CalWORKs \u2013 No Change",
+  "file": "CW_No_Change.json",
+  "program": "CalWORKs",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "Short Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "LONG DESCRIPTION",
+      "fields": [
+        {
+          "id": "longDescription",
+          "label": "Long Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "APPLICATION DETAILS",
+      "fields": [
+        {
+          "id": "reviewDate",
+          "label": "Review Date",
+          "type": "date"
+        },
+        {
+          "id": "reviewType",
+          "label": "Review Type",
+          "type": "choice",
+          "choices": [
+            "Mid-Period Report",
+            "SAR 7",
+            "Annual Redetermination",
+            "Interim Change Reporting",
+            "Case Maintenance",
+            "Other"
+          ]
+        },
+        {
+          "id": "verificationStatus",
+          "label": "Verification Status",
+          "type": "choice",
+          "choices": [
+            "Verified \u2014 No Change",
+            "No Verification Needed",
+            "Pending Review",
+            "Not Applicable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "HOUSEHOLD INFORMATION",
+      "fields": [
+        {
+          "id": "householdMembers",
+          "label": "Household Members",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "ageDob",
+              "label": "Age / DOB",
+              "type": "text"
+            },
+            {
+              "id": "relationship",
+              "label": "Relationship",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "id": "addressConfirmed",
+          "label": "Address Confirmed",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No",
+            "Updated"
+          ]
+        },
+        {
+          "id": "phoneConfirmed",
+          "label": "Phone Number Confirmed",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No",
+            "Updated"
+          ]
+        },
+        {
+          "id": "emailConfirmed",
+          "label": "Email Confirmed",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No",
+            "Updated"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "INCOME REVIEW",
+      "fields": [
+        {
+          "id": "incomeStatus",
+          "label": "Income Status",
+          "type": "choice",
+          "choices": [
+            "No Income Changes Reported",
+            "No Income Found in System Review",
+            "Income Verified \u2014 No Change",
+            "Income Pending Verification",
+            "Not Applicable"
+          ]
+        },
+        {
+          "id": "incomeSources",
+          "label": "Income Sources (If Any)",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "source",
+              "label": "Source",
+              "type": "text"
+            },
+            {
+              "id": "amount",
+              "label": "Amount",
+              "type": "text"
+            },
+            {
+              "id": "frequency",
+              "label": "Frequency",
+              "type": "text"
+            },
+            {
+              "id": "verified",
+              "label": "Verified",
+              "type": "choice",
+              "choices": [
+                "Yes",
+                "No"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "EXPENSE REVIEW",
+      "fields": [
+        {
+          "id": "housingExpense",
+          "label": "Housing Expense Change?",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "Not Applicable",
+            "Reviewed"
+          ]
+        },
+        {
+          "id": "utilities",
+          "label": "Utility Allowance Change?",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "Not Applicable",
+            "Reviewed"
+          ]
+        },
+        {
+          "id": "dependentCare",
+          "label": "Dependent Care Expenses Change?",
+          "type": "choice",
+          "choices": [
+            "No Change",
+            "Not Applicable",
+            "Reviewed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "CASE NOTES",
+      "fields": [
+        {
+          "id": "caseNotes",
+          "label": "Case Notes",
+          "type": "textarea",
+          "placeholder": "Enter additional case notes here"
+        }
+      ]
+    }
+  ]
+}

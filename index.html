@@ -1,33 +1,121 @@
 <!DOCTYPE html>
+<!-- CREATE TEMPLATE GUIDANCE POPUP (moved to end of body for z-index) -->
+<div id="create_template_guide_backdrop" class="fixed inset-0 bg-black/40 z-[999] hidden"></div>
+<div id="create_template_guide" class="fixed inset-0 z-[1000] flex items-center justify-center px-4 hidden">
+    <div class="modal-shell show bg-white rounded-xl shadow-2xl w-full max-w-md max-h-[80vh] flex flex-col animate-popin">
+        <div class="flex items-center justify-between p-6 border-b border-slate-200">
+            <h3 class="text-xl font-bold text-slate-900">Template Created!</h3>
+        </div>
+        <div class="p-6 bg-slate-50 text-center">
+            <div class="mb-4 text-3xl animate-bounce">🎉</div>
+            <p class="text-base font-semibold mb-2">You're ready to build your template.</p>
+            <p class="text-sm text-slate-600 mb-4">Use the Section Picker to import sections from other templates, or add a blank section to start from scratch.</p>
+            <p class="text-xs text-slate-500">You can opt out and close this guide at any time.</p>
+        </div>
+        <div class="flex justify-end items-center p-4 border-t bg-slate-50">
+            <button onclick="closeCreateTemplateGuide()" class="px-4 py-2 rounded-md border border-slate-300 text-sm hover:bg-white transition-colors">Got it!</button>
+        </div>
+    </div>
+</div>
+<!-- SECTION EDIT MODAL -->
+<div id="section_edit_modal_backdrop" class="fixed inset-0 bg-black/40 z-50 hidden"></div>
+<div id="section_edit_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 hidden">
+    <div class="modal-shell bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[80vh] flex flex-col animate-popin">
+        <div class="flex items-center justify-between p-4 border-b border-slate-200">
+            <h3 class="text-lg font-bold text-slate-900">Edit Section</h3>
+            <button id="section_edit_close" class="text-slate-400 hover:text-slate-600">✕</button>
+        </div>
+        <div class="p-6 bg-slate-50">
+            <label class="block text-xs font-semibold mb-2">Section Title</label>
+            <input id="section_edit_title" type="text" class="journal-input w-full mb-4" />
+
+            <label class="inline-flex items-center gap-2 text-sm mb-3">
+                <input id="section_edit_required" type="checkbox" />
+                <span class="text-xs text-slate-600">Required</span>
+            </label>
+
+            <p class="text-xs text-slate-500 mt-2">Update the section title and required flag. Changes persist to local state and will be saved when you Publish.</p>
+        </div>
+        <div class="flex justify-end items-center p-4 border-t bg-slate-50 gap-2">
+            <button id="section_edit_cancel" class="px-4 py-2 rounded-md border border-slate-300 text-sm hover:bg-white">Cancel</button>
+            <button id="section_edit_save" class="px-4 py-2 rounded-md bg-indigo-600 text-white text-sm hover:bg-indigo-700">Save Changes</button>
+        </div>
+    </div>
+</div>
+<script>
+// Wire section edit modal buttons
+document.addEventListener('DOMContentLoaded', function() {
+    const closeBtn = document.getElementById('section_edit_close');
+    const cancelBtn = document.getElementById('section_edit_cancel');
+    const saveBtn = document.getElementById('section_edit_save');
+    if (closeBtn) closeBtn.addEventListener('click', () => window.closeSectionEditModal && window.closeSectionEditModal());
+    if (cancelBtn) cancelBtn.addEventListener('click', () => window.closeSectionEditModal && window.closeSectionEditModal());
+    if (saveBtn) saveBtn.addEventListener('click', () => window.saveSectionEditModal && window.saveSectionEditModal());
+});
+</script>
+<!-- HIDE TOAST -->
+<div id="hideToast" class="fixed left-1/2 top-8 z-[999] -translate-x-1/2 bg-white border border-slate-200 shadow-xl rounded-lg px-6 py-4 flex items-center gap-3 opacity-0 pointer-events-none transition-all duration-500 scale-95">
+    <div id="hideToastIcon" class="text-blue-500 text-2xl animate-bounce">🙈</div>
+    <div>
+        <h3 id="hideToastMessage" class="text-base font-bold text-slate-800 mb-1">Template is now Hidden!</h3>
+        <p id="hideToastSubtext" class="text-sm text-slate-500"></p>
+    </div>
+</div>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DPSS Journal Builder</title>
+    <title>SSD Journal Builder</title>
 
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- mammoth.js for .docx parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js"></script>
+    
+    <!-- JSZip for DOCX XML parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    
+    <!-- rtf.js for .rtf parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/rtf.js@3.0.8/rtf.min.js"></script>
 
     <style>
+        :root {
+            /* DPSS accent palette (light purple) */
+            /* Layout variables for header and sidebar spacing */
+            --header-height: 4.5rem;
+            --sidebar-vertical-gap: 9rem; /* increased to lower the sidebar further */
+            --dpss-accent: #6366f1;
+            --dpss-accent-600: #4f46e5;
+            --dpss-accent-100: #eef2ff;
+            --dpss-accent-50: #f5f7ff;
+            /* Button palette tokens */
+            --btn-green: #16a34a;
+            --btn-green-600: #15803d;
+            --btn-amber: #f59e0b;
+            --btn-amber-600: #d97706;
+            --btn-neutral-bg: #f1f5f9;
+            --btn-neutral-border: #cbd5e1;
+        }
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             background-color: #f1f5f9;
         }
 
-        /* 2025-11-21 ORIGINAL: Sticky header shadow */
         .sticky-header {
             box-shadow: 0 1px 4px rgba(15, 23, 42, 0.1);
         }
 
-        /* 2025-11-21 ORIGINAL: Section cards */
         .section-card {
             background-color: #ffffff;
             border-radius: 0.75rem;
             padding: 1.25rem;
             border: 1px solid #e5e7eb;
+            border-left: 4px solid var(--dpss-accent-100); /* Accent left border */
+            position: relative;
         }
 
-        /* 2025-11-21 ORIGINAL: Input styling */
         .journal-input {
             width: 100%;
             border-radius: 0.5rem;
@@ -63,40 +151,94 @@
             font-weight: 600;
         }
 
-        /* 2025-11-21 ORIGINAL: Sidebar items */
+        /* Sidebar items: cleaner, narrower, truncated */
         .sidebar-item-active {
-            background-color: #e5e7eb;
-            color: #111827;
+            background-color: #eef2f7;
+            color: #0f172a;
         }
 
         .sidebar-item {
-            border-radius: 9999px;
-            padding: 0.4rem 0.75rem;
-            font-size: 0.85rem;
+            border-radius: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem; /* smaller text */
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.35rem; /* tighter spacing */
             cursor: pointer;
+            max-width: 100%;
+        }
+        .sidebar-item:hover { background-color: #f1f5f9; }
+
+        .sidebar-number {
+            min-width: 28px;
+            text-align: center;
+            font-size: 0.7rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            color: var(--dpss-accent);
+            background: var(--dpss-accent-50);
+            border: 1px solid rgba(99,102,241,0.12);
+            border-radius: 9999px; /* pill */
+            padding: 0.05rem 0.35rem;
         }
 
-        .sidebar-item span {
-            font-size: 0.75rem;
+        .sidebar-title {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #334155;
         }
 
-        .sidebar-item:hover {
-            background-color: #e5e7eb;
+        /* Sidebar nav scroll and soft scrollbar */
+        aside nav {
+            max-height: calc(100vh - 220px);
+            overflow-y: auto;
+            padding-right: 4px;
         }
+        aside nav::-webkit-scrollbar { width: 6px; }
+        aside nav::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+        aside nav::-webkit-scrollbar-track { background: transparent; }
 
         .pill {
             border-radius: 9999px;
             padding: 0.1rem 0.6rem;
             font-size: 0.7rem;
-            border: 1px solid rgba(148, 163, 184, 0.7);
+            border: 1px solid rgba(99,102,241,0.12);
+            background: var(--dpss-accent-50);
+            color: var(--dpss-accent-600);
         }
 
-        /* 2025-11-21 NEW: Dark mode base styles */
+        /* Header accents */
+        header {
+            border-top: 4px solid var(--dpss-accent-100);
+            background: linear-gradient(180deg, rgba(99,102,241,0.04) 0%, rgba(255,255,255,0.9) 60%);
+            backdrop-filter: blur(2px);
+        }
+        header h1 {
+            color: var(--dpss-accent-600);
+        }
+        /* Ensure current template pill in header uses accent (override utility classes) */
+        #currentTemplateTag {
+            background: var(--dpss-accent-50) !important;
+            color: var(--dpss-accent-600) !important;
+            border-color: rgba(79,70,229,0.12) !important;
+        }
+
+        /* Small hint under header title */
+        #headerHint {
+            display: inline-block;
+            margin-left: 8px;
+            font-size: 12px;
+            color: #6b7280;
+            vertical-align: middle;
+            background: rgba(99,102,241,0.06);
+            padding: 4px 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(99,102,241,0.08);
+        }
+
         body.dark-mode {
-            background-color: #020617; /* near-black */
+            background-color: #020617;
             color: #e5e7eb;
         }
 
@@ -116,1483 +258,1073 @@
             color: #e5e7eb;
         }
 
-        body.dark-mode .journal-input::placeholder {
+        /* Stronger, consistent dark-mode overrides for UI surfaces */
+        body.dark-mode {
+            --surface-1: #071028; /* primary card */
+            --surface-2: #0b1320; /* secondary panels */
+            --muted-text: #e6eefc; /* brighter text for readability */
+            --muted-text-2: #cbd5e1; /* secondary, slightly dimmer */
+            --subtle-border: #172033;
+            --accent-glow: rgba(79,140,255,0.06);
+            color: var(--muted-text);
+        }
+
+        body.dark-mode .modal-shell,
+        body.dark-mode .section-card,
+        body.dark-mode #changesTracker,
+        body.dark-mode #hideToast,
+        body.dark-mode #deleteToast,
+        body.dark-mode .repeatable-container,
+        body.dark-mode .clone-group,
+        body.dark-mode .toolbox,
+        body.dark-mode aside,
+        body.dark-mode nav {
+            background: var(--surface-1) !important;
+            color: var(--muted-text) !important;
+            border-color: var(--subtle-border) !important;
+            box-shadow: 0 6px 18px rgba(2,6,23,0.6) !important;
+        }
+
+        body.dark-mode .section-body { color: var(--muted-text); }
+
+        /* Stronger text contrast for headings, labels and nav */
+        body.dark-mode .section-label { color: var(--muted-text-2) !important; }
+        body.dark-mode .section-title { color: var(--muted-text) !important; }
+        body.dark-mode .sidebar-title { color: var(--muted-text) !important; }
+        body.dark-mode .sidebar-item { color: var(--muted-text) !important; }
+        body.dark-mode .sidebar-item:hover { color: var(--muted-text) !important; }
+
+        body.dark-mode .pill,
+        body.dark-mode .sidebar-item-active { background: rgba(79,70,229,0.06) !important; color: var(--muted-text) !important; }
+
+        body.dark-mode .journal-input,
+        body.dark-mode select.journal-input,
+        body.dark-mode textarea.journal-input {
+            background: #071428 !important;
+            border-color: var(--subtle-border) !important;
+            color: var(--muted-text) !important;
+            box-shadow: none !important;
+        }
+        body.dark-mode .journal-input::placeholder,
+        body.dark-mode textarea.journal-input::placeholder {
+            color: #94a3b8 !important;
+            opacity: 1;
+        }
+        body.dark-mode select.journal-input option {
+            color: var(--muted-text) !important;
+            background: #071428 !important;
+        }
+
+        body.dark-mode .repeatable-container {
+            background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)) !important;
+            border: 1px solid var(--subtle-border) !important;
+        }
+
+        /* Toasts & overlays */
+        body.dark-mode #hideToast,
+        body.dark-mode #deleteToast,
+        body.dark-mode .dpss-undo-toast {
+            background: linear-gradient(180deg, #071428, #07182a) !important;
+            color: var(--muted-text) !important;
+            border: 1px solid rgba(255,255,255,0.03) !important;
+            box-shadow: 0 8px 28px rgba(2,6,23,0.7) !important;
+        }
+
+        /* Make buttons less saturated in dark mode */
+        body.dark-mode .pill-btn,
+        body.dark-mode .pill-btn-green,
+        body.dark-mode .pill-btn-blue,
+        body.dark-mode .pill-btn-red,
+        body.dark-mode .section-admin-btn {
+            background: rgba(255,255,255,0.03) !important;
+            color: var(--muted-text) !important;
+            border: 1px solid rgba(255,255,255,0.03) !important;
+            box-shadow: none !important;
+        }
+
+        /* Make change items muted but readable */
+        body.dark-mode .change-item { background: rgba(255,255,255,0.02); color: var(--muted-text-2); }
+
+        /* Reduce contrast for header background in dark mode */
+        body.dark-mode header { background: linear-gradient(180deg, rgba(2,6,23,0.8), rgba(2,6,23,0.9)); border-top-color: rgba(79,70,229,0.04); }
+
+        /* Ensure focus outlines are visible but subtle */
+        body.dark-mode .journal-input:focus { box-shadow: 0 0 0 3px var(--accent-glow) !important; border-color: rgba(79,140,255,0.28) !important; }
+
+        /* Admin-only visibility (override Tailwind display utilities) */
+        .admin-only { display: none !important; }
+        body.admin-mode .admin-only { display: block !important; }
+        /* Non-admin-only visibility */
+        body.admin-mode .non-admin-only { display: none !important; }
+        /* Collapsed section body */
+        .section-body.collapsed { display: none; }
+        .collapse-toggle { cursor: pointer; }
+        .collapse-toggle span { transition: transform 0.2s ease; display: inline-block; }
+        .collapse-toggle.collapsed span { transform: rotate(-90deg); }
+        .section-card.active { outline: 2px solid #6366f1; outline-offset: 2px; }
+        
+        /* Scroll buttons */
+        .scroll-btn {
+            position: fixed;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--dpss-accent);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .scroll-btn.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-btn:hover {
+            background: #4338ca;
+            transform: scale(1.1);
+        }
+        
+        #scrollToTop {
+            top: 50%;
+            transform: translateY(-60px);
+        }
+        
+        #scrollToBottom {
+            top: 50%;
+            transform: translateY(20px);
+        }
+        
+        /* Publish button */
+        #publishBtn {
+            position: fixed;
+            bottom: 150px;
+            right: 20px;
+            padding: 12px 24px;
+            background: var(--dpss-accent-600);
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        #publishBtn.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        #publishBtn:hover {
+            background: var(--dpss-accent);
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(79,70,229,0.18);
+        }
+        
+        #publishBtn.pulsing {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+            50% { box-shadow: 0 4px 20px rgba(16, 185, 129, 0.6); }
+        }
+        
+        /* Changes tracker */
+        #changesTracker {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            width: 320px;
+            max-height: calc(100vh - 320px);
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 900;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #changesTracker.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .changes-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .changes-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+        }
+        
+        .change-item {
+            background: #f9fafb;
+            border-left: 3px solid #6366f1;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+        
+        .change-item.added {
+            border-left-color: #10b981;
+        }
+        
+        .change-item.edited {
+            border-left-color: #f59e0b;
+        }
+        
+        .change-item.deleted {
+            border-left-color: #ef4444;
+        }
+        
+        .change-type {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        
+        .change-details {
+            color: #4b5563;
+            line-height: 1.4;
+        }
+        
+        .change-timestamp {
+            font-size: 10px;
             color: #9ca3af;
+            margin-top: 4px;
+        }
+        
+        .clear-changes-btn {
+            font-size: 11px;
+            color: #ef4444;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        
+        .clear-changes-btn:hover {
+            color: #dc2626;
+        }
+        
+        /* Delete confirmation toast */
+        #deleteToast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 300px;
+        }
+        
+        #deleteToast.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .delete-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            animation: deleteIconPop 0.5s ease;
+        }
+        
+        @keyframes deleteIconPop {
+            0% { transform: scale(0) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(10deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        
+        .delete-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #ef4444;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        body.dark-mode .sidebar-item {
-            color: #e5e7eb;
+        /* Save/Publish toast */
+        #saveToast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 300px;
+        }
+        
+        #saveToast.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .save-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            animation: deleteIconPop 0.5s ease;
+        }
+        
+        .save-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #10b981;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+        /* Refresh toast */
+        #refreshToast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 300px;
+        }
+        #refreshToast.visible { opacity:1; visibility:visible; transform:translate(-50%, -50%) scale(1); }
+        .refresh-icon { font-size:48px; margin-bottom:16px; animation: deleteIconPop 0.5s ease; }
+        .refresh-spinner { width:40px; height:40px; border:4px solid #f3f4f6; border-top:4px solid #6366f1; border-radius:50%; animation: spin 0.8s linear infinite; margin:0 auto 16px; }
+        
+        .section-label-pill {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            font-size: 11px;
+            color: #475569;
+            max-width: 200px;
+            z-index: 5;
+        }
+        
+        .section-label-pill input {
+            background: transparent;
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 11px;
+            color: #475569;
+            font-weight: 500;
+        }
+        
+        .section-label-pill input::placeholder {
+            color: #94a3b8;
         }
 
-        body.dark-mode .sidebar-item-active {
-            background-color: #1f2937;
-            color: #f9fafb;
-        }
-
-        body.dark-mode .pill {
-            border-color: #4b5563;
-            background-color: #020617;
-            color: #e5e7eb;
-        }
-
-        body.dark-mode .badge {
-            border-color: rgba(148, 163, 184, 0.6);
-            background-color: #020617;
-            color: #e5e7eb;
-        }
-
-        /* 2025-11-21 NEW: Admin-only sections hidden by default */
-        .admin-only {
-            display: none;
-        }
-
-        body.admin-mode .admin-only {
-            display: block;
+        /* Modal pop-in animation */
+        .modal-shell { opacity: 0; transform: scale(0.97); transition: opacity 180ms ease-out, transform 180ms ease-out; }
+        .modal-shell.show { opacity: 1; transform: scale(1); }
+        #create_template_guide_backdrop, #create_template_guide {
+            z-index: 999999 !important;
         }
     </style>
+        <style>
+        /* Header search suggestions dropdown */
+        #headerSearchResults {
+            position: absolute;
+            background: white;
+            border: 1px solid #e6e9f2;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+            border-radius: 8px;
+            max-width: 420px;
+            width: 360px;
+            z-index: 1200;
+            overflow: hidden;
+            font-size: 13px;
+        }
+        #headerSearchResults.hidden { display: none; }
+        #headerSearchResults .result-item { padding: 8px 12px; cursor: pointer; display: flex; gap: 8px; align-items: center; }
+        #headerSearchResults .result-item:hover { background: #f1f5ff; }
+        #headerSearchResults .result-title { font-weight: 600; color: #0f172a; }
+        #headerSearchResults .result-program { font-size: 12px; color: #6b7280; margin-left: auto; }
+        /* Left sidebar / floating pane styles */
+        /* On medium+ screens the left pane will stay anchored (sticky) and scroll independently */
+        @media (min-width: 768px) {
+            .left-pane .section-card {
+                position: sticky;
+                /* Center the sidebar vertically between header and bottom by leaving a vertical gap */
+                top: calc(var(--header-height) + (var(--sidebar-vertical-gap) / 2));
+                /* Reserve space equal to --sidebar-vertical-gap so there's breathing room at bottom */
+                max-height: calc(100vh - var(--header-height) - var(--sidebar-vertical-gap));
+                overflow: auto;
+                -webkit-overflow-scrolling: touch;
+                z-index: 10; /* lower than header (header uses z-20) to avoid overlay */
+            }
+        }
+        </style>
+        <style>
+        /* Sidebar action buttons: consistent size, spacing, and palette */
+        .sidebar-action { display:block; width:100%; padding:0.6rem 0.9rem; font-size:0.95rem; border-radius:0.5rem; font-weight:600; text-align:center; }
+        /* Remove inconsistent utility margins and enforce even spacing */
+        .sidebar-action { margin-top: 0 !important; }
+        .sidebar-action + .sidebar-action { margin-top: 0.6rem !important; }
+        h3 + .sidebar-action { margin-top: 0.4rem !important; }
+
+        /* Color variants matching the DPSS palette */
+        #generate_journal_btn { background: var(--btn-green); color: #fff; border: 1px solid rgba(0,0,0,0.06); }
+        #generate_journal_btn:hover { background: var(--btn-green-600); }
+
+        #btnClearValues { background: var(--btn-neutral-bg); color: #0f172a; border: 1px solid var(--btn-neutral-border); }
+        #btnClearValues:hover { background: #e9eef6; }
+
+        #refreshAppBtn { background: var(--btn-amber); color: #fff; border: 1px solid rgba(0,0,0,0.06); }
+        #refreshAppBtn:hover { background: var(--btn-amber-600); }
+
+        /* Ensure small descriptive text below keeps spacing from buttons */
+        .section-card > p.text-xs { margin-top: 0.75rem; }
+        </style>
 </head>
 <body class="min-h-screen text-slate-900">
+<!-- Animated Startup Overlay -->
+<div id="startupOverlay" style="position:fixed;inset:0;z-index:10000000;background:#f1f5f9;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.7s;">
+    <div style="font-size:3rem;animation:bounce 1.2s infinite;">🎉</div>
+    <h1 style="font-size:2rem;font-weight:bold;color:#6366f1;margin-top:1rem;">SSD Journal Builder</h1>
+    <p style="color:#64748b;margin-top:0.5rem;font-size:1.1rem;">Loading your workspace...</p>
+    <div style="margin-top:2rem;">
+        <div style="width:48px;height:48px;border:6px solid #e0e7ef;border-top:6px solid #6366f1;border-radius:50%;animation:spin 1s linear infinite;"></div>
+    </div>
+</div>
+<style>
+@keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
+@keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-18px);} }
+</style>
 
-    <!-- HEADER -->
-    <header class="sticky top-0 z-20 bg-white sticky-header border-b border-slate-200">
-        <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-4">
-            <!-- Left: Title -->
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-700">
-                    DPSS
-                </div>
-                <div>
-                    <div class="flex items-center gap-2 flex-wrap">
-                        <h1 class="text-lg font-bold tracking-tight">
-                            DPSS Journal Builder
-                        </h1>
-                        <span id="currentTemplateTag" class="pill text-slate-600 bg-slate-50">
-                            Default Template
-                        </span>
-                    </div>
-                    <p class="text-xs text-slate-500">
-                        Structured journal template.
-                    </p>
-                </div>
+<!-- HEADER -->
+<header class="sticky top-0 z-20 bg-white sticky-header border-b border-slate-200">
+    <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-4">
+
+        <!-- LEFT -->
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-700" aria-hidden="false" title="SSD">
+                <!-- Inline clipboard/form SVG as logo -->
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SSD logo: form">
+                    <rect x="7" y="3" width="10" height="18" rx="2" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+                    <path d="M9 7h6" stroke="#94a3b8" stroke-width="1.4" stroke-linecap="round"/>
+                    <path d="M9 11h6" stroke="#94a3b8" stroke-width="1.4" stroke-linecap="round"/>
+                    <path d="M9 15h4" stroke="#94a3b8" stroke-width="1.4" stroke-linecap="round"/>
+                    <rect x="8" y="1" width="8" height="3" rx="1" fill="#6366f1" />
+                </svg>
+                <span class="sr-only">SSD</span>
             </div>
 
-            <!-- Right: Meta + Toggles -->
-            <div class="flex flex-col items-end gap-2 text-xs">
-                <div class="flex items-center gap-4">
-                    <div class="text-right">
-                        <div class="text-slate-500 uppercase tracking-wide font-semibold">
-                            Journal Date
-                        </div>
-                        <input
-                            id="journalDate"
-                            type="date"
-                            class="journal-input mt-1 !px-2 !py-1"
-                        />
-                    </div>
-                    <div class="hidden sm:block w-px h-9 bg-slate-200"></div>
-                    <div class="text-right">
-                        <div class="text-slate-500 uppercase tracking-wide font-semibold">
-                            Worker Name
-                        </div>
-                        <input
-                            id="workerName"
-                            type="text"
-                            placeholder="Enter your name"
-                            class="journal-input mt-1 !px-2 !py-1"
-                        />
-                    </div>
-                </div>
-
-                <!-- 2025-11-21 NEW: Toggles row + template selector -->
-                <div class="flex flex-wrap items-center gap-2 justify-end">
-                    <select
-                        id="templateSelector"
-                        class="journal-input !w-auto !px-2 !py-1 text-[11px]"
-                    >
-                        <option value="Default Template">Default Template</option>
-                        <option value="CF Application">CF Application</option>
-                        <option value="CF Changes">CF Changes</option>
-                        <option value="CW Interview Scheduled">CW Interview Scheduled</option>
-                    </select>
-
-                    <button
-                        id="btnThemeToggle"
-                        class="px-3 py-1.5 rounded-full border border-slate-300 text-slate-700 hover:bg-slate-100 transition text-[11px]"
-                    >
-                        Dark Mode
-                    </button>
-                    <button
-                        id="btnAdminToggle"
-                        class="px-3 py-1.5 rounded-full border border-amber-500 text-amber-700 hover:bg-amber-50 transition text-[11px]"
-                    >
-                        Admin: OFF
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- MAIN LAYOUT -->
-    <main class="mx-auto max-w-6xl px-4 py-4 flex flex-col md:flex-row gap-4">
-
-        <!-- SIDEBAR -->
-        <aside class="w-full md:w-64 md:flex-shrink-0">
-            <div class="section-card md:sticky md:top-24">
-                <div class="flex items-center justify-between mb-2">
-                    <h2 class="text-xs font-semibold tracking-wide text-slate-500 uppercase">
-                        Sections
-                    </h2>
-                    <span class="badge bg-indigo-50 text-indigo-700 border border-indigo-100">
-                        Builder
+            <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                    <h1 class="text-lg font-bold tracking-tight">SSD Journal Builder</h1>
+                    <span id="currentTemplateTag" class="pill text-slate-600 bg-slate-50">
+                        Default Template
                     </span>
                 </div>
-
-                <nav class="flex flex-wrap md:flex-col gap-1 text-sm">
-                    <button class="sidebar-item sidebar-item-active" data-target="section-general">
-                        <span class="w-6 text-xs font-mono text-slate-500">01</span>
-                        General Application Details
-                    </button>
-                    <button class="sidebar-item" data-target="section-household">
-                        <span class="w-6 text-xs font-mono text-slate-500">02</span>
-                        Household Composition
-                    </button>
-                    <button class="sidebar-item" data-target="section-income">
-                        <span class="w-6 text-xs font-mono text-slate-500">03</span>
-                        Income Summary
-                    </button>
-                    <button class="sidebar-item" data-target="section-property">
-                        <span class="w-6 text-xs font-mono text-slate-500">04</span>
-                        Property / Resources
-                    </button>
-                    <button class="sidebar-item" data-target="section-notes">
-                        <span class="w-6 text-xs font-mono text-slate-500">05</span>
-                        Narrative Notes
-                    </button>
-                    <button class="sidebar-item" data-target="section-tasks">
-                        <span class="w-6 text-xs font-mono text-slate-500">06</span>
-                        Tasks & Follow-Up
-                    </button>
-                    <button class="sidebar-item" data-target="section-files">
-                        <span class="w-6 text-xs font-mono text-slate-500">07</span>
-                        Supporting Documents
-                    </button>
-                    <!-- 2025-11-21 NEW: Admin section shortcut (only meaningful in admin mode) -->
-                    <button class="sidebar-item admin-only" data-target="section-admin">
-                        <span class="w-6 text-xs font-mono text-slate-500">08</span>
-                        Admin Controls
-                    </button>
-                </nav>
-
-                <hr class="my-3" />
-
-                <!-- 2025-11-21 // NEW: Journal Export buttons (Generate / Copy / Download) -->
-                <div class="mt-6">
-                    <!-- 2025-11-21 NEW: Journal Export (buttons only, in sidebar) -->
-                    <h3 class="text-lg font-semibold text-gray-800 mb-3">
-                      Journal Export
-                    </h3>
-
-                    <div class="flex flex-wrap gap-3">
-                      <button
-                        id="generate_journal_btn"
-                        type="button"
-                        class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-                      >
-                        Generate Journal
-                      </button>
-                    </div>
-
-                    <p class="text-xs text-gray-500 mt-2">
-                      Click "Generate Journal" to open a preview. You can edit it, copy, or download from the popup.
-                    </p>
-                </div>
+                <p class="text-xs text-slate-500">Structured journal template.</p>
             </div>
-        </aside>
+        </div>
 
-        <!-- MAIN CONTENT SECTIONS -->
-        <section class="flex-1 space-y-4 pb-10">
+        <!-- RIGHT -->
+        <div class="flex flex-col items-end gap-2 text-xs">
 
-        <!-- 2025-11-21 NEW: Dynamic core sections (General + Household from JSON) -->
+            <!-- Date + Worker (removed per user request) -->
+
+            <!-- FILTER BAR (SYSTEM B) -->
+            <div class="flex flex-wrap items-center gap-2 justify-end">
+
+                <!-- PROGRAM -->
+                <select id="headerProgramFilter" class="journal-input !w-auto !px-2 !py-1 text-[11px]">
+                    <option value="">All Programs</option>
+                </select>
+
+                <!-- TEMPLATE NAME -->
+                <select id="headerTemplateSelector" class="journal-input !w-auto !px-2 !py-1 text-[11px]">
+                    <option value="">Select Template</option>
+                </select>
+
+                <!-- SEARCH -->
+                <input id="headerTemplateSearch" type="text" placeholder="Search…" class="journal-input !w-40 text-[11px]" autocomplete="off" />
+                <!-- Search suggestions dropdown (positioned via JS) -->
+                <div id="headerSearchResults" class="hidden" aria-hidden="true"></div>
+
+                <!-- RESET -->
+                <div
+                    id="headerTemplateReset"
+                    class="px-2 py-1 rounded-full bg-slate-200 hover:bg-slate-300 text-xs cursor-pointer hidden"
+                >
+                    Reset
+                </div>
+
+                <!-- TOGGLES -->
+                <button id="btnThemeToggle" class="px-3 py-1.5 rounded-full border border-slate-300 text-slate-700 hover:bg-slate-100 text-[11px]">
+                    Dark Mode
+                </button>
+                <button id="btnAdminToggle" class="px-3 py-1.5 rounded-full border border-amber-500 text-amber-700 hover:bg-amber-50 text-[11px]">
+                    Admin: OFF
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- PAGE LAYOUT -->
+<main class="mx-auto max-w-6xl px-4 py-4 flex flex-col md:flex-row gap-4 main-with-left">
+
+    <!-- SIDEBAR -->
+    <aside class="w-full md:w-56 md:flex-shrink-0 left-pane">
+        <div class="section-card">
+
+            <div class="flex items-center justify-between mb-2">
+                <h2 class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Sections</h2>
+                <span class="badge bg-indigo-50 text-indigo-700 border border-indigo-100">Builder</span>
+            </div>
+
+            <nav class="flex flex-col gap-1 text-sm overflow-y-auto max-h-[60vh] pr-1" style="scrollbar-width: thin;">
+                <button class="sidebar-item sidebar-item-active" data-target="section-general">
+                    <span class="w-6 text-xs font-mono text-slate-500">01</span>General Application Details
+                </button>
+                <button class="sidebar-item" data-target="section-household">
+                    <span class="w-6 text-xs font-mono text-slate-500">02</span>Household Composition
+                </button>
+                <button class="sidebar-item" data-target="section-income">
+                    <span class="w-6 text-xs font-mono text-slate-500">03</span>Income Summary
+                </button>
+                <button class="sidebar-item" data-target="section-property">
+                    <span class="w-6 text-xs font-mono text-slate-500">04</span>Property / Resources
+                </button>
+                <button class="sidebar-item" data-target="section-notes">
+                    <span class="w-6 text-xs font-mono text-slate-500">05</span>Narrative Notes
+                </button>
+                <button class="sidebar-item" data-target="section-tasks">
+                    <span class="w-6 text-xs font-mono text-slate-500">06</span>Tasks & Follow-Up
+                </button>
+                <button class="sidebar-item" data-target="section-files">
+                    <span class="w-6 text-xs font-mono text-slate-500">07</span>Supporting Documents
+                </button>
+
+                <button class="sidebar-item admin-only" data-target="section-admin">
+                    <span class="w-6 text-xs font-mono text-slate-500">08</span>Admin Controls
+                </button>
+            </nav>
+
+            <hr class="my-3" />
+
+            <!-- GENERATE -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-3">Journal Export</h3>
+            <button id="generate_journal_btn" class="sidebar-action px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">
+                Generate Journal
+            </button>
+
+            <button id="btnClearValues" class="sidebar-action mt-3 px-4 py-2 bg-slate-200 text-slate-800 rounded-md hover:bg-slate-300 text-xs">Clear All Values</button>
+
+            <button id="refreshAppBtn" class="sidebar-action mt-2 px-4 py-2 rounded-md border border-slate-300 text-slate-700 hover:bg-slate-100 text-xs" title="Refresh app">🔄 Refresh</button>
+
+            <p class="text-xs text-slate-500 mt-2">Preview → Edit → Copy → Download.</p>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <section class="flex-1 space-y-4 pb-10">
+        <!-- JSON-DRIVEN CORE -->
         <div id="dynamicCoreSections"></div>
-
-            <!-- SECTION: INCOME SUMMARY -->
-            <section id="section-income" class="section-card">
-                <div class="flex items-start justify-between gap-3 mb-3">
-                    <div>
-                        <div class="section-label">Section 03</div>
-                        <h2 class="section-title">Income Summary</h2>
-                        <p class="text-xs text-slate-500 mt-1">
-                            High-level summary of income discussed or verified during this contact.
-                        </p>
-                    </div>
-                    <span class="badge bg-emerald-50 text-emerald-700 border border-emerald-100">
-                        Financial
-                    </span>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-3 text-xs">
-                    <div>
-                        <label class="block text-slate-600 font-semibold mb-1">
-                            Income Sources
-                        </label>
-                        <textarea
-                            rows="3"
-                            class="journal-input"
-                            placeholder="List all income sources (earned/unearned) discussed in this journal."
-                        ></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-slate-600 font-semibold mb-1">
-                            Verifications / Actions
-                        </label>
-                        <textarea
-                            rows="3"
-                            class="journal-input"
-                            placeholder="Note documents requested/received and worker actions (RFI sent, verification received, etc.)."
-                        ></textarea>
-                    </div>
-                </div>
-
-                <div class="mt-3 text-xs">
-                    <label class="block text-slate-600 font-semibold mb-1">
-                        Income Impact on Eligibility / Benefits
-                    </label>
-                    <textarea
-                        rows="3"
-                        class="journal-input"
-                        placeholder="Explain how reported income affects eligibility, budget, or benefit level (if applicable)."
-                    ></textarea>
-                </div>
-            </section>
-
-            <!-- SECTION: PROPERTY / RESOURCES -->
-            <section id="section-property" class="section-card">
-                <div class="flex items-start justify-between gap-3 mb-3">
-                    <div>
-                        <div class="section-label">Section 04</div>
-                        <h2 class="section-title">Property / Resources</h2>
-                        <p class="text-xs text-slate-500 mt-1">
-                            Use this space to document property, vehicles, or other resources that matter for the case.
-                        </p>
-                    </div>
-                    <span class="badge bg-amber-50 text-amber-700 border border-amber-100">
-                        Resources
-                    </span>
-                </div>
-
-                <div class="text-xs space-y-3">
-                    <div>
-                        <label class="block text-slate-600 font-semibold mb-1">
-                            Real Property / Housing
-                        </label>
-                        <textarea
-                            rows="3"
-                            class="journal-input"
-                            placeholder="Home ownership, second properties, changes in residence, etc."
-                        ></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-slate-600 font-semibold mb-1">
-                            Vehicles / Other Resources
-                        </label>
-                        <textarea
-                            rows="3"
-                            class="journal-input"
-                            placeholder="Vehicles, large assets, or resources that may affect eligibility."
-                        ></textarea>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION: NARRATIVE NOTES -->
-            <section id="section-notes" class="section-card">
-                <div class="flex items-start justify-between gap-3 mb-3">
-                    <div>
-                        <div class="section-label">Section 05</div>
-                        <h2 class="section-title">Narrative Notes</h2>
-                        <p class="text-xs text-slate-500 mt-1">
-                            Use this for full narrative – you can follow your existing county journal standards.
-                        </p>
-                    </div>
-                    <span class="badge bg-violet-50 text-violet-700 border border-violet-100">
-                        Narrative
-                    </span>
-                </div>
-
-                <textarea
-                    rows="8"
-                    class="journal-input text-sm"
-                    placeholder="Document the interaction, information received, worker analysis, policy references, and final outcome. This is your main narrative space."
-                ></textarea>
-            </section>
-
-            <!-- SECTION: TASKS / FOLLOW-UP -->
-            <section id="section-tasks" class="section-card">
-                <div class="flex items-start justify-between gap-3 mb-3">
-                    <div>
-                        <div class="section-label">Section 06</div>
-                        <h2 class="section-title">Tasks & Follow-Up</h2>
-                        <p class="text-xs text-slate-500 mt-1">
-                            Track worker tasks, RFIs, and follow-up dates related to this journal.
-                        </p>
-                    </div>
-                    <span class="badge bg-rose-50 text-rose-700 border border-rose-100">
-                        Follow-Up
-                    </span>
-                </div>
-
-                <div class="text-xs space-y-2">
-                    <div class="grid grid-cols-4 gap-2 font-semibold text-slate-600">
-                        <div>Task / Action</div>
-                        <div>Due Date</div>
-                        <div>Status</div>
-                        <div>Notes</div>
-                    </div>
-
-                    <div class="grid grid-cols-4 gap-2">
-                        <input class="journal-input" placeholder="e.g., Send RFI for income" />
-                        <input class="journal-input" type="date" />
-                        <input class="journal-input" placeholder="Open / Completed" />
-                        <input class="journal-input" placeholder="Additional details" />
-                    </div>
-                    <div class="grid grid-cols-4 gap-2">
-                        <input class="journal-input" placeholder="Task / Action" />
-                        <input class="journal-input" type="date" />
-                        <input class="journal-input" placeholder="Status" />
-                        <input class="journal-input" placeholder="Notes" />
-                    </div>
-                    <div class="grid grid-cols-4 gap-2">
-                        <input class="journal-input" placeholder="Task / Action" />
-                        <input class="journal-input" type="date" />
-                        <input class="journal-input" placeholder="Status" />
-                        <input class="journal-input" placeholder="Notes" />
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION: SUPPORTING DOCUMENTS -->
-            <section id="section-files" class="section-card">
-                <div class="flex items-start justify-between gap-3 mb-3">
-                    <div>
-                        <div class="section-label">Section 07</div>
-                        <h2 class="section-title">Supporting Documents (Local)</h2>
-                        <p class="text-xs text-slate-500 mt-1">
-                            Track which documents were received or requested. File uploads here are local only (for now).
-                        </p>
-                    </div>
-                    <span class="badge bg-slate-50 text-slate-700 border border-slate-200">
-                        Attachments
-                    </span>
-                </div>
-
-                <div class="text-xs space-y-3">
-                    <div>
-                        <label class="block text-slate-600 font-semibold mb-1">
-                            Document Checklist / Notes
-                        </label>
-                        <textarea
-                            rows="3"
-                            class="journal-input"
-                            placeholder="List items like ID, paystubs, lease, utility bills, etc., and whether received or pending."
-                        ></textarea>
-                    </div>
-
-                    <div>
-                        <label class="block text-slate-600 font-semibold mb-1">
-                            Local File Attachments (for your reference)
-                        </label>
-                        <input
-                            type="file"
-                            multiple
-                            class="journal-input bg-slate-50"
-                        />
-                        <p class="mt-1 text-[11px] text-slate-500">
-                            This prototype does not upload files to any server. Files stay on your device when you use this locally.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 2025-11-21 NEW: Custom sections injected by Builder -->
-            <div id="customSectionsRoot" class="space-y-4"></div>
-
-            <!-- 2025-11-21 NEW: ADMIN-ONLY SECTION (Template Manager) -->
-        <section id="section-admin" class="section-card admin-only">
-            <!-- Admin header -->
-            <div class="mb-4">
-                <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100">
-                    Template Manager – Admin Panel (Live Preview)
-                </h2>
-                <p class="text-xs text-slate-500 mt-1">
-                    Admin-only area for managing journal templates.
-                </p>
-            </div>
-
-            <!-- Admin Actions -->
-            <div class="mb-4 space-y-3">
-                <div class="flex flex-wrap gap-2">
-                    <button
-                        id="btnUploadTemplate"
-                        class="px-3 py-1.5 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition"
-                    >
-                        + Upload Template
-                    </button>
-                    <button
-                        id="btnCreateTemplate"
-                        class="px-3 py-1.5 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition"
-                    >
-                        + Create New Template
-                    </button>
-                    <button
-                        id="btnPublishGitHub"
-                        class="px-3 py-1.5 rounded-full bg-slate-900 text-white text-xs font-semibold hover:bg-black transition"
-                    >
-                        Publish to GitHub
+        <!-- Section Picker Modal -->
+        <div id="section_picker_modal_backdrop" class="fixed inset-0 bg-black/40 z-50 hidden"></div>
+        <div id="section_picker_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 hidden">
+            <div class="modal-shell bg-white rounded-xl shadow-xl w-full max-w-3xl max-h-[90vh] flex flex-col">
+                <div class="flex items-center justify-between p-6 border-b border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-900">Section Picker</h3>
+                    <button onclick="closeSectionPickerModal()" class="text-slate-400 hover:text-slate-600 transition-colors" title="Close">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
                     </button>
                 </div>
-
-                <input
-                    id="templateSearch"
-                    type="text"
-                    class="journal-input text-xs"
-                    placeholder="Search templates…"
-                />
-            </div>
-
-            <!-- Program tabs -->
-            <div class="border-b border-slate-200 mb-3">
-                <nav class="flex flex-wrap gap-4 text-sm">
-                    <button class="pb-2 border-b-2 border-blue-600 text-blue-700 font-semibold"
-                            data-template-tab="CalFresh">
-                        CalFresh
-                    </button>
-                    <button class="pb-2 border-b-2 border-transparent text-slate-500 hover:text-slate-800"
-                            data-template-tab="CalWORKs">
-                        CalWORKs
-                    </button>
-                    <button class="pb-2 border-b-2 border-transparent text-slate-500 hover:text-slate-800"
-                            data-template-tab="Medi-Cal">
-                        Medi-Cal
-                    </button>
-                    <button class="pb-2 border-b-2 border-transparent text-slate-500 hover:text-slate-800"
-                            data-template-tab="General">
-                        General
-                    </button>
-                    <button class="pb-2 border-b-2 border-transparent text-slate-500 hover:text-slate-800"
-                            data-template-tab="My Templates">
-                        My Templates
-                    </button>
-                    <button class="pb-2 border-b-2 border-transparent text-amber-600 hover:text-amber-700"
-                            data-template-tab="Drafts">
-                        Drafts
-                    </button>
-                </nav>
-            </div>
-
-            <!-- Template cards will be rendered here -->
-            <div id="templateList" class="space-y-3">
-                <!-- 2025-11-21 NEW: Cards injected by JS below -->
-            </div>
-            <!-- 2025-11-21 NEW: Simple Builder (demo) -->
-            <hr class="my-4" />
-            <div class="space-y-3 text-xs">
-                <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                    Template Builder (Simple Demo)
-                </h3>
-                <p class="text-[11px] text-slate-500">
-                    // 2025-11-21 NEW: Admin-only mini builder. Adds extra sections to the worker journal below "Supporting Documents".
-                </p>
-
-                <div class="grid md:grid-cols-3 gap-3">
-                    <div>
-                        <label class="block text-slate-600 font-semibold mb-1">
-                            Section Title
-                        </label>
-                        <input
-                            id="builderSectionTitle"
-                            type="text"
-                            class="journal-input"
-                            placeholder="e.g., Housing Notes"
-                        />
-                    </div>
-                    <div>
-                        <label class="block text-slate-600 font-semibold mb-1">
-                            Field Type
-                        </label>
-                        <select id="builderFieldType" class="journal-input">
-                            <option value="notes">Notes (big textarea)</option>
-                            <option value="text">Text (single line)</option>
-                            <option value="date">Date</option>
-                            <option value="choice">Choice (yes/no)</option>
-                        </select>
-                    </div>
-                    <div class="flex items-end">
-                        <button
-                            id="btnAddCustomSection"
-                            class="w-full px-3 py-2 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition"
-                        >
-                            + Add Custom Section
-                        </button>
-                    </div>
+                <div class="p-6 bg-slate-50">
+                    <label class="block text-xs font-semibold mb-2">Select a template:</label>
+                    <select id="section_picker_template_dd" class="journal-input mb-4"></select>
+                    <button id="section_picker_blank_btn" class="px-3 py-2 mb-4 bg-green-600 text-white text-sm rounded hover:bg-green-700">+ Add Blank Section</button>
+                    <div id="section_picker_browser" class="space-y-4"></div>
                 </div>
-
-                <div id="builderCustomList" class="space-y-1 text-[11px] text-slate-500">
-                    <!-- 2025-11-21 NEW: list of custom sections (for Admin view only) -->
-                </div>
-            </div>
-        </section>
-
-        </section>
-    </main>
-
-    <!-- SIMPLE JS: SIDEBAR SCROLL + ACTIONS + DARK MODE + ADMIN -->
-    <script>
-        // 2025-11-21 NEW: Active template name for core sections
-        let activeTemplateName = "Default Template";
-
-        // 2025-11-21 NEW: Template configuration for General + Household
-        let templateConfig = {
-            "Default Template": {
-                sections: [
-                    {
-                        id: "general",
-                        order: 1,
-                        title: "General Application Details",
-                        subtitle: "Basic identifying information and case context for this journal entry.",
-                        badgeLabel: "Core",
-                        badgeColorClass: "bg-slate-100 text-slate-700 border border-slate-200"
-                    },
-                    {
-                        id: "household",
-                        order: 2,
-                        title: "Household Composition",
-                        subtitle: "List active household members and any changes reported with this journal.",
-                        badgeLabel: "Household",
-                        badgeColorClass: "bg-sky-50 text-sky-700 border border-sky-100"
-                    }
-                ]
-            }
-            // 2025-11-21 NEW: later we will add CF Application, CF Changes, etc. here.
-        };
-
-        // 2025-11-21 NEW: Render General + Household from templateConfig
-        function renderCoreSections() {
-            const root = document.getElementById("dynamicCoreSections");
-            if (!root) return;
-
-            // clear existing
-            root.innerHTML = "";
-
-            const tmpl = templateConfig[activeTemplateName];
-            if (!tmpl || !tmpl.sections) return;
-
-            // sort by order and only include these two for now
-            tmpl.sections
-                .filter(sec => ["general", "household"].includes(sec.id))
-                .sort((a, b) => (a.order || 0) - (b.order || 0))
-                .forEach(sec => {
-                    const card = document.createElement("section");
-                    card.className = "section-card";
-                    card.id = "section-" + sec.id;
-
-                    let fieldsHtml = "";
-
-                    if (sec.id === "general") {
-                        // 2025-11-21 ORIGINAL: fields from original General section
-                        fieldsHtml = `
-                            <div class="grid md:grid-cols-3 gap-3 text-xs">
-                                <div>
-                                    <label class="block text-slate-600 font-semibold mb-1">
-                                        Case Number
-                                    </label>
-                                    <input
-                                        type="text"
-                                        class="journal-input"
-                                        placeholder="e.g., 12345678"
-                                    />
-                                </div>
-                                <div>
-                                    <label class="block text-slate-600 font-semibold mb-1">
-                                        Primary Name
-                                    </label>
-                                    <input
-                                        type="text"
-                                        class="journal-input"
-                                        placeholder="Last, First"
-                                    />
-                                </div>
-                                <div>
-                                    <label class="block text-slate-600 font-semibold mb-1">
-                                        Program(s)
-                                    </label>
-                                    <input
-                                        type="text"
-                                        class="journal-input"
-                                        placeholder="e.g., CalFresh, Medi-Cal"
-                                    />
-                                </div>
-                            </div>
-
-                            <div class="grid md:grid-cols-2 gap-3 text-xs mt-3">
-                                <div>
-                                    <label class="block text-slate-600 font-semibold mb-1">
-                                        Journal Type / Reason
-                                    </label>
-                                    <input
-                                        type="text"
-                                        class="journal-input"
-                                        placeholder="e.g., Application, Recertification, Change, etc."
-                                    />
-                                </div>
-                                <div>
-                                    <label class="block text-slate-600 font-semibold mb-1">
-                                        Contact Type
-                                    </label>
-                                    <input
-                                        type="text"
-                                        class="journal-input"
-                                        placeholder="e.g., Phone, Lobby, Mail, CalWIN notes, etc."
-                                    />
-                                </div>
-                            </div>
-
-                            <div class="mt-3 text-xs">
-                                <label class="block text-slate-600 font-semibold mb-1">
-                                    Summary of Action Taken
-                                </label>
-                                <textarea
-                                    rows="4"
-                                    class="journal-input"
-                                    placeholder="Summarize worker actions, information received, and key outcomes."
-                                ></textarea>
-                            </div>
-                        `;
-                    // 2025-11-21 NEW: Dynamic Household layout using a container
-                    } else if (sec.id === "household") {
-                        fieldsHtml = `
-                            <div class="text-xs space-y-3">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h3 class="font-semibold text-slate-700 text-sm">
-                                            Household Members
-                                        </h3>
-                                        <p class="text-[11px] text-slate-500">
-                                            // 2025-11-21 NEW: Person 1 is always the primary applicant. Add or remove additional members as needed.
-                                        </p>
-                                    </div>
-                                    <button
-                                        id="btnAddHHMember"
-                                        type="button"
-                                        class="px-3 py-1.5 rounded-full bg-blue-600 text-white text-[11px] font-semibold hover:bg-blue-700 transition"
-                                    >
-                                        + Add household member
-                                    </button>
-                                </div>
-
-                                <!-- 2025-11-21 NEW: dynamic members will be injected here -->
-                                <div id="hhMemberList" class="space-y-2"></div>
-                            </div>
-                        `;
-                    }
-
-                    card.innerHTML = `
-                        <div class="flex items-start justify-between gap-3 mb-3">
-                            <div>
-                                <div class="section-label">Section ${sec.id === "general" ? "01" : "02"}</div>
-                                <h2 class="section-title">${sec.title}</h2>
-                                <p class="text-xs text-slate-500 mt-1">
-                                    ${sec.subtitle}
-                                </p>
-                            </div>
-                            <span class="badge ${sec.badgeColorClass}">
-                                ${sec.badgeLabel}
-                            </span>
-                        </div>
-                        ${fieldsHtml}
-                    `;
-
-                    root.appendChild(card);
-                });
-
-            // 2025-11-21 NEW: after rendering core cards, render household members if present
-            renderHouseholdMembers && typeof renderHouseholdMembers === 'function' && renderHouseholdMembers();
-        }
-        // 2025-11-21 ORIGINAL: Sidebar scroll behavior
-        document.querySelectorAll(".sidebar-item").forEach(function (btn) {
-            btn.addEventListener("click", function () {
-                const targetId = btn.getAttribute("data-target");
-                const section = document.getElementById(targetId);
-                if (section) {
-                    section.scrollIntoView({ behavior: "smooth", block: "start" });
-                }
-
-                document.querySelectorAll(".sidebar-item")
-                    .forEach(function (el) { el.classList.remove("sidebar-item-active"); });
-                btn.classList.add("sidebar-item-active");
-            });
-        });
-
-        // 2025-11-21 ORIGINAL: Scroll to top button
-        const btnScrollTop = document.getElementById("btnScrollTop");
-        if (btnScrollTop) {
-            btnScrollTop.addEventListener("click", function () {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-            });
-        }
-
-        // 2025-11-21 ORIGINAL: Print button
-        const btnPrint = document.getElementById("btnPrint");
-        if (btnPrint) {
-            btnPrint.addEventListener("click", function () {
-                window.print();
-            });
-        }
-
-        // 2025-11-21 NEW: Dark mode toggle
-        const btnTheme = document.getElementById("btnThemeToggle");
-        if (btnTheme) {
-            btnTheme.addEventListener("click", function () {
-                document.body.classList.toggle("dark-mode");
-                const isDark = document.body.classList.contains("dark-mode");
-                btnTheme.textContent = isDark ? "Light Mode" : "Dark Mode";
-            });
-        }
-
-        // 2025-11-21 NEW: Admin mode toggle (password 1234)
-        const btnAdmin = document.getElementById("btnAdminToggle");
-        if (btnAdmin) {
-            btnAdmin.addEventListener("click", function () {
-                const isAdmin = document.body.classList.contains("admin-mode");
-
-                if (!isAdmin) {
-                    const pwd = window.prompt("Enter admin code:");
-                    if (pwd === "1234") {
-                        document.body.classList.add("admin-mode");
-                        btnAdmin.textContent = "Admin: ON";
-                    } else if (pwd !== null) {
-                        window.alert("Incorrect admin code.");
-                    }
-                } else {
-                    document.body.classList.remove("admin-mode");
-                    btnAdmin.textContent = "Admin: OFF";
-                }
-            });
-        }
-
-        // 2025-11-21 NEW: Simple in-browser Template Manager model
-        const templateData = [
-            {
-                id: 1,
-                name: "CF Application",
-                program: "CalFresh",
-                category: "CalFresh",
-                fields: "32 sections",
-                updated: "May 2025",
-                status: "draft"
-            },
-            {
-                id: 2,
-                name: "CF Changes",
-                program: "CalFresh",
-                category: "CalFresh",
-                fields: "28 sections",
-                updated: "May 2025",
-                status: "active"
-            },
-            {
-                id: 3,
-                name: "CW Interview Scheduled",
-                program: "CalWORKs",
-                category: "CalWORKs",
-                fields: "14 sections",
-                updated: "Apr 2025",
-                status: "active"
-            }
-        ];
-
-        // 2025-11-21 NEW: State for active tab and search
-        let activeTemplateCategory = "CalFresh";
-        let templateSearchText = "";
-
-        // 2025-11-21 NEW: Household members data (Person 1 = primary)
-        let hhMembers = [
-            {
-                name: "",
-                dob: "",
-                requestingAid: "",
-                relationship: "Primary applicant",
-            }
-        ];
-
-        // 2025-11-21 NEW: Render household member rows into #hhMemberList
-        function renderHouseholdMembers() {
-            const listEl = document.getElementById("hhMemberList");
-            const addBtn = document.getElementById("btnAddHHMember");
-            if (!listEl) return; // Household section not on screen yet
-
-            listEl.innerHTML = "";
-
-            hhMembers.forEach((m, index) => {
-                const isPrimary = index === 0;
-
-                const row = document.createElement("div");
-                row.className = "border border-slate-200 rounded-lg p-3 bg-white";
-
-                row.innerHTML = `
-                    <div class="flex items-center justify-between mb-2">
-                        <div class="text-[11px] font-semibold text-slate-600">
-                            Person ${index + 1} ${isPrimary ? "– Primary Applicant" : ""}
-                        </div>
-                        ${
-                            isPrimary
-                                ? `<span class="px-2 py-0.5 rounded-full text-[10px] bg-sky-50 text-sky-700 border border-sky-100">Primary</span>`
-                                : `<button
-                                        type="button"
-                                        data-hh-remove="${index}"
-                                        class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-[11px] border border-red-200 hover:bg-red-100"
-                                   >
-                                        Remove
-                                   </button>`
-                        }
-                    </div>
-
-                    <div class="grid md:grid-cols-4 gap-2 mb-2">
-                        <div>
-                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">
-                                Name
-                            </label>
-                            <input
-                                type="text"
-                                class="journal-input"
-                                placeholder="Enter household member's name"
-                                data-hh-field="name"
-                                data-hh-index="${index}"
-                                value="${m.name}"
-                            />
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">
-                                Birthdate
-                            </label>
-                            <input
-                                type="date"
-                                class="journal-input"
-                                data-hh-field="dob"
-                                data-hh-index="${index}"
-                                value="${m.dob}"
-                            />
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">
-                                Requesting Aid
-                            </label>
-                            <select
-                                class="journal-input"
-                                data-hh-field="requestingAid"
-                                data-hh-index="${index}"
-                            >
-                                <option value="" ${m.requestingAid === "" ? "selected" : ""}>-- Select --</option>
-                                <option value="yes" ${m.requestingAid === "yes" ? "selected" : ""}>Yes</option>
-                                <option value="no" ${m.requestingAid === "no" ? "selected" : ""}>No</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">
-                                Relationship
-                            </label>
-                            <input
-                                type="text"
-                                class="journal-input"
-                                ${isPrimary ? "readonly" : ""}
-                                data-hh-field="relationship"
-                                data-hh-index="${index}"
-                                value="${m.relationship}"
-                                placeholder="${isPrimary ? "Primary applicant" : "e.g., Child, Spouse"}"
-                            />
-                        </div>
-                    </div>
-                `;
-
-                listEl.appendChild(row);
-            });
-
-            // 2025-11-21 NEW: wire Add button once container exists
-            if (addBtn && !addBtn.dataset.wired) {
-                addBtn.dataset.wired = "true";
-                addBtn.addEventListener("click", () => {
-                    hhMembers.push({
-                        name: "",
-                        dob: "",
-                        requestingAid: "",
-                        relationship: "",
-                    });
-                    renderHouseholdMembers();
-                });
-            }
-
-            // 2025-11-21 NEW: change handlers (event delegation)
-            listEl.addEventListener("input", (evt) => {
-                const target = evt.target;
-                const indexAttr = target.getAttribute("data-hh-index");
-                const field = target.getAttribute("data-hh-field");
-                if (indexAttr == null || !field) return;
-                const idx = Number(indexAttr);
-                if (isNaN(idx) || !hhMembers[idx]) return;
-
-                hhMembers[idx][field] = target.value;
-            });
-
-            listEl.addEventListener("click", (evt) => {
-                const removeBtn = evt.target.closest("[data-hh-remove]");
-                if (!removeBtn) return;
-
-                const idx = Number(removeBtn.getAttribute("data-hh-remove"));
-                if (isNaN(idx) || idx <= 0 || idx >= hhMembers.length) return; // never remove primary
-
-                hhMembers.splice(idx, 1);
-                renderHouseholdMembers();
-            });
-        }
-
-        function renderTemplates() {
-            const listEl = document.getElementById("templateList");
-            if (!listEl) return;
-
-            // Clear existing
-            listEl.innerHTML = "";
-
-            const filtered = templateData.filter(t => {
-                const matchesCategory =
-                    activeTemplateCategory === "Drafts"
-                        ? t.status === "draft"
-                        : activeTemplateCategory === "My Templates"
-                            ? true // 2025-11-21 NEW: Placeholder (later tie to worker)
-                            : t.category === activeTemplateCategory;
-
-                const matchesSearch =
-                    !templateSearchText ||
-                    t.name.toLowerCase().includes(templateSearchText.toLowerCase());
-
-                return matchesCategory && matchesSearch;
-            });
-
-            if (filtered.length === 0) {
-                const emptyEl = document.createElement("div");
-                emptyEl.className = "text-xs text-slate-500 italic";
-                emptyEl.textContent = "No templates match this filter yet.";
-                listEl.appendChild(emptyEl);
-                return;
-            }
-
-            filtered.forEach(t => {
-                const card = document.createElement("div");
-                card.className = "section-card mb-2"; // 2025-11-21 NEW: reuse section-card styling
-
-                card.innerHTML = `
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                        <div>
-                            <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                                ${t.name}
-                            </h3>
-                            <p class="text-[11px] text-slate-500 mt-1">
-                                Program: ${t.program} · Fields: ${t.fields} · Updated: ${t.updated}
-                            </p>
-                        </div>
-                        <div class="flex flex-wrap gap-2 text-xs">
-                            <button class="px-3 py-1.5 rounded-full bg-slate-100 text-slate-800 hover:bg-slate-200 transition"
-                                    data-action="preview" data-id="${t.id}">
-                                Preview
-                            </button>
-                            <button class="px-3 py-1.5 rounded-full bg-slate-100 text-slate-800 hover:bg-slate-200 transition"
-                                    data-action="edit" data-id="${t.id}">
-                                Edit
-                            </button>
-                            <button class="px-3 py-1.5 rounded-full bg-slate-100 text-slate-800 hover:bg-slate-200 transition"
-                                    data-action="rename" data-id="${t.id}">
-                                Rename
-                            </button>
-                            <button class="px-3 py-1.5 rounded-full bg-slate-100 text-slate-800 hover:bg-slate-200 transition"
-                                    data-action="hide" data-id="${t.id}">
-                                ${t.status === "draft" ? "Hide" : "Hide"}
-                            </button>
-                            <button class="px-3 py-1.5 rounded-full bg-red-600 text-white hover:bg-red-700 transition"
-                                    data-action="delete" data-id="${t.id}">
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                `;
-                listEl.appendChild(card);
-            });
-        }
-
-        // 2025-11-21 NEW: Tab click handling
-        document.querySelectorAll("[data-template-tab]").forEach(tab => {
-            tab.addEventListener("click", () => {
-                const newCategory = tab.getAttribute("data-template-tab");
-                activeTemplateCategory = newCategory;
-
-                // Visual active state
-                document.querySelectorAll("[data-template-tab]").forEach(t => {
-                    t.classList.remove("border-blue-600", "text-blue-700", "font-semibold");
-                    t.classList.remove("text-amber-600"); // drafts color reset
-                    t.classList.add("border-transparent", "text-slate-500");
-                });
-
-                tab.classList.remove("border-transparent", "text-slate-500");
-                tab.classList.add("border-blue-600", "text-blue-700", "font-semibold");
-
-                renderTemplates();
-            });
-        });
-
-        // 2025-11-21 NEW: Search box handling
-        const templateSearchEl = document.getElementById("templateSearch");
-        if (templateSearchEl) {
-            templateSearchEl.addEventListener("input", () => {
-                templateSearchText = templateSearchEl.value || "";
-                renderTemplates();
-            });
-        }
-
-        // 2025-11-21 NEW: Card button actions (placeholder alerts)
-        const templateListEl = document.getElementById("templateList");
-        if (templateListEl) {
-            templateListEl.addEventListener("click", (evt) => {
-                const button = evt.target.closest("button[data-action]");
-                if (!button) return;
-
-                const action = button.getAttribute("data-action");
-                const id = Number(button.getAttribute("data-id"));
-                const template = templateData.find(t => t.id === id);
-                if (!template) return;
-
-                if (action === "preview") {
-                    alert(`Preview (demo): ${template.name}`);
-                } else if (action === "edit") {
-                    alert(`Edit (demo): ${template.name}`);
-                } else if (action === "rename") {
-                    const newName = prompt("Enter new template name:", template.name);
-                    if (newName && newName.trim()) {
-                        template.name = newName.trim();
-                        renderTemplates();
-                    }
-                } else if (action === "hide") {
-                    alert(`Hide (demo): ${template.name}`);
-                } else if (action === "delete") {
-                    const conf = confirm(`Delete template "${template.name}"? (demo only)`);
-                    if (conf) {
-                        const idx = templateData.findIndex(t => t.id === id);
-                        if (idx >= 0) {
-                            templateData.splice(idx, 1);
-                            renderTemplates();
-                        }
-                    }
-                }
-            });
-        }
-
-        // 2025-11-21 NEW: Admin action buttons (demo behavior)
-        const btnUploadTemplate = document.getElementById("btnUploadTemplate");
-        if (btnUploadTemplate) {
-            btnUploadTemplate.addEventListener("click", () => {
-                alert("// 2025-11-21 NEW: Upload flow will go here (e.g., pick Word/JSON).");
-            });
-        }
-
-        const btnCreateTemplate = document.getElementById("btnCreateTemplate");
-        if (btnCreateTemplate) {
-            btnCreateTemplate.addEventListener("click", () => {
-                const name = prompt("Template name (demo only):", "New Template");
-                if (!name) return;
-                templateData.push({
-                    id: Date.now(),
-                    name: name,
-                    program: "Custom",
-                    category: activeTemplateCategory === "Drafts" ? "General" : activeTemplateCategory,
-                    fields: "N/A",
-                    updated: "Just now",
-                    status: "draft"
-                });
-                renderTemplates();
-            });
-        }
-
-        const btnPublishGitHub = document.getElementById("btnPublishGitHub");
-        if (btnPublishGitHub) {
-            btnPublishGitHub.addEventListener("click", () => {
-                alert("// 2025-11-21 NEW: Future idea – push latest templates to GitHub repo for workers.");
-            });
-        }
-
-        // 2025-11-21 NEW: Initial render for Template Manager
-        renderTemplates();
-
-        // 2025-11-21 NEW: Custom sections data (admin-built)
-        let customSections = [];
-
-        function renderCustomSections() {
-            const root = document.getElementById("customSectionsRoot");
-            const adminList = document.getElementById("builderCustomList");
-            if (!root || !adminList) return;
-
-            // Clear current render
-            root.innerHTML = "";
-            adminList.innerHTML = "";
-
-            if (customSections.length === 0) {
-                adminList.textContent = "// 2025-11-21 NEW: No custom sections yet. Use the builder above to add one.";
-                return;
-            }
-
-            customSections.forEach((sec, index) => {
-                // Admin list preview
-                const row = document.createElement("div");
-                row.className = "flex items-center justify-between gap-2";
-                row.innerHTML = `
-                    <span>${index + 1}. ${sec.title} (${sec.type})</span>
-                    <div class="flex gap-1">
-                        <button data-builder-moveup="${index}" class="px-2 py-0.5 rounded-full border border-slate-300 text-[11px]">↑</button>
-                        <button data-builder-movedown="${index}" class="px-2 py-0.5 rounded-full border border-slate-300 text-[11px]">↓</button>
-                        <button data-builder-delete="${index}" class="px-2 py-0.5 rounded-full border border-red-500 text-[11px] text-red-600">X</button>
-                    </div>
-                `;
-                adminList.appendChild(row);
-
-                // Worker-facing custom section card
-                const card = document.createElement("section");
-                card.className = "section-card";
-
-                let fieldHtml = "";
-                if (sec.type === "notes") {
-                    fieldHtml = `
-                        <textarea rows="4" class="journal-input text-sm" placeholder="Notes for ${sec.title}"></textarea>
-                    `;
-                } else if (sec.type === "text") {
-                    fieldHtml = `
-                        <input type="text" class="journal-input" placeholder="${sec.title}" />
-                    `;
-                } else if (sec.type === "date") {
-                    fieldHtml = `
-                        <input type="date" class="journal-input" />
-                    `;
-                } else if (sec.type === "choice") {
-                    fieldHtml = `
-                        <select class="journal-input">
-                            <option value="">Select…</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
-                    `;
-                }
-
-                card.innerHTML = `
-                    <div class="flex items-start justify-between gap-3 mb-3">
-                        <div>
-                            <div class="section-label">Custom</div>
-                            <h2 class="section-title">${sec.title}</h2>
-                            <p class="text-xs text-slate-500 mt-1">
-                                // 2025-11-21 NEW: Added via Admin Builder.
-                            </p>
-                        </div>
-                        <span class="badge bg-slate-50 text-slate-700 border border-slate-200">
-                            Custom
-                        </span>
-                    </div>
-                    <div class="text-xs">
-                        ${fieldHtml}
-                    </div>
-                `;
-
-                root.appendChild(card);
-            });
-        }
-
-        // 2025-11-21 NEW: Handle Add Custom Section button
-        const btnAddCustomSection = document.getElementById("btnAddCustomSection");
-        if (btnAddCustomSection) {
-            btnAddCustomSection.addEventListener("click", () => {
-                const titleEl = document.getElementById("builderSectionTitle");
-                const typeEl = document.getElementById("builderFieldType");
-                if (!titleEl || !typeEl) return;
-
-                const title = (titleEl.value || "").trim();
-                const type = typeEl.value || "notes";
-
-                if (!title) {
-                    alert("Enter a section title first.");
-                    return;
-                }
-
-                customSections.push({
-                    title: title,
-                    type: type
-                });
-
-                titleEl.value = "";
-                renderCustomSections();
-            });
-        }
-
-        // 2025-11-21 NEW: Handle move up / down / delete in Admin list
-        const builderCustomList = document.getElementById("builderCustomList");
-        if (builderCustomList) {
-            builderCustomList.addEventListener("click", (evt) => {
-                const upBtn = evt.target.closest("[data-builder-moveup]");
-                const downBtn = evt.target.closest("[data-builder-movedown]");
-                const delBtn = evt.target.closest("[data-builder-delete]");
-
-                if (upBtn) {
-                    const idx = Number(upBtn.getAttribute("data-builder-moveup"));
-                    if (idx > 0) {
-                        const temp = customSections[idx - 1];
-                        customSections[idx - 1] = customSections[idx];
-                        customSections[idx] = temp;
-                        renderCustomSections();
-                    }
-                } else if (downBtn) {
-                    const idx = Number(downBtn.getAttribute("data-builder-movedown"));
-                    if (idx < customSections.length - 1) {
-                        const temp = customSections[idx + 1];
-                        customSections[idx + 1] = customSections[idx];
-                        customSections[idx] = temp;
-                        renderCustomSections();
-                    }
-                } else if (delBtn) {
-                    const idx = Number(delBtn.getAttribute("data-builder-delete"));
-                    customSections.splice(idx, 1);
-                    renderCustomSections();
-                }
-            });
-        }
-
-        // 2025-11-21 NEW: Initial render for custom sections
-        renderCustomSections();
-
-        // 2025-11-21 NEW: Initial render for core (General + Household) sections
-        renderCoreSections();
-
-        // 2025-11-21 NEW: Template selector updates activeTemplateName + header + sections
-        const templateSelector = document.getElementById("templateSelector");
-        const currentTemplateTag = document.getElementById("currentTemplateTag");
-
-        if (templateSelector && currentTemplateTag) {
-            templateSelector.addEventListener("change", () => {
-                const val = templateSelector.value || "Default Template";
-                activeTemplateName = val; // 2025-11-21 NEW: drive JSON config
-                currentTemplateTag.textContent = val;
-
-                // 2025-11-21 NEW: when template changes, re-render JSON-driven sections
-                renderCoreSections();
-                // later we will also re-render other areas (Income, Tasks, etc.)
-            });
-        }
-
-        // 2025-11-21 // ORIGINAL journal text generator (from template)
-        function generateJournalText() {
-            // Simple demo: just output a static string. Replace with real logic as needed.
-            return '--- Journal Entry ---\n' +
-                'Date: ' + (document.getElementById('journalDate')?.value || '') + '\n' +
-                'Worker: ' + (document.getElementById('workerName')?.value || '') + '\n' +
-                'Template: ' + (document.getElementById('templateSelector')?.value || '') + '\n' +
-                '\n[General/Household/Other fields would go here]\n';
-        }
-
-        // 2025-11-21 // NEW/ORIGINAL: wire Journal Export buttons
-        function attachJournalHandlers() {
-            // 2025-11-21 NEW: Journal preview modal behavior + export
-            try {
-                const generateBtn = document.getElementById('generate_journal_btn');
-                const copyBtn = document.getElementById('copy_journal_btn');
-                const downloadBtn = document.getElementById('download_journal_btn');
-                const journalContainer = document.getElementById('journal_output_container');
-                const journalOutput = document.getElementById('journal_output');
-                const statusLabel = document.getElementById('journal_status');
-
-                const backdrop = document.getElementById('journal_modal_backdrop');
-                const closeBtn = document.getElementById('journal_modal_close');
-                const closeFooterBtn = document.getElementById('journal_modal_close_footer');
-
-                // 2025-11-21 NEW: small helper for status messages
-                function showStatus(message, extraClass) {
-                    if (!statusLabel) return;
-                    statusLabel.textContent = message;
-                    statusLabel.className = 'text-[11px] mt-1 ' + (extraClass || 'text-slate-500');
-                }
-
-                function openModal() {
-                    if (journalContainer) journalContainer.classList.remove('hidden');
-                    if (backdrop) backdrop.classList.remove('hidden');
-                }
-
-                function closeModal() {
-                    if (journalContainer) journalContainer.classList.add('hidden');
-                    if (backdrop) backdrop.classList.add('hidden');
-                    showStatus('', 'text-slate-500');
-                }
-
-                const runGenerate = () => {
-                    try {
-                        if (journalOutput) journalOutput.value = '';
-                        const text = generateJournalText(); // // ORIGINAL: builds the text from form
-                        if (journalOutput) {
-                            journalOutput.value = text;
-                            journalOutput.scrollTop = 0;
-                        }
-                        if (copyBtn) copyBtn.disabled = false;
-                        if (downloadBtn) downloadBtn.disabled = false;
-                        openModal();
-                        showStatus('Journal generated. You can edit, copy, or download.', 'text-slate-500');
-                    } catch (e) {
-                        console.warn('Error generating journal', e);
-                        showStatus('Error generating journal.', 'text-red-600');
-                    }
-                };
-
-                const runCopy = async () => {
-                    try {
-                        if (!journalOutput || !journalOutput.value) {
-                            showStatus('Nothing to copy.', 'text-red-600');
-                            return;
-                        }
-
-                        if (navigator.clipboard && navigator.clipboard.writeText) {
-                            await navigator.clipboard.writeText(journalOutput.value);
-                        } else {
-                            journalOutput.select();
-                            document.execCommand('copy');
-                        }
-                        showStatus('Journal copied to clipboard.', 'text-green-600');
-                    } catch (e) {
-                        console.warn('Copy failed', e);
-                        showStatus('Copy failed.', 'text-red-600');
-                    }
-                };
-
-                const runDownload = () => {
-                    try {
-                        if (!journalOutput || !journalOutput.value) {
-                            showStatus('Nothing to download.', 'text-red-600');
-                            return;
-                        }
-                        const blob = new Blob([journalOutput.value], { type: 'text/plain;charset=utf-8' });
-                        const url = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        const datePart = (new Date()).toISOString().slice(0, 10);
-                        a.download = `journal_${datePart}.txt`;
-                        document.body.appendChild(a);
-                        a.click();
-                        a.remove();
-                        URL.revokeObjectURL(url);
-                        showStatus('Download started.', 'text-green-600');
-                    } catch (e) {
-                        console.warn('Download failed', e);
-                        showStatus('Download failed.', 'text-red-600');
-                    }
-                };
-
-                // Wire up buttons
-                if (generateBtn) generateBtn.addEventListener('click', runGenerate);
-                if (copyBtn) copyBtn.addEventListener('click', runCopy);
-                if (downloadBtn) downloadBtn.addEventListener('click', runDownload);
-
-                if (closeBtn) closeBtn.addEventListener('click', closeModal);
-                if (closeFooterBtn) closeFooterBtn.addEventListener('click', closeModal);
-                if (backdrop) backdrop.addEventListener('click', closeModal); // click outside to close
-            } catch (e) {
-                console.warn('attachJournalHandlers failed', e);
-            }
-        }
-
-        // 2025-11-21 // NEW: ensure journal + persistence handlers run on load
-        window.addEventListener('load', () => {
-            try {
-                attachFormPersistence?.();   // // ORIGINAL: saves form to local storage
-            } catch (e) { console.warn(e); }
-
-            try {
-                attachJournalHandlers();     // // NEW: wires Generate / Copy / Download
-            } catch (e) { console.warn(e); }
-        });
-        </script>
-
-        <!-- 2025-11-21 NEW: Journal Preview Modal -->
-        <div
-            id="journal_modal_backdrop"
-            class="fixed inset-0 bg-black/40 z-40 hidden"
-        ></div>
-
-        <div
-            id="journal_output_container"
-            class="fixed inset-0 z-40 flex items-center justify-center px-4 hidden"
-        >
-            <div class="bg-white rounded-xl shadow-xl max-w-3xl w-full max-h-[80vh] flex flex-col">
-                <!-- Header -->
-                <div class="flex items-center justify-between px-4 py-3 border-b border-slate-200">
-                    <h3 class="text-base font-semibold text-slate-900">
-                        Journal Preview
-                    </h3>
-                    <button
-                        id="journal_modal_close"
-                        type="button"
-                        class="text-slate-500 hover:text-slate-800 text-sm"
-                    >
-                        ✕
-                    </button>
-                </div>
-
-                <!-- Body -->
-                <div class="p-4 flex-1 overflow-hidden flex flex-col">
-                    <label
-                        for="journal_output"
-                        class="block text-xs font-medium text-slate-600 mb-1"
-                    >
-                        Generated Journal Text (you can edit before copying or downloading):
-                    </label>
-
-                    <textarea
-                        id="journal_output"
-                        rows="12"
-                        class="journal-input w-full flex-1 font-mono text-xs"
-                        style="resize: none;"
-                    ></textarea>
-
-                    <p
-                        id="journal_status"
-                        class="text-[11px] mt-1 text-slate-500"
-                    ></p>
-                </div>
-
-                <!-- Footer buttons -->
-                <div class="px-4 py-3 border-t border-slate-200 flex flex-wrap justify-end gap-2">
-                    <button
-                        id="copy_journal_btn"
-                        type="button"
-                        class="px-3 py-1.5 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700"
-                        disabled
-                    >
-                        Copy to Clipboard
-                    </button>
-
-                    <button
-                        id="download_journal_btn"
-                        type="button"
-                        class="px-3 py-1.5 rounded-full bg-slate-700 text-white text-xs font-semibold hover:bg-slate-900"
-                        disabled
-                    >
-                        Download
-                    </button>
-
-                    <button
-                        id="journal_modal_close_footer"
-                        type="button"
-                        class="px-3 py-1.5 rounded-full border border-slate-300 text-xs text-slate-700 hover:bg-slate-100"
-                    >
-                        Close
-                    </button>
+                <div class="flex justify-end items-center p-4 border-t bg-slate-50">
+                    <span id="section_picker_confirm_msg" class="text-green-600 text-xs mr-4"></span>
+                    <button onclick="closeSectionPickerModal()" class="px-4 py-2 rounded-md border border-slate-300 text-sm hover:bg-white transition-colors">Cancel</button>
                 </div>
             </div>
         </div>
+        <!-- Section Preview Modal -->
+        <div id="section_preview_modal_backdrop" class="fixed inset-0 bg-black/40 z-50 hidden"></div>
+        <div id="section_preview_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 hidden">
+            <div class="modal-shell bg-white rounded-xl shadow-xl w-full max-w-xl max-h-[80vh] flex flex-col">
+                <div class="flex items-center justify-between p-4 border-b border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-900">Section Preview</h3>
+                    <button onclick="closeSectionPreviewModal()" class="text-slate-400 hover:text-slate-600 transition-colors" title="Close">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div id="section_preview_content" class="flex-1 overflow-y-auto p-4 bg-slate-50"></div>
+                <div class="flex justify-end items-center p-4 border-t bg-slate-50">
+                    <button onclick="closeSectionPreviewModal()" class="px-4 py-2 rounded-md border border-slate-300 text-sm hover:bg-white transition-colors">Close</button>
+                </div>
+            </div>
+        </div>
+        <!-- STATIC SECTIONS BELOW -->
+        <section id="section-income" class="section-card"><div class="section-label">Section 03</div><h2 class="section-title">Income Summary</h2></section>
+        <section id="section-property" class="section-card"><div class="section-label">Section 04</div><h2 class="section-title">Property / Resources</h2></section>
+        <section id="section-notes" class="section-card"><div class="section-label">Section 05</div><h2 class="section-title">Narrative Notes</h2></section>
+        <section id="section-tasks" class="section-card"><div class="section-label">Section 06</div><h2 class="section-title">Tasks & Follow-Up</h2></section>
+        <section id="section-files" class="section-card"><div class="section-label">Section 07</div><h2 class="section-title">Supporting Documents</h2></section>
+        <div id="customSectionsRoot"></div>
+        <!-- ADMIN PANEL -->
+        <section id="section-admin" class="section-card admin-only">
+            <h2 class="text-lg font-bold">Template Manager – Admin Panel</h2>
+            <p class="text-xs text-slate-500 mt-1">Manage templates.</p>
+            <div class="my-3 flex gap-2">
+                <button id="btnUploadTemplate" class="px-3 py-1.5 rounded-full bg-blue-600 text-white text-xs">+ Upload Template</button>
+                <input type="file" id="uploadTemplateInput" accept=".json,.docx,.doc,.rtf,.txt" class="hidden" />
+                <button id="btnCreateTemplate" class="px-3 py-1.5 rounded-full bg-blue-600 text-white text-xs">+ Create New Template</button>
+                <button id="btnSectionPicker" class="px-3 py-1.5 rounded-full bg-purple-600 text-white text-xs admin-only">+ Add Section from Other Template</button>
+                <button id="btnPublishGitHub" class="px-3 py-1.5 rounded-full bg-slate-900 text-white text-xs">Publish</button>
+                <button id="btnExportTemplate" class="px-3 py-1.5 rounded-full bg-green-700 text-white text-xs admin-only">Export JSON</button>
+            </div>
+            <!-- MANAGER FILTERS -->
+            <div class="mb-3 admin-only flex flex-wrap gap-2">
+                <select id="programFilter" class="journal-input !w-auto !px-2 !py-1 text-[11px]"></select>
+                <input id="managerSearch" type="text" placeholder="Search…" class="journal-input text-xs" />
+                <div id="resetFiltersPill" class="px-2 py-1 rounded-full bg-slate-200 text-xs cursor-pointer hidden">Reset</div>
+            </div>
+            <hr class="my-4" />
+            <h3 class="text-sm font-bold text-slate-700 mb-2">📂 Uploaded Templates</h3>
+            <p class="text-xs text-slate-500 mb-3">Manage your imported templates by program folder.</p>
+            <div id="templateList" class="space-y-3"></div>
+        </section>
+    </section>
+</main>
+
+<!-- JOURNAL MODAL -->
+<div id="journal_modal_backdrop" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
+<div id="journal_output_container" class="fixed inset-0 z-40 flex items-center justify-center px-4 hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-6xl w-full max-h-[98vh] flex flex-col" style="min-width:760px;">
+        <div class="flex items-center justify-between px-4 py-3 border-b">
+            <h3 class="text-base font-semibold">Journal Preview</h3>
+            <button id="journal_modal_close" class="text-slate-500 hover:text-slate-800">✕</button>
+        </div>
+
+        <div class="p-4 flex-1 overflow-hidden flex flex-col">
+            <textarea id="journal_output" rows="20" class="journal-input w-full flex-1 font-mono text-sm" style="resize:vertical; min-height: calc(98vh - 240px); line-height:1.45;"></textarea>
+            <p id="journal_status" class="text-[11px] mt-1 text-slate-500"></p>
+        </div>
+
+        <div class="px-4 py-3 border-t flex justify-end gap-2">
+            <button id="copy_journal_btn" class="px-3 py-1.5 rounded-full bg-blue-600 text-white text-xs" disabled>Copy</button>
+            <button id="download_journal_btn" class="px-3 py-1.5 rounded-full bg-slate-700 text-white text-xs" disabled>Download</button>
+            <button id="journal_modal_close_footer" class="px-3 py-1.5 rounded-full border text-xs">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- GENERIC CONFIRM MODAL -->
+<div id="confirm_modal_backdrop" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
+<div id="confirm_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-5">
+        <h3 id="confirm_title" class="text-base font-semibold mb-2">Confirm</h3>
+        <p id="confirm_message" class="text-sm text-slate-600 mb-4"></p>
+        <div class="flex justify-end gap-2">
+            <button id="confirm_no" class="px-3 py-1.5 rounded-md border text-xs">Cancel</button>
+            <button id="confirm_yes" class="px-3 py-1.5 rounded-md bg-red-600 text-white text-xs">Continue</button>
+        </div>
+    </div>
+</div>
+
+<!-- CONVERT FIELD TYPE MODAL -->
+<div id="convert_modal_backdrop" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
+<div id="convert_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-lg w-full p-6">
+        <h3 class="text-lg font-bold mb-2">Convert Field Type</h3>
+        <p id="convert_current_info" class="text-sm text-slate-600 mb-4"></p>
+        <p class="text-xs font-semibold text-slate-700 mb-3">Choose new type:</p>
+        <div class="space-y-2 mb-4">
+            <button onclick="selectFieldType('text')" class="w-full text-left px-4 py-3 border-2 border-slate-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">📝</span>
+                    <div class="flex-1">
+                        <div class="font-semibold text-sm">Text Box</div>
+                        <div class="text-xs text-slate-500">Single-line input for short text</div>
+                    </div>
+                </div>
+            </button>
+            <button onclick="selectFieldType('textarea')" class="w-full text-left px-4 py-3 border-2 border-slate-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">📄</span>
+                    <div class="flex-1">
+                        <div class="font-semibold text-sm">Text Area</div>
+                        <div class="text-xs text-slate-500">Multi-line input for longer text</div>
+                    </div>
+                </div>
+            </button>
+            <button onclick="selectFieldType('date')" class="w-full text-left px-4 py-3 border-2 border-slate-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">📅</span>
+                    <div class="flex-1">
+                        <div class="font-semibold text-sm">Date Picker</div>
+                        <div class="text-xs text-slate-500">Calendar date selection</div>
+                    </div>
+                </div>
+            </button>
+            <button onclick="selectFieldType('choice')" class="w-full text-left px-4 py-3 border-2 border-slate-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">☑️</span>
+                    <div class="flex-1">
+                        <div class="font-semibold text-sm">Dropdown</div>
+                        <div class="text-xs text-slate-500">Select from predefined options</div>
+                    </div>
+                </div>
+            </button>
+            <button onclick="selectFieldType('admin-note')" class="w-full text-left px-4 py-3 border-2 border-slate-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">📌</span>
+                    <div class="flex-1">
+                        <div class="font-semibold text-sm">Admin Note</div>
+                        <div class="text-xs text-slate-500">Highlighted instruction for users</div>
+                    </div>
+                </div>
+            </button>
+        </div>
+        <div class="flex justify-end">
+            <button onclick="closeConvertModal()" class="px-4 py-2 rounded-md border text-sm hover:bg-slate-50">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- PROGRAM SELECTOR MODAL -->
+<div id="program_modal_backdrop" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
+<div id="program_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full p-6 max-h-[80vh] overflow-y-auto">
+        <h3 class="text-lg font-bold mb-2">Select Program Folder</h3>
+        <p id="program_template_name" class="text-sm text-slate-600 mb-4"></p>
+        <p class="text-xs font-semibold text-slate-700 mb-3">Choose a program folder for this template:</p>
+        <div id="program_buttons_container" class="grid grid-cols-2 gap-3 mb-4">
+            <!-- Program buttons will be inserted here -->
+        </div>
+        <div class="border-t pt-4 mt-4">
+            <p class="text-xs font-semibold text-slate-700 mb-2">Or create a new program folder:</p>
+            <div class="space-y-2">
+                <div class="flex gap-2">
+                    <button id="emoji_picker_btn" onclick="toggleEmojiPicker()" class="px-3 py-2 border border-slate-300 rounded-lg text-2xl hover:bg-slate-50 transition-colors" title="Choose emoji">
+                        <span id="selected_emoji">📁</span>
+                    </button>
+                    <input type="text" id="new_program_input" placeholder="Enter new program name..." class="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100" onkeypress="if(event.key==='Enter') createAndSelectNewProgram()">
+                    <button onclick="createAndSelectNewProgram()" class="px-4 py-2 bg-green-500 text-white rounded-lg text-sm font-semibold hover:bg-green-600 transition-colors">Create</button>
+                </div>
+                <div id="emoji_picker" class="hidden bg-slate-50 border border-slate-200 rounded-lg p-3">
+                    <p class="text-xs font-semibold text-slate-600 mb-2">Choose an emoji:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="selectEmoji('📁')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">📁</button>
+                        <button onclick="selectEmoji('🍎')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">🍎</button>
+                        <button onclick="selectEmoji('👨‍👩‍👧‍👦')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">👨‍👩‍👧‍👦</button>
+                        <button onclick="selectEmoji('🏥')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">🏥</button>
+                        <button onclick="selectEmoji('👶')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">👶</button>
+                        <button onclick="selectEmoji('📋')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">📋</button>
+                        <button onclick="selectEmoji('💼')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">💼</button>
+                        <button onclick="selectEmoji('🏠')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">🏠</button>
+                        <button onclick="selectEmoji('🎓')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">🎓</button>
+                        <button onclick="selectEmoji('💰')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">💰</button>
+                        <button onclick="selectEmoji('⚖️')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">⚖️</button>
+                        <button onclick="selectEmoji('🚗')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">🚗</button>
+                        <button onclick="selectEmoji('🔧')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">🔧</button>
+                        <button onclick="selectEmoji('📱')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">📱</button>
+                        <button onclick="selectEmoji('✨')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">✨</button>
+                        <button onclick="selectEmoji('🌟')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">🌟</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-end mt-4">
+            <button onclick="closeProgramModal()" class="px-4 py-2 rounded-md border text-sm hover:bg-slate-50">Cancel</button>
+        </div>
+    </div>
+</div>
+
+ <!-- DROPDOWN OPTIONS MODAL -->
+ <div id="dropdown_modal_backdrop" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
+ <div id="dropdown_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 hidden">
+     <div class="bg-white rounded-xl shadow-xl max-w-lg w-full p-6 max-h-[80vh] overflow-y-auto">
+         <h3 class="text-lg font-bold mb-2">Dropdown Options</h3>
+         <p class="text-sm text-slate-600 mb-4">Enter the options for this dropdown field:</p>
+         
+         <div id="dropdown_options_container" class="space-y-2 mb-4">
+             <!-- Option inputs will be inserted here -->
+         </div>
+         
+         <button onclick="addDropdownOption()" class="w-full px-4 py-2 border-2 border-dashed border-slate-300 rounded-lg text-sm text-slate-600 hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50 transition-all flex items-center justify-center gap-2">
+             <span class="text-lg">+</span>
+             <span>Add Another Option</span>
+         </button>
+         
+         <div class="flex justify-end gap-2 mt-4">
+             <button onclick="closeDropdownModal()" class="px-4 py-2 rounded-md border text-sm hover:bg-slate-50">Cancel</button>
+             <button onclick="confirmDropdownOptions()" class="px-4 py-2 rounded-md bg-blue-500 text-white text-sm hover:bg-blue-600">Save Options</button>
+         </div>
+     </div>
+ </div>
+
+<!-- ADMIN NOTE MODAL -->
+<div id="adminnote_modal_backdrop" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
+<div id="adminnote_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-lg w-full p-6">
+        <h3 class="text-lg font-bold mb-2">Admin Note Settings</h3>
+        <p class="text-sm text-slate-600 mb-4">Create a highlighted instruction for users:</p>
+        
+        <div class="mb-4">
+            <label class="block text-xs font-semibold text-slate-700 mb-2">Note Content:</label>
+            <textarea id="adminnote_content" rows="3" placeholder="Enter your admin note..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"></textarea>
+        </div>
+        
+        <div class="mb-4">
+            <label class="block text-xs font-semibold text-slate-700 mb-2">Highlight Color:</label>
+            <div class="grid grid-cols-4 gap-2">
+                <button onclick="selectAdminNoteColor('yellow')" class="admin-note-color-btn px-3 py-2 rounded-lg border-2 border-transparent hover:border-slate-400 transition-all" data-color="yellow">
+                    <div class="bg-yellow-100 border border-yellow-300 rounded h-8 flex items-center justify-center">
+                        <span class="text-xs text-yellow-800">Yellow</span>
+                    </div>
+                </button>
+                <button onclick="selectAdminNoteColor('blue')" class="admin-note-color-btn px-3 py-2 rounded-lg border-2 border-transparent hover:border-slate-400 transition-all" data-color="blue">
+                    <div class="bg-blue-100 border border-blue-300 rounded h-8 flex items-center justify-center">
+                        <span class="text-xs text-blue-800">Blue</span>
+                    </div>
+                </button>
+                <button onclick="selectAdminNoteColor('green')" class="admin-note-color-btn px-3 py-2 rounded-lg border-2 border-transparent hover:border-slate-400 transition-all" data-color="green">
+                    <div class="bg-green-100 border border-green-300 rounded h-8 flex items-center justify-center">
+                        <span class="text-xs text-green-800">Green</span>
+                    </div>
+                </button>
+                <button onclick="selectAdminNoteColor('red')" class="admin-note-color-btn px-3 py-2 rounded-lg border-2 border-transparent hover:border-slate-400 transition-all" data-color="red">
+                    <div class="bg-red-100 border border-red-300 rounded h-8 flex items-center justify-center">
+                        <span class="text-xs text-red-800">Red</span>
+                    </div>
+                </button>
+                <button onclick="selectAdminNoteColor('purple')" class="admin-note-color-btn px-3 py-2 rounded-lg border-2 border-transparent hover:border-slate-400 transition-all" data-color="purple">
+                    <div class="bg-purple-100 border border-purple-300 rounded h-8 flex items-center justify-center">
+                        <span class="text-xs text-purple-800">Purple</span>
+                    </div>
+                </button>
+                <button onclick="selectAdminNoteColor('orange')" class="admin-note-color-btn px-3 py-2 rounded-lg border-2 border-transparent hover:border-slate-400 transition-all" data-color="orange">
+                    <div class="bg-orange-100 border border-orange-300 rounded h-8 flex items-center justify-center">
+                        <span class="text-xs text-orange-800">Orange</span>
+                    </div>
+                </button>
+                <button onclick="selectAdminNoteColor('pink')" class="admin-note-color-btn px-3 py-2 rounded-lg border-2 border-transparent hover:border-slate-400 transition-all" data-color="pink">
+                    <div class="bg-pink-100 border border-pink-300 rounded h-8 flex items-center justify-center">
+                        <span class="text-xs text-pink-800">Pink</span>
+                    </div>
+                </button>
+                <button onclick="selectAdminNoteColor('slate')" class="admin-note-color-btn px-3 py-2 rounded-lg border-2 border-transparent hover:border-slate-400 transition-all" data-color="slate">
+                    <div class="bg-slate-100 border border-slate-300 rounded h-8 flex items-center justify-center">
+                        <span class="text-xs text-slate-800">Gray</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+        
+        <div class="flex justify-end gap-2 mt-4">
+            <button onclick="closeAdminNoteModal()" class="px-4 py-2 rounded-md border text-sm hover:bg-slate-50">Cancel</button>
+            <button onclick="confirmAdminNote()" class="px-4 py-2 rounded-md bg-blue-500 text-white text-sm hover:bg-blue-600">Save Note</button>
+        </div>
+    </div>
+</div>
+
+<!-- TEMPLATE PREVIEW MODAL -->
+<div id="preview_modal_backdrop" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
+<div id="preview_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 hidden">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+        <!-- Header -->
+        <div class="flex items-center justify-between p-6 border-b border-slate-200">
+            <div>
+                <h3 id="preview_title" class="text-xl font-bold text-slate-900"></h3>
+                <p id="preview_subtitle" class="text-sm text-slate-500 mt-1"></p>
+            </div>
+            <button onclick="closePreviewModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Content - Scrollable -->
+        <div id="preview_content" class="flex-1 overflow-y-auto p-6 bg-slate-50">
+            <!-- Template preview will be rendered here -->
+        </div>
+        
+        <!-- Footer -->
+        <div class="flex justify-between items-center p-4 border-t border-slate-200 bg-slate-50">
+            <button onclick="closePreviewModal()" class="px-4 py-2 rounded-md border border-slate-300 text-sm hover:bg-white transition-colors">Close</button>
+            <button onclick="loadPreviewedTemplate()" class="px-4 py-2 rounded-md bg-blue-500 text-white text-sm hover:bg-blue-600 transition-colors">Load This Template</button>
+        </div>
+    </div>
+</div>
+ 
+<!-- SCROLL BUTTONS -->
+<button id="scrollToTop" class="scroll-btn" title="Scroll to top">↑</button>
+<button id="scrollToBottom" class="scroll-btn" title="Scroll to bottom">↓</button><!-- PUBLISH BUTTON -->
+<button id="publishBtn" class="admin-only" title="Save all changes">
+    <span>💾</span>
+    <span>Publish Changes</span>
+</button>
+
+<!-- CHANGES TRACKER -->
+<div id="changesTracker" class="admin-only">
+    <div class="changes-header">
+        <div>
+            <h3 class="text-sm font-bold text-slate-700">Recent Changes</h3>
+            <p class="text-xs text-slate-500" id="changesCount">0 changes</p>
+        </div>
+        <button class="clear-changes-btn" onclick="clearChangeLog()">Clear</button>
+    </div>
+    <div class="changes-body" id="changesBody">
+        <p class="text-xs text-slate-400 text-center py-4">No changes yet</p>
+    </div>
+</div>
+
+<!-- TEMPLATE EDIT MODAL -->
+<div id="edit_modal_backdrop" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
+<div id="edit_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 hidden">
+    <div class="modal-shell bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+        <!-- Header -->
+        <div class="flex items-center justify-between p-6 border-b border-slate-200">
+            <div>
+                <h3 class="text-xl font-bold text-slate-900">Edit Template</h3>
+                <p id="edit_subtitle" class="text-sm text-slate-500 mt-1"></p>
+            </div>
+            <button onclick="closeEditModal()" class="text-slate-400 hover:text-slate-600 transition-colors" title="Close">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Content -->
+        <div class="flex-1 overflow-y-auto p-6 bg-slate-50">
+            <!-- Template meta -->
+            <div class="bg-white border border-slate-200 rounded-lg p-4 mb-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 items-center">
+                    <div class="md:col-span-2">
+                        <label class="text-xs font-semibold text-slate-700">Template Name</label>
+                        <input id="edit_name_input" type="text" class="mt-1 w-full px-3 py-2 border border-slate-300 rounded-md text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100" />
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-slate-700">Program</label>
+                        <div id="edit_program_badge" class="mt-1 inline-block px-2 py-1 rounded-full border text-xs text-slate-700 bg-slate-100"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sections -->
+            <div id="edit_sections_container" class="space-y-2">
+                <!-- Collapsible section items will be injected here -->
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="flex justify-between items-center p-4 border-t border-slate-200 bg-slate-50">
+            <div class="text-xs text-slate-500">Changes persist to local storage.</div>
+            <div class="flex gap-2">
+                <button id="edit_save_btn" onclick="saveEditedTemplateName()" class="px-4 py-2 rounded-md border border-slate-300 text-sm hover:bg-white transition-colors relative flex items-center gap-2">
+                    <span id="edit_save_btn_text">Save Name</span>
+                    <span id="edit_save_loader" class="hidden"><svg class="animate-spin h-4 w-4 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg></span>
+                    <span id="edit_save_success" class="hidden text-green-600 text-xs font-semibold ml-2">Saved!</span>
+                </button>
+                <button onclick="loadEditedTemplate()" class="px-4 py-2 rounded-md bg-green-600 text-white text-sm hover:bg-green-700 transition-colors">Load To Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE TOAST -->
+<div id="deleteToast">
+    <div id="deleteSpinner" class="delete-spinner"></div>
+    <div id="deleteIcon" class="delete-icon" style="display:none;">🗑️✓</div>
+    <h3 id="deleteMessage" class="text-lg font-bold text-slate-800 mb-1">Deleting...</h3>
+    <p id="deleteSubtext" class="text-sm text-slate-500"></p>
+</div>
+
+<!-- SAVE/PUBLISH TOAST -->
+<div id="saveToast">
+    <div id="saveSpinner" class="save-spinner"></div>
+    <div id="saveIcon" class="save-icon" style="display:none;">💾✓</div>
+    <h3 id="saveMessage" class="text-lg font-bold text-slate-800 mb-1">Saving...</h3>
+    <p id="saveSubtext" class="text-sm text-slate-500"></p>
+</div>
+
+<!-- REFRESH TOAST -->
+<div id="refreshToast">
+    <div id="refreshSpinner" class="refresh-spinner"></div>
+    <div id="refreshIcon" class="refresh-icon" style="display:none;">🔄✓</div>
+    <h3 id="refreshMessage" class="text-lg font-bold text-slate-800 mb-1">Refreshing...</h3>
+    <p id="refreshSubtext" class="text-sm text-slate-500"></p>
+</div>
+
+<!-- JS -->
+<script src="./app.js?v=20251124_001"></script>
+
 </body>
 </html>
+<script>console.log("Test: DOMContentLoaded patch active");</script>

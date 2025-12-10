@@ -1,0 +1,71 @@
+{
+  "id": "mc_re_not_advanced",
+  "name": "Medi-Cal – RE Not Advanced Journal",
+  "program": "Medi-Cal",
+  "file": "MC_RE_NotAdvanced.json",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+
+  "sections": [
+{
+  "id": "section_1",
+  "title": "SHORT DESCRIPTION",
+  "fields": [
+    {
+      "id": "shortDescription",
+      "label": "Short Description",
+      "type": "note",
+      "content": "MC – RE Not Advanced"
+    }
+  ]
+},
+{
+  "id": "section_2",
+  "title": "RE Not Advanced Details",
+  "fields": [
+
+    {
+      "id": "longDescriptionActivity",
+      "label": "Activity",
+      "type": "choice",
+      "choices": [
+        "CF intake processed",
+        "CF RC processed",
+        "SAR 7 processed",
+        "Family reported a change to CF"
+      ],
+      "placeholder": "Choose an item."
+    },
+
+    {
+      "id": "longDescriptionStatic",
+      "label": "StaticText",
+      "type": "note",
+      "content": "but MC RE not advanced as"
+    },
+
+    {
+      "id": "longDescriptionReason",
+      "label": "Reason",
+      "type": "choice",
+      "choices": [
+        "it would cause an adverse action.",
+        "no changes have been reported since last MC RE.",
+        "not all required income verifications for MC were verified"
+      ],
+      "placeholder": "Choose an item."
+    }
+
+  ]
+}
+
+
+  ]
+}
+
+
+
+
+
+
+

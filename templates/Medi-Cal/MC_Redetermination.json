@@ -1,0 +1,1383 @@
+{
+  "id": "mc_redetermination",
+  "name": "Medi-Cal – Redetermination",
+  "program": "Medi-Cal",
+  "file": "MC_Redetermination.json",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+
+  "sections": [
+{
+  "id": "section_1",
+  "title": "SHORT DESCRIPTION",
+  "fields": [
+    {
+      "id": "shortDescription",
+      "label": "Short Description",
+      "type": "choice",
+      "choices": [
+        "RE: Annual Redetermination",
+        "RE: Change of Circumstance",
+        "RE: COVID Unwinding",
+        "RE: System-Generated",
+        "RE: Other"
+      ]
+    }
+  ]
+},
+{
+  
+{
+  "id": "section_3",
+  "title": "VERIFICATION CONSENT",
+  "fields": [
+    {
+      "id": "verificationConsent",
+      "label": "Verification Consent",
+      "type": "choice",
+      "choices": [
+        "Consent Provided",
+        "Consent Denied",
+        "Consent Withdrawn",
+        "Consent Pending",
+        "Other"
+      ]
+    }
+  ]
+},
+{
+  "id": "section_4",
+  "title": "HOUSEHOLD COMPOSITION",
+  "fields": [
+    {
+      "id": "householdMembers",
+      "label": "Household Members",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        { "id": "name", "label": "Name", "type": "text" },
+        { "id": "age", "label": "Age", "type": "text" },
+        {
+          "id": "relationship",
+          "label": "Relationship",
+          "type": "choice",
+          "choices": [
+            "Self",
+            "Spouse",
+            "Child",
+            "Stepchild",
+            "Grandchild",
+            "Parent",
+            "Other Relative",
+            "Non-relative"
+          ]
+        },
+        {
+          "id": "pregnancyStatus",
+          "label": "Pregnancy",
+          "type": "choice",
+          "choices": [
+            "Not Pregnant",
+            "Pregnant",
+            "Postpartum",
+            "Unknown"
+          ]
+        },
+        { "id": "unbornCount", "label": "Number of Unborn Children", "type": "text" },
+        { "id": "edc", "label": "Expected Date of Confinement (EDC)", "type": "date" }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_5",
+  "title": "TAX HOUSEHOLD",
+  "fields": [
+    {
+      "id": "sourceOfAttestation",
+      "label": "Source of Attestation",
+      "type": "choice",
+      "choices": [
+        "Client Attestation",
+        "System Verification",
+        "Documentation",
+        "Collateral Contact",
+        "Other"
+      ]
+    },
+    {
+      "id": "primaryTaxFiler",
+      "label": "Primary Tax Filer",
+      "type": "text"
+    },
+    {
+      "id": "filingStatus",
+      "label": "Filing Status",
+      "type": "choice",
+      "choices": [
+        "Single",
+        "Married Filing Jointly",
+        "Married Filing Separately",
+        "Head of Household",
+        "Qualifying Widow(er)",
+        "Not Filing"
+      ]
+    },
+    {
+      "id": "taxDependents",
+      "label": "Dependents",
+      "type": "textarea"
+    }
+  ]
+},
+{
+  "id": "section_6",
+  "title": "LINKAGE",
+  "fields": [
+    {
+      "id": "linkageStatus",
+      "label": "Linkage",
+      "type": "choice",
+      "choices": [
+        "Age-Based Linkage",
+        "Disability-Based Linkage",
+        "Blindness-Based Linkage",
+        "Pregnancy-Based Linkage",
+        "Parent/Caretaker Relative",
+        "Former Foster Youth",
+        "No Linkage",
+        "Other"
+      ]
+    }
+  ]
+},
+{
+  "id": "section_7",
+  "title": "CASE IDENTITY",
+  "fields": [
+    {
+      "id": "caseIdentity",
+      "label": "Case Identity",
+      "type": "choice",
+      "choices": [
+        "Identity Verified",
+        "Identity Pending Verification",
+        "Identity Not Provided",
+        "Identity Verified via System Match",
+        "Identity Verified via Documentation",
+        "Identity Verified via Collateral Contact",
+        "Other"
+      ]
+    }
+  ]
+},
+{
+  "id": "section_8",
+  "title": "REMOTE IDENTITY PROOFING (RIDP)",
+  "fields": [
+    {
+      "id": "ridpStatus",
+      "label": "Remote Identity Proofing (RIDP)",
+      "type": "choice",
+      "choices": [
+        "RIDP: Passed",
+        "RIDP: Failed",
+        "RIDP: Not Required",
+        "RIDP: Pending",
+        "RIDP: Unable to Complete",
+        "RIDP: Other"
+      ]
+    }
+  ]
+},
+{
+  "id": "section_10",
+  "title": "VITAL STATISTICS",
+  "fields": [
+    {
+      "id": "vitalStatistics",
+      "label": "Vital Statistics",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        {
+          "id": "vsStatus",
+          "label": "Vital Statistics Status",
+          "type": "choice",
+          "choices": [
+            "Vital Statistics: Verified",
+            "Vital Statistics: Pending",
+            "Vital Statistics: Not Provided",
+            "Vital Statistics: Not Required",
+            "Vital Statistics: Other"
+          ]
+        },
+        {
+          "id": "vsName",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "vsDraCitizenship",
+          "label": "DRA Citizenship",
+          "type": "text"
+        },
+        {
+          "id": "vsDraIdentity",
+          "label": "DRA Identity",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_11",
+  "title": "CITIZENSHIP",
+  "fields": [
+    {
+      "id": "citizenshipRecords",
+      "label": "Citizenship Records",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        {
+          "id": "citizenshipStatus",
+          "label": "Citizenship Status",
+          "type": "choice",
+          "choices": [
+            "US Citizen",
+            "Non-Citizen",
+            "Naturalized Citizen",
+            "Derivative Citizen",
+            "Pending Verification",
+            "Unable to Verify",
+            "Other"
+          ]
+        },
+        {
+          "id": "citizenshipName",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "nonCitizenType",
+          "label": "Non-Citizen Type",
+          "type": "text"
+        },
+        {
+          "id": "alienNumber",
+          "label": "Alien Number",
+          "type": "text"
+        },
+        {
+          "id": "documentNumber",
+          "label": "Document Number",
+          "type": "text"
+        },
+        {
+          "id": "categoryCode",
+          "label": "Category Code",
+          "type": "text"
+        },
+        {
+          "id": "entryDate",
+          "label": "Entry Date",
+          "type": "date"
+        },
+        {
+          "id": "citizenshipVerification",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "saveVerification",
+          "label": "Systematic Alien Verification for Entitlements (SAVE)",
+          "type": "choice",
+          "choices": [
+            "SAVE: Verified",
+            "SAVE: Pending",
+            "SAVE: Not Required",
+            "SAVE: Failed Verification",
+            "SAVE: Other"
+          ]
+        },
+        {
+          "id": "mc13Status",
+          "label": "Statement of Citizenship (MC 13)",
+          "type": "choice",
+          "choices": [
+            "MC 13: Provided",
+            "MC 13: Not Provided",
+            "MC 13: Pending",
+            "MC 13: Not Required",
+            "MC 13: Other"
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_12",
+  "title": "CITIZEN / ALIEN INDICATOR",
+  "fields": [
+    {
+      "id": "citizenAlienIndicator",
+      "label": "Citizen / Alien Indicator",
+      "type": "choice",
+      "choices": [
+        "Citizen",
+        "Non-Citizen",
+        "Qualified Non-Citizen",
+        "Non-Qualified Non-Citizen",
+        "Mixed Household",
+        "Pending Verification",
+        "Unable to Determine",
+        "Other"
+      ]
+    }
+  ]
+},
+{
+  "id": "section_13",
+  "title": "RESIDENCY",
+  "fields": [
+    {
+      "id": "residencyVerification",
+      "label": "Residency Verification",
+      "type": "note",
+      "content": "Verification: Self-attestation of state residency with no discrepancies, per temporary suspension of verification."
+    }
+  ]
+},
+{
+  "id": "section_14",
+  "title": "CUSTOMER OPTIONS",
+  "fields": [
+
+    {
+      "id": "customerVerificationConsent",
+      "label": "Verification Consent",
+      "type": "choice",
+      "choices": [
+        "Consent Provided",
+        "Consent Not Provided",
+        "Consent Withdrawn",
+        "Consent Pending",
+        "Other"
+      ]
+    },
+
+    {
+      "id": "maintainVerificationsYears",
+      "label": "Maintain Verifications (Years)",
+      "type": "text",
+      "placeholder": "Enter number of years (Primary applicant required)"
+    },
+
+    {
+      "id": "fullMediCalHierarchy",
+      "label": "Full Medi-Cal Hierarchy",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        {
+          "id": "fmhName",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "fmhRequested",
+          "label": "Full Medi-Cal Hierarchy Requested",
+          "type": "choice",
+          "choices": [
+            "Requested",
+            "Not Requested",
+            "Pending",
+            "Other"
+          ]
+        }
+      ]
+    }
+
+  ]
+},
+{
+  "id": "section_15",
+  "title": "LIVING ARRANGEMENT",
+  "fields": [
+    {
+      "id": "livingArrangement",
+      "label": "Living Arrangement",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        {
+          "id": "laStatus",
+          "label": "Living Arrangement Status",
+          "type": "choice",
+          "choices": [
+            "Living at Home",
+            "Living in a Facility",
+            "Hospitalized",
+            "Temporary Housing",
+            "Homeless",
+            "Other"
+          ]
+        },
+        {
+          "id": "laName",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "facilityName",
+          "label": "Facility Name",
+          "type": "text"
+        },
+        {
+          "id": "laVerification",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_16",
+  "title": "POTENTIALLY AVAILABLE INCOME",
+  "fields": [
+    {
+      "id": "potentialIncome",
+      "label": "Potentially Available Income",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+
+        {
+          "id": "piStatus",
+          "label": "Potentially Available Income Status",
+          "type": "choice",
+          "choices": [
+            "Potentially Available Income: Reported",
+            "Potentially Available Income: Not Reported",
+            "Potentially Available Income: Pending Verification",
+            "Potentially Available Income: Not Applicable",
+            "Potentially Available Income: Other"
+          ]
+        },
+
+        {
+          "id": "piName",
+          "label": "Name",
+          "type": "text"
+        },
+
+        {
+          "id": "piType",
+          "label": "Type of Potentially Available Income",
+          "type": "text",
+          "placeholder": "Unemployment, Veteran’s Benefits, Disability, etc."
+        },
+
+        {
+          "id": "piEligibilityDetermination",
+          "label": "How Potential Eligibility Was Determined",
+          "type": "text"
+        },
+
+        {
+          "id": "piProof",
+          "label": "Proof of Application Verification",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_17",
+  "title": "MILITARY / VETERANS",
+  "fields": [
+    {
+      "id": "militaryVeterans",
+      "label": "Military / Veterans",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+
+        {
+          "id": "mvStatus",
+          "label": "Military / Veteran Status",
+          "type": "choice",
+          "choices": [
+            "Military: Active Duty",
+            "Military: Veteran",
+            "Military: Reserve / National Guard",
+            "Not Military",
+            "Pending Verification",
+            "Other"
+          ]
+        },
+
+        {
+          "id": "mvName",
+          "label": "Name",
+          "type": "text"
+        },
+
+        {
+          "id": "mvBranch",
+          "label": "Branch",
+          "type": "text",
+          "placeholder": "Army, Navy, Marines, Air Force, Space Force, Coast Guard"
+        },
+
+        {
+          "id": "mvEnlistmentDate",
+          "label": "Enlistment Date",
+          "type": "date"
+        },
+
+        {
+          "id": "mvVerification",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_18",
+  "title": "ABSENT PARENT",
+  "fields": [
+    {
+      "id": "absentParent",
+      "label": "Absent Parent",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+
+        {
+          "id": "apStatus",
+          "label": "Absent Parent Status",
+          "type": "choice",
+          "choices": [
+            "Choose ABSENT PARENT",
+            "ABSENT PARENT: Not applicable. No minor children reported in HH.",
+            "ABSENT PARENT: Exempt.",
+            "ABSENT PARENT: Pending: CW 2.1 NA and CW 2.1 Q provided to the family.",
+            "ABSENT PARENT: Verification: CW 2.1 NA and CW 2.1 Q information provided verbally.",
+            "ABSENT PARENT: Verification: CW 2.1 NA and CW 2.1 Q completed."
+          ]
+        },
+
+        {
+          "id": "apName",
+          "label": "Name",
+          "type": "text"
+        },
+
+        {
+          "id": "apVerification",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_19",
+  "title": "MEDICAL CONDITION",
+  "fields": [
+    {
+      "id": "medicalCondition",
+      "label": "Medical Condition",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+
+        {
+          "id": "mcStatus",
+          "label": "Medical Condition Status",
+          "type": "choice",
+          "choices": [
+            "Choose MEDICAL CONDITION",
+            "Medical Condition: Reported",
+            "Medical Condition: Not Reported",
+            "Medical Condition: Pending Verification",
+            "Medical Condition: Other"
+          ]
+        },
+
+        {
+          "id": "mcName",
+          "label": "Name",
+          "type": "text"
+        },
+
+        {
+          "id": "mcType",
+          "label": "Medical Condition Type (Do not include diagnosis information)",
+          "type": "text"
+        },
+
+        {
+          "id": "mcVerification",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_20",
+  "title": "OTHER PROGRAM ASSISTANCE",
+  "fields": [
+    {
+      "id": "otherProgramAssistance",
+      "label": "Other Program Assistance",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+
+        {
+          "id": "opaStatus",
+          "label": "Other Program Assistance Status",
+          "type": "choice",
+          "choices": [
+            "Choose OTHER PROGRAM ASSISTANCE",
+            "Program Assistance: Reported",
+            "Program Assistance: Not Reported",
+            "Program Assistance: Pending Verification",
+            "Program Assistance: Not Applicable",
+            "Program Assistance: Other"
+          ]
+        },
+
+        {
+          "id": "opaName",
+          "label": "Name",
+          "type": "text"
+        },
+
+        {
+          "id": "opaSource",
+          "label": "Source",
+          "type": "text"
+        },
+
+        {
+          "id": "opaFrequency",
+          "label": "Frequency",
+          "type": "text"
+        },
+
+        {
+          "id": "opaVerification",
+          "label": "Verification",
+          "type": "text"
+        },
+
+        {
+          "id": "opaAmountUsed",
+          "label": "Amount Used",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_21",
+  "title": "EMPLOYMENT",
+  "fields": [
+    {
+      "id": "employmentRecords",
+      "label": "Employment Records",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+
+        {
+          "id": "employmentStatus",
+          "label": "Employment Status",
+          "type": "choice",
+          "choices": [
+            "Choose EMPLOYMENT",
+            "Employment: Reported",
+            "Employment: Not Reported",
+            "Employment: Pending Verification",
+            "Employment: Not Applicable",
+            "Employment: Other"
+          ]
+        },
+
+        {
+          "id": "employmentName",
+          "label": "Name",
+          "type": "text"
+        },
+
+        {
+          "id": "employmentEmployer",
+          "label": "Employer",
+          "type": "text"
+        },
+
+        {
+          "id": "employmentStartDate",
+          "label": "Start Date",
+          "type": "date"
+        },
+
+        {
+          "id": "employmentHourlyRate",
+          "label": "Hourly Rate",
+          "type": "text"
+        },
+
+        {
+          "id": "employmentHoursWeekly",
+          "label": "Average Hours Weekly",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_22",
+  "title": "INCOME",
+  "fields": [
+    {
+      "id": "incomeRecords",
+      "label": "Income Records",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+
+        {
+          "id": "incomeStatus",
+          "label": "Income Status",
+          "type": "choice",
+          "choices": [
+            "Choose INCOME",
+            "Income: Reported",
+            "Income: Not Reported",
+            "Income: Pending Verification",
+            "Income: Not Applicable",
+            "Income: Other"
+          ]
+        },
+
+        {
+          "id": "incomeName",
+          "label": "Name",
+          "type": "text"
+        },
+
+        {
+          "id": "incomeSource",
+          "label": "Source",
+          "type": "text"
+        },
+
+        {
+          "id": "incomeFrequency",
+          "label": "Frequency",
+          "type": "text"
+        },
+
+        {
+          "id": "incomeVerification",
+          "label": "Verification",
+          "type": "text"
+        },
+
+        {
+          "id": "incomeAmount",
+          "label": "Amount",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_23",
+  "title": "PROPERTY",
+  "fields": [
+
+    {
+      "id": "propertyStatus",
+      "label": "Property",
+      "type": "choice",
+      "choices": [
+        "Choose PROPERTY",
+        "Property: Reported",
+        "Property: Not Reported",
+        "Property: Pending Verification",
+        "Property: Not Applicable",
+        "Property: Other"
+      ]
+    },
+
+    {
+      "id": "nonMagiPropertyForms",
+      "label": "Non-MAGI Property Supplemental Forms",
+      "type": "choice",
+      "choices": [
+        "Choose Non-MAGI Property Supplemental Forms",
+        "Form MC 210",
+        "Form MC 219",
+        "Form MC 604 IPS",
+        "None",
+        "Other"
+      ]
+    },
+
+    {
+      "id": "realProperty",
+      "label": "Real Property",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        { "id": "rpOwner", "label": "Owner", "type": "text" },
+        { "id": "rpType", "label": "Type (Home, Mobile Home, Land Rights, etc.)", "type": "text" },
+        { "id": "rpVerification", "label": "Verification", "type": "text" },
+        { "id": "rpValue", "label": "Value", "type": "text" }
+      ]
+    },
+
+    {
+      "id": "vehicles",
+      "label": "Vehicles",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        { "id": "vOwner", "label": "Owner", "type": "text" },
+        { "id": "vMake", "label": "Make", "type": "text" },
+        { "id": "vModel", "label": "Model", "type": "text" },
+        { "id": "vYear", "label": "Year", "type": "text" },
+        { "id": "vVerification", "label": "Verification", "type": "text" },
+        { "id": "vValue", "label": "Value", "type": "text" }
+      ]
+    },
+
+    {
+      "id": "bankAccounts",
+      "label": "Bank Accounts",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        { "id": "baOwner", "label": "Owner", "type": "text" },
+        { "id": "baType", "label": "Type", "type": "text" },
+        { "id": "baAccountNumber", "label": "Account Number", "type": "text" },
+        { "id": "baVerification", "label": "Verification", "type": "text" },
+        { "id": "baValue", "label": "Value", "type": "text" }
+      ]
+    },
+
+    {
+      "id": "retirementAccounts",
+      "label": "Retirement Accounts",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        { "id": "raOwner", "label": "Owner", "type": "text" },
+        { "id": "raType", "label": "Type", "type": "text" },
+        { "id": "raAccountNumber", "label": "Account Number", "type": "text" },
+        { "id": "raVerification", "label": "Verification", "type": "text" },
+        { "id": "raValue", "label": "Value", "type": "text" }
+      ]
+    },
+
+    {
+      "id": "payCards",
+      "label": "Pay Cards",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        { "id": "pcOwner", "label": "Owner", "type": "text" },
+        { "id": "pcCompany", "label": "Company", "type": "text" },
+        { "id": "pcVerification", "label": "Verification", "type": "text" },
+        { "id": "pcValue", "label": "Value", "type": "text" }
+      ]
+    },
+
+    {
+      "id": "cashOnHand",
+      "label": "Cash on Hand",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        { "id": "cohOwner", "label": "Owner", "type": "text" },
+        { "id": "cohVerification", "label": "Verification", "type": "text" },
+        { "id": "cohValue", "label": "Value", "type": "text" }
+      ]
+    },
+
+    {
+      "id": "otherProperty",
+      "label": "Other Property",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        { "id": "opOwner", "label": "Owner", "type": "text" },
+        { "id": "opType", "label": "Type", "type": "text" },
+        { "id": "opVerification", "label": "Verification", "type": "text" },
+        { "id": "opValue", "label": "Value", "type": "text" }
+      ]
+    }
+
+  ]
+},
+{
+  "id": "section_24",
+  "title": "EXPENSES",
+  "fields": [
+    {
+      "id": "expenses",
+      "label": "Expenses",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+
+        {
+          "id": "expenseStatus",
+          "label": "Expense Status",
+          "type": "choice",
+          "choices": [
+            "Choose EXPENSES",
+            "Expense: Reported",
+            "Expense: Not Reported",
+            "Expense: Pending Verification",
+            "Expense: Not Applicable",
+            "Expense: Other"
+          ]
+        },
+
+        {
+          "id": "expenseName",
+          "label": "Name",
+          "type": "text"
+        },
+
+        {
+          "id": "expenseType",
+          "label": "Type",
+          "type": "text"
+        },
+
+        {
+          "id": "expenseFrequency",
+          "label": "Frequency",
+          "type": "text"
+        },
+
+        {
+          "id": "expenseVerification",
+          "label": "Verification",
+          "type": "text"
+        },
+
+        {
+          "id": "expenseAmount",
+          "label": "Amount",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_25",
+  "title": "MEDICARE",
+  "fields": [
+    {
+      "id": "medicareRecords",
+      "label": "Medicare Records",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+
+        {
+          "id": "medicareStatus",
+          "label": "Medicare Status",
+          "type": "choice",
+          "choices": [
+            "Choose MEDICARE",
+            "Medicare: Reported",
+            "Medicare: None Reported, No Discrepancies",
+            "Medicare: Pending Verification",
+            "Medicare: Not Applicable",
+            "Medicare: Other"
+          ]
+        },
+
+        {
+          "id": "medicareName",
+          "label": "Name",
+          "type": "text"
+        },
+
+        {
+          "id": "medicareVerification",
+          "label": "Verification",
+          "type": "text"
+        },
+
+        {
+          "id": "medicareAmount",
+          "label": "Amount",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_26",
+  "title": "THIRD PARTY LIABILITY (TPL)",
+  "fields": [
+    {
+      "id": "tplRecords",
+      "label": "Third Party Liability (TPL)",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+
+        {
+          "id": "tplStatus",
+          "label": "TPL Status",
+          "type": "choice",
+          "choices": [
+            "Choose THIRD PARTY LIABILITY",
+            "TPL: Reported",
+            "TPL: Not Reported",
+            "TPL: Pending Verification",
+            "TPL: Not Applicable",
+            "TPL: Other"
+          ]
+        },
+
+        {
+          "id": "tplName",
+          "label": "Name",
+          "type": "text"
+        },
+
+        {
+          "id": "tplInjuryDate",
+          "label": "Date of Injury",
+          "type": "date"
+        },
+
+        {
+          "id": "tplWorkRelated",
+          "label": "Work Related",
+          "type": "choice",
+          "choices": [
+            "Work Related: Yes",
+            "Work Related: No",
+            "Work Related: Pending",
+            "Work Related: Unknown",
+            "Work Related: Other"
+          ]
+        },
+
+        {
+          "id": "tplDhcsReferral",
+          "label": "Department of Health Care Services (DHCS) Referral",
+          "type": "choice",
+          "choices": [
+            "DHCS Referral: Yes",
+            "DHCS Referral: No",
+            "DHCS Referral: Pending",
+            "DHCS Referral: Not Required",
+            "DHCS Referral: Other"
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_27",
+  "title": "OTHER HEALTH CARE (OHC)",
+  "fields": [
+    {
+      "id": "ohcRecords",
+      "label": "Other Health Care (OHC)",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+
+        {
+          "id": "ohcStatus",
+          "label": "OHC Status",
+          "type": "choice",
+          "choices": [
+            "Choose OTHER HEALTH CARE (OHC)",
+            "OHC: Reported",
+            "OHC: Not Reported",
+            "OHC: Pending Verification",
+            "OHC: Not Applicable",
+            "OHC: Other"
+          ]
+        },
+
+        {
+          "id": "ohcName",
+          "label": "Name",
+          "type": "text"
+        },
+
+        {
+          "id": "ohcInsuranceCompany",
+          "label": "Insurance Company",
+          "type": "text"
+        },
+
+        {
+          "id": "ohcVerification",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_28",
+  "title": "IEVS / PVS / NHR / MEDS",
+  "fields": [
+
+    {
+      "id": "ievsNote",
+      "label": "IEVS Instruction",
+      "type": "note",
+      "content": "All IEVS, PVS, and NHR reports are to be reviewed and dispositioned each time the case is touched. Complete the drop down for each IEVS report below."
+    },
+
+    {
+      "id": "ievsApplicantReport",
+      "label": "IEVS Applicant Report",
+      "type": "choice",
+      "choices": [
+        "Choose IEVS Applicant Report",
+        "Reviewed – No Change",
+        "Reviewed – Requires Action",
+        "Reviewed – Not Applicable",
+        "IEVS Not Returned",
+        "Other (Specify)"
+      ]
+    },
+
+    {
+      "id": "pvsReport",
+      "label": "Payment Verification System (PVS)",
+      "type": "choice",
+      "choices": [
+        "Choose Payment Verification System (PVS)",
+        "Reviewed – No Change",
+        "Reviewed – Requires Action",
+        "Reviewed – Not Applicable",
+        "PVS Not Returned",
+        "Other (Specify)"
+      ]
+    },
+
+    {
+      "id": "nhrReport",
+      "label": "New Hire Registry (NHR)",
+      "type": "choice",
+      "choices": [
+        "Choose New Hire Registry (NHR)",
+        "Reviewed – No Change",
+        "Reviewed – Requires Action",
+        "Reviewed – Not Applicable",
+        "NHR Not Returned",
+        "Hit – Confirmed Not the Client",
+        "Other (Specify)"
+      ]
+    },
+
+    {
+      "id": "medsAlerts",
+      "label": "Medi-Cal Eligibility Data System (MEDS) Alerts",
+      "type": "choice",
+      "choices": [
+        "Choose MEDS Alerts",
+        "Reviewed – No Discrepancy",
+        "Reviewed – Requires Action",
+        "Reviewed – Not Applicable",
+        "Other (Specify)"
+      ]
+    }
+
+  ]
+},
+{
+  "id": "section_29",
+  "title": "TASKS DUE FUTURE",
+  "fields": [
+    {
+      "id": "tasksDueFutureStatus",
+      "label": "Tasks Due (Future)",
+      "type": "choice",
+      "choices": [
+        "Choose TASKS DUE FUTURE",
+        "Tasks: Required",
+        "Tasks: Not Required",
+        "Tasks: Completed",
+        "Tasks: Pending",
+        "Tasks: Other"
+      ]
+    },
+
+    {
+      "id": "tasksDueFuture",
+      "label": "Task List",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        {
+          "id": "taskDescription",
+          "label": "Task Description",
+          "type": "text",
+          "placeholder": "Enter task"
+        }
+      ]
+    },
+
+    {
+      "id": "tasksNote",
+      "label": "Example Task",
+      "type": "note",
+      "content": "Task set to ensure MEDS picks up COR and ICT summary page is complete."
+    }
+  ]
+},
+{
+  "id": "section_30",
+  "title": "SUPPLEMENTAL FORMS",
+  "fields": [
+    {
+      "id": "supplementalFormsNote",
+      "label": "Supplemental Forms",
+      "type": "note",
+      "content": "Supplemental forms sent to customer include: DPSS 3310, DHCS 7077, 7077A, DPSS 3171, MC 219, MC 003, DPSS 3167, PUB 13, DPSS 1551, DPSS 3385 HIPPA, PUB 183, DPSS 2824, DPSS 2206, MC 372, PUB 68, DPSS 1854, GEN 1365, voter registration card, DPSS 3226, WIC form, DPSS 4523, DPSS 4611, CW 2223.\n\n*In compliance with DP 70-017, VOTER FORM SENT*\n\nEmail sent to prior county to confirm our pickup date.\n\n***MC 360 not received, however no longer required for electronic ICTs. ET verified information via MEDS and CALHEERS.***"
+    }
+  ]
+},
+{
+  "id": "section_31",
+  "title": "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS",
+  "fields": [
+
+    {
+      "id": "edbcStatus",
+      "label": "EDBC Results",
+      "type": "choice",
+      "choices": [
+        "Choose ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS",
+        "EDBC: Completed",
+        "EDBC: Unable to Run – Pending Verifications",
+        "EDBC: Not Required",
+        "EDBC: Results Reviewed",
+        "EDBC: Other"
+      ]
+    },
+
+    {
+      "id": "edbcNotes",
+      "label": "EDBC Notes",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        {
+          "id": "edbcNote",
+          "label": "Note",
+          "type": "text"
+        }
+      ]
+    }
+
+  ]
+},
+{
+  "id": "section_32",
+  "title": "INTER-AGENCY TRANSFER (IAT) SUMMARY",
+  "fields": [
+    {
+      "id": "iatSummary",
+      "label": "IAT Summary",
+      "type": "choice",
+      "choices": [
+        "Choose INTER-AGENCY TRANSFER (IAT) SUMMARY",
+        "IAT: Not Required",
+        "IAT: Completed",
+        "IAT: Pending",
+        "IAT: Reviewed",
+        "IAT: Other"
+      ]
+    }
+  ]
+},
+{
+  "id": "section_33",
+  "title": "NOTICE OF ACTION (NOA)",
+  "fields": [
+    {
+      "id": "noaStatus",
+      "label": "Notice of Action (NOA)",
+      "type": "choice",
+      "choices": [
+        "Choose NOTICE OF ACTION (NOA)",
+        "NOA: Pending",
+        "NOA: Generated",
+        "NOA: Reviewed",
+        "NOA: Appended and Provided to Customer",
+        "NOA: Not Required",
+        "NOA: Other"
+      ]
+    }
+  ]
+}
+  ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

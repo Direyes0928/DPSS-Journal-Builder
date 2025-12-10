@@ -1,0 +1,194 @@
+{
+  "id": "cf_withdrawal",
+  "name": "CalFresh – Withdrawal",
+  "program": "CalFresh",
+  "file": "CF_Withdrawal.json",
+
+  "sections": [
+
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "withdrawalType",
+          "type": "choice",
+          "label": "Withdrawal Type",
+          "choices": [
+            "CF: Verbal Request to Withdraw Application",
+            "CF: Written Request to Withdraw Application"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_2",
+      "title": "Withdrawal Details",
+      "fields": [
+        { "id": "applicationDate", "label": "Application Date", "type": "date" },
+        { "id": "primaryApplicant", "label": "Primary Applicant Who Requested Withdrawal", "type": "text" },
+        {
+          "id": "language",
+          "label": "Language",
+          "type": "choice",
+          "choices": [
+            "English",
+            "Spanish",
+            "Other"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_3",
+      "title": "FAMILY AUTHENTICATED WITH",
+      "fields": [
+        {
+          "id": "familyAuthMethod",
+          "type": "choice",
+          "label": "Authentication Method",
+          "choices": [
+            "Full name of:",
+            "Last 4 digits of SSN for:",
+            "DOB for:",
+            "Address",
+            "Telephone number",
+            "SSN of child:",
+            "DOB of child:",
+            "Case number",
+            "ID number for:"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_4",
+      "title": "EXPEDITED SERVICE",
+      "fields": [
+        {
+          "id": "expSvNote",
+          "type": "admin-note",
+          "content": "EXPEDITED SERVICE: Ineligible. CF HH withdrew application.",
+          "color": "blue"
+        }
+      ]
+    },
+
+    {
+      "id": "section_5",
+      "title": "NEGATIVE ACTION",
+      "fields": [
+        {
+          "id": "personsDenied",
+          "label": "Persons denied:",
+          "type": "text"
+        },
+        {
+          "id": "negativeActionNote",
+          "type": "admin-note",
+          "content": "Negative action EDBC ran for verbal/written withdrawal in CalSAWS.\nCW 10 generated, appended with mandatory language in DP 63-014 and mailed centrally.",
+          "color": "grey"
+        }
+      ]
+    },
+
+    {
+      "id": "section_6",
+      "title": "IEVS / PVS / NHR / MEDS REVIEW",
+      "fields": [
+
+        {
+          "id": "ievsApplicantReport",
+          "type": "choice",
+          "label": "IEVS Applicant Report",
+          "choices": [
+            "Choose IEVS Applicant Report",
+            "IEVS Applicant Report: Received and reviewed for this application. No discrepancies.",
+            "IEVS Applicant Report: Pending. Task set for 10 days.",
+            "IEVS Applicant Report: Discrepant:",
+            "IEVS Applicant Report: Not generated"
+          ]
+        },
+
+        {
+          "id": "pvsStatus",
+          "type": "choice",
+          "label": "Payment Verification System (PVS)",
+          "choices": [
+            "Choose Payment Verification System (PVS)",
+            "PVS: Received and reviewed. No discrepancies.",
+            "PVS: Pending verification.",
+            "PVS: Discrepant"
+          ]
+        },
+
+        {
+          "id": "nhrStatus",
+          "type": "choice",
+          "label": "New Hire Registry (NHR)",
+          "choices": [
+            "Choose New Hire Registry (NHR)",
+            "NHR: No matches.",
+            "NHR: Match found – reviewed.",
+            "NHR: Pending review"
+          ]
+        },
+
+        {
+          "id": "medsStatus",
+          "type": "choice",
+          "label": "MEDS Alerts",
+          "choices": [
+            "Choose Medi-Cal Eligibility Data System (MEDS) Alerts",
+            "MEDS: No alerts.",
+            "MEDS: Alerts reviewed.",
+            "MEDS: Pending action"
+          ]
+        },
+
+        {
+          "id": "tasksCleared",
+          "label": "Tasks cleared (# and type of tasks cleared):",
+          "type": "text"
+        }
+
+      ]
+    },
+
+    {
+      "id": "section_7",
+      "title": "FIRST CONTACT RESOLUTION",
+      "fields": [
+        {
+          "id": "impactToOtherPrograms",
+          "type": "choice",
+          "label": "Impact to Other Programs",
+          "choices": [
+            "No impact",
+            "Potential impact",
+            "Confirmed impact",
+            "Other"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_8",
+      "title": "IMPORTANT REMINDER",
+      "fields": [
+        {
+          "id": "adminReminder",
+          "type": "admin-note",
+          "content": "Do not deny for withdrawal if eligibility factors have been discussed with the family. Instead, send a denial NOA for a correct reason (e.g., ineligible student, mandatory HH member, over income).",
+          "color": "yellow"
+        }
+      ]
+    }
+
+  ]
+}
+

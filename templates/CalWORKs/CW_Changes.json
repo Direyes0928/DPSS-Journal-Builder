@@ -1,0 +1,345 @@
+{
+  "id": "CW_Changes",
+  "name": "CalWORKs – Changes",
+  "file": "CW_Changes.json",
+  "program": "CalWORKs",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+
+  "sections": [
+
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        { "id": "shortDescription", "label": "Short Description", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_2",
+      "title": "CHANGE TYPE",
+      "fields": [
+        {
+          "id": "changeType",
+          "label": "Select Change Type",
+          "type": "choice",
+          "choices": [
+            "Household Composition",
+            "Address",
+            "Income",
+            "Property",
+            "Expenses",
+            "School Attendance",
+            "Non-Compliance",
+            "Other"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_3",
+      "title": "HOUSEHOLD COMPOSITION CHANGE",
+      "fields": [
+        {
+          "id": "hhCompositionChange",
+          "label": "Household Composition Changes",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "dob", "label": "DOB / Age", "type": "text" },
+            {
+              "id": "movementType",
+              "label": "Move In / Move Out",
+              "type": "choice",
+              "choices": ["Moved In", "Moved Out"]
+            },
+            { "id": "movementDate", "label": "Movement Date", "type": "date" },
+            { "id": "relationship", "label": "Relationship to Primary Applicant", "type": "text" },
+            {
+              "id": "ppStatus",
+              "label": "Purchase & Prepare (CF)",
+              "type": "choice",
+              "choices": ["Yes", "No"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_4",
+      "title": "ADDRESS CHANGE",
+      "fields": [
+        {
+          "id": "addressType",
+          "label": "Address Type",
+          "type": "choice",
+          "choices": ["Physical", "Mailing", "Both"]
+        },
+        { "id": "dateMoved", "label": "Date Moved", "type": "date" }
+      ]
+    },
+
+    {
+      "id": "section_5",
+      "title": "VOTER REGISTRATION",
+      "fields": [
+        {
+          "id": "voterName",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "voterPreference",
+          "label": "Voter Preference",
+          "type": "choice",
+          "choices": ["Register", "Decline", "Already Registered", "No Response"]
+        }
+      ]
+    },
+
+    {
+      "id": "section_6",
+      "title": "HOUSING EXPENSE CHANGE (CF)",
+      "fields": [
+        {
+          "id": "housingExpense",
+          "label": "Housing Expenses",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            {
+              "id": "expenseType",
+              "label": "Type",
+              "type": "text"
+            },
+            {
+              "id": "frequency",
+              "label": "Frequency",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "choice",
+              "choices": ["Provided", "Pending", "Not Provided"]
+            },
+            { "id": "amountPaid", "label": "Amount Paid", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "utilityAllowance",
+          "label": "Utility Allowance (CF)",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+
+        {
+          "id": "suas",
+          "label": "Standard Utility Allowance Subsidy (SUAS) (CF)",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        }
+      ]
+    },
+
+    {
+      "id": "section_7",
+      "title": "NON-COMPLIANCE CHANGE",
+      "fields": [
+        {
+          "id": "nonCompliance",
+          "label": "Non-Compliance",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "ncType", "label": "Type", "type": "text" },
+            { "id": "state", "label": "State", "type": "text" },
+            { "id": "date", "label": "Date", "type": "date" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_8",
+      "title": "MEDICAL EXPENSE CHANGE (CF)",
+      "fields": [
+        {
+          "id": "medicalExpense",
+          "label": "Medical Expenses",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            {
+              "id": "frequency",
+              "label": "Frequency",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "choice",
+              "choices": ["Provided", "Pending", "Not Provided"]
+            },
+            { "id": "amount", "label": "Amount", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_9",
+      "title": "COURT-ORDERED CHILD SUPPORT PAID CHANGE (CF)",
+      "fields": [
+        {
+          "id": "childSupport",
+          "label": "Child Support",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            {
+              "id": "frequency",
+              "label": "Frequency",
+              "type": "text"
+            },
+            {
+              "id": "verifyOrder",
+              "label": "Verification of Court-Ordered Amount",
+              "type": "text"
+            },
+            {
+              "id": "verifyPaid",
+              "label": "Verification of Amount Paid",
+              "type": "text"
+            },
+            { "id": "amount", "label": "Amount (Lesser of Ordered or Paid)", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_10",
+      "title": "DEPENDENT CARE CHANGE (CF)",
+      "fields": [
+        {
+          "id": "dependentCare",
+          "label": "Dependent Care",
+          "type": "repeatable",
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            {
+              "id": "frequency",
+              "label": "Frequency",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            },
+            { "id": "amount", "label": "Amount", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_11",
+      "title": "PROPERTY CHANGE (CW & CF)",
+      "fields": [
+
+        {
+          "id": "realProperty",
+          "label": "Real Property",
+          "type": "repeatable",
+          "fields": [
+            { "id": "owner", "label": "Owner", "type": "text" },
+            { "id": "type", "label": "Type", "type": "text" },
+            { "id": "verifyCW", "label": "Verification (CW)", "type": "text" },
+            { "id": "verifyCF", "label": "Verification (CF)", "type": "text" },
+            { "id": "value", "label": "Value", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "vehicle",
+          "label": "Vehicle",
+          "type": "repeatable",
+          "fields": [
+            { "id": "owner", "label": "Owner", "type": "text" },
+            { "id": "make", "label": "Make", "type": "text" },
+            { "id": "model", "label": "Model", "type": "text" },
+            { "id": "year", "label": "Year", "type": "text" },
+            { "id": "verifyCW", "label": "Verification (CW)", "type": "text" },
+            { "id": "verifyCF", "label": "Verification (CF)", "type": "text" },
+            { "id": "value", "label": "Value", "type": "text" }
+          ]
+        },
+
+        {
+          "id": "bankAccounts",
+          "label": "Bank Accounts",
+          "type": "repeatable",
+          "fields": [
+            { "id": "institution", "label": "Financial Institution", "type": "text" },
+            { "id": "owner", "label": "Owner", "type": "text" },
+            { "id": "type", "label": "Type", "type": "text" },
+            { "id": "acctNumber", "label": "Account Number", "type": "text" },
+            { "id": "verifyCW", "label": "Verification (CW)", "type": "text" },
+            { "id": "verifyCF", "label": "Verification (CF)", "type": "text" },
+            { "id": "value", "label": "Value", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_12",
+      "title": "OTHER CHANGES",
+      "fields": [
+        {
+          "id": "otherChange",
+          "label": "Other Change",
+          "type": "repeatable",
+          "fields": [
+            { "id": "changeType", "label": "Change", "type": "text" },
+            { "id": "verification", "label": "Verification", "type": "text" },
+            { "id": "resolution", "label": "Resolution", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_13",
+      "title": "FINAL ACTIONS",
+      "fields": [
+        {
+          "id": "pendingVerifications",
+          "label": "Pending Verifications",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "item", "label": "Item", "type": "text" }
+          ]
+        },
+        {
+          "id": "tasksDue",
+          "label": "Tasks Due Future",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "task", "label": "Task", "type": "text" }
+          ]
+        }
+      ]
+    }
+
+  ]
+}

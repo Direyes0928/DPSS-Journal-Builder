@@ -1,0 +1,231 @@
+{
+  "id": "CW_Failure_To_Provide",
+  "name": "CalWORKs - Failure to Provide",
+  "file": "CW_Failure_To_Provide.json",
+  "program": "CalWORKs",
+  "version": "2025-12-01T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "ACTION",
+      "fields": [
+        {
+          "id": "actionType",
+          "label": "Action",
+          "type": "choice",
+          "choices": [
+            "Provided",
+            "Not Provided",
+            "Partially Provided",
+            "Pending",
+            "Unable to Obtain",
+            "Verification Not Acceptable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "FOLLOW UP ACTION",
+      "fields": [
+        {
+          "id": "followUpAction",
+          "label": "Follow-Up Action",
+          "type": "choice",
+          "choices": [
+            "Request Additional Verification",
+            "Clarification Needed",
+            "Pending Client Response",
+            "Submit to Supervisor",
+            "No Further Action Required"
+          ]
+        },
+        {
+          "id": "journalEntryDate",
+          "label": "See Journal Entry On",
+          "type": "date"
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "PENDING VERIFICATIONS",
+      "fields": [
+        {
+          "id": "pendingVerifications_note",
+          "label": "(List verifications not provided):",
+          "type": "text"
+        },
+        {
+          "id": "pendingVerifications",
+          "label": "Pending Verifications",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "pendingVerifications_item",
+              "label": "Verification Item",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "FIRST CONTACT RESOLUTION",
+      "fields": [
+        {
+          "id": "electronicVerification",
+          "label": "Electronic Verification Attempt",
+          "type": "choice",
+          "choices": [
+            "Attempted - Unable to Obtain",
+            "Not Attempted",
+            "Successful"
+          ]
+        },
+        {
+          "id": "collateralContact",
+          "label": "Collateral Contact Attempt",
+          "type": "choice",
+          "choices": [
+            "Attempted - Unable to Obtain",
+            "Not Attempted",
+            "Successful"
+          ]
+        },
+        {
+          "id": "impactOtherPrograms",
+          "label": "Impact to Other Programs",
+          "type": "choice",
+          "choices": [
+            "No Impact",
+            "CalFresh Impacted",
+            "Medi-Cal Impacted",
+            "GA Impacted",
+            "Multiple Programs Impacted"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "IEVS / PVS / NHR / MEDS",
+      "fields": [
+        {
+          "id": "ievsApplicantReport",
+          "label": "IEVS Applicant Report",
+          "type": "choice",
+          "choices": [
+            "Match - No Action Needed",
+            "Match - Verified",
+            "Match - Discrepancy Found",
+            "Pending Review",
+            "Not Applicable"
+          ]
+        },
+        {
+          "id": "pvsReport",
+          "label": "Payment Verification System (PVS)",
+          "type": "choice",
+          "choices": [
+            "Match - No Action Needed",
+            "Match - Verified",
+            "Match - Discrepancy Found",
+            "Pending Review",
+            "Not Applicable"
+          ]
+        },
+        {
+          "id": "nhrReport",
+          "label": "New Hire Registry (NHR)",
+          "type": "choice",
+          "choices": [
+            "Match - No Action Needed",
+            "Match - Verified",
+            "Match - Discrepancy Found",
+            "Pending Review",
+            "Not Applicable"
+          ]
+        },
+        {
+          "id": "medsAlert",
+          "label": "MEDS Alerts",
+          "type": "choice",
+          "choices": [
+            "No Alerts",
+            "Alerts Reviewed - No Discrepancy",
+            "Alerts Reviewed - Discrepancy Found",
+            "Pending Review"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "EDBC RESULTS",
+      "fields": [
+        {
+          "id": "edbcOutcome",
+          "label": "EDBC Results",
+          "type": "choice",
+          "choices": [
+            "Approved",
+            "Denied",
+            "Discontinued",
+            "Pending Information",
+            "Recalculated",
+            "Not Applicable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_8",
+      "title": "NOTICE OF ACTION (NOA)",
+      "fields": [
+        {
+          "id": "noaStatus",
+          "label": "NOA Status",
+          "type": "choice",
+          "choices": [
+            "Generated",
+            "Reviewed",
+            "Appended and Provided",
+            "Pending",
+            "Not Required"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_9",
+      "title": "MEDI-CAL REFERRAL",
+      "fields": [
+        {
+          "id": "mediCalReferral",
+          "label": "Medi-Cal Referral",
+          "type": "choice",
+          "choices": [
+            "Referred",
+            "Not Referred",
+            "Pending"
+          ]
+        }
+      ]
+    }
+  ]
+}

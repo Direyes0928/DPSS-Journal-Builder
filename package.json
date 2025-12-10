@@ -1,0 +1,24 @@
+{
+  "name": "dpss-journal-builder",
+  "version": "1.0.0",
+  "description": "DOCX to Template JSON converter for structured form-builder app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "mammoth": "^1.6.0",
+    "jszip": "^3.10.1",
+    "@xmldom/xmldom": "^0.8.10"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "docx",
+    "converter",
+    "form-builder",
+    "template"
+  ],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,249 @@
+{
+  "id": "FC_ARC_IPT",
+  "name": "Foster Care \u2013 ARC IPT",
+  "file": "FC_ARC_IPT.json",
+  "program": "CalWORKs",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "Short Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "ACTION",
+      "fields": [
+        {
+          "id": "iptAction",
+          "label": "ARC IPT Action",
+          "type": "choice",
+          "choices": [
+            "Processed",
+            "Pending",
+            "Follow-Up Needed",
+            "Reissued",
+            "Denied",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "LONG DESCRIPTION",
+      "fields": [
+        {
+          "id": "longDescription",
+          "label": "Long Description",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "PARTICIPANT INFORMATION",
+      "fields": [
+        {
+          "id": "participantName",
+          "label": "Participant Name",
+          "type": "text"
+        },
+        {
+          "id": "childName",
+          "label": "Child Name",
+          "type": "text"
+        },
+        {
+          "id": "relationship",
+          "label": "Relationship to Child",
+          "type": "text"
+        },
+        {
+          "id": "caseNumber",
+          "label": "Case Number",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "ICT / IPT DETAILS",
+      "fields": [
+        {
+          "id": "iptType",
+          "label": "IPT Type",
+          "type": "choice",
+          "choices": [
+            "Initial IPT",
+            "Ongoing IPT",
+            "Corrected IPT",
+            "Reissued IPT",
+            "Other"
+          ]
+        },
+        {
+          "id": "iptDate",
+          "label": "IPT Date",
+          "type": "date"
+        },
+        {
+          "id": "iptReason",
+          "label": "IPT Reason",
+          "type": "choice",
+          "choices": [
+            "Income Change",
+            "Placement Change",
+            "Aid Code Change",
+            "Eligibility Update",
+            "Missing Documentation",
+            "Other"
+          ]
+        },
+        {
+          "id": "aidCode",
+          "label": "Aid Code",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "PLACEMENT DETAILS",
+      "fields": [
+        {
+          "id": "placementInfo",
+          "label": "Placement Information",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "provider",
+              "label": "Provider / Caregiver",
+              "type": "text"
+            },
+            {
+              "id": "address",
+              "label": "Address",
+              "type": "text"
+            },
+            {
+              "id": "placementDate",
+              "label": "Placement Date",
+              "type": "date"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "INCOME DETAILS",
+      "fields": [
+        {
+          "id": "incomeItems",
+          "label": "Income Items",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "source",
+              "label": "Income Source",
+              "type": "text"
+            },
+            {
+              "id": "amount",
+              "label": "Amount",
+              "type": "text"
+            },
+            {
+              "id": "frequency",
+              "label": "Frequency",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_8",
+      "title": "VERIFICATIONS RECEIVED",
+      "fields": [
+        {
+          "id": "verificationItems",
+          "label": "Verification Items",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "item",
+              "label": "Item",
+              "type": "text"
+            },
+            {
+              "id": "status",
+              "label": "Status",
+              "type": "choice",
+              "choices": [
+                "Provided",
+                "Not Provided",
+                "Insufficient",
+                "Pending"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_9",
+      "title": "ACTIONS TAKEN",
+      "fields": [
+        {
+          "id": "actionsTaken",
+          "label": "Actions Taken",
+          "type": "textarea",
+          "placeholder": "Example: IPT processed, income updated, placement verified."
+        }
+      ]
+    },
+    {
+      "id": "section_10",
+      "title": "NOTICE OF ACTION (NOA)",
+      "fields": [
+        {
+          "id": "noaStatus",
+          "label": "NOA Status",
+          "type": "choice",
+          "choices": [
+            "Generated",
+            "Pending",
+            "Provided",
+            "Not Required"
+          ]
+        },
+        {
+          "id": "noaDate",
+          "label": "NOA Date",
+          "type": "date"
+        }
+      ]
+    }
+  ]
+}

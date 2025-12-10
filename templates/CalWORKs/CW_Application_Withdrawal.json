@@ -1,0 +1,154 @@
+{
+  "id": "CW_Application_Withdrawal",
+  "name": "CalWORKs – Application Withdrawal",
+  "file": "CW_Application_Withdrawal.json",
+  "program": "CalWORKs",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+
+  "sections": [
+
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        { "id": "shortDescription", "label": "Short Description", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_2",
+      "title": "WITHDRAWAL DETAILS",
+      "fields": [
+        {
+          "id": "withdrawalAction",
+          "label": "Withdrawal Action",
+          "type": "choice",
+          "choices": [
+            "Client Requested Withdrawal",
+            "Request Received via Phone",
+            "Request Received via Written Statement",
+            "Request Received via Authorized Representative"
+          ]
+        },
+        { "id": "withdrawalDate", "label": "Date of Withdrawal Request", "type": "date" },
+        { "id": "withdrawalReason", "label": "Reason for Withdrawal", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_3",
+      "title": "CONTACT ATTEMPTS",
+      "fields": [
+        {
+          "id": "contactAttempted",
+          "label": "Contact Attempted",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+        {
+          "id": "contactMethod",
+          "label": "Contact Method",
+          "type": "choice",
+          "choices": [
+            "Phone",
+            "Text",
+            "Email",
+            "In Person",
+            "No Contact Attempted"
+          ]
+        },
+        { "id": "contactNotes", "label": "Contact Notes", "type": "textarea" }
+      ]
+    },
+
+    {
+      "id": "section_4",
+      "title": "AUTHORIZED REPRESENTATIVE",
+      "fields": [
+        {
+          "id": "hasAR",
+          "label": "Authorized Representative",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+        { "id": "arName", "label": "AR Name", "type": "text" },
+        { "id": "arVerification", "label": "Verification", "type": "choice", "choices": ["Verified", "Not Verified"] }
+      ]
+    },
+
+    {
+      "id": "section_5",
+      "title": "HOUSEHOLD AFFECTED",
+      "fields": [
+        {
+          "id": "householdMembersAffected",
+          "label": "Household Members Affected",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "name", "label": "Name", "type": "text" },
+            { "id": "ageDob", "label": "Age / DOB", "type": "text" },
+            { "id": "relationship", "label": "Relationship", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_6",
+      "title": "VERIFICATIONS RETURNED",
+      "fields": [
+        {
+          "id": "verificationReturned",
+          "label": "Verification Returned With Withdrawal",
+          "type": "choice",
+          "choices": ["Yes", "No", "Partially Returned"]
+        },
+        {
+          "id": "verificationList",
+          "label": "List of Verifications Returned",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            { "id": "verificationItem", "label": "Verification Item", "type": "text" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "section_7",
+      "title": "R&R ACKNOWLEDGMENT",
+      "fields": [
+        {
+          "id": "rrProvided",
+          "label": "Rights & Responsibilities Reviewed",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+        {
+          "id": "rrMethod",
+          "label": "Method Reviewed",
+          "type": "choice",
+          "choices": ["Verbally", "Written Packet", "Script", "Other"]
+        }
+      ]
+    },
+
+    {
+      "id": "section_8",
+      "title": "FINAL ACTIONS",
+      "fields": [
+        {
+          "id": "noticeProvided",
+          "label": "Notice of Action (NOA)",
+          "type": "choice",
+          "choices": ["Generated", "Provided", "Not Required"]
+        },
+        { "id": "workerComments", "label": "Worker Comments", "type": "textarea" }
+      ]
+    }
+
+  ]
+}

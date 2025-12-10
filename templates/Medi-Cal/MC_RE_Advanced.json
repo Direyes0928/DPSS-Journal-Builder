@@ -1,0 +1,107 @@
+{
+  "id": "mc_re_advancement",
+  "name": "Medi-Cal – RE Advancement Journal",
+  "program": "Medi-Cal",
+  "file": "MC_RE_Advancement.json",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+
+  "sections": [
+{
+  "id": "section_1",
+  "title": "SHORT DESCRIPTION",
+  "fields": [
+    {
+      "id": "shortDescription",
+      "label": "Short Description",
+      "type": "choice",
+      "choices": [
+        "RE: Advanced",
+        "RE: Not Advanced",
+        "RE: Processed",
+        "RE: Pending",
+        "RE: Other"
+      ]
+    }
+  ]
+},
+{
+  "id": "section_2",
+  "title": "RE Advanced Details",
+  "fields": [
+    {
+      "id": "longDescription",
+      "label": "Long Description",
+      "type": "choice",
+      "choices": [
+        "No Additional Notes",
+        "Change in Circumstance Renewal Waiver Applied",
+        "Continuous Coverage Unwinding",
+        "System-Generated RE Explanation",
+        "Other"
+      ]
+    }
+  ]
+},
+{
+  "id": "section_3",
+  "title": "REDETERMINATION MONTH",
+  "fields": [
+    {
+      "id": "reMonth",
+      "label": "Redetermination Month",
+      "type": "choice",
+      "choices": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+        "Other"
+      ]
+    },
+    {
+      "id": "renewalWaiverNote",
+      "label": "Waiver Information",
+      "type": "note",
+      "content": "The Change in Circumstance Renewal Waiver for hard-to-reach beneficiaries was applied while processing the continuous coverage unwinding renewal based on CMS waiver approval under Section 1902(e)(14)(A)."
+    },
+    {
+      "id": "edbcNote",
+      "label": "EDBC Action",
+      "type": "note",
+      "content": "EDBC ran for RE reason."
+    },
+    {
+      "id": "mcReUpdatedDate",
+      "label": "MC RE updated to",
+      "type": "date"
+    }
+  ]
+}
+  ]
+}
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+

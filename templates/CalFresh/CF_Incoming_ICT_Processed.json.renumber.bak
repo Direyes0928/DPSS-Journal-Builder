@@ -1,0 +1,1217 @@
+{
+  "id": "cf_incoming_ict_processed",
+  "name": "CalFresh \u2013 Incoming ICT Processed",
+  "program": "CalFresh",
+  "file": "CF_IncomingICTProcessed.json",
+  "version": "2025-12-02T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "Short Description",
+          "type": "note",
+          "content": "APPLICATION ACTION"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "COUNTY & INTAKE INFORMATION",
+      "fields": [
+        {
+          "id": "sendingCounty",
+          "label": "Sending County",
+          "type": "choice",
+          "choices": [
+            "Alameda",
+            "Alpine",
+            "Amador",
+            "Butte",
+            "Calaveras",
+            "Colusa",
+            "Contra Costa",
+            "Del Norte",
+            "El Dorado",
+            "Fresno",
+            "Glenn",
+            "Humboldt",
+            "Imperial",
+            "Inyo",
+            "Kern",
+            "Kings",
+            "Lake",
+            "Lassen",
+            "Los Angeles",
+            "Madera",
+            "Marin",
+            "Mariposa",
+            "Mendocino",
+            "Merced",
+            "Modoc",
+            "Mono",
+            "Monterey",
+            "Napa",
+            "Nevada",
+            "Orange",
+            "Placer",
+            "Plumas",
+            "Riverside",
+            "Sacramento",
+            "San Benito",
+            "San Bernardino",
+            "San Diego",
+            "San Francisco",
+            "San Joaquin",
+            "San Luis Obispo",
+            "San Mateo",
+            "Santa Barbara",
+            "Santa Clara",
+            "Santa Cruz",
+            "Shasta",
+            "Sierra",
+            "Siskiyou",
+            "Solano",
+            "Sonoma",
+            "Stanislaus",
+            "Sutter",
+            "Tehama",
+            "Trinity",
+            "Tulare",
+            "Tuolumne",
+            "Ventura",
+            "Yolo",
+            "Yuba",
+            "Other"
+          ]
+        },
+        {
+          "id": "initiatedDate",
+          "label": "Initiated Date",
+          "type": "date"
+        },
+        {
+          "id": "applicationDate",
+          "label": "Application Date",
+          "type": "date"
+        },
+        {
+          "id": "beginningAidDate",
+          "label": "Beginning Date of Aid",
+          "type": "choice",
+          "choices": [
+            "1st of Month",
+            "Immediate",
+            "Next Benefit Month",
+            "Other"
+          ]
+        },
+        {
+          "id": "ictInterviewNote",
+          "label": "Interview Not Needed",
+          "type": "note",
+          "content": "INTERVIEW NOT NEEDED: ICT"
+        },
+        {
+          "id": "language",
+          "label": "Language",
+          "type": "choice",
+          "choices": [
+            "English",
+            "Spanish",
+            "Vietnamese",
+            "Chinese",
+            "Arabic",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "AUTHORIZED REPRESENTATIVE & VOTER REGISTRATION",
+      "fields": [
+        {
+          "id": "authorizedRep",
+          "label": "Authorized Representative",
+          "type": "choice",
+          "choices": [
+            "None",
+            "Form on File",
+            "Completed Today",
+            "Other"
+          ]
+        },
+        {
+          "id": "voterRegistration",
+          "label": "Voter Registration",
+          "type": "choice",
+          "choices": [
+            "Provided Voter Form",
+            "Declined",
+            "Completed",
+            "Unable to Complete",
+            "Other"
+          ]
+        },
+        {
+          "id": "voterName",
+          "label": "Name for Voter Preference",
+          "type": "text"
+        },
+        {
+          "id": "voterPreference",
+          "label": "Voter Preference",
+          "type": "choice",
+          "choices": [
+            "Register",
+            "Decline",
+            "Already Registered",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "HOUSEHOLD COMPOSITION",
+      "fields": [
+        {
+          "id": "householdRow",
+          "label": "Household Composition",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "age",
+              "label": "Age",
+              "type": "text"
+            },
+            {
+              "id": "relationship",
+              "label": "Relationship",
+              "type": "choice",
+              "choices": [
+                "Parent",
+                "Child",
+                "Sibling",
+                "Spouse/Partner",
+                "Roommate",
+                "Other"
+              ]
+            },
+            {
+              "id": "purchasePrepare",
+              "label": "Purchase & Prepare (P&P)",
+              "type": "choice",
+              "choices": [
+                "Yes \u2013 P&P Together",
+                "No \u2013 Separate P&P",
+                "Sometimes",
+                "Unknown"
+              ]
+            },
+            {
+              "id": "status",
+              "label": "Status",
+              "type": "choice",
+              "choices": [
+                "Active",
+                "Inactive",
+                "Pending",
+                "Other"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "IDENTITY & SOCIAL SECURITY NUMBER",
+      "fields": [
+        {
+          "id": "caseIdentity",
+          "label": "Case Identity",
+          "type": "choice",
+          "choices": [
+            "Verified",
+            "Pending",
+            "Not Provided",
+            "Other"
+          ]
+        },
+        {
+          "id": "ssnInfo",
+          "label": "Social Security Number (SSN)",
+          "type": "choice",
+          "choices": [
+            "Provided",
+            "Not Provided",
+            "Verification Pending",
+            "Other"
+          ]
+        },
+        {
+          "id": "ssnName",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "ssnVerification",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "CITIZENSHIP",
+      "fields": [
+        {
+          "id": "citizenshipStatus",
+          "label": "Citizenship",
+          "type": "choice",
+          "choices": [
+            "US Citizen",
+            "Non-Citizen",
+            "Naturalized Citizen",
+            "Pending Verification",
+            "Other"
+          ]
+        },
+        {
+          "id": "citizenshipName",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "citizenType",
+          "label": "Naturalized Citizen / Non-Citizen Type",
+          "type": "text"
+        },
+        {
+          "id": "nonCitizenOption",
+          "label": "Non-Citizen Option",
+          "type": "choice",
+          "choices": [
+            "Lawful Permanent Resident",
+            "Refugee",
+            "Asylee",
+            "Parolee",
+            "Other"
+          ]
+        },
+        {
+          "id": "alienNumber",
+          "label": "Alien Number",
+          "type": "text"
+        },
+        {
+          "id": "documentNumber",
+          "label": "Document Number",
+          "type": "text"
+        },
+        {
+          "id": "categoryCode",
+          "label": "Category Code",
+          "type": "text"
+        },
+        {
+          "id": "entryDate",
+          "label": "Entry Date",
+          "type": "date"
+        },
+        {
+          "id": "sponsorInfo",
+          "label": "Sponsor",
+          "type": "choice",
+          "choices": [
+            "No Sponsor",
+            "Has Sponsor",
+            "Sponsor Info Pending",
+            "Other"
+          ]
+        },
+        {
+          "id": "citizenshipVerification",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "saveCheck",
+          "label": "Systematic Alien Verification for Entitlements (SAVE)",
+          "type": "choice",
+          "choices": [
+            "Verified",
+            "Pending",
+            "Not Required",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "SPONSORSHIP",
+      "fields": [
+        {
+          "id": "sponsorshipName",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "sponsorshipVerification",
+          "label": "Verification",
+          "type": "choice",
+          "choices": [
+            "Verified",
+            "Pending",
+            "Not Provided",
+            "Other"
+          ]
+        },
+        {
+          "id": "deemedIncome",
+          "label": "Deemed Income (Specify how calculated)",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_8",
+      "title": "RESIDENCY",
+      "fields": [
+        {
+          "id": "residencyStatus",
+          "label": "Residency",
+          "type": "choice",
+          "choices": [
+            "Verified",
+            "Pending",
+            "Not Provided",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_9",
+      "title": "SCHOOL ATTENDANCE",
+      "fields": [
+        {
+          "id": "studentName",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "schoolName",
+          "label": "School Name",
+          "type": "text"
+        },
+        {
+          "id": "schoolType",
+          "label": "School Type",
+          "type": "text"
+        },
+        {
+          "id": "unitsEnrolled",
+          "label": "Units Enrolled",
+          "type": "text"
+        },
+        {
+          "id": "cfStudentDetermination",
+          "label": "CalFresh Student Determination",
+          "type": "choice",
+          "choices": [
+            "Meets Requirement",
+            "Does Not Meet Requirement",
+            "Pending",
+            "Other"
+          ]
+        },
+        {
+          "id": "studentExemption",
+          "label": "Student Exemption",
+          "type": "choice",
+          "choices": [
+            "Exempt",
+            "Not Exempt",
+            "Pending",
+            "Other"
+          ]
+        },
+        {
+          "id": "financialAid",
+          "label": "Financial Aid",
+          "type": "choice",
+          "choices": [
+            "Received",
+            "Not Received",
+            "Pending",
+            "Other"
+          ]
+        },
+        {
+          "id": "studentVerification",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_10",
+      "title": "LIVING ARRANGEMENTS",
+      "fields": [
+        {
+          "id": "livingArrangements",
+          "label": "Living Arrangements",
+          "type": "choice",
+          "choices": [
+            "Renting",
+            "Own Home",
+            "Temporary Housing",
+            "Shared Housing",
+            "Homeless",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_11",
+      "title": "MEDICAL CONDITION",
+      "fields": [
+        {
+          "id": "medicalName",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "medicalType",
+          "label": "Medical Condition Type (No diagnosis per HIPAA)",
+          "type": "text"
+        },
+        {
+          "id": "medicalVerification",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_12",
+      "title": "OTHER PROGRAM ASSISTANCE",
+      "fields": [
+        {
+          "id": "assistanceName",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "assistanceSource",
+          "label": "Source",
+          "type": "text"
+        },
+        {
+          "id": "assistanceFrequency",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "assistanceVerification",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "assistanceAmountUsed",
+          "label": "Amount Used",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_13",
+      "title": "EMPLOYMENT & INCOME",
+      "fields": [
+        {
+          "id": "employmentStatus",
+          "label": "Employment",
+          "type": "choice",
+          "choices": [
+            "Employed",
+            "Unemployed",
+            "Self-Employed",
+            "Other"
+          ]
+        },
+        {
+          "id": "incomeStatus",
+          "label": "Income",
+          "type": "choice",
+          "choices": [
+            "Earned",
+            "Unearned",
+            "Self-Employment",
+            "Other"
+          ]
+        },
+        {
+          "id": "incomeName",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "incomeSource",
+          "label": "Employer/Source",
+          "type": "text"
+        },
+        {
+          "id": "incomeStartDate",
+          "label": "Start Date",
+          "type": "date"
+        },
+        {
+          "id": "incomeRate",
+          "label": "Hourly Rate",
+          "type": "text"
+        },
+        {
+          "id": "incomeHours",
+          "label": "Average Hours Weekly",
+          "type": "text"
+        },
+        {
+          "id": "incomeFrequency",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "incomeVerification",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "incomeAmountUsed",
+          "label": "Amount Used (How calculated)",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_14",
+      "title": "WINS",
+      "fields": [
+        {
+          "id": "winsStatus",
+          "label": "WINS Participation",
+          "type": "choice",
+          "choices": [
+            "Participating",
+            "Not Participating",
+            "Pending",
+            "Unknown"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_15",
+      "title": "WORK REGISTRATION",
+      "fields": [
+        {
+          "id": "workRegName",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "workRegStatus",
+          "label": "Work Registration Status",
+          "type": "choice",
+          "choices": [
+            "Registered",
+            "Exempt",
+            "Non-Exempt",
+            "Pending",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_16",
+      "title": "ABAWD",
+      "fields": [
+        {
+          "id": "abawdName",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "abawdStatus",
+          "label": "ABAWD Status",
+          "type": "choice",
+          "choices": [
+            "Meets Work Requirement",
+            "Does Not Meet Requirement",
+            "Exempt",
+            "Pending",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_17",
+      "title": "ADDITIONAL INFORMATION",
+      "fields": [
+        {
+          "id": "additionalInfoNote",
+          "label": "Additional Information",
+          "type": "note",
+          "content": "Per ICT, no one in the household is a drug/fleeing felon, no one is in violation of probation or parole, no one has any warrants for their arrest, and no one has any welfare fraud convictions or sanctions. Customer understands rights and responsibilities. Fraud, ES, and PUB 13, SAR 7, IRT explained to the customer by prior county."
+        }
+      ]
+    },
+    {
+      "id": "section_18",
+      "title": "PROPERTY",
+      "fields": [
+        {
+          "id": "realProperty",
+          "label": "Real Property",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "owner",
+              "label": "Owner",
+              "type": "text"
+            },
+            {
+              "id": "type",
+              "label": "Type",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "id": "vehicles",
+          "label": "Vehicles",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "owner",
+              "label": "Owner",
+              "type": "text"
+            },
+            {
+              "id": "make",
+              "label": "Make",
+              "type": "text"
+            },
+            {
+              "id": "model",
+              "label": "Model",
+              "type": "text"
+            },
+            {
+              "id": "year",
+              "label": "Year",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "id": "bankAccounts",
+          "label": "Bank Accounts",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "institution",
+              "label": "Financial Institution",
+              "type": "text"
+            },
+            {
+              "id": "owner",
+              "label": "Owner",
+              "type": "text"
+            },
+            {
+              "id": "type",
+              "label": "Type",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            },
+            {
+              "id": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "id": "retirementAccounts",
+          "label": "Retirement Accounts",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "owner",
+              "label": "Owner",
+              "type": "text"
+            },
+            {
+              "id": "type",
+              "label": "Type",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            },
+            {
+              "id": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "id": "payCards",
+          "label": "Pay Cards",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "owner",
+              "label": "Owner",
+              "type": "text"
+            },
+            {
+              "id": "company",
+              "label": "Company",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            },
+            {
+              "id": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "id": "cashOnHand",
+          "label": "Cash on Hand",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "owner",
+              "label": "Owner",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            },
+            {
+              "id": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "id": "otherProperty",
+          "label": "Other Property",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "owner",
+              "label": "Owner",
+              "type": "text"
+            },
+            {
+              "id": "type",
+              "label": "Type",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            },
+            {
+              "id": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_19",
+      "title": "EXPENSES",
+      "fields": [
+        {
+          "id": "housingExpense",
+          "label": "Housing Expense",
+          "type": "choice",
+          "choices": [
+            "Mortgage",
+            "Rent",
+            "Temporary Housing",
+            "Shared Housing",
+            "Other"
+          ]
+        },
+        {
+          "id": "expenseName",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "expenseType",
+          "label": "Expense Type",
+          "type": "text"
+        },
+        {
+          "id": "expenseFrequency",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "expenseVerification",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "amountPaid",
+          "label": "Amount Paid by Household",
+          "type": "text"
+        },
+        {
+          "id": "utilityAllowance",
+          "label": "Utility Allowance",
+          "type": "choice",
+          "choices": [
+            "Standard Utility Allowance (SUA)",
+            "Basic Utility Allowance (BUA)",
+            "Heating and Cooling Allowance (HCA)",
+            "No Allowance",
+            "Other"
+          ]
+        },
+        {
+          "id": "suas",
+          "label": "Standard Utility Allowance Subsidy (SUAS)",
+          "type": "choice",
+          "choices": [
+            "Received",
+            "Not Received",
+            "Pending",
+            "Other"
+          ]
+        },
+        {
+          "id": "selfEmploymentExpense",
+          "label": "Self-Employment Expense",
+          "type": "choice",
+          "choices": [
+            "Fuel",
+            "Supplies",
+            "Maintenance",
+            "Fees",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_20",
+      "title": "IEVS / PVS / NHR / MEDS",
+      "fields": [
+        {
+          "id": "ievsApplicant",
+          "label": "IEVS Applicant Report",
+          "type": "choice",
+          "choices": [
+            "Reviewed \u2013 No Change",
+            "Reviewed \u2013 Requires Action",
+            "Reviewed \u2013 Not Applicable",
+            "IEVS Not Returned",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "pvsReport",
+          "label": "Payment Verification System (PVS)",
+          "type": "choice",
+          "choices": [
+            "Reviewed \u2013 No Change",
+            "Reviewed \u2013 Requires Action",
+            "Reviewed \u2013 Not Applicable",
+            "PVS Not Returned",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "nhrReport",
+          "label": "New Hire Registry (NHR)",
+          "type": "choice",
+          "choices": [
+            "Reviewed \u2013 No Change",
+            "Reviewed \u2013 Requires Action",
+            "Reviewed \u2013 Not Applicable",
+            "Hit \u2013 Confirmed Not the Client",
+            "NHR Not Returned",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "medsAlerts",
+          "label": "Medi-Cal Eligibility Data System (MEDS) Alerts",
+          "type": "choice",
+          "choices": [
+            "Reviewed \u2013 No Discrepancy",
+            "Reviewed \u2013 Requires Action",
+            "Reviewed \u2013 Not Applicable",
+            "Other (Specify):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_21",
+      "title": "ELECTRONIC BENEFIT TRANSFER (EBT)",
+      "fields": [
+        {
+          "id": "ebtAccount",
+          "label": "EBT Account and Card",
+          "type": "choice",
+          "choices": [
+            "Active",
+            "Pending Activation",
+            "Inactive",
+            "Other"
+          ]
+        },
+        {
+          "id": "designatedCardHolder",
+          "label": "Designated Card Holder",
+          "type": "choice",
+          "choices": [
+            "Primary Applicant",
+            "Authorized Representative",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_22",
+      "title": "RESTAURANT MEALS PROGRAM",
+      "fields": [
+        {
+          "id": "rmpStatus",
+          "label": "Restaurant Meals Program",
+          "type": "choice",
+          "choices": [
+            "Approved",
+            "Denied",
+            "Pending",
+            "Not Applicable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_23",
+      "title": "ICT REVIEW NOTES",
+      "fields": [
+        {
+          "id": "ictReview",
+          "label": "ICT Review Notes",
+          "type": "note",
+          "content": "ES REVIEWED: ICT \u2013 HH not eligible as no break in benefits. Sample SAR 7 reviewed: customer informed by prior CO of how to complete and submit the report. Supplemental forms sent: DPSS 4022, DPSS 2263, Temp 2201, RVSD 512b, EBT 2216, SAR 7A, PUB 13, PUB 275, PUB 388, ADM 109, VRC, CW 2223."
+        }
+      ]
+    },
+    {
+      "id": "section_24",
+      "title": "ELIGIBLE MEMBERS",
+      "fields": [
+        {
+          "id": "eligibleMembers",
+          "label": "Eligible Members",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "age",
+              "label": "Age",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_25",
+      "title": "INELIGIBLE MEMBERS",
+      "fields": [
+        {
+          "id": "ineligibleMembers",
+          "label": "Ineligible Members & Reasons Why",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "age",
+              "label": "Age",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_26",
+      "title": "BENEFIT AMOUNT",
+      "fields": [
+        {
+          "id": "benefitAmount",
+          "label": "Benefit Amount & Month Issued",
+          "type": "text"
+        },
+        {
+          "id": "edbcRan",
+          "label": "EDBC RAN",
+          "type": "text"
+        },
+        {
+          "id": "monthlyAllotment",
+          "label": "Monthly Allotment (Matched to incoming ICT/CF215)",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_27",
+      "title": "RECERTIFICATION",
+      "fields": [
+        {
+          "id": "recertMonthYear",
+          "label": "Recertification Month",
+          "type": "choice",
+          "choices": [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+            "Other"
+          ]
+        },
+        {
+          "id": "recertMonthYear",
+          "label": "Recertification Year",
+          "type": "choice",
+          "choices": [
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025",
+            "2026",
+            "2027",
+            "2028",
+            "2029",
+            "2030",
+            "2031",
+            "Other:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_28",
+      "title": "REPORTING TYPE",
+      "fields": [
+        {
+          "id": "reportingType",
+          "label": "Reporting Type",
+          "type": "choice",
+          "choices": [
+            "REPORTING TYPE: Pending",
+            "REPORTING TYPE: Semi-Annual Reporting (SAR)",
+            "REPORTING TYPE: Semi-Annual Reporting Annually (SARA)",
+            "REPORTING TYPE: Elderly Simplified Application Project (ESAP)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_29",
+      "title": "NOTICE OF ACTION (NOA)",
+      "fields": [
+        {
+          "id": "noaType",
+          "label": "NOA",
+          "type": "choice",
+          "choices": [
+            "NOTICE OF ACTION (NOA): Generated, reviewed, and appended, if applicable, then provided to the family.",
+            "NOTICE OF ACTION (NOA): Pending",
+            "No Action:",
+            "Other:"
+          ]
+        }
+      ]
+    }
+  ]
+}
