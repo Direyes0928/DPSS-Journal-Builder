@@ -1288,7 +1288,16 @@ function renderField(sec, sectionIndex) {
         return sec.fields.map((f, fieldIndex) => {
             // Static text block for 'note' type only
             if (f.type === 'note') {
-                return `<div class="mb-3 p-3 rounded bg-slate-50 text-slate-700 text-base">${f.content || f.label}</div>`;
+                // 2025-12-10 new (note support)
+                const safeLabel = escapeHtml(f.label || '');
+                const safeContent = escapeHtml(f.content || f.label || '');
+                return `
+                    <div class="mb-3">
+                        <div class="journal-input p-3 rounded bg-slate-50 text-slate-700 text-base" data-type="note" data-label="${safeLabel}" data-content="${safeContent}">
+                            ${safeContent}
+                        </div>
+                    </div>
+                `;
             }
             const label = f.label || f.id || "";
             const adminToolbar = `
