@@ -146,41 +146,38 @@ function buildJournalOutput() {
                             const subfields = row.querySelectorAll('.repeatable-inner input, .repeatable-inner select');
                             subfields.forEach((sf, sfi) => {
                                 const sublabel = sf.getAttribute('placeholder') || '';
-                                    // 2025-12-09 new
-                                    if (!sublabel || !sublabel.trim()) return;
-                                    // 2025-12-09 new
-                                    const sLower = sublabel.trim().toLowerCase();
-                                    // 2025-12-09 new
-                                    if (sLower === 'field' || sLower === ':') return;
-                                    let val = '';
-                                    if (sf.tagName === 'INPUT' || sf.tagName === 'TEXTAREA') val = sf.value;
-                                    else if (sf.tagName === 'SELECT') val = sf.options[sf.selectedIndex]?.text || '';
-                                    output += `    ${sublabel}:\n    ${val}\n`;
+                                            // 2025-12-09 new
+                                        if (!sublabel || !sublabel.trim()) return;
+                                        // 2025-12-09 new
+                                        const sLower = sublabel.trim().toLowerCase();
+                                        // 2025-12-09 new
+                                        if (sLower === 'field' || sLower === ':') return;
+                                        // 2025-12-10 new (note support)
+                                        let val = '';
+                                        const sfType = sf.getAttribute('data-type') || (sf.dataset && sf.dataset.type);
+                                        // 2025-12-10 new (note support)
+                                        if (sfType === 'note') {
+                                            val = sf.getAttribute('data-content') || (sf.dataset && sf.dataset.content) || '';
+                                        } else {
+                                            if (sf.tagName === 'INPUT' || sf.tagName === 'TEXTAREA') val = sf.value;
+                                            else if (sf.tagName === 'SELECT') val = sf.options[sf.selectedIndex]?.text || '';
+                                        }
+                                        output += `    ${sublabel}:\n    ${val}\n`;
                             });
                         });
                     } else {
                         // Regular field
                         const label = resolveFieldLabel(field);
                         // 2025-12-10 new (note support)
-                        try {
-                            if (activeTemplate && activeTemplate.sections) {
-                                const domSecId = section.getAttribute('id') || '';
-                                const secId = domSecId.replace(/^dynamic_/, '');
-                                const tplSec = activeTemplate.sections.find(s => s.id === secId);
-                                if (tplSec && Array.isArray(tplSec.fields)) {
-                                    const matched = tplSec.fields.find(ff => ((ff.label || '').trim() === (label || '').trim()) || ((ff.id || '').trim() === (label || '').trim()));
-                                    if (matched && matched.type === 'note') {
-                                        // 2025-12-10 new (note support)
-                                        const content = matched.content || '';
-                                        output += `  ${label}:\n  ${content}\n`;
-                                        return;
-                                    }
-                                }
-                            }
-                        } catch (e) { console.warn('Note detection failed', e); }
                         let val = '';
-                        if (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA') val = field.value;
-                        else if (field.tagName === 'SELECT') val = field.options[field.selectedIndex]?.text || '';
+                        const fType = field.getAttribute('data-type') || (field.dataset && field.dataset.type);
+                        // 2025-12-10 new (note support)
+                        if (fType === 'note') {
+                            val = field.getAttribute('data-content') || (field.dataset && field.dataset.content) || '';
+                        } else {
+                            if (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA') val = field.value;
+                            else if (field.tagName === 'SELECT') val = field.options[field.selectedIndex]?.text || '';
+                        }
                             // 2025-12-09 new
                             if (!label || !label.trim()) return;
                             // 2025-12-09 new
