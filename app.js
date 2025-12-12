@@ -121,78 +121,190 @@ function resolveFieldLabel(fieldEl) {
     // 4. Last resort — use the field’s name or id
     return fieldEl.name || fieldEl.id || "Field";
 }
-// Build Journal Output: Extracts all section/field values and formats as plain text
+// ============================================================================
+// Build Journal Output (2025-12-10 — FIXED LABELS VERSION)
+// - All repeatable subfields now print correct labels (Relationship, Status, etc.)
+// - No more "Field:" entries
+// - Supports notes, selects, text, specify, none-reported
+// ============================================================================
+// Section helper: detects if section repeatables are empty
+// ============================================================================
+function sectionHasEmptyRepeatables(sectionEl) {
+    const repeatables = sectionEl.querySelectorAll('.repeatable-container');
+    if (repeatables.length === 0) return false;
+
+    for (const rep of repeatables) {
+        if (rep.querySelector('.repeatable-row')) return false;
+    }
+    return true;
+}
+
+// ============================================================================
+// Build Journal Output — WITH NOTE SUPPORT + FURTHER CLARIFICATION
+// ============================================================================
+// ============================================================================
+// Build Journal Output (2025-12 FINAL) 
+// - Repeatables correct
+// - Notes correct
+// - "Specify" logic correct
+// - Clarification textareas INCLUDED
+// - No "Field:" labels inside repeatables
+// ============================================================================
+
 function buildJournalOutput() {
     const sections = document.querySelectorAll('#dynamicCoreSections .section-card');
     let output = '';
+
     sections.forEach(section => {
-        const title = section.querySelector('.section-title')?.textContent.trim() || '';
-        if (title) output += title + ':\n';
-        // For each clone group (repeatable set)
+
+        const sectionTitleRaw = section.querySelector('.section-title')?.textContent.trim() || '';
+        const sectionTitleLower = sectionTitleRaw.toLowerCase();
+
+        if (sectionTitleRaw) output += `${sectionTitleRaw}:\n`;
+
         const groups = section.querySelectorAll('.clone-group');
-        if (groups.length > 0) {
-            groups.forEach((group, gIdx) => {
-                // Only number if more than one group
-                if (groups.length > 1) output += `  [${gIdx+1}]\n`;
-                // For each field in group
-                const fields = group.querySelectorAll('input.journal-input, textarea.journal-input, select.journal-input, .repeatable-container');
-                fields.forEach(field => {
-                    // If repeatable-container, handle its rows
-                    if (field.classList.contains('repeatable-container')) {
-                        const label = field.querySelector('label')?.textContent.trim() || '';
-                        const rows = field.querySelectorAll('.repeatable-row');
-                        rows.forEach((row, rIdx) => {
-                            output += `  ${label} [${rIdx+1}]:\n`;
-                            const subfields = row.querySelectorAll('.repeatable-inner input, .repeatable-inner select');
-                            subfields.forEach((sf, sfi) => {
-                                const sublabel = sf.getAttribute('placeholder') || '';
-                                            // 2025-12-09 new
-                                        if (!sublabel || !sublabel.trim()) return;
-                                        // 2025-12-09 new
-                                        const sLower = sublabel.trim().toLowerCase();
-                                        // 2025-12-09 new
-                                        if (sLower === 'field' || sLower === ':') return;
-                                        // 2025-12-10 new (note support)
-                                        let val = '';
-                                        const sfType = sf.getAttribute('data-type') || (sf.dataset && sf.dataset.type);
-                                        // 2025-12-10 new (note support)
-                                        if (sfType === 'note') {
-                                            val = sf.getAttribute('data-content') || (sf.dataset && sf.dataset.content) || '';
-                                        } else {
-                                            if (sf.tagName === 'INPUT' || sf.tagName === 'TEXTAREA') val = sf.value;
-                                            else if (sf.tagName === 'SELECT') val = sf.options[sf.selectedIndex]?.text || '';
-                                        }
-                                        output += `    ${sublabel}:\n    ${val}\n`;
-                            });
-                        });
-                    } else {
-                        // Regular field
-                        const label = resolveFieldLabel(field);
-                        // 2025-12-10 new (note support)
-                        let val = '';
-                        const fType = field.getAttribute('data-type') || (field.dataset && field.dataset.type);
-                        // 2025-12-10 new (note support)
-                        if (fType === 'note') {
-                            val = field.getAttribute('data-content') || (field.dataset && field.dataset.content) || '';
-                        } else {
-                            if (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA') val = field.value;
-                            else if (field.tagName === 'SELECT') val = field.options[field.selectedIndex]?.text || '';
-                        }
-                            // 2025-12-09 new
-                            if (!label || !label.trim()) return;
-                            // 2025-12-09 new
-                            const lower = label.trim().toLowerCase();
-                            // 2025-12-09 new
-                            if (lower === 'field' || lower === ':') return;
-                            output += `  ${label}:\n  ${val}\n`;
+        let printedAnyField = false;
+
+        // ===========================================================
+        // PROCESS MAIN FIELDS + REPEATABLES
+        // ===========================================================
+        groups.forEach((group, gIdx) => {
+
+            if (groups.length > 1) {
+                output += `  [${gIdx + 1}]\n`;
+            }
+
+            const fields = group.querySelectorAll('.journal-input, .repeatable-container');
+
+            fields.forEach(field => {
+
+                // =======================================================
+                // 1. REPEATABLE HANDLING
+                // =======================================================
+                if (field.classList.contains('repeatable-container')) {
+                    const label = field.querySelector('label')?.textContent.trim() || '';
+                    if (!label) return;
+
+                    const rows = field.querySelectorAll('.repeatable-row');
+
+                    if (rows.length === 0) {
+                        output += `  ${label}: None reported\n`;
+                        return;
                     }
-                });
-                output += '\n';
+
+                    rows.forEach((row, rIdx) => {
+                        printedAnyField = true;
+
+                        output += `  ${label} [${rIdx + 1}]:\n`;
+
+                        const subfields = row.querySelectorAll(
+                            '.repeatable-inner input, .repeatable-inner textarea, .repeatable-inner select, .repeatable-inner .journal-input[data-type="note"]'
+                        );
+
+                        subfields.forEach(sf => {
+
+                            let sublabel =
+                                sf.getAttribute('placeholder') ||
+                                sf.dataset?.label ||
+                                sf.closest('.mb-3')?.querySelector('label')?.textContent ||
+                                sf.id ||
+                                "";
+
+                            if (!sublabel.trim()) return;
+
+                            const sfType = sf.dataset?.type;
+                            let val = "";
+
+                            if (sfType === "note") {
+                                val = sf.dataset?.content || "";
+                            } else if (sf.tagName === "SELECT") {
+                                val = sf.options[sf.selectedIndex]?.text || "";
+                            } else {
+                                val = sf.value || "";
+                            }
+
+                            output += `    ${sublabel}: ${val}\n`;
+                        });
+                    });
+
+                    return;
+                }
+
+                // =======================================================
+                // 2. NON-REPEATABLE FIELDS
+                // =======================================================
+                if (field.closest('.repeatable-inner')) return; 
+
+                const label = resolveFieldLabel(field);
+                if (!label?.trim()) return;
+
+                const lower = label.toLowerCase();
+                if (lower === sectionTitleLower) return;
+
+                let val = "";
+                const fType = field.dataset?.type;
+
+                if (fType === "note") {
+                    val = field.dataset?.content || "";
+                } else if (field.tagName === "SELECT") {
+                    val = field.options[field.selectedIndex]?.text || "";
+                } else {
+                    val = field.value || "";
+                }
+
+                let cleanedVal = val;
+                const prefix = label + ":";
+
+                if (cleanedVal.toLowerCase().startsWith(prefix.toLowerCase())) {
+                    cleanedVal = cleanedVal.substring(prefix.length).trim();
+                }
+
+                // SPECIFY logic
+                if (cleanedVal.toLowerCase().includes("specify") && field.tagName === "SELECT") {
+                    const nextInput = field.closest('.mb-3')?.querySelector("input[type='text'], textarea");
+                    if (nextInput && nextInput.value.trim()) {
+                        cleanedVal = `${label}: ${nextInput.value.trim()}`;
+                        nextInput.dataset.skipOutput = "true";
+                    }
+                }
+
+                if (field.dataset?.skipOutput === "true") return;
+
+                printedAnyField = true;
+                output += `  ${label}: ${cleanedVal}\n`;
+
             });
+
+            output += `\n`;
+        });
+
+// ===========================================================
+// 3. CLARIFICATION TEXTAREA HANDLING (Final Working Version)
+// ===========================================================
+const clarifications = section.querySelectorAll("[id^='clarification-container'] textarea.journal-input");
+
+clarifications.forEach(t => {
+    const v = t.value.trim();
+    if (!v) return;
+
+    printedAnyField = true;
+    output += `  Further Clarification: ${v}\n`;
+});
+
+
+        // ===========================================================
+        // 4. NONE REPORTED RULE
+        // ===========================================================
+        if (!printedAnyField && sectionHasEmptyRepeatables(section)) {
+            output += `  None reported\n\n`;
         }
+
     });
+
     return output.trim();
 }
+
+
 // ============================================================================
 // SSD JOURNAL BUILDER — FULLY FIXED VERSION (2025-11-24)
 // Works with templatesIndex.json + templates/*/*.json exactly as your repo has it
@@ -1000,6 +1112,7 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
             container.appendChild(wrapper);
         }
     };
+// Admin controls column admincol'
 
         const adminCol = document.createElement('div');
         adminCol.className = 'admin-only section-admin-box';
@@ -1357,13 +1470,17 @@ function renderField(sec, sectionIndex) {
 
                 function renderSubfields() {
                     return subfields.map(sf => {
+                        // Ensure safe label/id values for embedding
+                        const lbl = (sf.label || '').toString();
+                        const fid = (sf.id || '').toString();
+
                         if (sf.type === "text") {
-                            return `<input class=\"journal-input\" type=\"text\" placeholder=\"${sf.label || ''}\">`;
+                            return `<input class=\"journal-input\" type=\"text\" placeholder=\"${escapeHtml(lbl)}\" data-label=\"${escapeHtml(lbl)}\" data-field-id=\"${escapeHtml(fid)}\">`;
                         }
                         if (sf.type === "choice" && sf.choices) {
                             // Lazy select for repeatable subfield
                             const safe = JSON.stringify(sf.choices || []).replace(/</g, '\\u003c');
-                            return `<select class="journal-input" data-lazy="true" data-choices='${safe}'><option value="" disabled selected>Choose an Option</option></select>`;
+                            return `<select class=\"journal-input\" data-lazy=\"true\" data-choices='${safe}' data-label=\"${escapeHtml(lbl)}\" data-field-id=\"${escapeHtml(fid)}\"><option value=\"\" disabled selected>Choose an Option</option></select>`;
                         }
                         return '';
                     }).join('');
