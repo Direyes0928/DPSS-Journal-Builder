@@ -121,78 +121,185 @@ function resolveFieldLabel(fieldEl) {
     // 4. Last resort — use the field’s name or id
     return fieldEl.name || fieldEl.id || "Field";
 }
-// Build Journal Output: Extracts all section/field values and formats as plain text
+// ============================================================================
+// Build Journal Output (2025-12-10 — FIXED LABELS VERSION)
+// - All repeatable subfields now print correct labels (Relationship, Status, etc.)
+// - No more "Field:" entries
+// - Supports notes, selects, text, specify, none-reported
+// ============================================================================
+// Section helper: detects if section repeatables are empty
+// ============================================================================
+function sectionHasEmptyRepeatables(sectionEl) {
+    const repeatables = sectionEl.querySelectorAll('.repeatable-container');
+    if (repeatables.length === 0) return false;
+
+    for (const rep of repeatables) {
+        if (rep.querySelector('.repeatable-row')) return false;
+    }
+    return true;
+}
+
+// ============================================================================
+// Build Journal Output — WITH NOTE SUPPORT + FURTHER CLARIFICATION
+// ============================================================================
+// ============================================================================
+// Build Journal Output (2025-12 FINAL) 
+// - Repeatables correct
+// - Notes correct
+// - "Specify" logic correct
+// - Clarification textareas INCLUDED
+// - No "Field:" labels inside repeatables
+// ============================================================================
+// BUILD JOURNAL OUTPUT — SIMPLE, DOM-MIRROR VERSION
+// Purpose: Show EXACTLY what the user sees on screen
+// No validation, no guessing, no placeholder logic
+// ============================================================================
+
 function buildJournalOutput() {
     const sections = document.querySelectorAll('#dynamicCoreSections .section-card');
     let output = '';
+
     sections.forEach(section => {
-        const title = section.querySelector('.section-title')?.textContent.trim() || '';
-        if (title) output += title + ':\n';
-        // For each clone group (repeatable set)
+
+        const sectionTitle =
+            section.querySelector('.section-title')?.textContent.trim() || '';
+
+        if (sectionTitle) {
+            output += `\n=== ${sectionTitle.toUpperCase()} ===\n\n`;
+        }
+
         const groups = section.querySelectorAll('.clone-group');
-        if (groups.length > 0) {
-            groups.forEach((group, gIdx) => {
-                // Only number if more than one group
-                if (groups.length > 1) output += `  [${gIdx+1}]\n`;
-                // For each field in group
-                const fields = group.querySelectorAll('input.journal-input, textarea.journal-input, select.journal-input, .repeatable-container');
-                fields.forEach(field => {
-                    // If repeatable-container, handle its rows
-                    if (field.classList.contains('repeatable-container')) {
-                        const label = field.querySelector('label')?.textContent.trim() || '';
-                        const rows = field.querySelectorAll('.repeatable-row');
-                        rows.forEach((row, rIdx) => {
-                            output += `  ${label} [${rIdx+1}]:\n`;
-                            const subfields = row.querySelectorAll('.repeatable-inner input, .repeatable-inner select');
-                            subfields.forEach((sf, sfi) => {
-                                const sublabel = sf.getAttribute('placeholder') || '';
-                                            // 2025-12-09 new
-                                        if (!sublabel || !sublabel.trim()) return;
-                                        // 2025-12-09 new
-                                        const sLower = sublabel.trim().toLowerCase();
-                                        // 2025-12-09 new
-                                        if (sLower === 'field' || sLower === ':') return;
-                                        // 2025-12-10 new (note support)
-                                        let val = '';
-                                        const sfType = sf.getAttribute('data-type') || (sf.dataset && sf.dataset.type);
-                                        // 2025-12-10 new (note support)
-                                        if (sfType === 'note') {
-                                            val = sf.getAttribute('data-content') || (sf.dataset && sf.dataset.content) || '';
-                                        } else {
-                                            if (sf.tagName === 'INPUT' || sf.tagName === 'TEXTAREA') val = sf.value;
-                                            else if (sf.tagName === 'SELECT') val = sf.options[sf.selectedIndex]?.text || '';
-                                        }
-                                        output += `    ${sublabel}:\n    ${val}\n`;
-                            });
-                        });
-                    } else {
-                        // Regular field
-                        const label = resolveFieldLabel(field);
-                        // 2025-12-10 new (note support)
-                        let val = '';
-                        const fType = field.getAttribute('data-type') || (field.dataset && field.dataset.type);
-                        // 2025-12-10 new (note support)
-                        if (fType === 'note') {
-                            val = field.getAttribute('data-content') || (field.dataset && field.dataset.content) || '';
-                        } else {
-                            if (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA') val = field.value;
-                            else if (field.tagName === 'SELECT') val = field.options[field.selectedIndex]?.text || '';
-                        }
-                            // 2025-12-09 new
-                            if (!label || !label.trim()) return;
-                            // 2025-12-09 new
-                            const lower = label.trim().toLowerCase();
-                            // 2025-12-09 new
-                            if (lower === 'field' || lower === ':') return;
-                            output += `  ${label}:\n  ${val}\n`;
+        let printedAnyField = false;
+
+        groups.forEach((group, gIdx) => {
+
+            if (groups.length > 1) {
+                output += `  [${gIdx + 1}]\n`;
+            }
+
+            const fields = group.querySelectorAll(
+                '.journal-input, .repeatable-container'
+            );
+
+            fields.forEach(field => {
+
+                // =======================================================
+                // REPEATABLE CONTAINER
+                // =======================================================
+                if (field.classList.contains('repeatable-container')) {
+
+                    const label =
+                        field.querySelector('label')?.textContent.trim() || '';
+                    if (!label) return;
+
+                    const rows = field.querySelectorAll('.repeatable-row');
+
+                    if (rows.length === 0) {
+                        output += `  ${label}: \n`;
+                        printedAnyField = true;
+                        return;
                     }
-                });
-                output += '\n';
+
+                    rows.forEach((row, rIdx) => {
+                        printedAnyField = true;
+                        output += `  ${label} [${rIdx + 1}]:\n`;
+
+                        const subfields = row.querySelectorAll(
+                            '.repeatable-inner input, ' +
+                            '.repeatable-inner textarea, ' +
+                            '.repeatable-inner select, ' +
+                            '.repeatable-inner .journal-input[data-type="note"]'
+                        );
+
+                        subfields.forEach(sf => {
+
+                            const sublabel =
+                                sf.closest('.mb-3')
+                                    ?.querySelector('label')
+                                    ?.textContent.trim() ||
+                                sf.getAttribute('placeholder') ||
+                                sf.dataset?.label ||
+                                sf.id ||
+                                '';
+
+                            if (!sublabel) return;
+
+                            const val = readVisibleValue(sf);
+                            if (!val) return;
+
+                            output += `    ${sublabel}: ${val}\n`;
+                        });
+                    });
+
+                    return;
+                }
+
+                // =======================================================
+                // NON-REPEATABLE FIELD
+                // =======================================================
+                if (field.closest('.repeatable-inner')) return;
+
+                const label = resolveFieldLabel(field);
+                if (!label) return;
+
+                const val = readVisibleValue(field);
+                if (!val) return;
+
+                printedAnyField = true;
+                output += `  ${label}: ${val}\n`;
             });
+
+            output += `\n`;
+        });
+
+        // ===========================================================
+        // CLARIFICATION TEXTAREAS
+        // ===========================================================
+        const clarifications = section.querySelectorAll(
+            "[id^='clarification-container'] textarea.journal-input"
+        );
+
+        clarifications.forEach(t => {
+            const v = t.value.trim();
+            if (!v) return;
+
+            printedAnyField = true;
+            output += `  Further Clarification: ${v}\n`;
+        });
+
+        // ===========================================================
+        // NONE REPORTED
+        // ===========================================================
+        if (!printedAnyField) {
+            output += `  \n`;
         }
     });
+
     return output.trim();
 }
+
+// ============================================================================
+// Helper — read exactly what is VISIBLE in the UI
+// ============================================================================
+function readVisibleValue(el) {
+    if (!el) return '';
+
+    // Dropdown → visible option text
+    if (el.tagName === 'SELECT') {
+        return el.options[el.selectedIndex]?.text?.trim() || '';
+    }
+
+    // Notes / static text
+    if (el.dataset?.type === 'note') {
+        return el.dataset?.content?.trim() || '';
+    }
+
+    // Inputs / textareas
+    return el.value?.trim() || '';
+}
+
+
+
 // ============================================================================
 // SSD JOURNAL BUILDER — FULLY FIXED VERSION (2025-11-24)
 // Works with templatesIndex.json + templates/*/*.json exactly as your repo has it
@@ -1000,6 +1107,7 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
             container.appendChild(wrapper);
         }
     };
+// Admin controls column admincol'
 
         const adminCol = document.createElement('div');
         adminCol.className = 'admin-only section-admin-box';
@@ -1357,13 +1465,17 @@ function renderField(sec, sectionIndex) {
 
                 function renderSubfields() {
                     return subfields.map(sf => {
+                        // Ensure safe label/id values for embedding
+                        const lbl = (sf.label || '').toString();
+                        const fid = (sf.id || '').toString();
+
                         if (sf.type === "text") {
-                            return `<input class=\"journal-input\" type=\"text\" placeholder=\"${sf.label || ''}\">`;
+                            return `<input class=\"journal-input\" type=\"text\" placeholder=\"${escapeHtml(lbl)}\" data-label=\"${escapeHtml(lbl)}\" data-field-id=\"${escapeHtml(fid)}\">`;
                         }
                         if (sf.type === "choice" && sf.choices) {
                             // Lazy select for repeatable subfield
                             const safe = JSON.stringify(sf.choices || []).replace(/</g, '\\u003c');
-                            return `<select class="journal-input" data-lazy="true" data-choices='${safe}'><option value="" disabled selected>Choose an Option</option></select>`;
+                            return `<select class=\"journal-input\" data-lazy=\"true\" data-choices='${safe}' data-label=\"${escapeHtml(lbl)}\" data-field-id=\"${escapeHtml(fid)}\"><option value=\"\" disabled selected>Choose an Option</option></select>`;
                         }
                         return '';
                     }).join('');
@@ -4366,3 +4478,224 @@ function hideRefreshToast() {
         }, 300);
     }
 }
+// ============================================================================
+// FLOATING PROGRESS BAR — FINAL, SAFE, DPSS-FRIENDLY
+// ============================================================================
+// ============================================================================
+// FLOATING PROGRESS BAR — FINAL, LAZY-SAFE, DPSS-FRIENDLY
+// ============================================================================
+(function initFloatingProgressBar() {
+
+    function start() {
+        if (!document.body) return;
+
+        // Prevent double injection
+        if (document.getElementById('floatingProgressBar')) return;
+
+        // ===========================================================
+        // UI
+        // ===========================================================
+        const bar = document.createElement('div');
+        bar.id = 'floatingProgressBar';
+        bar.innerHTML = `
+            <div id="progressBarLabel">0% — Let’s get started!</div>
+            <div id="progressBarTrack">
+                <div id="progressBarFill"></div>
+            </div>
+        `;
+        document.body.appendChild(bar);
+
+        // ===========================================================
+        // Styles
+        // ===========================================================
+        const style = document.createElement('style');
+        style.textContent = `
+            #floatingProgressBar {
+                position: fixed;
+                bottom: 24px;
+                right: 24px;
+                width: 300px;
+                background: #3C6A840;
+                border-radius: 16px;
+                box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+                padding: 18px;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+                z-index: 10000;
+            }
+
+            #progressBarLabel {
+                text-align: center;
+                margin-bottom: 10px;
+                font-weight: 600;
+                font-size: 13px;
+                color: #1f2937;
+            }
+
+            #progressBarTrack {
+                width: 100%;
+                height: 16px;
+                background: #e5e7eb;
+                border-radius: 999px;
+                overflow: hidden;
+            }
+
+            #progressBarFill {
+                height: 100%;
+                width: 0%;
+                background: linear-gradient(90deg, #22c55e, #16a34a);
+                transition: width 0.35s ease;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // ===========================================================
+        // Motivation messages
+        // ===========================================================
+        function getMotivationMessage(percent) {
+            if (percent === 100) return "✅ Journal Complete — Ready to generate";
+            if (percent >= 90) return "🔥 Final stretch — almost there!";
+            if (percent >= 75) return "🚀 Almost done — keep going!";
+            if (percent >= 60) return "💪 Strong progress — past halfway!";
+            if (percent >= 40) return "📈 Good momentum — stay focused!";
+            if (percent >= 20) return "📝 Nice start — keep it moving!";
+            return "👋 Let’s get started!";
+        }
+
+        // ===========================================================
+        // Completion popup (fires once)
+        // ===========================================================
+        let completionShown = false;
+
+        function showCompletionPopup() {
+            if (completionShown) return;
+            completionShown = true;
+
+            const popup = document.createElement('div');
+            popup.id = 'journalCompletePopup';
+            popup.innerHTML = `
+                <div style="font-size:28px;margin-bottom:6px;">✅</div>
+                <div style="font-weight:700;font-size:16px;margin-bottom:4px;">
+                    Journal Complete
+                </div>
+                <div style="font-size:13px;color:#4b5563;">
+                    You’re all set — ready to generate.
+                </div>
+            `;
+
+            Object.assign(popup.style, {
+                position: 'fixed',
+                top: '22%',
+                left: '50%',
+                transform: 'translateX(-50%) scale(0.95)',
+                background: '#ffffff',
+                padding: '22px 28px',
+                borderRadius: '18px',
+                boxShadow: '0 24px 48px rgba(0,0,0,0.25)',
+                textAlign: 'center',
+                zIndex: 11000,
+                opacity: '0',
+                transition: 'all 0.35s ease'
+            });
+
+            document.body.appendChild(popup);
+
+            requestAnimationFrame(() => {
+                popup.style.opacity = '1';
+                popup.style.transform = 'translateX(-50%) scale(1)';
+            });
+
+            setTimeout(() => {
+                popup.style.opacity = '0';
+                popup.style.transform = 'translateX(-50%) scale(0.95)';
+                setTimeout(() => popup.remove(), 350);
+            }, 2500);
+        }
+
+        // ===========================================================
+        // Progress calculation (SURFACE ONLY, LAZY SAFE)
+        // ===========================================================
+        function updateProgressBar() {
+            const container = document.getElementById('dynamicCoreSections');
+            if (!container) return;
+
+            const fields = container.querySelectorAll('input, textarea, select');
+            let total = 0;
+            let completed = 0;
+
+            fields.forEach(field => {
+
+                if (
+                    field.disabled ||
+                    field.type === 'hidden' ||
+                    field.offsetParent === null
+                ) return;
+
+                // Ignore static/admin notes
+                if (field.dataset?.type === 'note') return;
+
+                // Ignore clarification blocks
+                if (field.closest('[id^="clarification-container"]')) return;
+
+                total++;
+
+                // ✅ SELECT — visible text based (lazy-safe)
+                if (field.tagName === 'SELECT') {
+                    const selectedText =
+                        field.options[field.selectedIndex]?.text?.trim() || '';
+
+                    if (
+                        selectedText &&
+                        !selectedText.toLowerCase().startsWith('choose')
+                    ) {
+                        completed++;
+                    }
+                }
+
+                // ✅ INPUT / TEXTAREA
+                else if (
+                    (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA') &&
+                    field.value.trim() !== ''
+                ) {
+                    completed++;
+                }
+            });
+
+            const percent = total === 0
+                ? 0
+                : Math.round((completed / total) * 100);
+
+            document.getElementById('progressBarFill').style.width =
+                `${percent}%`;
+
+            document.getElementById('progressBarLabel').textContent =
+                `${percent}% — ${getMotivationMessage(percent)}`;
+
+            if (percent === 100) {
+                showCompletionPopup();
+            }
+        }
+
+        // ===========================================================
+        // Events
+        // ===========================================================
+        document.addEventListener('input', updateProgressBar, true);
+        document.addEventListener('change', updateProgressBar, true);
+
+        // Watch dynamic renders
+        const observer = new MutationObserver(updateProgressBar);
+        observer.observe(document.getElementById('dynamicCoreSections'), {
+            childList: true,
+            subtree: true
+        });
+
+        updateProgressBar();
+        console.log('🟢 Floating progress bar initialized');
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', start);
+    } else {
+        start();
+    }
+
+})();

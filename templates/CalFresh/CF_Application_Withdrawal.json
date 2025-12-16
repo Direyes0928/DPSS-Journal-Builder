@@ -70,9 +70,9 @@
       "fields": [
         {
           "id": "expSvNote",
-          "type": "admin-note",
-          "content": "EXPEDITED SERVICE: Ineligible. CF HH withdrew application.",
-          "color": "blue"
+          "label": "Expedited Service Note",
+          "type": "note",
+          "content": "EXPEDITED SERVICE: Ineligible. CF HH withdrew application."
         }
       ]
     },
@@ -88,9 +88,10 @@
         },
         {
           "id": "negativeActionNote",
-          "type": "admin-note",
-          "content": "Negative action EDBC ran for verbal/written withdrawal in CalSAWS.\nCW 10 generated, appended with mandatory language in DP 63-014 and mailed centrally.",
-          "color": "grey"
+          "label": "Negative Action Note",
+          "type": "note",
+          "content": "Negative action EDBC ran for verbal/written withdrawal in CalSAWS.\nCW 10 generated, appended with mandatory language in DP 63-014 and mailed centrally."
+
         }
       ]
     },
@@ -182,9 +183,9 @@
       "fields": [
         {
           "id": "adminReminder",
-          "type": "admin-note",
-          "content": "Do not deny for withdrawal if eligibility factors have been discussed with the family. Instead, send a denial NOA for a correct reason (e.g., ineligible student, mandatory HH member, over income).",
-          "color": "yellow"
+          "type": "note",
+          "content": "Do not deny for withdrawal if eligibility factors have been discussed with the family. Instead, send a denial NOA for a correct reason (e.g., ineligible student, mandatory HH member, over income)."
+  
         }
       ]
     }
