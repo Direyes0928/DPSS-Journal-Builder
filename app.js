@@ -4482,14 +4482,16 @@ function hideRefreshToast() {
 // FLOATING PROGRESS BAR — FINAL, SAFE, DPSS-FRIENDLY
 // ============================================================================
 // ============================================================================
-// FLOATING PROGRESS BAR — FINAL, LAZY-SAFE, DPSS-FRIENDLY
+// FLOATING PROGRESS BAR — FINAL (ARROW-ONLY SECTION NAVIGATION)
+// No section list (prevents overload)
+// Progress logic UNCHANGED
+// 2025-12-16
 // ============================================================================
+
 (function initFloatingProgressBar() {
 
     function start() {
         if (!document.body) return;
-
-        // Prevent double injection
         if (document.getElementById('floatingProgressBar')) return;
 
         // ===========================================================
@@ -4501,6 +4503,11 @@ function hideRefreshToast() {
             <div id="progressBarLabel">0% — Let’s get started!</div>
             <div id="progressBarTrack">
                 <div id="progressBarFill"></div>
+            </div>
+
+            <div style="display:flex;gap:8px;margin-top:10px;">
+                <button id="prevSectionBtn" disabled>⬆ Prev</button>
+                <button id="nextSectionBtn" disabled>⬇ Next</button>
             </div>
         `;
         document.body.appendChild(bar);
@@ -4515,7 +4522,7 @@ function hideRefreshToast() {
                 bottom: 24px;
                 right: 24px;
                 width: 300px;
-                background: #3C6A840;
+                background: #ffffff;
                 border-radius: 16px;
                 box-shadow: 0 12px 28px rgba(0,0,0,0.18);
                 padding: 18px;
@@ -4545,11 +4552,35 @@ function hideRefreshToast() {
                 background: linear-gradient(90deg, #22c55e, #16a34a);
                 transition: width 0.35s ease;
             }
+
+            #prevSectionBtn,
+            #nextSectionBtn {
+                flex: 1;
+                background: #22c55e;
+                color: white;
+                border: none;
+                border-radius: 10px;
+                padding: 6px;
+                font-size: 12px;
+                cursor: pointer;
+            }
+
+            #prevSectionBtn:disabled,
+            #nextSectionBtn:disabled {
+                opacity: 0.4;
+                cursor: default;
+            }
+
+            .section-highlight {
+                outline: 2px solid #22c55e;
+                outline-offset: 4px;
+                transition: outline 0.3s ease;
+            }
         `;
         document.head.appendChild(style);
 
         // ===========================================================
-        // Motivation messages
+        // Motivation messages (UNCHANGED)
         // ===========================================================
         function getMotivationMessage(percent) {
             if (percent === 100) return "✅ Journal Complete — Ready to generate";
@@ -4562,65 +4593,38 @@ function hideRefreshToast() {
         }
 
         // ===========================================================
-        // Completion popup (fires once)
+        // Helpers
         // ===========================================================
-        let completionShown = false;
+        function getSectionForField(field) {
+            return field.closest('[data-section-id], .journal-section, section');
+        }
 
-        function showCompletionPopup() {
-            if (completionShown) return;
-            completionShown = true;
+        function navigateToSection(section) {
+            if (!section) return;
 
-            const popup = document.createElement('div');
-            popup.id = 'journalCompletePopup';
-            popup.innerHTML = `
-                <div style="font-size:28px;margin-bottom:6px;">✅</div>
-                <div style="font-weight:700;font-size:16px;margin-bottom:4px;">
-                    Journal Complete
-                </div>
-                <div style="font-size:13px;color:#4b5563;">
-                    You’re all set — ready to generate.
-                </div>
-            `;
-
-            Object.assign(popup.style, {
-                position: 'fixed',
-                top: '22%',
-                left: '50%',
-                transform: 'translateX(-50%) scale(0.95)',
-                background: '#ffffff',
-                padding: '22px 28px',
-                borderRadius: '18px',
-                boxShadow: '0 24px 48px rgba(0,0,0,0.25)',
-                textAlign: 'center',
-                zIndex: 11000,
-                opacity: '0',
-                transition: 'all 0.35s ease'
-            });
-
-            document.body.appendChild(popup);
-
-            requestAnimationFrame(() => {
-                popup.style.opacity = '1';
-                popup.style.transform = 'translateX(-50%) scale(1)';
-            });
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            section.classList.add('section-highlight');
 
             setTimeout(() => {
-                popup.style.opacity = '0';
-                popup.style.transform = 'translateX(-50%) scale(0.95)';
-                setTimeout(() => popup.remove(), 350);
-            }, 2500);
+                section.classList.remove('section-highlight');
+            }, 1200);
         }
 
         // ===========================================================
-        // Progress calculation (SURFACE ONLY, LAZY SAFE)
+        // Progress + SECTION Missing Logic
         // ===========================================================
+        let missingSections = [];
+        let sectionIndex = 0;
+
         function updateProgressBar() {
             const container = document.getElementById('dynamicCoreSections');
             if (!container) return;
 
             const fields = container.querySelectorAll('input, textarea, select');
+
             let total = 0;
             let completed = 0;
+            const sectionSet = new Set();
 
             fields.forEach(field => {
 
@@ -4630,35 +4634,35 @@ function hideRefreshToast() {
                     field.offsetParent === null
                 ) return;
 
-                // Ignore static/admin notes
                 if (field.dataset?.type === 'note') return;
-
-                // Ignore clarification blocks
                 if (field.closest('[id^="clarification-container"]')) return;
 
                 total++;
 
-                // ✅ SELECT — visible text based (lazy-safe)
+                let isComplete = false;
+
                 if (field.tagName === 'SELECT') {
-                    const selectedText =
+                    const txt =
                         field.options[field.selectedIndex]?.text?.trim() || '';
-
-                    if (
-                        selectedText &&
-                        !selectedText.toLowerCase().startsWith('choose')
-                    ) {
-                        completed++;
+                    if (txt && !txt.toLowerCase().startsWith('choose')) {
+                        isComplete = true;
                     }
-                }
-
-                // ✅ INPUT / TEXTAREA
-                else if (
+                } else if (
                     (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA') &&
                     field.value.trim() !== ''
                 ) {
+                    isComplete = true;
+                }
+
+                if (isComplete) {
                     completed++;
+                } else {
+                    const section = getSectionForField(field);
+                    if (section) sectionSet.add(section);
                 }
             });
+
+            missingSections = Array.from(sectionSet);
 
             const percent = total === 0
                 ? 0
@@ -4670,18 +4674,44 @@ function hideRefreshToast() {
             document.getElementById('progressBarLabel').textContent =
                 `${percent}% — ${getMotivationMessage(percent)}`;
 
-            if (percent === 100) {
-                showCompletionPopup();
+            const prevBtn = document.getElementById('prevSectionBtn');
+            const nextBtn = document.getElementById('nextSectionBtn');
+
+            if (missingSections.length && percent < 100) {
+                prevBtn.disabled = false;
+                nextBtn.disabled = false;
+
+                if (sectionIndex >= missingSections.length) {
+                    sectionIndex = 0;
+                }
+            } else {
+                prevBtn.disabled = true;
+                nextBtn.disabled = true;
             }
         }
 
         // ===========================================================
-        // Events
+        // Arrow Navigation (SECTION-ONLY)
+        // ===========================================================
+        document.getElementById('nextSectionBtn').onclick = () => {
+            if (!missingSections.length) return;
+            navigateToSection(missingSections[sectionIndex]);
+            sectionIndex = (sectionIndex + 1) % missingSections.length;
+        };
+
+        document.getElementById('prevSectionBtn').onclick = () => {
+            if (!missingSections.length) return;
+            sectionIndex =
+                (sectionIndex - 1 + missingSections.length) % missingSections.length;
+            navigateToSection(missingSections[sectionIndex]);
+        };
+
+        // ===========================================================
+        // Events (UNCHANGED)
         // ===========================================================
         document.addEventListener('input', updateProgressBar, true);
         document.addEventListener('change', updateProgressBar, true);
 
-        // Watch dynamic renders
         const observer = new MutationObserver(updateProgressBar);
         observer.observe(document.getElementById('dynamicCoreSections'), {
             childList: true,
@@ -4689,7 +4719,7 @@ function hideRefreshToast() {
         });
 
         updateProgressBar();
-        console.log('🟢 Floating progress bar initialized');
+        console.log('🟢 Floating progress bar (arrow-only section navigation) initialized');
     }
 
     if (document.readyState === 'loading') {
