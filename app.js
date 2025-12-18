@@ -16,6 +16,29 @@ const SECTION_LIBRARY = {
     ]
   }
 };
+
+// ==================================================
+// TEMPLATE SECTION NORMALIZER
+// Supports legacy + section-library formats
+// 2025-12-17 // new
+// ==================================================
+
+function normalizeTemplateSections(sections) {
+  if (!Array.isArray(sections)) return [];
+
+  // New format: already references sectionId
+  if (sections.length && sections[0].sectionId) {
+    return sections;
+  }
+
+  // Legacy format: wrap existing section objects
+  return sections.map((sec, idx) => ({
+    sectionId: sec.id || `legacy_section_${idx}`,
+    legacySection: sec,
+    required: !!sec.required
+  }));
+}
+
 // Animated startup overlay logic
 document.addEventListener('DOMContentLoaded', function() {
     var overlay = document.getElementById('startupOverlay');
@@ -764,12 +787,17 @@ function renderHeaderSearchResults(container, matches) {
             setTimeout(() => {
                 const tpl = allTemplates.find(t => t.file === m.file && t.program === m.program) || allTemplates.find(t => t.file === m.file);
                 if (tpl) {
-                    activeTemplate = tpl;
-                    document.getElementById('currentTemplateTag').textContent = tpl.name;
-                    renderTemplateSections(tpl);
-                    renderSidebarFromTemplate(tpl);
-                    setTimeout(() => initializeFollowupInputs(), 100);
-                }
+    activeTemplate = {
+        ...tpl,
+        sections: normalizeTemplateSections(tpl.sections)
+    };
+
+    document.getElementById('currentTemplateTag').textContent = activeTemplate.name;
+    renderTemplateSections(activeTemplate);
+    renderSidebarFromTemplate(activeTemplate);
+    setTimeout(() => initializeFollowupInputs(), 100);
+}
+
             }, 80);
             hideHeaderSearchResults(container);
             // Clear search input after selection
@@ -859,9 +887,12 @@ function renderTemplateSections(tpl) {
             sections: []
         };
         allTemplates.push(newTemplate);
-        activeTemplate = newTemplate;
-        renderTemplateSections(newTemplate);
-        renderSidebarFromTemplate(newTemplate);
+        activeTemplate = {
+  ...newTemplate,
+  sections: normalizeTemplateSections(newTemplate.sections || [])
+};
+        renderTemplateSections(activeTemplate);
+        renderSidebarFromTemplate(activeTemplate);
         // Show guidance popup first
         document.getElementById('create_template_guide_backdrop').classList.remove('hidden');
         document.getElementById('create_template_guide').classList.remove('hidden');
@@ -3951,7 +3982,10 @@ window.loadPreviewedTemplate = function() {
     closePreviewModal();
     
     // Load template
-    activeTemplate = tpl;
+    activeTemplate = {
+  ...newTemplate,
+  sections: normalizeTemplateSections(newTemplate.sections || [])
+};
     document.getElementById('currentTemplateTag').textContent = tpl.name;
     renderTemplateSections(tpl);
     renderSidebarFromTemplate(tpl);
@@ -3977,10 +4011,10 @@ window.editTemplateMetadata = function(file) {
     if (!tpl) return;
     
     // Load and activate this template for editing
-    activeTemplate = tpl;
-    document.getElementById('currentTemplateTag').textContent = tpl.name;
-    renderTemplateSections(tpl);
-    renderSidebarFromTemplate(tpl);
+    document.getElementById('currentTemplateTag').textContent = activeTemplate.name;
+renderTemplateSections(activeTemplate);
+renderSidebarFromTemplate(activeTemplate);
+
     
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
