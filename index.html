@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
             /* Layout variables for header and sidebar spacing */
             --header-height: 4.5rem;
             --sidebar-vertical-gap: 9rem; /* increased to lower the sidebar further */
-            --dpss-accent: #6366f1;
+            --dpss-accent: #5b91b6;
             --dpss-accent-600: #4f46e5;
             --dpss-accent-100: #eef2ff;
             --dpss-accent-50: #f5f7ff;
@@ -209,14 +209,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         /* Header accents */
-        header {
-            border-top: 4px solid var(--dpss-accent-100);
-            background: linear-gradient(180deg, rgba(99,102,241,0.04) 0%, rgba(255,255,255,0.9) 60%);
-            backdrop-filter: blur(2px);
-        }
-        header h1 {
-            color: var(--dpss-accent-600);
-        }
+/* =========================================
+   Header — Solid, centered, template-width
+   No transparency / no glass
+   ========================================= */
+
+/* Header — clean, no divider line */
+header.sticky-header {
+    background: #f8fafc;
+    border-bottom: none !important; 
+    box-shadow: none;            
+}
+
+
+/* Centered header content container */
+header.sticky-header > div {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 12px rgba(15,23,42,0.06);
+}
+
+/* Header title color stays accent-aware */
+header.sticky-header h1 {
+    color: var(--dpss-accent-600);
+}
+
         /* Ensure current template pill in header uses accent (override utility classes) */
         #currentTemplateTag {
             background: var(--dpss-accent-50) !important;
@@ -237,27 +255,60 @@ document.addEventListener('DOMContentLoaded', function() {
             border: 1px solid rgba(99,102,241,0.08);
         }
 
-        body.dark-mode {
-            background-color: #020617;
-            color: #e5e7eb;
-        }
+/* =========================================================
+   App Background — intentional depth, neutral canvas
+   2025-12-17 // new
+   ========================================================= */
+/* Light mode background */
+body {
+    background:
+        linear-gradient(
+            180deg,
+            #f8fafc 0%,
+            #f1f5f9 60%,
+            #eef2f7 100%
+        );
+}
+/* Dark mode background */
+body.dark-mode {
+    background:
+        radial-gradient(
+            1200px 600px at 50% -200px,
+            rgba(79,140,255,0.08),
+            transparent 60%
+        ),
+        linear-gradient(
+            180deg,
+            #020617 0%,
+            #030a18 40%,
+            #020617 100%
+        );
+}
+/* 2025-12-17 // new */
+body.dark-mode header.sticky-header > div {
+    background: #071428;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 10px 28px rgba(2,6,23,0.7);
+}
+/* 2025-12-17 // new */
+body.dark-mode header.sticky-header {
+    background: linear-gradient(
+        180deg,
+        #0b1324 0%,
+        #09101f 100%
+    );
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 4px 18px rgba(2,6,23,0.6);
+}
 
-        body.dark-mode header {
-            background-color: #020617;
-            color: #e5e7eb;
-        }
 
-        body.dark-mode .section-card {
-            background-color: #020617;
-            border-color: #1f2937;
-        }
-
-        body.dark-mode .journal-input {
-            background-color: #020617;
-            border-color: #4b5563;
-            color: #e5e7eb;
-        }
-
+/* 2025-12-17 // new */
+body.dark-mode .journal-input,
+body.dark-mode select.journal-input {
+    background: #0c1a33;
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #e6eefc;
+}
         /* Stronger, consistent dark-mode overrides for UI surfaces */
         body.dark-mode {
             --surface-1: #071028; /* primary card */
@@ -703,18 +754,41 @@ document.addEventListener('DOMContentLoaded', function() {
         #headerSearchResults .result-program { font-size: 12px; color: #6b7280; margin-left: auto; }
         /* Left sidebar / floating pane styles */
         /* On medium+ screens the left pane will stay anchored (sticky) and scroll independently */
-        @media (min-width: 768px) {
-            .left-pane .section-card {
-                position: sticky;
-                /* Center the sidebar vertically between header and bottom by leaving a vertical gap */
-                top: calc(var(--header-height) + (var(--sidebar-vertical-gap) / 2));
-                /* Reserve space equal to --sidebar-vertical-gap so there's breathing room at bottom */
-                max-height: calc(100vh - var(--header-height) - var(--sidebar-vertical-gap));
-                overflow: auto;
-                -webkit-overflow-scrolling: touch;
-                z-index: 10; /* lower than header (header uses z-20) to avoid overlay */
-            }
-        }
+        
+/* =========================================
+   2025-12-17 — Sticky Sidebar (CSS SAFE)
+   Freezes left sidebar, no double scroll
+   ========================================= */
+
+/* =========================================
+   Floating Sidebar (Over Header)
+   Clean, intentional, no overlap bugs
+   ========================================= */
+
+@media (min-width: 768px) {
+
+    #sideNav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 18rem;            /* w-72 */
+        z-index: 30;             /* above header (header is z-20) */
+        overflow: hidden;
+        background: #f8fafc;
+        border-right: 1px solid #e5e7eb;
+        box-shadow: 4px 0 12px rgba(15,23,42,0.06);
+    }
+
+    /* Only the section list scrolls */
+    #sideNav nav {
+        max-height: calc(100vh - 220px);
+        overflow-y: auto;
+        padding-right: 6px;
+    }
+}
+
+
         </style>
         <style>
         /* Sidebar action buttons: consistent size, spacing, and palette */
@@ -745,7 +819,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Animated Startup Overlay -->
 <div id="startupOverlay" style="position:fixed;inset:0;z-index:10000000;background:#f1f5f9;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.7s;">
     <div style="font-size:3rem;animation:bounce 1.2s infinite;">🎉</div>
-    <h1 style="font-size:2rem;font-weight:bold;color:#6366f1;margin-top:1rem;">SSD Journal Builder</h1>
+    <h1 style="font-size:2rem;font-weight:bold;color:#5F93B8;margin-top:1rem;">SSD Journal Builder</h1>
     <p style="color:#64748b;margin-top:0.5rem;font-size:1.1rem;">Loading your workspace...</p>
     <div style="margin-top:2rem;">
         <div style="width:48px;height:48px;border:6px solid #e0e7ef;border-top:6px solid #6366f1;border-radius:50%;animation:spin 1s linear infinite;"></div>
@@ -826,11 +900,30 @@ document.addEventListener('DOMContentLoaded', function() {
 </header>
 
 <!-- PAGE LAYOUT -->
-<main class="mx-auto max-w-6xl px-4 py-4 flex flex-col md:flex-row gap-4 main-with-left">
+<main
+  id="appLayout"
+  class="flex w-full min-h-screen"
+>
+
+
 
     <!-- SIDEBAR -->
-    <aside class="w-full md:w-56 md:flex-shrink-0 left-pane">
-        <div class="section-card">
+<!-- SIDEBAR -->
+<aside
+  id="sideNav"
+  class="
+    left-pane
+    w-72 lg:w-80
+    shrink-0
+    bg-slate-50
+    border-r border-slate-200
+  "
+>
+
+
+
+        <div class="px-3 py-4">
+
 
             <div class="flex items-center justify-between mb-2">
                 <h2 class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Sections</h2>
@@ -882,7 +975,14 @@ document.addEventListener('DOMContentLoaded', function() {
     </aside>
 
     <!-- MAIN CONTENT -->
-    <section class="flex-1 space-y-4 pb-10">
+   <!-- MAIN CONTENT -->
+<section
+  id="mainContent"
+  class="flex-1 overflow-y-auto bg-slate-50"
+>
+    <!-- CENTERED DOCUMENT WRAPPER (THIS IS THE FIX) -->
+    <div class="mx-auto max-w-6xl px-4 py-4 space-y-4">
+
         <!-- JSON-DRIVEN CORE -->
         <div id="dynamicCoreSections"></div>
         <!-- Section Picker Modal -->
@@ -956,8 +1056,8 @@ document.addEventListener('DOMContentLoaded', function() {
             <h3 class="text-sm font-bold text-slate-700 mb-2">📂 Uploaded Templates</h3>
             <p class="text-xs text-slate-500 mb-3">Manage your imported templates by program folder.</p>
             <div id="templateList" class="space-y-3"></div>
-        </section>
-    </section>
+    </div> <!-- ✅ CLOSE CENTERED DOCUMENT WRAPPER -->
+</section>
 </main>
 
 <!-- JOURNAL MODAL -->

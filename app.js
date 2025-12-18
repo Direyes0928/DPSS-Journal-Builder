@@ -4729,3 +4729,241 @@ function hideRefreshToast() {
     }
 
 })();
+// ============================================================================
+// GUIDED FIELD NAVIGATION — ENTER / SHIFT+ENTER (HARDENED)
+// ONLY navigates real question fields
+// Skips section toggles, arrows, clarification UI
+// Does NOT override native TAB
+// 2025-12-16
+// ============================================================================
+
+(function initGuidedFieldNavigation() {
+
+    function isRealQuestionField(field) {
+
+        // -------------------------------------------------------
+        // Base exclusions
+        // -------------------------------------------------------
+        if (
+            field.disabled ||
+            field.type === 'hidden' ||
+            field.offsetParent === null
+        ) return false;
+
+        // -------------------------------------------------------
+        // Only allow standard form fields
+        // -------------------------------------------------------
+        if (!['INPUT', 'TEXTAREA', 'SELECT'].includes(field.tagName)) {
+            return false;
+        }
+
+        // -------------------------------------------------------
+        // ❌ Exclude section headers, arrows, toggles
+        // -------------------------------------------------------
+        if (
+            field.closest('.section-header') ||
+            field.closest('.section-toggle') ||
+            field.closest('.section-caret') ||
+            field.closest('.collapse-toggle') ||
+            field.closest('[aria-expanded]')
+        ) return false;
+
+        // -------------------------------------------------------
+        // ❌ Exclude clarification UI (ALL forms)
+        // -------------------------------------------------------
+        if (
+            field.closest('[id^="clarification"]') ||
+            field.closest('[class*="clarification"]') ||
+            field.name?.toLowerCase().includes('clarification') ||
+            field.id?.toLowerCase().includes('clarification')
+        ) return false;
+
+        // -------------------------------------------------------
+        // ❌ Exclude admin / helper controls
+        // -------------------------------------------------------
+        if (
+            field.closest('.admin-controls') ||
+            field.closest('.helper-controls')
+        ) return false;
+
+        // -------------------------------------------------------
+        // ✅ Require it to live inside a question container
+        // (this is the key safeguard)
+        // -------------------------------------------------------
+        if (
+            !field.closest('.field-wrapper') &&
+            !field.closest('.question') &&
+            !field.closest('[data-field-id]')
+        ) return false;
+
+        return true;
+    }
+
+    function getFocusableFields() {
+        const container = document.getElementById('dynamicCoreSections');
+        if (!container) return [];
+
+        return Array.from(
+            container.querySelectorAll('input, textarea, select')
+        ).filter(isRealQuestionField);
+    }
+
+    function focusFieldAt(index) {
+        const fields = getFocusableFields();
+        if (!fields.length) return;
+
+        const clampedIndex = Math.max(0, Math.min(index, fields.length - 1));
+        const field = fields[clampedIndex];
+
+        field.focus({ preventScroll: true });
+        field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    document.addEventListener('keydown', (e) => {
+
+        // Only act inside journal
+        if (!e.target.closest('#dynamicCoreSections')) return;
+
+        // ENTER → Next question
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+
+            const fields = getFocusableFields();
+            const index = fields.indexOf(e.target);
+
+            if (index > -1) {
+                focusFieldAt(index + 1);
+            }
+        }
+
+        // SHIFT + ENTER → Previous question
+        if (e.key === 'Enter' && e.shiftKey) {
+            e.preventDefault();
+
+            const fields = getFocusableFields();
+            const index = fields.indexOf(e.target);
+
+            if (index > -1) {
+                focusFieldAt(index - 1);
+            }
+        }
+
+    }, true);
+
+    console.log('🟢 Guided navigation hardened (questions only)');
+})();
+// ============================================================================
+// DISABLE SECTION COLLAPSE FEATURE (UI + LOGIC)
+// Fully neutralizes section collapse arrows
+// 2025-12-16
+// ============================================================================
+
+(function disableSectionCollapseFeature() {
+
+    function disableUI() {
+        document.querySelectorAll('button.collapse-toggle').forEach(btn => {
+            btn.style.display = 'none';          // hide arrow
+            btn.style.pointerEvents = 'none';    // disable clicks
+            btn.setAttribute('tabindex', '-1');  // remove from keyboard
+            btn.setAttribute('aria-hidden', 'true');
+        });
+    }
+
+    function forceSectionsOpen() {
+        document.querySelectorAll('.section-body').forEach(body => {
+            body.classList.remove('collapsed');
+            body.style.display = '';
+        });
+    }
+
+    function disableLogic() {
+        // Safely override the collapse function if it exists
+        if (typeof window.toggleSectionCollapse === 'function') {
+            window.toggleSectionCollapse = function () {
+                // NOOP — intentionally disabled
+                return false;
+            };
+        }
+    }
+
+    function run() {
+        disableUI();
+        forceSectionsOpen();
+        disableLogic();
+    }
+
+    // Run now and after dynamic renders
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', run);
+    } else {
+        run();
+    }
+
+    // Safety: observe future injections
+    const observer = new MutationObserver(run);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    console.log('🟢 Section collapse feature fully disabled');
+})();
+// ============================================================================
+// RESPONSIVE SIDENAV MODE CONTROLLER
+// 2025-12-16
+// ============================================================================
+
+(function initResponsiveSidenav() {
+
+    const sidenav = document.getElementById('sideNav');
+    if (!sidenav) return;
+
+    function setMode() {
+        const width = window.innerWidth;
+
+        if (width < 768) {
+            document.body.classList.add('sidenav-over');
+            document.body.classList.remove('sidenav-side');
+        } else {
+            document.body.classList.add('sidenav-side');
+            document.body.classList.remove('sidenav-over');
+
+            // Ensure visible on resize up
+            sidenav.classList.remove('-translate-x-full');
+        }
+    }
+
+    window.addEventListener('resize', setMode);
+    setMode();
+
+    console.log('🟢 Responsive sidenav mode active');
+})();
+// ============================================================================
+// SIDENAV TOGGLE (MOBILE OVER MODE)
+// 2025-12-16
+// ============================================================================
+
+(function initSidenavToggle() {
+    const sideNav = document.getElementById('sideNav');
+    const toggle = document.getElementById('sidenavToggle');
+    const backdrop = document.getElementById('sidenavBackdrop');
+
+    function openNav() {
+        sideNav.classList.remove('-translate-x-full');
+        backdrop.classList.remove('hidden');
+    }
+
+    function closeNav() {
+        sideNav.classList.add('-translate-x-full');
+        backdrop.classList.add('hidden');
+    }
+
+    toggle?.addEventListener('click', openNav);
+    backdrop?.addEventListener('click', closeNav);
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+            backdrop.classList.add('hidden');
+            sideNav.classList.remove('-translate-x-full');
+        }
+    });
+
+    console.log('🟢 Responsive sidenav ready');
+})();
