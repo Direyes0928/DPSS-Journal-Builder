@@ -1,3 +1,21 @@
+// ==================================================
+// SECTION LIBRARY (authoritative source of sections)
+// 2025-12-17 // new
+// ==================================================
+
+const SECTION_LIBRARY = {
+  interview_details: {
+    id: "interview_details",
+    title: "Interview Details",
+    fields: [
+      { id: "method", type: "choice", label: "Interview Method" },
+      { id: "date", type: "date", label: "Scheduled Interview Date" },
+      { id: "time", type: "time", label: "Scheduled Interview Time" },
+      { id: "contact_name", type: "text", label: "Interview Contact Name" },
+      { id: "contact_phone", type: "phone", label: "Interview Contact Phone" }
+    ]
+  }
+};
 // Animated startup overlay logic
 document.addEventListener('DOMContentLoaded', function() {
     var overlay = document.getElementById('startupOverlay');
@@ -4851,119 +4869,4 @@ function hideRefreshToast() {
     }, true);
 
     console.log('🟢 Guided navigation hardened (questions only)');
-})();
-// ============================================================================
-// DISABLE SECTION COLLAPSE FEATURE (UI + LOGIC)
-// Fully neutralizes section collapse arrows
-// 2025-12-16
-// ============================================================================
-
-(function disableSectionCollapseFeature() {
-
-    function disableUI() {
-        document.querySelectorAll('button.collapse-toggle').forEach(btn => {
-            btn.style.display = 'none';          // hide arrow
-            btn.style.pointerEvents = 'none';    // disable clicks
-            btn.setAttribute('tabindex', '-1');  // remove from keyboard
-            btn.setAttribute('aria-hidden', 'true');
-        });
-    }
-
-    function forceSectionsOpen() {
-        document.querySelectorAll('.section-body').forEach(body => {
-            body.classList.remove('collapsed');
-            body.style.display = '';
-        });
-    }
-
-    function disableLogic() {
-        // Safely override the collapse function if it exists
-        if (typeof window.toggleSectionCollapse === 'function') {
-            window.toggleSectionCollapse = function () {
-                // NOOP — intentionally disabled
-                return false;
-            };
-        }
-    }
-
-    function run() {
-        disableUI();
-        forceSectionsOpen();
-        disableLogic();
-    }
-
-    // Run now and after dynamic renders
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', run);
-    } else {
-        run();
-    }
-
-    // Safety: observe future injections
-    const observer = new MutationObserver(run);
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    console.log('🟢 Section collapse feature fully disabled');
-})();
-// ============================================================================
-// RESPONSIVE SIDENAV MODE CONTROLLER
-// 2025-12-16
-// ============================================================================
-
-(function initResponsiveSidenav() {
-
-    const sidenav = document.getElementById('sideNav');
-    if (!sidenav) return;
-
-    function setMode() {
-        const width = window.innerWidth;
-
-        if (width < 768) {
-            document.body.classList.add('sidenav-over');
-            document.body.classList.remove('sidenav-side');
-        } else {
-            document.body.classList.add('sidenav-side');
-            document.body.classList.remove('sidenav-over');
-
-            // Ensure visible on resize up
-            sidenav.classList.remove('-translate-x-full');
-        }
-    }
-
-    window.addEventListener('resize', setMode);
-    setMode();
-
-    console.log('🟢 Responsive sidenav mode active');
-})();
-// ============================================================================
-// SIDENAV TOGGLE (MOBILE OVER MODE)
-// 2025-12-16
-// ============================================================================
-
-(function initSidenavToggle() {
-    const sideNav = document.getElementById('sideNav');
-    const toggle = document.getElementById('sidenavToggle');
-    const backdrop = document.getElementById('sidenavBackdrop');
-
-    function openNav() {
-        sideNav.classList.remove('-translate-x-full');
-        backdrop.classList.remove('hidden');
-    }
-
-    function closeNav() {
-        sideNav.classList.add('-translate-x-full');
-        backdrop.classList.add('hidden');
-    }
-
-    toggle?.addEventListener('click', openNav);
-    backdrop?.addEventListener('click', closeNav);
-
-    window.addEventListener('resize', () => {
-        if (window.innerWidth >= 768) {
-            backdrop.classList.add('hidden');
-            sideNav.classList.remove('-translate-x-full');
-        }
-    });
-
-    console.log('🟢 Responsive sidenav ready');
 })();
