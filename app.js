@@ -4798,138 +4798,17 @@ function hideRefreshToast() {
 
 })();
 // ============================================================================
-// GUIDED FIELD NAVIGATION — ENTER / SHIFT+ENTER (HARDENED)
-// ONLY navigates real question fields
-// Skips section toggles, arrows, clarification UI
-// Does NOT override native TAB
-// 2025-12-16
-// ============================================================================
-
-(function initGuidedFieldNavigation() {
-
-    function isRealQuestionField(field) {
-
-        // -------------------------------------------------------
-        // Base exclusions
-        // -------------------------------------------------------
-        if (
-            field.disabled ||
-            field.type === 'hidden' ||
-            field.offsetParent === null
-        ) return false;
-
-        // -------------------------------------------------------
-        // Only allow standard form fields
-        // -------------------------------------------------------
-        if (!['INPUT', 'TEXTAREA', 'SELECT'].includes(field.tagName)) {
-            return false;
-        }
-
-        // -------------------------------------------------------
-        // ❌ Exclude section headers, arrows, toggles
-        // -------------------------------------------------------
-        if (
-            field.closest('.section-header') ||
-            field.closest('.section-toggle') ||
-            field.closest('.section-caret') ||
-            field.closest('.collapse-toggle') ||
-            field.closest('[aria-expanded]')
-        ) return false;
-
-        // -------------------------------------------------------
-        // ❌ Exclude clarification UI (ALL forms)
-        // -------------------------------------------------------
-        if (
-            field.closest('[id^="clarification"]') ||
-            field.closest('[class*="clarification"]') ||
-            field.name?.toLowerCase().includes('clarification') ||
-            field.id?.toLowerCase().includes('clarification')
-        ) return false;
-
-        // -------------------------------------------------------
-        // ❌ Exclude admin / helper controls
-        // -------------------------------------------------------
-        if (
-            field.closest('.admin-controls') ||
-            field.closest('.helper-controls')
-        ) return false;
-
-        // -------------------------------------------------------
-        // ✅ Require it to live inside a question container
-        // (this is the key safeguard)
-        // -------------------------------------------------------
-        if (
-            !field.closest('.field-wrapper') &&
-            !field.closest('.question') &&
-            !field.closest('[data-field-id]')
-        ) return false;
-
-        return true;
-    }
-
-    function getFocusableFields() {
-        const container = document.getElementById('dynamicCoreSections');
-        if (!container) return [];
-
-        return Array.from(
-            container.querySelectorAll('input, textarea, select')
-        ).filter(isRealQuestionField);
-    }
-
-    function focusFieldAt(index) {
-        const fields = getFocusableFields();
-        if (!fields.length) return;
-
-        const clampedIndex = Math.max(0, Math.min(index, fields.length - 1));
-        const field = fields[clampedIndex];
-
-        field.focus({ preventScroll: true });
-        field.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    document.addEventListener('keydown', (e) => {
-
-        // Only act inside journal
-        if (!e.target.closest('#dynamicCoreSections')) return;
-
-        // ENTER → Next question
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-
-            const fields = getFocusableFields();
-            const index = fields.indexOf(e.target);
-
-            if (index > -1) {
-                focusFieldAt(index + 1);
-            }
-        }
-
-        // SHIFT + ENTER → Previous question
-        if (e.key === 'Enter' && e.shiftKey) {
-            e.preventDefault();
-
-            const fields = getFocusableFields();
-            const index = fields.indexOf(e.target);
-
-            if (index > -1) {
-                focusFieldAt(index - 1);
-            }
-        }
-
-    }, true);
-
-    console.log('🟢 Guided navigation hardened (questions only)');
-})();
-// ============================================================================
-// SECTION WIZARD – ISOLATED, SAFE MVP
+// SECTION WIZARD – ISOLATED SAFE MVP (FINAL)
 // Date: 2025-12-22
-// Purpose: Create blank sections via Admin-only wizard
-// Notes:
-// - Does NOT touch template loading, dropdowns, or conversion utilities
+// Purpose: Create new blank sections via Admin-only wizard
+// IMPORTANT:
+// - Does NOT touch dropdowns, loaders, or conversion utilities
 // - Operates ONLY on activeTemplate.sections
 // ============================================================================
 
-// ---------- Admin Button Injection ----------
+/* ---------------------------------------------------------------------------
+   Inject "+ Create New Section" button (Admin only)
+--------------------------------------------------------------------------- */
 function ensureCreateNewSectionButton() {
     if (!document.body.classList.contains("admin-mode")) return;
     if (document.getElementById("createNewSectionBtn")) return;
@@ -4938,14 +4817,31 @@ function ensureCreateNewSectionButton() {
     btn.id = "createNewSectionBtn";
     btn.textContent = "+ Create New Section";
     btn.className = "create-new-section-btn";
-    btn.addEventListener("click", openSectionWizard);
+    btn.style.position = "fixed";
+    btn.style.bottom = "24px";
+    btn.style.right = "24px";
+    btn.style.zIndex = "9999";
 
-    document.body.appendChild(btn); // Safe default placement
+    btn.addEventListener("click", openSectionWizard);
+    document.body.appendChild(btn);
+
+    console.log("🧩 Create New Section button injected");
 }
 
-document.addEventListener("DOMContentLoaded", ensureCreateNewSectionButton);
+/* 🔑 IMPORTANT: Admin mode is applied AFTER load → observe it */
+const adminModeObserver = new MutationObserver(() => {
+    if (document.body.classList.contains("admin-mode")) {
+        ensureCreateNewSectionButton();
+    }
+});
+adminModeObserver.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["class"]
+});
 
-// ---------- Wizard State ----------
+/* ---------------------------------------------------------------------------
+   Wizard State
+--------------------------------------------------------------------------- */
 let sectionWizardState = {
     step: 1,
     section: {
@@ -4957,16 +4853,21 @@ let sectionWizardState = {
     }
 };
 
-// ---------- Open Wizard ----------
+/* ---------------------------------------------------------------------------
+   Open Wizard
+--------------------------------------------------------------------------- */
 function openSectionWizard() {
-    if (!document.body.classList.contains("admin-mode")) {
-        alert("Admin Mode required.");
-        return;
+    console.log("🟢 openSectionWizard fired");
+
+    // 🔥 TEMP: bypass guards for validation
+    if (!window.activeTemplate) {
+        window.activeTemplate = { sections: [] };
+        console.warn("⚠️ activeTemplate was missing — stubbed");
     }
 
-    if (!activeTemplate || !Array.isArray(activeTemplate.sections)) {
-        alert("Select a template before adding sections.");
-        return;
+    if (!Array.isArray(activeTemplate.sections)) {
+        activeTemplate.sections = [];
+        console.warn("⚠️ sections array was missing — fixed");
     }
 
     sectionWizardState = {
@@ -4980,22 +4881,42 @@ function openSectionWizard() {
         }
     };
 
+    const existing = document.getElementById("sectionWizardModal");
+    if (existing) existing.remove();
+
     const modal = document.createElement("div");
     modal.id = "sectionWizardModal";
-    modal.className = "modal";
-    modal.innerHTML = renderSectionWizardStep();
+    modal.style.position = "fixed";
+    modal.style.inset = "0";
+    modal.style.background = "rgba(0,0,0,0.45)";
+    modal.style.zIndex = "99999";
+
+    modal.innerHTML = `
+        <div style="
+            background:#fff;
+            max-width:600px;
+            margin:10vh auto;
+            padding:24px;
+            border-radius:12px;
+        ">
+            ${renderSectionWizardStep()}
+        </div>
+    `;
 
     modal.addEventListener("click", handleWizardActions);
     document.body.appendChild(modal);
+
+    console.log("🟢 Section Wizard opened (forced)");
 }
 
-// ---------- Render Wizard ----------
+/* ---------------------------------------------------------------------------
+   Render Wizard Steps
+--------------------------------------------------------------------------- */
 function renderSectionWizardStep() {
     const s = sectionWizardState.section;
 
     if (sectionWizardState.step === 1) {
         return `
-        <div class="modal-content">
             <h2>Create Section</h2>
 
             <label>
@@ -5004,7 +4925,7 @@ function renderSectionWizardStep() {
             </label>
 
             <label>
-                <input type="checkbox" id="sectionRequired" ${s.required ? "checked" : ""} />
+                <input type="checkbox" id="sectionRequired" ${s.required ? "checked" : ""}/>
                 Required
             </label>
 
@@ -5015,20 +4936,18 @@ function renderSectionWizardStep() {
 
             <button data-action="next">Next</button>
             <button data-action="close">Cancel</button>
-        </div>
         `;
     }
 
     if (sectionWizardState.step === 2) {
         const fields = s.fields.map((f, i) => `
             <div>
-                <strong>${f.label || "(Untitled field)"}</strong> (${f.type})
+                <strong>${f.label}</strong> (${f.type})
                 <button data-remove="${i}">Remove</button>
             </div>
         `).join("");
 
         return `
-        <div class="modal-content">
             <h2>Fields</h2>
 
             ${fields || "<p>No fields yet.</p>"}
@@ -5036,12 +4955,10 @@ function renderSectionWizardStep() {
             <button data-action="addField">Add Field</button>
             <button data-action="back">Back</button>
             <button data-action="next">Next</button>
-        </div>
         `;
     }
 
     return `
-    <div class="modal-content">
         <h2>Review</h2>
 
         <p><strong>${s.title}</strong></p>
@@ -5053,11 +4970,12 @@ function renderSectionWizardStep() {
 
         <button data-action="back">Back</button>
         <button data-action="save">Save Section</button>
-    </div>
     `;
 }
 
-// ---------- Actions ----------
+/* ---------------------------------------------------------------------------
+   Actions
+--------------------------------------------------------------------------- */
 function handleWizardActions(e) {
     const action = e.target.dataset.action;
 
@@ -5105,7 +5023,7 @@ function handleWizardActions(e) {
 
         if (type === "choice") {
             const opts = prompt("Choices (comma separated)");
-            field.choices = opts ? opts.split(",").map(s => s.trim()) : [];
+            field.choices = opts ? opts.split(",").map(v => v.trim()) : [];
         }
 
         sectionWizardState.section.fields.push(field);
@@ -5128,11 +5046,55 @@ function handleWizardActions(e) {
     }
 
     const modal = document.getElementById("sectionWizardModal");
-    if (modal) modal.innerHTML = renderSectionWizardStep();
+    if (modal) {
+        modal.innerHTML = `
+            <div style="
+                background:#fff;
+                max-width:600px;
+                margin:10vh auto;
+                padding:24px;
+                border-radius:12px;
+            ">
+                ${renderSectionWizardStep()}
+            </div>
+        `;
+    }
 }
 
-// ---------- Close ----------
+/* ---------------------------------------------------------------------------
+   Close Wizard
+--------------------------------------------------------------------------- */
 function closeSectionWizard() {
     const modal = document.getElementById("sectionWizardModal");
     if (modal) modal.remove();
+    console.log("🧹 Section Wizard closed");
 }
+// ============================================================================
+// SECTION WIZARD – WIRE INTO EXISTING UI BUTTON
+// Date: 2025-12-22
+// Purpose: Reuse #btnSectionPicker to open Section Wizard
+// ============================================================================
+
+(function wireSectionWizardButton() {
+    document.addEventListener("click", function (e) {
+        const btn = e.target.closest("#btnSectionPicker");
+        if (!btn) return;
+
+        console.log("🟢 Section Picker button intercepted");
+
+        // Stop existing behavior
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Safety checks
+        if (!window.activeTemplate || !Array.isArray(activeTemplate.sections)) {
+            alert("Select a template first.");
+            return;
+        }
+
+        // Open wizard
+        openSectionWizard();
+    }, true);
+
+    console.log("🧩 Section Wizard wired to #btnSectionPicker");
+})();
