@@ -2223,6 +2223,22 @@ async function extractDocxDropdowns(arrayBuffer) {
         return [];
     }
 }
+// ============================================================================
+// DOCX HTML CLEANER (RESTORED)
+// ============================================================================
+// original-style sanitizer to remove junk markup before conversion
+function cleanDocxHTML(html) {
+    if (!html || typeof html !== 'string') return '';
+
+    return html
+        // remove empty paragraphs
+        .replace(/<p>\s*<\/p>/gi, '')
+        // remove Word-specific spans
+        .replace(/<span[^>]*>\s*<\/span>/gi, '')
+        // normalize whitespace
+        .replace(/\s+/g, ' ')
+        .trim();
+}
 
 async function handleDocxTemplateUpload(file) {
     const arrayBuffer = await file.arrayBuffer();
@@ -4904,3 +4920,219 @@ function hideRefreshToast() {
 
     console.log('🟢 Guided navigation hardened (questions only)');
 })();
+// ============================================================================
+// SECTION WIZARD – ISOLATED, SAFE MVP
+// Date: 2025-12-22
+// Purpose: Create blank sections via Admin-only wizard
+// Notes:
+// - Does NOT touch template loading, dropdowns, or conversion utilities
+// - Operates ONLY on activeTemplate.sections
+// ============================================================================
+
+// ---------- Admin Button Injection ----------
+function ensureCreateNewSectionButton() {
+    if (!document.body.classList.contains("admin-mode")) return;
+    if (document.getElementById("createNewSectionBtn")) return;
+
+    const btn = document.createElement("button");
+    btn.id = "createNewSectionBtn";
+    btn.textContent = "+ Create New Section";
+    btn.className = "create-new-section-btn";
+    btn.addEventListener("click", openSectionWizard);
+
+    document.body.appendChild(btn); // Safe default placement
+}
+
+document.addEventListener("DOMContentLoaded", ensureCreateNewSectionButton);
+
+// ---------- Wizard State ----------
+let sectionWizardState = {
+    step: 1,
+    section: {
+        id: "",
+        title: "",
+        required: false,
+        description: "",
+        fields: []
+    }
+};
+
+// ---------- Open Wizard ----------
+function openSectionWizard() {
+    if (!document.body.classList.contains("admin-mode")) {
+        alert("Admin Mode required.");
+        return;
+    }
+
+    if (!activeTemplate || !Array.isArray(activeTemplate.sections)) {
+        alert("Select a template before adding sections.");
+        return;
+    }
+
+    sectionWizardState = {
+        step: 1,
+        section: {
+            id: `section_${crypto.randomUUID()}`,
+            title: "",
+            required: false,
+            description: "",
+            fields: []
+        }
+    };
+
+    const modal = document.createElement("div");
+    modal.id = "sectionWizardModal";
+    modal.className = "modal";
+    modal.innerHTML = renderSectionWizardStep();
+
+    modal.addEventListener("click", handleWizardActions);
+    document.body.appendChild(modal);
+}
+
+// ---------- Render Wizard ----------
+function renderSectionWizardStep() {
+    const s = sectionWizardState.section;
+
+    if (sectionWizardState.step === 1) {
+        return `
+        <div class="modal-content">
+            <h2>Create Section</h2>
+
+            <label>
+                Title
+                <input id="sectionTitle" value="${s.title}" />
+            </label>
+
+            <label>
+                <input type="checkbox" id="sectionRequired" ${s.required ? "checked" : ""} />
+                Required
+            </label>
+
+            <label>
+                Description
+                <textarea id="sectionDescription">${s.description}</textarea>
+            </label>
+
+            <button data-action="next">Next</button>
+            <button data-action="close">Cancel</button>
+        </div>
+        `;
+    }
+
+    if (sectionWizardState.step === 2) {
+        const fields = s.fields.map((f, i) => `
+            <div>
+                <strong>${f.label || "(Untitled field)"}</strong> (${f.type})
+                <button data-remove="${i}">Remove</button>
+            </div>
+        `).join("");
+
+        return `
+        <div class="modal-content">
+            <h2>Fields</h2>
+
+            ${fields || "<p>No fields yet.</p>"}
+
+            <button data-action="addField">Add Field</button>
+            <button data-action="back">Back</button>
+            <button data-action="next">Next</button>
+        </div>
+        `;
+    }
+
+    return `
+    <div class="modal-content">
+        <h2>Review</h2>
+
+        <p><strong>${s.title}</strong></p>
+        <p>${s.description || "(No description)"}</p>
+
+        <ul>
+            ${s.fields.map(f => `<li>${f.label} (${f.type})</li>`).join("")}
+        </ul>
+
+        <button data-action="back">Back</button>
+        <button data-action="save">Save Section</button>
+    </div>
+    `;
+}
+
+// ---------- Actions ----------
+function handleWizardActions(e) {
+    const action = e.target.dataset.action;
+
+    if (action === "close") {
+        closeSectionWizard();
+        return;
+    }
+
+    if (action === "next") {
+        if (sectionWizardState.step === 1) {
+            const title = document.getElementById("sectionTitle").value.trim();
+            if (!title) {
+                alert("Title is required.");
+                return;
+            }
+            sectionWizardState.section.title = title;
+            sectionWizardState.section.required =
+                document.getElementById("sectionRequired").checked;
+            sectionWizardState.section.description =
+                document.getElementById("sectionDescription").value.trim();
+        }
+        sectionWizardState.step++;
+    }
+
+    if (action === "back") {
+        sectionWizardState.step--;
+    }
+
+    if (action === "addField") {
+        const label = prompt("Field label?");
+        if (!label) return;
+
+        const type = prompt("Type: text | textarea | date | choice");
+        if (!["text", "textarea", "date", "choice"].includes(type)) {
+            alert("Invalid field type.");
+            return;
+        }
+
+        const field = {
+            id: `field_${crypto.randomUUID()}`,
+            label,
+            type,
+            required: false
+        };
+
+        if (type === "choice") {
+            const opts = prompt("Choices (comma separated)");
+            field.choices = opts ? opts.split(",").map(s => s.trim()) : [];
+        }
+
+        sectionWizardState.section.fields.push(field);
+    }
+
+    if (action === "save") {
+        activeTemplate.sections.push(
+            JSON.parse(JSON.stringify(sectionWizardState.section))
+        );
+        renderTemplateSections(activeTemplate);
+        closeSectionWizard();
+        return;
+    }
+
+    if (e.target.dataset.remove !== undefined) {
+        sectionWizardState.section.fields.splice(
+            Number(e.target.dataset.remove),
+            1
+        );
+    }
+
+    const modal = document.getElementById("sectionWizardModal");
+    if (modal) modal.innerHTML = renderSectionWizardStep();
+}
+
+// ---------- Close ----------
+function closeSectionWizard() {
+    const modal = document.getElementById("sectionWizardModal");
+    if (modal) modal.remove();
+}
