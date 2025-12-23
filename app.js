@@ -560,7 +560,7 @@ function applyHeaderFilters() {
 
         let haystack = '';
         if (tokens.length) {
-            // Build a comprehensive lowercase haystack of template content (section titles, labels, field labels & admin notes)
+            // Build a comprehensive lowercase haystack of template content (section
             const sectionParts = (tpl.sections || []).map(sec => {
                 const base = [sec.title, sec.label, sec.sectionLabel].filter(Boolean).join(' ');
                 const fieldText = (sec.fields || []).map(f => [f.label, f.content].filter(Boolean).join(' ')).join(' ');
@@ -4797,304 +4797,498 @@ function hideRefreshToast() {
     }
 
 })();
-// ============================================================================
-// SECTION WIZARD – ISOLATED SAFE MVP (FINAL)
+// ================================
+// Section Wizard (WIP)
+// Global exposure guard
 // Date: 2025-12-22
-// Purpose: Create new blank sections via Admin-only wizard
-// IMPORTANT:
-// - Does NOT touch dropdowns, loaders, or conversion utilities
-// - Operates ONLY on activeTemplate.sections
-// ============================================================================
+// ================================
+
+window.sectionWizardState = window.sectionWizardState || {
+  step: 1,
+  mode: null,
+  draftSection: null
+};
+
+window.openSectionWizard = function () {
+  window.sectionWizardState.step = 1;
+  window.sectionWizardState.mode = null;
+  window.sectionWizardState.draftSection = null;
+
+  console.log("Section Wizard opened:", window.sectionWizardState);
+};
+
+window.startBlankSection = function () {
+  window.sectionWizardState.mode = "blank";
+  window.sectionWizardState.step = 2;
+
+  window.sectionWizardState.draftSection = {
+    id: "section_" + crypto.randomUUID(),
+    title: "",
+    required: false,
+    description: "",
+    fields: []
+  };
+
+  console.log("Blank section initialized:", window.sectionWizardState);
+};
+// ================================
+// Section Wizard (WIP)
+// Steps 1–4: Start → Details → Field Builder → Review & Confirm
+// Date: 2025-12-22
+// ================================
 
 /* ---------------------------------------------------------------------------
-   Inject "+ Create New Section" button (Admin only)
+   STEP 1 — Choose Starting Point
 --------------------------------------------------------------------------- */
-function ensureCreateNewSectionButton() {
-    if (!document.body.classList.contains("admin-mode")) return;
-    if (document.getElementById("createNewSectionBtn")) return;
+window.renderSectionWizardStep1 = function () {
+  return `
+    <h2 style="margin-bottom:12px;">Create Section</h2>
+    <p style="margin-bottom:20px;">
+      How do you want to start this section?
+    </p>
 
-    const btn = document.createElement("button");
-    btn.id = "createNewSectionBtn";
-    btn.textContent = "+ Create New Section";
-    btn.className = "create-new-section-btn";
-    btn.style.position = "fixed";
-    btn.style.bottom = "24px";
-    btn.style.right = "24px";
-    btn.style.zIndex = "9999";
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <button data-action="start-blank" style="padding:12px; font-size:14px;">
+        🆕 Start from Blank
+      </button>
 
-    btn.addEventListener("click", openSectionWizard);
-    document.body.appendChild(btn);
+      <button disabled style="padding:12px; font-size:14px; opacity:0.5;">
+        ♻️ Reuse from Existing Section (Coming Soon)
+      </button>
+    </div>
 
-    console.log("🧩 Create New Section button injected");
-}
-
-/* 🔑 IMPORTANT: Admin mode is applied AFTER load → observe it */
-const adminModeObserver = new MutationObserver(() => {
-    if (document.body.classList.contains("admin-mode")) {
-        ensureCreateNewSectionButton();
-    }
-});
-adminModeObserver.observe(document.body, {
-    attributes: true,
-    attributeFilter: ["class"]
-});
-
-/* ---------------------------------------------------------------------------
-   Wizard State
---------------------------------------------------------------------------- */
-let sectionWizardState = {
-    step: 1,
-    section: {
-        id: "",
-        title: "",
-        required: false,
-        description: "",
-        fields: []
-    }
+    <div style="margin-top:20px; text-align:right;">
+      <button data-action="cancel">Cancel</button>
+    </div>
+  `;
 };
 
 /* ---------------------------------------------------------------------------
-   Open Wizard
+   STEP 2 — Section Details
 --------------------------------------------------------------------------- */
-function openSectionWizard() {
-    console.log("🟢 openSectionWizard fired");
+window.renderSectionWizardStep2 = function () {
+  const s = window.sectionWizardState.draftSection;
 
-    // 🔥 TEMP: bypass guards for validation
-    if (!window.activeTemplate) {
-        window.activeTemplate = { sections: [] };
-        console.warn("⚠️ activeTemplate was missing — stubbed");
-    }
+  return `
+    <h2 style="margin-bottom:12px;">Section Details</h2>
 
-    if (!Array.isArray(activeTemplate.sections)) {
-        activeTemplate.sections = [];
-        console.warn("⚠️ sections array was missing — fixed");
-    }
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <label>
+        <div style="font-size:12px;">Section Title *</div>
+        <input id="wizardSectionTitle"
+          value="${s.title || ""}"
+          style="padding:8px; width:100%;" />
+      </label>
 
-    sectionWizardState = {
-        step: 1,
-        section: {
-            id: `section_${crypto.randomUUID()}`,
-            title: "",
-            required: false,
-            description: "",
-            fields: []
-        }
-    };
+      <label style="display:flex; gap:8px; align-items:center;">
+        <input type="checkbox" id="wizardSectionRequired"
+          ${s.required ? "checked" : ""} />
+        Required section
+      </label>
 
-    const existing = document.getElementById("sectionWizardModal");
-    if (existing) existing.remove();
+      <label>
+        <div style="font-size:12px;">Description (optional)</div>
+        <textarea id="wizardSectionDescription"
+          style="padding:8px; width:100%;" rows="3"
+        >${s.description || ""}</textarea>
+      </label>
+    </div>
 
-    const modal = document.createElement("div");
-    modal.id = "sectionWizardModal";
-    modal.style.position = "fixed";
-    modal.style.inset = "0";
-    modal.style.background = "rgba(0,0,0,0.45)";
-    modal.style.zIndex = "99999";
+    <div style="margin-top:20px; display:flex; justify-content:space-between;">
+      <button data-action="back">Back</button>
+      <button data-action="next">Next</button>
+    </div>
+  `;
+};
 
-    modal.innerHTML = `
+/* ---------------------------------------------------------------------------
+   STEP 3 — Field Builder
+--------------------------------------------------------------------------- */
+window.renderSectionWizardStep3 = function () {
+  const fields = window.sectionWizardState.draftSection.fields || [];
+
+  const rows = fields.length
+    ? fields.map((f, i) => `
         <div style="
-            background:#fff;
-            max-width:600px;
-            margin:10vh auto;
-            padding:24px;
-            border-radius:12px;
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          border:1px solid #ddd;
+          padding:8px;
+          border-radius:6px;
         ">
-            ${renderSectionWizardStep()}
+          <div>
+            <strong>${f.label}</strong>
+            <div style="font-size:12px; color:#555;">
+              Type: ${f.type}
+            </div>
+          </div>
+          <button data-action="remove-field" data-index="${i}">
+            🗑 Remove
+          </button>
         </div>
-    `;
+      `).join("")
+    : `<p style="color:#666;">No fields added yet.</p>`;
 
-    modal.addEventListener("click", handleWizardActions);
-    document.body.appendChild(modal);
+  return `
+    <h2 style="margin-bottom:12px;">Field Builder</h2>
+    <p>Add fields to this section.</p>
 
-    console.log("🟢 Section Wizard opened (forced)");
-}
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      ${rows}
+    </div>
 
-/* ---------------------------------------------------------------------------
-   Render Wizard Steps
---------------------------------------------------------------------------- */
-function renderSectionWizardStep() {
-    const s = sectionWizardState.section;
+    <div style="margin-top:16px;">
+      <button data-action="add-field">➕ Add Field</button>
+    </div>
 
-    if (sectionWizardState.step === 1) {
-        return `
-            <h2>Create Section</h2>
-
-            <label>
-                Title
-                <input id="sectionTitle" value="${s.title}" />
-            </label>
-
-            <label>
-                <input type="checkbox" id="sectionRequired" ${s.required ? "checked" : ""}/>
-                Required
-            </label>
-
-            <label>
-                Description
-                <textarea id="sectionDescription">${s.description}</textarea>
-            </label>
-
-            <button data-action="next">Next</button>
-            <button data-action="close">Cancel</button>
-        `;
-    }
-
-    if (sectionWizardState.step === 2) {
-        const fields = s.fields.map((f, i) => `
-            <div>
-                <strong>${f.label}</strong> (${f.type})
-                <button data-remove="${i}">Remove</button>
-            </div>
-        `).join("");
-
-        return `
-            <h2>Fields</h2>
-
-            ${fields || "<p>No fields yet.</p>"}
-
-            <button data-action="addField">Add Field</button>
-            <button data-action="back">Back</button>
-            <button data-action="next">Next</button>
-        `;
-    }
-
-    return `
-        <h2>Review</h2>
-
-        <p><strong>${s.title}</strong></p>
-        <p>${s.description || "(No description)"}</p>
-
-        <ul>
-            ${s.fields.map(f => `<li>${f.label} (${f.type})</li>`).join("")}
-        </ul>
-
-        <button data-action="back">Back</button>
-        <button data-action="save">Save Section</button>
-    `;
-}
+    <div style="margin-top:24px; display:flex; justify-content:space-between;">
+      <button data-action="back">Back</button>
+      <button data-action="next">Next</button>
+    </div>
+  `;
+};
 
 /* ---------------------------------------------------------------------------
-   Actions
+   STEP 4 — Review & Confirm
 --------------------------------------------------------------------------- */
-function handleWizardActions(e) {
+window.renderSectionWizardStep4 = function () {
+  const s = window.sectionWizardState.draftSection;
+
+  const fieldList = s.fields.length
+    ? s.fields.map(f => `<li><strong>${f.label}</strong> — ${f.type}</li>`).join("")
+    : `<li><em>No fields added</em></li>`;
+
+  return `
+    <h2 style="margin-bottom:12px;">Review Section</h2>
+
+    <p><strong>Title:</strong> ${s.title}</p>
+    <p><strong>Required:</strong> ${s.required ? "Yes" : "No"}</p>
+    <p><strong>Description:</strong><br/>
+      ${s.description || "<em>None</em>"}
+    </p>
+
+    <div style="margin-top:12px;">
+      <strong>Fields:</strong>
+      <ul style="margin-top:6px;">
+        ${fieldList}
+      </ul>
+    </div>
+
+    <div style="margin-top:24px; display:flex; justify-content:space-between;">
+      <button data-action="back">Back</button>
+      <button data-action="confirm">✅ Create Section</button>
+    </div>
+  `;
+};
+
+/* ---------------------------------------------------------------------------
+   OPEN WIZARD + UNIFIED HANDLER
+--------------------------------------------------------------------------- */
+window.openSectionWizard = function () {
+  window.sectionWizardState.step = 1;
+  window.sectionWizardState.mode = null;
+  window.sectionWizardState.draftSection = null;
+
+  const existing = document.getElementById("sectionWizardModal");
+  if (existing) existing.remove();
+
+  const modal = document.createElement("div");
+  modal.id = "sectionWizardModal";
+  modal.style.position = "fixed";
+  modal.style.inset = "0";
+  modal.style.background = "rgba(0,0,0,0.45)";
+  modal.style.zIndex = "99999";
+
+  modal.innerHTML = `
+    <div id="sectionWizardContent" style="
+      background:#fff;
+      max-width:540px;
+      margin:15vh auto;
+      padding:24px;
+      border-radius:12px;
+    ">
+      ${renderSectionWizardStep1()}
+    </div>
+  `;
+
+  modal.addEventListener("click", function (e) {
     const action = e.target.dataset.action;
+    if (!action) return;
 
-    if (action === "close") {
-        closeSectionWizard();
+    const content = document.getElementById("sectionWizardContent");
+
+    // Cancel
+    if (action === "cancel") {
+      modal.remove();
+      return;
+    }
+
+    // Step 1 → Step 2
+    if (action === "start-blank") {
+      startBlankSection();
+      content.innerHTML = renderSectionWizardStep2();
+      return;
+    }
+
+    // Step 2 → Step 1
+    if (action === "back" && window.sectionWizardState.step === 2) {
+      window.sectionWizardState.step = 1;
+      content.innerHTML = renderSectionWizardStep1();
+      return;
+    }
+
+    // Step 2 → Step 3
+    if (action === "next" && window.sectionWizardState.step === 2) {
+      const title = document.getElementById("wizardSectionTitle").value.trim();
+      if (!title) {
+        alert("Section title is required.");
         return;
+      }
+
+      window.sectionWizardState.draftSection.title = title;
+      window.sectionWizardState.draftSection.required =
+        document.getElementById("wizardSectionRequired").checked;
+      window.sectionWizardState.draftSection.description =
+        document.getElementById("wizardSectionDescription").value.trim();
+
+      window.sectionWizardState.step = 3;
+      content.innerHTML = renderSectionWizardStep3();
+      return;
     }
 
-    if (action === "next") {
-        if (sectionWizardState.step === 1) {
-            const title = document.getElementById("sectionTitle").value.trim();
-            if (!title) {
-                alert("Title is required.");
-                return;
-            }
-            sectionWizardState.section.title = title;
-            sectionWizardState.section.required =
-                document.getElementById("sectionRequired").checked;
-            sectionWizardState.section.description =
-                document.getElementById("sectionDescription").value.trim();
-        }
-        sectionWizardState.step++;
+    // Step 3 → Step 2
+    if (action === "back" && window.sectionWizardState.step === 3) {
+      window.sectionWizardState.step = 2;
+      content.innerHTML = renderSectionWizardStep2();
+      return;
     }
 
-    if (action === "back") {
-        sectionWizardState.step--;
-    }
+    // Step 3 → Add Field
+    if (action === "add-field") {
+      const label = prompt("Field label?");
+      if (!label) return;
 
-    if (action === "addField") {
-        const label = prompt("Field label?");
-        if (!label) return;
-
-        const type = prompt("Type: text | textarea | date | choice");
-        if (!["text", "textarea", "date", "choice"].includes(type)) {
-            alert("Invalid field type.");
-            return;
-        }
-
-        const field = {
-            id: `field_${crypto.randomUUID()}`,
-            label,
-            type,
-            required: false
-        };
-
-        if (type === "choice") {
-            const opts = prompt("Choices (comma separated)");
-            field.choices = opts ? opts.split(",").map(v => v.trim()) : [];
-        }
-
-        sectionWizardState.section.fields.push(field);
-    }
-
-    if (action === "save") {
-        activeTemplate.sections.push(
-            JSON.parse(JSON.stringify(sectionWizardState.section))
-        );
-        renderTemplateSections(activeTemplate);
-        closeSectionWizard();
+      const type = prompt("Type: text, textarea, date, choice");
+      if (!["text", "textarea", "date", "choice"].includes(type)) {
+        alert("Invalid type.");
         return;
+      }
+
+      const field = {
+        id: "field_" + crypto.randomUUID(),
+        label,
+        type
+      };
+
+      if (type === "choice") {
+        const opts = prompt("Choices (comma-separated)");
+        field.choices = opts ? opts.split(",").map(v => v.trim()) : [];
+      }
+
+      window.sectionWizardState.draftSection.fields.push(field);
+      content.innerHTML = renderSectionWizardStep3();
+      return;
     }
 
-    if (e.target.dataset.remove !== undefined) {
-        sectionWizardState.section.fields.splice(
-            Number(e.target.dataset.remove),
-            1
-        );
+    // Step 3 → Remove Field
+    if (action === "remove-field") {
+      const idx = Number(e.target.dataset.index);
+      window.sectionWizardState.draftSection.fields.splice(idx, 1);
+      content.innerHTML = renderSectionWizardStep3();
+      return;
     }
 
-    const modal = document.getElementById("sectionWizardModal");
-    if (modal) {
-        modal.innerHTML = `
-            <div style="
-                background:#fff;
-                max-width:600px;
-                margin:10vh auto;
-                padding:24px;
-                border-radius:12px;
-            ">
-                ${renderSectionWizardStep()}
-            </div>
-        `;
+    // Step 3 → Step 4
+    if (action === "next" && window.sectionWizardState.step === 3) {
+      window.sectionWizardState.step = 4;
+      content.innerHTML = renderSectionWizardStep4();
+      return;
     }
+
+    // Step 4 → Step 3
+    if (action === "back" && window.sectionWizardState.step === 4) {
+      window.sectionWizardState.step = 3;
+      content.innerHTML = renderSectionWizardStep3();
+      return;
+    }
+
+    // FINAL COMMIT
+    if (action === "confirm") {
+  if (!window.activeTemplate || !Array.isArray(activeTemplate.sections)) {
+    alert("No active template selected.");
+    return;
+  }
+
+  activeTemplate.sections.push(
+    structuredClone(window.sectionWizardState.draftSection)
+  );
+
+  console.log("✅ Section committed:", window.sectionWizardState.draftSection);
+
+  renderTemplateSections(activeTemplate);
+
+  document.getElementById("sectionWizardModal").remove();
+
+  // reset wizard state
+  window.sectionWizardState.step = 1;
+  window.sectionWizardState.mode = null;
+  window.sectionWizardState.draftSection = null;
+
+  return;
 }
+  });
 
-/* ---------------------------------------------------------------------------
-   Close Wizard
---------------------------------------------------------------------------- */
-function closeSectionWizard() {
-    const modal = document.getElementById("sectionWizardModal");
-    if (modal) modal.remove();
-    console.log("🧹 Section Wizard closed");
-}
-// ============================================================================
-// SECTION WIZARD – WIRE INTO EXISTING UI BUTTON
+  document.body.appendChild(modal);
+};
+
+
+// ================================
+// Section Wizard (WIP)
+// Step 4: Render Step 2 UI (Section Details)
 // Date: 2025-12-22
-// Purpose: Reuse #btnSectionPicker to open Section Wizard
-// ============================================================================
+// ================================
 
-(function wireSectionWizardButton() {
-    document.addEventListener("click", function (e) {
-        const btn = e.target.closest("#btnSectionPicker");
-        if (!btn) return;
+// // new: render step 2 UI
+window.renderSectionWizardStep2 = function () {
+  const s = window.sectionWizardState.draftSection;
 
-        console.log("🟢 Section Picker button intercepted");
+  return `
+    <h2 style="margin-bottom:12px;">Section Details</h2>
 
-        // Stop existing behavior
-        e.preventDefault();
-        e.stopPropagation();
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <label>
+        <div style="font-size:12px; margin-bottom:4px;">Section Title *</div>
+        <input
+          id="wizardSectionTitle"
+          type="text"
+          value="${s.title || ""}"
+          style="width:100%; padding:8px;"
+        />
+      </label>
 
-        // Safety checks
-        if (!window.activeTemplate || !Array.isArray(activeTemplate.sections)) {
-            alert("Select a template first.");
-            return;
-        }
+      <label style="display:flex; align-items:center; gap:8px;">
+        <input
+          id="wizardSectionRequired"
+          type="checkbox"
+          ${s.required ? "checked" : ""}
+        />
+        Required section
+      </label>
 
-        // Open wizard
-        openSectionWizard();
-    }, true);
+      <label>
+        <div style="font-size:12px; margin-bottom:4px;">Description (optional)</div>
+        <textarea
+          id="wizardSectionDescription"
+          rows="3"
+          style="width:100%; padding:8px;"
+        >${s.description || ""}</textarea>
+      </label>
+    </div>
 
-    console.log("🧩 Section Wizard wired to #btnSectionPicker");
-})();
+    <div style="margin-top:20px; display:flex; justify-content:space-between;">
+      <button data-action="back">Back</button>
+      <button data-action="next">Next</button>
+    </div>
+  `;
+};
+// ================================
+// Section Wizard (WIP)
+// Step 5: Render Step 3 UI (Field Builder)
+// Date: 2025-12-22
+// ================================
+
+window.renderSectionWizardStep3 = function () {
+  const fields = window.sectionWizardState.draftSection.fields || [];
+
+  const fieldRows = fields.length
+    ? fields.map((f, i) => `
+        <div
+          style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:8px;
+            border:1px solid #e5e7eb;
+            border-radius:6px;
+          "
+        >
+          <div>
+            <strong>${f.label}</strong>
+            <div style="font-size:12px; color:#555;">
+              Type: ${f.type}${f.required ? " • Required" : ""}
+            </div>
+          </div>
+          <button data-action="remove-field" data-index="${i}">
+            🗑 Remove
+          </button>
+        </div>
+      `).join("")
+    : `<p style="color:#666;">No fields added yet.</p>`;
+
+  return `
+    <h2 style="margin-bottom:12px;">Field Builder</h2>
+    <p style="margin-bottom:16px;">
+      Add fields to this section.
+    </p>
+
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      ${fieldRows}
+    </div>
+
+    <div style="margin-top:16px;">
+      <button data-action="add-field">➕ Add Field</button>
+    </div>
+
+    <div style="margin-top:24px; display:flex; justify-content:space-between;">
+      <button data-action="back">Back</button>
+      <button data-action="next">Next</button>
+    </div>
+  `;
+};
+// ================================
+// Section Wizard (WIP)
+// Step 6: Render Step 4 UI (Review & Confirm)
+// Date: 2025-12-22
+// ================================
+
+window.renderSectionWizardStep4 = function () {
+  const s = window.sectionWizardState.draftSection;
+
+  const fieldList = s.fields.length
+    ? s.fields.map(f => `
+        <li>
+          <strong>${f.label}</strong> — ${f.type}
+        </li>
+      `).join("")
+    : `<li><em>No fields added</em></li>`;
+
+  return `
+    <h2 style="margin-bottom:12px;">Review Section</h2>
+
+    <div style="margin-bottom:12px;">
+      <strong>Title:</strong> ${s.title}
+    </div>
+
+    <div style="margin-bottom:12px;">
+      <strong>Required:</strong> ${s.required ? "Yes" : "No"}
+    </div>
+
+    <div style="margin-bottom:12px;">
+      <strong>Description:</strong><br/>
+      ${s.description || "<em>None</em>"}
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <strong>Fields:</strong>
+      <ul style="margin-top:6px;">
+        ${fieldList}
+      </ul>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin-top:20px;">
+      <button data-action="back">Back</button>
+      <button data-action="confirm">✅ Create Section</button>
+    </div>
+  `;
+};
