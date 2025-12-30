@@ -1439,6 +1439,14 @@ body.dark-mode select.journal-input {
 <div id="adminToggleFixed" class="admin-toggle-fixed">
     <button id="btnAdminToggle" class="px-3 py-1.5 rounded-full border border-amber-500 text-amber-700 hover:bg-amber-50 text-[11px]">Admin: OFF</button>
 </div>
+<!-- SECTION PREVIEW MODAL (Admin) -->
+<div id="previewModal" class="modal hidden">
+  <div class="modal-content">
+    <h3>Section Preview</h3>
+    <div id="previewBody"></div>
+    <button onclick="closePreview()">Close</button>
+  </div>
+</div>
 
 <!-- JS -->
 <script src="./app.js?v=20251124_001"></script>

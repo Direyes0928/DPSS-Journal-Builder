@@ -3100,6 +3100,52 @@ function hideUndoNotification() {
         notification.classList.add('hidden');
     }
 }
+// ============================================================================
+// BLANK TEMPLATE CREATION (Admin)
+// Date: 2025-12-29
+// Purpose: Create an empty template shell to attach sections
+// ============================================================================
+
+// // new
+window.createBlankTemplate = function () {
+    const name = prompt("Template name?");
+    if (!name) return;
+
+    const tpl = {
+        id: "template_" + crypto.randomUUID(),
+        name,
+        program: "Custom",
+        sections: [],
+        createdAt: new Date().toISOString(),
+        blank: true
+    };
+
+    // set as active
+    window.activeTemplate = tpl;
+
+    // OPTIONAL: add to allTemplates if you want it selectable later
+    window.allTemplates = window.allTemplates || [];
+    window.allTemplates.push(tpl);
+
+    // render empty state
+    renderTemplateSections(tpl);
+
+    alert(`Blank template "${name}" created.\nYou can now add sections.`);
+};
+
+// /12.30.2025: Add Create Blank Template button to admin header
+// // new: Create Blank Template button handler
+document.addEventListener("click", e => {
+  if (!e.target.closest("#btnCreateTemplate")) return; // // updated 2025-12-30
+
+  if (!document.body.classList.contains("admin-mode")) {
+    alert("Admin mode required.");
+    return;
+  }
+
+  console.log("🆕 Create Blank Template clicked"); // // debug
+  createBlankTemplate();
+});
 
 // ============================================================================
 // SECTION INTERACTION (Collapse / Required / Reorder)
@@ -5180,4 +5226,47 @@ window.applyAdminVisibility = function () {
   if (document.body.classList.contains("admin-mode")) {
     renderSectionLibrary();
   }
+};
+// ============================================================================
+// SECTION PREVIEW MODAL (Library / Admin)
+// Date: 2025-12-29
+// Purpose: Show clean modal preview instead of alert()
+// ============================================================================
+
+// // new
+window.openSectionPreview = function (section) {
+  const modal = document.getElementById("previewModal");
+  const body = document.getElementById("previewBody");
+
+  if (!modal || !body) {
+    console.warn("⚠️ Preview modal elements not found");
+    return;
+  }
+
+  body.innerHTML = `
+    <div style="margin-top:8px;">
+      <p><strong>${section.title}</strong></p>
+      <p style="font-size:12px; color:#555;">
+        ${section.description || "<em>No description</em>"}
+      </p>
+
+      <ul style="margin-top:8px;">
+        ${
+          section.fields?.length
+            ? section.fields.map(
+                f => `<li>${f.label} (${f.type})</li>`
+              ).join("")
+            : "<li><em>No fields</em></li>"
+        }
+      </ul>
+    </div>
+  `;
+
+  modal.classList.remove("hidden");
+};
+
+// // new
+window.closePreview = function () {
+  const modal = document.getElementById("previewModal");
+  if (modal) modal.classList.add("hidden");
 };
