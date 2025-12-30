@@ -851,19 +851,17 @@ function renderTemplateSections(tpl) {
         const addSectionBtn = document.createElement('button');
         addSectionBtn.className = 'admin-only px-3 py-2 mb-4 bg-green-600 text-white text-sm rounded hover:bg-green-700';
         addSectionBtn.textContent = '+ Add Section';
-        addSectionBtn.onclick = function() {
-            const newSection = {
-                id: `section_${Date.now()}`,
-                label: '',
-                title: '',
-                fields: [],
-                _clones: [[]],
-                required: false
-            };
-            tpl.sections.push(newSection);
-            renderTemplateSections(tpl);
-            persistActiveTemplateChanges && persistActiveTemplateChanges();
-        };
+        // // new: open Section Wizard instead of auto-creating section
+addSectionBtn.onclick = function () {
+    if (!window.activeTemplate) {
+        alert("Please select or create a template first.");
+        return;
+    }
+
+    console.log("🧩 Opening Section Wizard from + Add Section");
+    openSectionWizard();
+};
+
         root.appendChild(addSectionBtn);
 
         // Add section picker button
@@ -1853,7 +1851,6 @@ function initDarkMode() {
         document.body.classList.toggle("dark-mode");
     });
 }
-
 function initAdminMode() {
     document.getElementById("btnAdminToggle").addEventListener("click", async () => {
         const wasOn = document.body.classList.contains('admin-mode');
@@ -1866,6 +1863,16 @@ function initAdminMode() {
                 originalTemplateState = deepClone(activeTemplate);
                 console.log('💾 Captured original template state');
             }
+
+            // ===============================
+            // FORCE SECTION LIBRARY RENDER
+            // 2025-12-29 // new
+            // ===============================
+            if (typeof renderSectionLibrary === "function") {
+                renderSectionLibrary(); // // new
+                console.log('📚 Section Library rendered on admin enable'); // // new
+            }
+
         } else if (!on && wasOn) {
             // Exiting admin mode - offer to undo changes
             if (activeTemplate && originalTemplateState && changeLog.length > 0) {
@@ -1905,6 +1912,7 @@ function initAdminMode() {
         applyAdminVisibility();
     });
 }
+
 
 function applyAdminVisibility() {
     const isOn = document.body.classList.contains('admin-mode');
@@ -4797,64 +4805,128 @@ function hideRefreshToast() {
     }
 
 })();
-// ================================
-// Section Wizard (WIP)
-// Global exposure guard
-// Date: 2025-12-22
-// ================================
+// ============================================================================
+// SECTION LIBRARY + SECTION WIZARD (FINAL — LIBRARY MODE)
+// Purpose: Admin-only creation of reusable sections (no template required)
+// Storage: localStorage ("dpss_sectionLibrary")
+// Date: 2025-12-29
+// ============================================================================
 
-window.sectionWizardState = window.sectionWizardState || {
+
+/* ---------------------------------------------------------------------------
+   SECTION LIBRARY (Persistent Storage)
+--------------------------------------------------------------------------- */
+
+// // new: load library
+window.sectionLibrary = JSON.parse(
+  localStorage.getItem("dpss_sectionLibrary") || "[]"
+);
+
+// // new: persist library
+window.persistSectionLibrary = function () {
+  localStorage.setItem(
+    "dpss_sectionLibrary",
+    JSON.stringify(window.sectionLibrary)
+  );
+};
+
+
+/* ---------------------------------------------------------------------------
+   RENDER SECTION LIBRARY (Admin Panel UI)
+--------------------------------------------------------------------------- */
+
+// // new
+window.renderSectionLibrary = function () {
+  const root = document.getElementById("sectionLibraryList");
+  if (!root) {
+    console.warn("⚠️ sectionLibraryList element not found");
+    return;
+  }
+
+  root.innerHTML = "";
+
+  if (!window.sectionLibrary.length) {
+    root.innerHTML =
+      `<p class="text-xs text-slate-400 italic">No saved sections yet.</p>`;
+    return;
+  }
+
+  window.sectionLibrary.forEach(sec => {
+    const el = document.createElement("div");
+    el.className =
+      "border border-slate-200 rounded-lg p-3 bg-white flex justify-between items-center";
+
+    el.innerHTML = `
+      <div>
+        <div class="text-sm font-semibold">${sec.title}</div>
+        <div class="text-xs text-slate-500">
+          ${sec.fields?.length || 0} fields
+        </div>
+      </div>
+
+      <div class="flex gap-2">
+        <button
+          class="px-2 py-1 text-xs border rounded"
+          onclick="previewLibrarySection('${sec.id}')"
+        >
+          Preview
+        </button>
+
+        <button
+          class="px-2 py-1 text-xs bg-green-600 text-white rounded"
+          onclick="addLibrarySectionToTemplate('${sec.id}')"
+        >
+          + Add
+        </button>
+      </div>
+    `;
+
+    root.appendChild(el);
+  });
+};
+
+
+/* ---------------------------------------------------------------------------
+   WIZARD STATE
+--------------------------------------------------------------------------- */
+
+window.sectionWizardState = {
   step: 1,
-  mode: null,
   draftSection: null
 };
 
-window.openSectionWizard = function () {
-  window.sectionWizardState.step = 1;
-  window.sectionWizardState.mode = null;
-  window.sectionWizardState.draftSection = null;
 
-  console.log("Section Wizard opened:", window.sectionWizardState);
-};
+/* ---------------------------------------------------------------------------
+   INIT BLANK SECTION
+--------------------------------------------------------------------------- */
 
+// // new
 window.startBlankSection = function () {
-  window.sectionWizardState.mode = "blank";
   window.sectionWizardState.step = 2;
-
   window.sectionWizardState.draftSection = {
     id: "section_" + crypto.randomUUID(),
     title: "",
     required: false,
     description: "",
-    fields: []
+    fields: [],
+    createdAt: new Date().toISOString(),
+    source: "library"
   };
-
-  console.log("Blank section initialized:", window.sectionWizardState);
 };
-// ================================
-// Section Wizard (WIP)
-// Steps 1–4: Start → Details → Field Builder → Review & Confirm
-// Date: 2025-12-22
-// ================================
+
 
 /* ---------------------------------------------------------------------------
-   STEP 1 — Choose Starting Point
+   WIZARD STEPS
 --------------------------------------------------------------------------- */
+
 window.renderSectionWizardStep1 = function () {
   return `
-    <h2 style="margin-bottom:12px;">Create Section</h2>
-    <p style="margin-bottom:20px;">
-      How do you want to start this section?
-    </p>
+    <h2>Create Section</h2>
+    <p>Create a reusable section for the Section Library.</p>
 
-    <div style="display:flex; flex-direction:column; gap:12px;">
-      <button data-action="start-blank" style="padding:12px; font-size:14px;">
-        🆕 Start from Blank
-      </button>
-
-      <button disabled style="padding:12px; font-size:14px; opacity:0.5;">
-        ♻️ Reuse from Existing Section (Coming Soon)
-      </button>
+    <div style="margin-top:16px; display:flex; flex-direction:column; gap:12px;">
+      <button data-action="start-blank">🆕 Start from Blank</button>
+      <button disabled style="opacity:.5;">Reuse Existing (Coming Soon)</button>
     </div>
 
     <div style="margin-top:20px; text-align:right;">
@@ -4863,36 +4935,27 @@ window.renderSectionWizardStep1 = function () {
   `;
 };
 
-/* ---------------------------------------------------------------------------
-   STEP 2 — Section Details
---------------------------------------------------------------------------- */
 window.renderSectionWizardStep2 = function () {
   const s = window.sectionWizardState.draftSection;
 
   return `
-    <h2 style="margin-bottom:12px;">Section Details</h2>
+    <h2>Section Details</h2>
 
-    <div style="display:flex; flex-direction:column; gap:12px;">
-      <label>
-        <div style="font-size:12px;">Section Title *</div>
-        <input id="wizardSectionTitle"
-          value="${s.title || ""}"
-          style="padding:8px; width:100%;" />
-      </label>
+    <label>
+      <div>Section Title *</div>
+      <input id="wizardSectionTitle" value="${s.title}" />
+    </label>
 
-      <label style="display:flex; gap:8px; align-items:center;">
-        <input type="checkbox" id="wizardSectionRequired"
-          ${s.required ? "checked" : ""} />
-        Required section
-      </label>
+    <label style="display:flex; gap:8px; margin-top:8px;">
+      <input type="checkbox" id="wizardSectionRequired"
+        ${s.required ? "checked" : ""} />
+      Required section
+    </label>
 
-      <label>
-        <div style="font-size:12px;">Description (optional)</div>
-        <textarea id="wizardSectionDescription"
-          style="padding:8px; width:100%;" rows="3"
-        >${s.description || ""}</textarea>
-      </label>
-    </div>
+    <label style="margin-top:8px;">
+      <div>Description</div>
+      <textarea id="wizardSectionDescription" rows="3">${s.description}</textarea>
+    </label>
 
     <div style="margin-top:20px; display:flex; justify-content:space-between;">
       <button data-action="back">Back</button>
@@ -4901,394 +4964,220 @@ window.renderSectionWizardStep2 = function () {
   `;
 };
 
-/* ---------------------------------------------------------------------------
-   STEP 3 — Field Builder
---------------------------------------------------------------------------- */
 window.renderSectionWizardStep3 = function () {
-  const fields = window.sectionWizardState.draftSection.fields || [];
+  const fields = window.sectionWizardState.draftSection.fields;
 
   const rows = fields.length
     ? fields.map((f, i) => `
-        <div style="
-          display:flex;
-          justify-content:space-between;
-          align-items:center;
-          border:1px solid #ddd;
-          padding:8px;
-          border-radius:6px;
-        ">
-          <div>
-            <strong>${f.label}</strong>
-            <div style="font-size:12px; color:#555;">
-              Type: ${f.type}
-            </div>
-          </div>
-          <button data-action="remove-field" data-index="${i}">
-            🗑 Remove
-          </button>
+        <div style="border:1px solid #ddd; padding:8px; display:flex; justify-content:space-between;">
+          <div><strong>${f.label}</strong> (${f.type})</div>
+          <button data-action="remove-field" data-index="${i}">🗑</button>
         </div>
       `).join("")
-    : `<p style="color:#666;">No fields added yet.</p>`;
+    : `<p><em>No fields added yet.</em></p>`;
 
   return `
-    <h2 style="margin-bottom:12px;">Field Builder</h2>
-    <p>Add fields to this section.</p>
+    <h2>Field Builder</h2>
 
-    <div style="display:flex; flex-direction:column; gap:8px;">
-      ${rows}
-    </div>
+    <div style="margin-top:12px;">${rows}</div>
 
-    <div style="margin-top:16px;">
-      <button data-action="add-field">➕ Add Field</button>
-    </div>
+    <button data-action="add-field" style="margin-top:12px;">➕ Add Field</button>
 
-    <div style="margin-top:24px; display:flex; justify-content:space-between;">
+    <div style="margin-top:20px; display:flex; justify-content:space-between;">
       <button data-action="back">Back</button>
       <button data-action="next">Next</button>
     </div>
   `;
 };
 
-/* ---------------------------------------------------------------------------
-   STEP 4 — Review & Confirm
---------------------------------------------------------------------------- */
 window.renderSectionWizardStep4 = function () {
   const s = window.sectionWizardState.draftSection;
 
-  const fieldList = s.fields.length
-    ? s.fields.map(f => `<li><strong>${f.label}</strong> — ${f.type}</li>`).join("")
-    : `<li><em>No fields added</em></li>`;
-
   return `
-    <h2 style="margin-bottom:12px;">Review Section</h2>
+    <h2>Review Section</h2>
 
     <p><strong>Title:</strong> ${s.title}</p>
     <p><strong>Required:</strong> ${s.required ? "Yes" : "No"}</p>
-    <p><strong>Description:</strong><br/>
-      ${s.description || "<em>None</em>"}
-    </p>
+    <p><strong>Description:</strong> ${s.description || "<em>None</em>"}</p>
 
-    <div style="margin-top:12px;">
-      <strong>Fields:</strong>
-      <ul style="margin-top:6px;">
-        ${fieldList}
-      </ul>
-    </div>
+    <ul>
+      ${s.fields.length
+        ? s.fields.map(f => `<li>${f.label} (${f.type})</li>`).join("")
+        : "<li><em>No fields</em></li>"}
+    </ul>
 
-    <div style="margin-top:24px; display:flex; justify-content:space-between;">
+    <div style="margin-top:20px; display:flex; justify-content:space-between;">
       <button data-action="back">Back</button>
-      <button data-action="confirm">✅ Create Section</button>
+      <button data-action="confirm">✅ Save to Library</button>
     </div>
   `;
 };
 
+
 /* ---------------------------------------------------------------------------
-   OPEN WIZARD + UNIFIED HANDLER
+   OPEN WIZARD + EVENT HANDLER
 --------------------------------------------------------------------------- */
+
+// // new
 window.openSectionWizard = function () {
   window.sectionWizardState.step = 1;
-  window.sectionWizardState.mode = null;
   window.sectionWizardState.draftSection = null;
 
-  const existing = document.getElementById("sectionWizardModal");
-  if (existing) existing.remove();
+  document.getElementById("sectionWizardModal")?.remove();
 
   const modal = document.createElement("div");
   modal.id = "sectionWizardModal";
-  modal.style.position = "fixed";
-  modal.style.inset = "0";
-  modal.style.background = "rgba(0,0,0,0.45)";
-  modal.style.zIndex = "99999";
+  modal.style.cssText =
+    "position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:99999";
 
   modal.innerHTML = `
-    <div id="sectionWizardContent" style="
-      background:#fff;
-      max-width:540px;
-      margin:15vh auto;
-      padding:24px;
-      border-radius:12px;
-    ">
+    <div id="sectionWizardContent"
+         style="background:#fff; max-width:520px; margin:15vh auto; padding:24px;">
       ${renderSectionWizardStep1()}
     </div>
   `;
 
-  modal.addEventListener("click", function (e) {
+  modal.addEventListener("click", e => {
     const action = e.target.dataset.action;
     if (!action) return;
 
+    const state = window.sectionWizardState;
     const content = document.getElementById("sectionWizardContent");
 
-    // Cancel
-    if (action === "cancel") {
-      modal.remove();
-      return;
-    }
+    if (action === "cancel") return modal.remove();
 
-    // Step 1 → Step 2
     if (action === "start-blank") {
       startBlankSection();
-      content.innerHTML = renderSectionWizardStep2();
-      return;
+      return content.innerHTML = renderSectionWizardStep2();
     }
 
-    // Step 2 → Step 1
-    if (action === "back" && window.sectionWizardState.step === 2) {
-      window.sectionWizardState.step = 1;
-      content.innerHTML = renderSectionWizardStep1();
-      return;
-    }
+    if (action === "back") state.step--;
 
-    // Step 2 → Step 3
-    if (action === "next" && window.sectionWizardState.step === 2) {
-      const title = document.getElementById("wizardSectionTitle").value.trim();
-      if (!title) {
-        alert("Section title is required.");
-        return;
+    if (action === "next") {
+      if (state.step === 2) {
+        const title = document.getElementById("wizardSectionTitle").value.trim();
+        if (!title) return alert("Section title is required.");
+
+        state.draftSection.title = title;
+        state.draftSection.required =
+          document.getElementById("wizardSectionRequired").checked;
+        state.draftSection.description =
+          document.getElementById("wizardSectionDescription").value.trim();
       }
-
-      window.sectionWizardState.draftSection.title = title;
-      window.sectionWizardState.draftSection.required =
-        document.getElementById("wizardSectionRequired").checked;
-      window.sectionWizardState.draftSection.description =
-        document.getElementById("wizardSectionDescription").value.trim();
-
-      window.sectionWizardState.step = 3;
-      content.innerHTML = renderSectionWizardStep3();
-      return;
+      state.step++;
     }
 
-    // Step 3 → Step 2
-    if (action === "back" && window.sectionWizardState.step === 3) {
-      window.sectionWizardState.step = 2;
-      content.innerHTML = renderSectionWizardStep2();
-      return;
-    }
-
-    // Step 3 → Add Field
     if (action === "add-field") {
       const label = prompt("Field label?");
       if (!label) return;
 
       const type = prompt("Type: text, textarea, date, choice");
-      if (!["text", "textarea", "date", "choice"].includes(type)) {
-        alert("Invalid type.");
-        return;
-      }
+      if (!["text", "textarea", "date", "choice"].includes(type)) return;
 
-      const field = {
-        id: "field_" + crypto.randomUUID(),
-        label,
-        type
-      };
-
+      const field = { id: crypto.randomUUID(), label, type };
       if (type === "choice") {
         const opts = prompt("Choices (comma-separated)");
         field.choices = opts ? opts.split(",").map(v => v.trim()) : [];
       }
-
-      window.sectionWizardState.draftSection.fields.push(field);
-      content.innerHTML = renderSectionWizardStep3();
-      return;
+      state.draftSection.fields.push(field);
     }
 
-    // Step 3 → Remove Field
     if (action === "remove-field") {
-      const idx = Number(e.target.dataset.index);
-      window.sectionWizardState.draftSection.fields.splice(idx, 1);
-      content.innerHTML = renderSectionWizardStep3();
-      return;
+      state.draftSection.fields.splice(Number(e.target.dataset.index), 1);
     }
 
-    // Step 3 → Step 4
-    if (action === "next" && window.sectionWizardState.step === 3) {
-      window.sectionWizardState.step = 4;
-      content.innerHTML = renderSectionWizardStep4();
-      return;
-    }
-
-    // Step 4 → Step 3
-    if (action === "back" && window.sectionWizardState.step === 4) {
-      window.sectionWizardState.step = 3;
-      content.innerHTML = renderSectionWizardStep3();
-      return;
-    }
-
-    // FINAL COMMIT
     if (action === "confirm") {
-  if (!window.activeTemplate || !Array.isArray(activeTemplate.sections)) {
-    alert("No active template selected.");
-    return;
-  }
+      window.sectionLibrary.push(structuredClone(state.draftSection));
+      persistSectionLibrary();
+      renderSectionLibrary();
+      modal.remove();
+      return;
+    }
 
-  activeTemplate.sections.push(
-    structuredClone(window.sectionWizardState.draftSection)
-  );
+    const renderMap = {
+      1: renderSectionWizardStep1,
+      2: renderSectionWizardStep2,
+      3: renderSectionWizardStep3,
+      4: renderSectionWizardStep4
+    };
 
-  console.log("✅ Section committed:", window.sectionWizardState.draftSection);
-
-  renderTemplateSections(activeTemplate);
-
-  document.getElementById("sectionWizardModal").remove();
-
-  // reset wizard state
-  window.sectionWizardState.step = 1;
-  window.sectionWizardState.mode = null;
-  window.sectionWizardState.draftSection = null;
-
-  return;
-}
+    content.innerHTML = renderMap[state.step]();
   });
 
   document.body.appendChild(modal);
 };
 
 
-// ================================
-// Section Wizard (WIP)
-// Step 4: Render Step 2 UI (Section Details)
-// Date: 2025-12-22
-// ================================
+/* ---------------------------------------------------------------------------
+   ADMIN PANEL BUTTON — OPEN WIZARD
+--------------------------------------------------------------------------- */
 
-// // new: render step 2 UI
-window.renderSectionWizardStep2 = function () {
-  const s = window.sectionWizardState.draftSection;
+// // new
+document.addEventListener("click", e => {
+  if (!e.target.closest("#btnAddSectionAdmin")) return;
 
-  return `
-    <h2 style="margin-bottom:12px;">Section Details</h2>
+  if (!document.body.classList.contains("admin-mode")) {
+    alert("Admin mode must be ON.");
+    return;
+  }
 
-    <div style="display:flex; flex-direction:column; gap:12px;">
-      <label>
-        <div style="font-size:12px; margin-bottom:4px;">Section Title *</div>
-        <input
-          id="wizardSectionTitle"
-          type="text"
-          value="${s.title || ""}"
-          style="width:100%; padding:8px;"
-        />
-      </label>
+  openSectionWizard();
+});
 
-      <label style="display:flex; align-items:center; gap:8px;">
-        <input
-          id="wizardSectionRequired"
-          type="checkbox"
-          ${s.required ? "checked" : ""}
-        />
-        Required section
-      </label>
 
-      <label>
-        <div style="font-size:12px; margin-bottom:4px;">Description (optional)</div>
-        <textarea
-          id="wizardSectionDescription"
-          rows="3"
-          style="width:100%; padding:8px;"
-        >${s.description || ""}</textarea>
-      </label>
-    </div>
+/* ---------------------------------------------------------------------------
+   LIBRARY → TEMPLATE INTEGRATION
+--------------------------------------------------------------------------- */
 
-    <div style="margin-top:20px; display:flex; justify-content:space-between;">
-      <button data-action="back">Back</button>
-      <button data-action="next">Next</button>
-    </div>
-  `;
+// // new
+window.previewLibrarySection = function (sectionId) {
+  const section = window.sectionLibrary.find(s => s.id === sectionId);
+  if (!section) return;
+
+  alert(
+    "SECTION PREVIEW\n\n" +
+    section.title +
+    "\n\nFields:\n" +
+    section.fields.map(f => `• ${f.label} (${f.type})`).join("\n")
+  );
 };
-// ================================
-// Section Wizard (WIP)
-// Step 5: Render Step 3 UI (Field Builder)
-// Date: 2025-12-22
-// ================================
 
-window.renderSectionWizardStep3 = function () {
-  const fields = window.sectionWizardState.draftSection.fields || [];
+// // new
+window.addLibrarySectionToTemplate = function (sectionId) {
+  if (!window.activeTemplate) {
+    alert("No active template selected.");
+    return;
+  }
 
-  const fieldRows = fields.length
-    ? fields.map((f, i) => `
-        <div
-          style="
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:8px;
-            border:1px solid #e5e7eb;
-            border-radius:6px;
-          "
-        >
-          <div>
-            <strong>${f.label}</strong>
-            <div style="font-size:12px; color:#555;">
-              Type: ${f.type}${f.required ? " • Required" : ""}
-            </div>
-          </div>
-          <button data-action="remove-field" data-index="${i}">
-            🗑 Remove
-          </button>
-        </div>
-      `).join("")
-    : `<p style="color:#666;">No fields added yet.</p>`;
+  const source = window.sectionLibrary.find(s => s.id === sectionId);
+  if (!source) return;
 
-  return `
-    <h2 style="margin-bottom:12px;">Field Builder</h2>
-    <p style="margin-bottom:16px;">
-      Add fields to this section.
-    </p>
+  const cloned = structuredClone(source);
+  cloned.id = "section_" + crypto.randomUUID();
+  cloned.fromLibrary = true;
+  cloned.addedAt = new Date().toISOString();
 
-    <div style="display:flex; flex-direction:column; gap:8px;">
-      ${fieldRows}
-    </div>
-
-    <div style="margin-top:16px;">
-      <button data-action="add-field">➕ Add Field</button>
-    </div>
-
-    <div style="margin-top:24px; display:flex; justify-content:space-between;">
-      <button data-action="back">Back</button>
-      <button data-action="next">Next</button>
-    </div>
-  `;
+  window.activeTemplate.sections.push(cloned);
+  renderTemplateSections(window.activeTemplate);
 };
-// ================================
-// Section Wizard (WIP)
-// Step 6: Render Step 4 UI (Review & Confirm)
-// Date: 2025-12-22
-// ================================
 
-window.renderSectionWizardStep4 = function () {
-  const s = window.sectionWizardState.draftSection;
 
-  const fieldList = s.fields.length
-    ? s.fields.map(f => `
-        <li>
-          <strong>${f.label}</strong> — ${f.type}
-        </li>
-      `).join("")
-    : `<li><em>No fields added</em></li>`;
+/* ---------------------------------------------------------------------------
+   INITIAL LOAD + ADMIN MODE RE-RENDER
+--------------------------------------------------------------------------- */
 
-  return `
-    <h2 style="margin-bottom:12px;">Review Section</h2>
+// // new
+document.addEventListener("DOMContentLoaded", () => {
+  if (document.body.classList.contains("admin-mode")) {
+    renderSectionLibrary();
+  }
+});
 
-    <div style="margin-bottom:12px;">
-      <strong>Title:</strong> ${s.title}
-    </div>
-
-    <div style="margin-bottom:12px;">
-      <strong>Required:</strong> ${s.required ? "Yes" : "No"}
-    </div>
-
-    <div style="margin-bottom:12px;">
-      <strong>Description:</strong><br/>
-      ${s.description || "<em>None</em>"}
-    </div>
-
-    <div style="margin-bottom:16px;">
-      <strong>Fields:</strong>
-      <ul style="margin-top:6px;">
-        ${fieldList}
-      </ul>
-    </div>
-
-    <div style="display:flex; justify-content:space-between; margin-top:20px;">
-      <button data-action="back">Back</button>
-      <button data-action="confirm">✅ Create Section</button>
-    </div>
-  `;
+// // new: ensure render when admin mode toggles ON
+const _origApplyAdminVisibility = window.applyAdminVisibility;
+window.applyAdminVisibility = function () {
+  _origApplyAdminVisibility?.();
+  if (document.body.classList.contains("admin-mode")) {
+    renderSectionLibrary();
+  }
 };
