@@ -1887,7 +1887,8 @@ function initSidebarNavigation() { /* replaced by inline listeners in renderSide
 // ============================================================================
 function initDarkMode() {
     document.getElementById("btnThemeToggle").addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
+        const isDark = document.body.classList.toggle("dark-mode");
+        document.getElementById("btnThemeToggle").textContent = isDark ? "Light Mode" : "Dark Mode";
     });
 }
 function initAdminMode() {

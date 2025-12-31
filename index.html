@@ -319,9 +319,40 @@ body.dark-mode select.journal-input {
             box-shadow: 0 8px 28px rgba(2,6,23,0.7) !important;
         }
 
-        /* Make buttons less saturated in dark mode */
+        /* Dark mode overrides for Tailwind slate classes */
+        body.dark-mode .text-slate-900 { color: var(--muted-text) !important; }
+        body.dark-mode .text-slate-700 { color: var(--muted-text) !important; }
+        body.dark-mode .text-slate-600 { color: var(--muted-text-2) !important; }
+        body.dark-mode .text-slate-500 { color: var(--muted-text-2) !important; }
+        body.dark-mode .bg-slate-200 { background-color: var(--surface-2) !important; }
+        body.dark-mode .bg-slate-300 { background-color: var(--surface-1) !important; }
+        body.dark-mode .hover\:bg-slate-300:hover { background-color: var(--surface-1) !important; }
+        body.dark-mode .border-slate-200 { border-color: var(--subtle-border) !important; }
+        body.dark-mode .border-slate-300 { border-color: var(--subtle-border) !important; }
+        body.dark-mode .bg-slate-50 { background-color: var(--surface-2) !important; }
+        body.dark-mode .hover\:bg-slate-100:hover { background-color: var(--surface-2) !important; }
+        body.dark-mode .bg-white { background-color: var(--surface-1) !important; }
+
+        /* Keep specific buttons unchanged in dark mode */
+        body.dark-mode #btnClearValues {
+            background: var(--btn-neutral-bg) !important;
+            color: #0f172a !important;
+            border: 1px solid var(--btn-neutral-border) !important;
+        }
+        body.dark-mode #btnClearValues:hover {
+            background: #e9eef6 !important;
+        }
+
+        /* Dark mode overrides for indigo classes */
+        body.dark-mode .bg-indigo-50 { background-color: rgba(79,70,229,0.06) !important; }
+        body.dark-mode .text-indigo-700 { color: #a5b4fc !important; }
+        body.dark-mode .border-indigo-100 { border-color: rgba(79,70,229,0.2) !important; }
+
+        /* Dark mode scrollbar */
+        body.dark-mode aside nav::-webkit-scrollbar-thumb { background: #475569 !important; }
+
+        /* Make buttons less saturated in dark mode (but keep pill-btn-green as-is) */
         body.dark-mode .pill-btn,
-        body.dark-mode .pill-btn-green,
         body.dark-mode .pill-btn-blue,
         body.dark-mode .pill-btn-red,
         body.dark-mode .section-admin-btn {
@@ -329,6 +360,17 @@ body.dark-mode select.journal-input {
             color: var(--muted-text) !important;
             border: 1px solid rgba(255,255,255,0.03) !important;
             box-shadow: none !important;
+        }
+
+        /* Keep pill-btn-green buttons with original styling in dark mode */
+        body.dark-mode .pill-btn-green {
+            background: linear-gradient(90deg, #ffb347 0%, #ffcc80 100%) !important;
+            color: #333 !important;
+            box-shadow: 0 2px 8px rgba(255, 180, 71, 0.10) !important;
+        }
+        body.dark-mode .pill-btn-green:hover {
+            background: linear-gradient(90deg, #ffcc80 0%, #ffb347 100%) !important;
+            box-shadow: 0 4px 16px rgba(255, 180, 71, 0.18) !important;
         }
 
         /* Make change items muted but readable */
