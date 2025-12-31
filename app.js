@@ -1849,7 +1849,7 @@ function showPlaceholders() {
             <h3 class="text-lg font-semibold text-slate-700 mb-2">No Template Selected</h3>
             <p class="text-sm text-slate-500 mb-4">Use the filters above to select a template</p>
             <div class="text-xs text-slate-400">
-                <p>💡 Tip: Filter by Program → Type Keyword → Edit Template</p>
+                <p>💡 Tip: Filter by Program → Scenario → Template Name</p>
             </div>
         </div>
     `;
@@ -1895,6 +1895,8 @@ function initAdminMode() {
         const wasOn = document.body.classList.contains('admin-mode');
         const on = document.body.classList.toggle("admin-mode");
         document.getElementById("btnAdminToggle").textContent = on ? "Admin: ON" : "Admin: OFF";
+
+        if (on && typeof renderSectionLibrary === "function") renderSectionLibrary();
         
         if (on && !wasOn) {
             // Entering admin mode - capture original state
@@ -4738,6 +4740,9 @@ function hideRefreshToast() {
         if (!document.body) return;
         if (document.getElementById('floatingProgressBar')) return;
 
+        // Always start hidden on page load for a cleaner initial experience
+        const isHidden = true;
+
         // ===========================================================
         // UI
         // ===========================================================
@@ -4752,9 +4757,17 @@ function hideRefreshToast() {
             <div style="display:flex;gap:8px;margin-top:10px;">
                 <button id="prevSectionBtn" disabled>⬆ Prev</button>
                 <button id="nextSectionBtn" disabled>⬇ Next</button>
+                <button id="hideProgressBtn" style="background:#6b7280;">✕</button>
             </div>
         `;
         document.body.appendChild(bar);
+
+        // Create the show tab
+        const showTab = document.createElement('div');
+        showTab.id = 'floatingProgressTab';
+        showTab.innerHTML = '📊';
+        showTab.title = 'Show Progress Bar';
+        document.body.appendChild(showTab);
 
         // ===========================================================
         // Styles
@@ -4772,6 +4785,35 @@ function hideRefreshToast() {
                 padding: 18px;
                 font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
                 z-index: 10000;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
+
+            #floatingProgressBar.hidden {
+                transform: translateX(320px);
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            #floatingProgressTab {
+                position: fixed;
+                bottom: 24px;
+                right: -10px;
+                width: 40px;
+                height: 40px;
+                background: #ffffff;
+                border-radius: 12px 0 0 12px;
+                box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 18px;
+                cursor: pointer;
+                z-index: 9999;
+                transition: right 0.3s ease;
+            }
+
+            #floatingProgressTab.hidden {
+                right: -50px;
             }
 
             #progressBarLabel {
@@ -4809,6 +4851,17 @@ function hideRefreshToast() {
                 cursor: pointer;
             }
 
+            #hideProgressBtn {
+                flex: 0 0 32px;
+                background: #6b7280;
+                color: white;
+                border: none;
+                border-radius: 10px;
+                padding: 6px;
+                font-size: 12px;
+                cursor: pointer;
+            }
+
             #prevSectionBtn:disabled,
             #nextSectionBtn:disabled {
                 opacity: 0.4;
@@ -4822,6 +4875,34 @@ function hideRefreshToast() {
             }
         `;
         document.head.appendChild(style);
+
+        // ===========================================================
+        // Hide/Show Logic
+        // ===========================================================
+        function toggleProgressBar() {
+            const hidden = bar.classList.contains('hidden');
+            if (hidden) {
+                bar.classList.remove('hidden');
+                showTab.classList.add('hidden');
+                localStorage.setItem('dpss_progressBarHidden', 'false');
+            } else {
+                bar.classList.add('hidden');
+                showTab.classList.remove('hidden');
+                localStorage.setItem('dpss_progressBarHidden', 'true');
+            }
+        }
+
+        document.getElementById('hideProgressBtn').onclick = toggleProgressBar;
+        showTab.onclick = toggleProgressBar;
+
+        // Initial state
+        if (isHidden) {
+            bar.classList.add('hidden');
+            showTab.classList.remove('hidden');
+        } else {
+            bar.classList.remove('hidden');
+            showTab.classList.add('hidden');
+        }
 
         // ===========================================================
         // Motivation messages (UNCHANGED)
@@ -5047,58 +5128,58 @@ window.renderSectionLibrary = function () {
 // --------------------------------------------------------------------------- */
 
 // // new: edit library section (reuse wizard or modal)
+// Open Library Edit Modal
 window.editLibrarySection = function (idx) {
   const sec = window.sectionLibrary[idx];
   if (!sec) return;
 
-  // For simplicity, open the section edit modal (same as template sections)
-  // But target the library instead of activeTemplate
   window._editingLibraryIndex = idx;
 
   const titleInput = document.getElementById('section_edit_title');
   const requiredCb = document.getElementById('section_edit_required');
-  titleInput.value = sec.title || sec.label || '';
-  requiredCb.checked = !!sec.required;
 
-  document.getElementById('section_edit_modal_backdrop').classList.remove('hidden');
-  document.getElementById('section_edit_modal').classList.remove('hidden');
+  if (titleInput) titleInput.value = sec.title || sec.label || '';
+  if (requiredCb) requiredCb.checked = !!sec.required;
+
+  document.getElementById('section_edit_modal_backdrop')?.classList.remove('hidden');
+  document.getElementById('section_edit_modal')?.classList.remove('hidden');
+
+  // animation hook
+  requestAnimationFrame(() =>
+    document.querySelector('#section_edit_modal .modal-shell')?.classList.add('show')
+  );
 };
 
-// // new: save library section edit
+// Close modal
+window.closeLibraryEditModal = function () {
+  document.getElementById('section_edit_modal_backdrop')?.classList.add('hidden');
+  document.getElementById('section_edit_modal')?.classList.add('hidden');
+  document.querySelector('#section_edit_modal .modal-shell')?.classList.remove('show');
+  window._editingLibraryIndex = null;
+};
+
+// Save changes
 window.saveLibrarySectionEdit = function () {
   const idx = window._editingLibraryIndex;
-  if (idx === null || idx === undefined) return;
+  if (idx == null) return;
+
   const sec = window.sectionLibrary[idx];
   if (!sec) return;
 
   const titleInput = document.getElementById('section_edit_title');
   const requiredCb = document.getElementById('section_edit_required');
-  const newTitle = titleInput.value.trim();
 
-  if (newTitle && newTitle !== (sec.title || sec.label || '')) {
-    sec.title = newTitle;
-  }
-  sec.required = !!requiredCb.checked;
+  const newTitle = titleInput?.value.trim();
+  if (newTitle) sec.title = newTitle;
+
+  sec.required = !!requiredCb?.checked;
 
   persistSectionLibrary();
   renderSectionLibrary();
-  closeSectionEditModal();
+  closeLibraryEditModal();
   showAnimatedMessage('Library section updated');
 };
 
-// // new: delete library section
-window.deleteLibrarySection = async function (idx) {
-  const sec = window.sectionLibrary[idx];
-  if (!sec) return;
-
-  const confirmed = await showConfirm('Delete Library Section', `Delete "${sec.title}" from the Section Library?`);
-  if (!confirmed) return;
-
-  window.sectionLibrary.splice(idx, 1);
-  persistSectionLibrary();
-  renderSectionLibrary();
-  showAnimatedMessage('Library section deleted');
-};
 
 // // new: add field to library section (simple prompt for now)
 window.addFieldToLibrarySection = function (idx) {
@@ -5483,18 +5564,65 @@ window.previewLibrarySection = function (sectionId) {
   const section = window.sectionLibrary.find(s => s.id === sectionId);
   if (!section) return;
 
-  alert(
-    "SECTION PREVIEW\n\n" +
-    section.title +
-    "\n\nFields:\n" +
-    section.fields.map(f => `• ${f.label} (${f.type})`).join("\n")
-  );
+  // Set header info
+  document.getElementById('preview_title').textContent = section.title || 'Untitled Section';
+  document.getElementById('preview_subtitle').textContent = `${section.fields?.length || 0} field${(section.fields?.length || 0) !== 1 ? 's' : ''}`;
+
+  // Render section preview
+  const container = document.getElementById('preview_content');
+  container.innerHTML = '';
+
+  const sectionDiv = document.createElement('div');
+  sectionDiv.className = 'bg-white rounded-lg border border-slate-200 p-5 mb-4 shadow-sm';
+
+  const sectionTitle = section.title || 'Untitled Section';
+  const requiredBadge = section.required ? `<span class=\"ml-2 px-2 py-0.5 bg-red-50 text-red-600 border border-red-200 rounded-full text-[10px] font-semibold\">Required</span>` : '';
+
+  let sectionHTML = `
+      <h3 class=\"text-base font-bold text-slate-900 mb-4 flex items-center\">${sectionTitle}${requiredBadge}</h3>
+  `;
+
+  // Render fields
+  if (section.fields && section.fields.length > 0) {
+      section.fields.forEach((f) => {
+          const label = f.label || f.title || 'Untitled Field';
+
+          if (f.type === 'admin-note') {
+              const noteContent = f.content || f.label || '';
+              const color = f.color || 'blue';
+              sectionHTML += `
+  <div class=\"mb-4 p-3 rounded border-l-4 border-${color}-500 bg-${color}-50\">
+      <div class=\"text-sm font-medium text-${color}-800\">Admin Note</div>
+      <div class=\"text-sm text-${color}-700 mt-1\">${noteContent}</div>
+  </div>
+  `;
+          } else {
+              sectionHTML += `
+  <div class=\"mb-3\">
+      <label class=\"block text-sm font-medium text-slate-700 mb-1\">${label}</label>
+      <div class=\"text-xs text-slate-500\">(${f.type})</div>
+  </div>
+  `;
+          }
+      });
+  } else {
+      sectionHTML += `<p class=\"text-sm text-slate-400 italic\">No fields in this section</p>`;
+  }
+
+  sectionDiv.innerHTML = sectionHTML;
+  container.appendChild(sectionDiv);
+
+  // Show modal
+  const modal = document.getElementById('preview_modal');
+  const backdrop = document.getElementById('preview_modal_backdrop');
+  backdrop.classList.remove('hidden');
+  modal.classList.remove('hidden');
 };
 
 // // new
 window.addLibrarySectionToTemplate = function (sectionId) {
   if (!window.activeTemplate) {
-    alert("No active template selected.");
+    showAnimatedMessage('Please select a template first before adding sections.', { duration: 3000 });
     return;
   }
 
@@ -5508,6 +5636,7 @@ window.addLibrarySectionToTemplate = function (sectionId) {
 
   window.activeTemplate.sections.push(cloned);
   renderTemplateSections(window.activeTemplate);
+  showAnimatedMessage('Section added to template');
 };
 
 

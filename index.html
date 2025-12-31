@@ -1,66 +1,4 @@
-<!DOCTYPE html>
-<!-- CREATE TEMPLATE GUIDANCE POPUP (moved to end of body for z-index) -->
-<div id="create_template_guide_backdrop" class="fixed inset-0 bg-black/40 z-[999] hidden"></div>
-<div id="create_template_guide" class="fixed inset-0 z-[1000] flex items-center justify-center px-4 hidden">
-    <div class="modal-shell show bg-white rounded-xl shadow-2xl w-full max-w-md max-h-[80vh] flex flex-col animate-popin">
-        <div class="flex items-center justify-between p-6 border-b border-slate-200">
-            <h3 class="text-xl font-bold text-slate-900">Template Created!</h3>
-        </div>
-        <div class="p-6 bg-slate-50 text-center">
-            <div class="mb-4 text-3xl animate-bounce">🎉</div>
-            <p class="text-base font-semibold mb-2">You're ready to build your template.</p>
-            <p class="text-sm text-slate-600 mb-4">Use the Section Picker to import sections from other templates, or add a blank section to start from scratch.</p>
-            <p class="text-xs text-slate-500">You can opt out and close this guide at any time.</p>
-        </div>
-        <div class="flex justify-end items-center p-4 border-t bg-slate-50">
-            <button onclick="closeCreateTemplateGuide()" class="px-4 py-2 rounded-md border border-slate-300 text-sm hover:bg-white transition-colors">Got it!</button>
-        </div>
-    </div>
-</div>
-<!-- SECTION EDIT MODAL -->
-<div id="section_edit_modal_backdrop" class="fixed inset-0 bg-black/40 z-50 hidden"></div>
-<div id="section_edit_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 hidden">
-    <div class="modal-shell bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[80vh] flex flex-col animate-popin">
-        <div class="flex items-center justify-between p-4 border-b border-slate-200">
-            <h3 class="text-lg font-bold text-slate-900">Edit Section</h3>
-            <button id="section_edit_close" class="text-slate-400 hover:text-slate-600">✕</button>
-        </div>
-        <div class="p-6 bg-slate-50">
-            <label class="block text-xs font-semibold mb-2">Section Title</label>
-            <input id="section_edit_title" type="text" class="journal-input w-full mb-4" />
 
-            <label class="inline-flex items-center gap-2 text-sm mb-3">
-                <input id="section_edit_required" type="checkbox" />
-                <span class="text-xs text-slate-600">Required</span>
-            </label>
-
-            <p class="text-xs text-slate-500 mt-2">Update the section title and required flag. Changes persist to local state and will be saved when you Publish.</p>
-        </div>
-        <div class="flex justify-end items-center p-4 border-t bg-slate-50 gap-2">
-            <button id="section_edit_cancel" class="px-4 py-2 rounded-md border border-slate-300 text-sm hover:bg-white">Cancel</button>
-            <button id="section_edit_save" class="px-4 py-2 rounded-md bg-indigo-600 text-white text-sm hover:bg-indigo-700">Save Changes</button>
-        </div>
-    </div>
-</div>
-<script>
-// Wire section edit modal buttons
-document.addEventListener('DOMContentLoaded', function() {
-    const closeBtn = document.getElementById('section_edit_close');
-    const cancelBtn = document.getElementById('section_edit_cancel');
-    const saveBtn = document.getElementById('section_edit_save');
-    if (closeBtn) closeBtn.addEventListener('click', () => window.closeSectionEditModal && window.closeSectionEditModal());
-    if (cancelBtn) cancelBtn.addEventListener('click', () => window.closeSectionEditModal && window.closeSectionEditModal());
-    if (saveBtn) saveBtn.addEventListener('click', () => window.saveSectionEditModal && window.saveSectionEditModal());
-});
-</script>
-<!-- HIDE TOAST -->
-<div id="hideToast" class="fixed left-1/2 top-8 z-[999] -translate-x-1/2 bg-white border border-slate-200 shadow-xl rounded-lg px-6 py-4 flex items-center gap-3 opacity-0 pointer-events-none transition-all duration-500 scale-95">
-    <div id="hideToastIcon" class="text-blue-500 text-2xl animate-bounce">🙈</div>
-    <div>
-        <h3 id="hideToastMessage" class="text-base font-bold text-slate-800 mb-1">Template is now Hidden!</h3>
-        <p id="hideToastSubtext" class="text-sm text-slate-500"></p>
-    </div>
-</div>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1027,6 +965,70 @@ body.dark-mode select.journal-input {
                 </div>
             </div>
         </div>
+<!-- SECTION LIBRARY EDIT MODAL -->
+<!-- SECTION EDIT MODAL (GLOBAL - for both template and library sections) -->
+<div id="section_edit_modal_backdrop" class="fixed inset-0 bg-black/50 z-[100] hidden"></div>
+
+<div id="section_edit_modal" class="fixed inset-0 z-[100] flex items-center justify-center px-4 hidden pointer-events-none">
+  <div class="modal-shell bg-white rounded-2xl shadow-2xl w-full max-w-lg flex flex-col pointer-events-auto">
+    
+    <!-- Header -->
+    <div class="flex items-center justify-between p-6 border-b border-slate-200">
+      <h3 class="text-xl font-bold text-slate-900">Edit Section</h3>
+      <button 
+        onclick="closeSectionEditModal()" 
+        class="text-slate-400 hover:text-slate-700 transition-colors rounded-lg p-2 hover:bg-slate-100"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="p-6 space-y-6 bg-slate-50/50">
+      <div>
+        <label for="section_edit_title" class="block text-sm font-semibold text-slate-700 mb-2">
+          Section Title
+        </label>
+        <input
+          id="section_edit_title"
+          type="text"
+          class="journal-input w-full px-4 py-3 text-base focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          placeholder="Enter section title..."
+        />
+      </div>
+
+      <div class="flex items-center gap-4">
+        <input
+          id="section_edit_required"
+          type="checkbox"
+          class="h-5 w-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+        />
+        <label for="section_edit_required" class="text-sm font-medium text-slate-700 cursor-pointer select-none">
+          Required section
+        </label>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex justify-end gap-3 p-6 border-t border-slate-200 bg-white rounded-b-2xl">
+      <button
+        onclick="closeSectionEditModal()"
+        class="px-6 py-3 rounded-lg border border-slate-300 text-sm font-medium text-slate-700 hover:bg-slate-50"
+      >
+        Cancel
+      </button>
+      <button
+        onclick="saveSectionEdit()"
+        class="px-6 py-3 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 shadow-md hover:shadow-lg"
+      >
+        Save Changes
+      </button>
+    </div>
+  </div>
+</div>
+
         <!-- STATIC SECTIONS BELOW -->
         <section id="section-income" class="section-card"><div class="section-label">Section 03</div><h2 class="section-title">Income Summary</h2></section>
         <section id="section-property" class="section-card"><div class="section-label">Section 04</div><h2 class="section-title">Property / Resources</h2></section>
@@ -1072,7 +1074,20 @@ body.dark-mode select.journal-input {
     </div> <!-- ✅ CLOSE CENTERED DOCUMENT WRAPPER -->
 </section>
 </main>
+</section>
+</main>
 
+<!-- SECTION EDIT MODAL FOR Journal YOO -->
+<div id="section_edit_modal_backdrop" class="fixed inset-0 bg-black/40 z-50 hidden"></div>
+<div id="section_edit_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 hidden">
+  <div class="modal-shell bg-white rounded-xl shadow-xl w-full max-w-xl flex flex-col">
+    ...
+  </div>
+</div>
+
+<!-- JOURNAL MODAL -->
+<div id="journal_modal_backdrop" ...></div>
+...
 <!-- JOURNAL MODAL -->
 <div id="journal_modal_backdrop" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
 <div id="journal_output_container" class="fixed inset-0 z-40 flex items-center justify-center px-4 hidden">
