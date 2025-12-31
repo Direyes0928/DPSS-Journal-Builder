@@ -184,16 +184,12 @@ function sectionHasEmptyRepeatables(sectionEl) {
 // Build Journal Output — WITH NOTE SUPPORT + FURTHER CLARIFICATION
 // ============================================================================
 // ============================================================================
-// Build Journal Output (2025-12 FINAL) 
+// Build Journal Output (2025-12 FINAL) Brief run down of what it does and fixes
 // - Repeatables correct
 // - Notes correct
 // - "Specify" logic correct
 // - Clarification textareas INCLUDED
 // - No "Field:" labels inside repeatables
-// ============================================================================
-// BUILD JOURNAL OUTPUT — SIMPLE, DOM-MIRROR VERSION
-// Purpose: Show EXACTLY what the user sees on screen
-// No validation, no guessing, no placeholder logic
 // ============================================================================
 
 function buildJournalOutput() {
@@ -345,7 +341,7 @@ function readVisibleValue(el) {
 // SSD JOURNAL BUILDER — FULLY FIXED VERSION (2025-11-24)
 // Works with templatesIndex.json + templates/*/*.json exactly as your repo has it
 // ============================================================================
-console.log("🔥 NEW APP.JS LOADED");
+console.log("NEW APP.JS LOADED");
 
 // GLOBALS
 let allTemplates = [];
@@ -886,8 +882,8 @@ addSectionBtn.onclick = function () {
         };
         allTemplates.push(newTemplate);
         activeTemplate = {
-  ...newTemplate,
-  sections: normalizeTemplateSections(newTemplate.sections || [])
+  ...tpl,
+  sections: normalizeTemplateSections(tpl.sections || [])
 };
         renderTemplateSections(activeTemplate);
         renderSidebarFromTemplate(activeTemplate);
@@ -1038,6 +1034,34 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
 };
 
     console.log("🎨 Rendering", tpl.sections.length, "sections");
+    
+    // Special message for newly created blank templates
+    if (tpl.blank && tpl.sections.length === 0) {
+        const blankMessage = document.createElement('div');
+        blankMessage.className = 'section-card text-center py-12 bg-blue-50 border-blue-200';
+        blankMessage.innerHTML = `
+            <svg class="w-16 h-16 mx-auto mb-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <h3 class="text-xl font-semibold text-blue-800 mb-2">${tpl.name}</h3>
+            <p class="text-sm text-blue-600 mb-4">${tpl.program} Program</p>
+            <p class="text-sm text-slate-600 mb-6">Your new template is ready! Add sections from the Section Library below to get started.</p>
+            <div class="text-xs text-slate-500">
+                <p>💡 Tip: Use the Section Library to add pre-built sections, or create custom ones.</p>
+            </div>
+        `;
+        root.appendChild(blankMessage);
+    }
+    
+    // Update Save Template button visibility
+    const saveBtn = document.getElementById('btnSaveTemplate');
+    if (saveBtn) {
+        if (tpl.custom || tpl.blank) {
+            saveBtn.classList.remove('hidden');
+        } else {
+            saveBtn.classList.add('hidden');
+        }
+    }
     
     tpl.sections.forEach((sec, index) => {
         const sectionTitle = sec.label || sec.title || "Untitled Section";
@@ -1410,7 +1434,18 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
         `;
         document.head.appendChild(style);
     }
-    
+    // // new — post-render hooks (2025-12-29)
+setTimeout(() => {
+    try {
+        setupLazySelects(root);
+        if (typeof enableSpellcheck === 'function') {
+            enableSpellcheck(root);
+        }
+    } catch (e) {
+        console.warn('Post-render init failed', e);
+    }
+}, 50);
+
     console.log("🎨 Done rendering sections");
 }
 
@@ -1814,7 +1849,7 @@ function showPlaceholders() {
             <h3 class="text-lg font-semibold text-slate-700 mb-2">No Template Selected</h3>
             <p class="text-sm text-slate-500 mb-4">Use the filters above to select a template</p>
             <div class="text-xs text-slate-400">
-                <p>💡 Tip: Filter by Program → Scenario → Template Name</p>
+                <p>💡 Tip: Filter by Program → Type Keyword → Edit Template</p>
             </div>
         </div>
     `;
@@ -1825,6 +1860,10 @@ function showPlaceholders() {
     });
     // Hide journal controls when no template is selected
     try { const jc = document.getElementById('journalControls'); if (jc) jc.style.display = 'none'; } catch (e) {}
+    
+    // Hide Save Template button when no template is selected
+    const saveBtn = document.getElementById('btnSaveTemplate');
+    if (saveBtn) saveBtn.classList.add('hidden');
 }
 
 // Toggle visibility of sidebar journal controls based on whether a template is selected.
@@ -2884,53 +2923,32 @@ window.saveSectionEditModal = function() {
 
 window.editField = function(sectionIndex, fieldIndex) {
     if (!activeTemplate) return;
-    
+
     const sec = activeTemplate.sections[sectionIndex];
     const field = sec.fields[fieldIndex];
-    
-    const currentLabel = field.label || "";
-    const currentType = field.type || "text";
-    
-    // Special handling for admin notes
+    if (!field) return;
+
+    const currentType = field.type || 'text';
+
+    // Admin notes edit content
     if (currentType === "admin-note") {
-        const newContent = prompt("Edit Admin Note:", field.content || currentLabel);
+        const newContent = prompt("Edit Admin Note:", field.content || field.label || '');
         if (newContent !== null) {
             field.content = newContent;
             field.label = newContent;
         }
     } else {
-        const newLabel = prompt("Edit Field Label:", currentLabel);
+        const newLabel = prompt("Edit Field Label:", field.label || '');
         if (newLabel !== null) {
             field.label = newLabel;
         }
     }
-    
-    const newType = prompt("Edit Field Type (text, textarea, date, choice, admin-note):", currentType);
-    if (newType !== null && ["text", "textarea", "date", "choice", "notes", "admin-note"].includes(newType)) {
-        field.type = newType;
-        
-        if (newType === "choice" && !field.choices) {
-            const choicesInput = prompt("Enter choices (comma-separated):", "Yes,No");
-            if (choicesInput) {
-                field.choices = choicesInput.split(",").map(c => c.trim());
-            }
-        }
-        
-        if (newType === "admin-note" && !field.content) {
-            const noteContent = prompt("Enter the admin note for end users:", field.label);
-            if (noteContent) {
-                field.content = noteContent;
-                field.label = noteContent;
-            }
-        }
-    }
-    
-    // Re-render
+
     renderTemplateSections(activeTemplate);
-    
-    console.log("✏️ Field updated:", field);
     persistActiveTemplateChanges();
     showPublishIndicator();
+
+    console.log("✏️ Field label/content updated:", field);
 };
 
 window.toggleToolbox = function(sectionIndex) {
@@ -3108,29 +3126,126 @@ function hideUndoNotification() {
 
 // // new
 window.createBlankTemplate = function () {
-    const name = prompt("Template name?");
-    if (!name) return;
+    openCreateTemplateModal();
+};
 
-    const tpl = {
-        id: "template_" + crypto.randomUUID(),
-        name,
-        program: "Custom",
-        sections: [],
-        createdAt: new Date().toISOString(),
-        blank: true
+// // new: modal for creating new template
+window.openCreateTemplateModal = function () {
+    // Remove existing modal if present
+    const existing = document.getElementById('createTemplateModal');
+    if (existing) existing.remove();
+
+    // Get available programs
+    const programs = Object.keys(templatesIndex).sort();
+
+    const modal = document.createElement('div');
+    modal.id = 'createTemplateModal';
+    modal.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:99999; display:flex; align-items:center; justify-content:center;';
+
+    modal.innerHTML = `
+        <div style="background:#fff; padding:24px; border-radius:12px; max-width:400px; width:90vw; box-shadow:0 10px 30px rgba(0,0,0,.3);">
+            <h2 style="margin:0 0 16px 0; font-size:1.5em; color:#333;">Create New Template</h2>
+            
+            <label style="display:block; margin-bottom:8px; font-weight:600;">
+                Template Name *
+                <input id="newTemplateName" type="text" placeholder="e.g., My Custom Template" 
+                       style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; margin-top:4px;" />
+            </label>
+            
+            <label style="display:block; margin-bottom:8px; font-weight:600;">
+                Description
+                <textarea id="newTemplateDescription" placeholder="Optional description of this template" rows="3"
+                          style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; margin-top:4px; resize:vertical;"></textarea>
+            </label>
+            
+            <label style="display:block; margin-bottom:16px; font-weight:600;">
+                Program
+                <select id="newTemplateProgram" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; margin-top:4px;">
+                    ${programs.map(p => `<option value="${p}">${p}</option>`).join('')}
+                </select>
+            </label>
+            
+            <div style="display:flex; gap:12px; justify-content:flex-end;">
+                <button id="cancelCreateTemplate" style="padding:8px 16px; border:1px solid #ccc; background:#f5f5f5; border-radius:6px; cursor:pointer;">Cancel</button>
+                <button id="confirmCreateTemplate" style="padding:8px 16px; background:#4f8cff; color:#fff; border:none; border-radius:6px; cursor:pointer;">Create Template</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Focus name input
+    setTimeout(() => document.getElementById('newTemplateName').focus(), 100);
+
+    // Event listeners
+    document.getElementById('cancelCreateTemplate').onclick = () => modal.remove();
+    document.getElementById('confirmCreateTemplate').onclick = () => {
+        const name = document.getElementById('newTemplateName').value.trim();
+        const description = document.getElementById('newTemplateDescription').value.trim();
+        const program = document.getElementById('newTemplateProgram').value;
+
+        if (!name) {
+            alert('Please enter a template name.');
+            return;
+        }
+
+        // Create template with file property for persistence
+        const fileName = `custom_${Date.now()}.json`;
+        const tpl = {
+            id: "template_" + crypto.randomUUID(),
+            name,
+            description,
+            program,
+            file: fileName,
+            sections: [],
+            createdAt: new Date().toISOString(),
+            blank: true,
+            custom: true // Mark as user-created
+        };
+
+        // Add to templatesIndex under selected program
+        if (!templatesIndex[program]) {
+            templatesIndex[program] = [];
+        }
+
+        const indexEntry = {
+            id: tpl.id,
+            name: tpl.name,
+            file: tpl.file,
+            program: program,
+            custom: true,
+            created: new Date().toISOString()
+        };
+
+        templatesIndex[program].push(indexEntry);
+
+        // Save templatesIndex to localStorage
+        localStorage.setItem('dpss_templatesIndex', JSON.stringify(templatesIndex));
+
+        // Set as active
+        window.activeTemplate = tpl;
+
+        // Add to allTemplates
+        window.allTemplates = window.allTemplates || [];
+        window.allTemplates.push(tpl);
+
+        // Save initial state to localStorage
+        localStorage.setItem(PERSIST_PREFIX + tpl.file, JSON.stringify(tpl));
+
+        // Render
+        renderTemplateSections(tpl);
+
+        // Close modal
+        modal.remove();
+
+        // Show success message
+        showAnimatedMessage(`Template "${name}" created and saved! Add sections now.`);
     };
 
-    // set as active
-    window.activeTemplate = tpl;
-
-    // OPTIONAL: add to allTemplates if you want it selectable later
-    window.allTemplates = window.allTemplates || [];
-    window.allTemplates.push(tpl);
-
-    // render empty state
-    renderTemplateSections(tpl);
-
-    alert(`Blank template "${name}" created.\nYou can now add sections.`);
+    // Close on backdrop click
+    modal.onclick = (e) => {
+        if (e.target === modal) modal.remove();
+    };
 };
 
 // /12.30.2025: Add Create Blank Template button to admin header
@@ -3145,6 +3260,26 @@ document.addEventListener("click", e => {
 
   console.log("🆕 Create Blank Template clicked"); // // debug
   createBlankTemplate();
+});
+
+// // new: Save Template button handler
+document.addEventListener("click", e => {
+  if (!e.target.closest("#btnSaveTemplate")) return;
+
+  if (!window.activeTemplate) {
+    alert("No template is currently active.");
+    return;
+  }
+
+  // Save the current template state
+  try {
+    localStorage.setItem(PERSIST_PREFIX + window.activeTemplate.file, JSON.stringify(window.activeTemplate));
+    showAnimatedMessage(`Template "${window.activeTemplate.name}" saved successfully!`);
+    console.log("💾 Template saved:", window.activeTemplate.file);
+  } catch (error) {
+    console.error("Failed to save template:", error);
+    alert("Failed to save template. Please try again.");
+  }
 });
 
 // ============================================================================
@@ -3804,20 +3939,7 @@ window.editField = async function(sectionIndex, fieldIndex) {
                 changeDetails.push(`Changed label from "${currentLabel}" to "${newLabel}"`);
             }
         }
-        const newType = prompt('Edit Field Type (text, textarea, date, choice, admin-note):', currentType);
-        if (newType && ["text","textarea","date","choice","notes","admin-note"].includes(newType) && newType !== currentType) {
-            field.type = newType;
-            changeDetails.push(`Changed type from ${currentType} to ${newType}`);
-            if (newType === 'choice' && !field.choices) {
-                const choicesInput = prompt('Enter choices (comma-separated):', 'Yes,No');
-                if (choicesInput) field.choices = choicesInput.split(',').map(c=>c.trim());
-            }
-            if (newType === 'admin-note' && !field.content) {
-                const noteContent = prompt('Enter initial admin note:', 'Important:');
-                if (noteContent) { field.content = noteContent; field.label = noteContent; }
-            }
-        }
-        
+
         // Log the change if any modifications were made
         if (changeDetails.length > 0) {
             const sectionTitle = sec.label || sec.title || 'Untitled Section';
@@ -4884,53 +5006,161 @@ window.persistSectionLibrary = function () {
 // // new
 window.renderSectionLibrary = function () {
   const root = document.getElementById("sectionLibraryList");
-  if (!root) {
-    console.warn("⚠️ sectionLibraryList element not found");
-    return;
-  }
-
+  if (!root) return;
   root.innerHTML = "";
 
   if (!window.sectionLibrary.length) {
-    root.innerHTML =
-      `<p class="text-xs text-slate-400 italic">No saved sections yet.</p>`;
+    root.innerHTML = `<p class="text-xs text-slate-400 italic">No saved sections yet. Use the wizard to create one.</p>`;
     return;
   }
 
-  window.sectionLibrary.forEach(sec => {
+  window.sectionLibrary.forEach((sec, idx) => {
     const el = document.createElement("div");
-    el.className =
-      "border border-slate-200 rounded-lg p-3 bg-white flex justify-between items-center";
-
+    el.className = "border border-slate-200 rounded-lg p-4 bg-white shadow-sm hover:shadow transition-shadow";
     el.innerHTML = `
-      <div>
-        <div class="text-sm font-semibold">${sec.title}</div>
-        <div class="text-xs text-slate-500">
-          ${sec.fields?.length || 0} fields
+      <div class="flex justify-between items-start">
+        <div class="flex-1">
+          <div class="font-semibold text-slate-800">${sec.title || 'Untitled Section'}</div>
+          <div class="text-xs text-slate-500 mt-1">
+            ${sec.fields?.length || 0} field${(sec.fields?.length || 0) === 1 ? '' : 's'}
+            ${sec.required ? ' • Required' : ''}
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <button class="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200" 
+                  onclick="previewLibrarySection('${sec.id}')">Preview</button>
+          <button class="px-3 py-1 text-xs bg-amber-100 text-amber-700 rounded hover:bg-amber-200" 
+                  onclick="editLibrarySection(${idx})">✏️ Edit</button>
+          <button class="px-3 py-1 text-xs bg-red-100 text-red-600 rounded hover:bg-red-200" 
+                  onclick="deleteLibrarySection(${idx})">🗑️</button>
+          <button class="px-3 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700" 
+                  onclick="addLibrarySectionToTemplate('${sec.id}')">+ Add</button>
         </div>
       </div>
-
-      <div class="flex gap-2">
-        <button
-          class="px-2 py-1 text-xs border rounded"
-          onclick="previewLibrarySection('${sec.id}')"
-        >
-          Preview
-        </button>
-
-        <button
-          class="px-2 py-1 text-xs bg-green-600 text-white rounded"
-          onclick="addLibrarySectionToTemplate('${sec.id}')"
-        >
-          + Add
-        </button>
-      </div>
     `;
-
     root.appendChild(el);
   });
 };
 
+/* ---------------------------------------------------------------------------
+// LIBRARY EDIT FUNCTIONS (Admin-Only)
+// --------------------------------------------------------------------------- */
+
+// // new: edit library section (reuse wizard or modal)
+window.editLibrarySection = function (idx) {
+  const sec = window.sectionLibrary[idx];
+  if (!sec) return;
+
+  // For simplicity, open the section edit modal (same as template sections)
+  // But target the library instead of activeTemplate
+  window._editingLibraryIndex = idx;
+
+  const titleInput = document.getElementById('section_edit_title');
+  const requiredCb = document.getElementById('section_edit_required');
+  titleInput.value = sec.title || sec.label || '';
+  requiredCb.checked = !!sec.required;
+
+  document.getElementById('section_edit_modal_backdrop').classList.remove('hidden');
+  document.getElementById('section_edit_modal').classList.remove('hidden');
+};
+
+// // new: save library section edit
+window.saveLibrarySectionEdit = function () {
+  const idx = window._editingLibraryIndex;
+  if (idx === null || idx === undefined) return;
+  const sec = window.sectionLibrary[idx];
+  if (!sec) return;
+
+  const titleInput = document.getElementById('section_edit_title');
+  const requiredCb = document.getElementById('section_edit_required');
+  const newTitle = titleInput.value.trim();
+
+  if (newTitle && newTitle !== (sec.title || sec.label || '')) {
+    sec.title = newTitle;
+  }
+  sec.required = !!requiredCb.checked;
+
+  persistSectionLibrary();
+  renderSectionLibrary();
+  closeSectionEditModal();
+  showAnimatedMessage('Library section updated');
+};
+
+// // new: delete library section
+window.deleteLibrarySection = async function (idx) {
+  const sec = window.sectionLibrary[idx];
+  if (!sec) return;
+
+  const confirmed = await showConfirm('Delete Library Section', `Delete "${sec.title}" from the Section Library?`);
+  if (!confirmed) return;
+
+  window.sectionLibrary.splice(idx, 1);
+  persistSectionLibrary();
+  renderSectionLibrary();
+  showAnimatedMessage('Library section deleted');
+};
+
+// // new: add field to library section (simple prompt for now)
+window.addFieldToLibrarySection = function (idx) {
+  const sec = window.sectionLibrary[idx];
+  if (!sec) return;
+
+  const fieldType = prompt('Field type (text, textarea, choice, date):', 'text');
+  if (!fieldType) return;
+
+  const fieldLabel = prompt('Field label:', 'New Field');
+  if (!fieldLabel) return;
+
+  const newField = { id: `field_${Date.now()}`, label: fieldLabel, type: fieldType };
+  if (fieldType === 'choice') {
+    const choices = prompt('Choices (comma-separated):', 'Yes,No');
+    if (choices) newField.choices = choices.split(',').map(c => c.trim());
+  }
+
+  sec.fields.push(newField);
+  persistSectionLibrary();
+  renderSectionLibrary();
+  showAnimatedMessage('Field added to library section');
+};
+
+// // new: edit field in library section
+window.editFieldInLibrarySection = function (secIdx, fieldIdx) {
+  const sec = window.sectionLibrary[secIdx];
+  const field = sec.fields[fieldIdx];
+  if (!field) return;
+
+  const newLabel = prompt('Edit field label:', field.label);
+  if (newLabel !== null) field.label = newLabel;
+
+  persistSectionLibrary();
+  renderSectionLibrary();
+  showAnimatedMessage('Library field updated');
+};
+
+// // new: delete field from library section
+window.deleteFieldFromLibrarySection = function (secIdx, fieldIdx) {
+  const sec = window.sectionLibrary[secIdx];
+  if (!sec.fields[fieldIdx]) return;
+
+  sec.fields.splice(fieldIdx, 1);
+  persistSectionLibrary();
+  renderSectionLibrary();
+  showAnimatedMessage('Field removed from library section');
+};
+
+/* ---------------------------------------------------------------------------
+// OVERRIDE MODAL SAVE FOR LIBRARY
+// --------------------------------------------------------------------------- */
+
+// // new: patch the modal save to handle library edits
+const originalSaveSectionEditModal = window.saveSectionEditModal;
+window.saveSectionEditModal = function () {
+  if (window._editingLibraryIndex !== undefined) {
+    saveLibrarySectionEdit();
+  } else {
+    originalSaveSectionEditModal();
+  }
+};
 
 /* ---------------------------------------------------------------------------
    WIZARD STATE
@@ -4967,16 +5197,16 @@ window.startBlankSection = function () {
 
 window.renderSectionWizardStep1 = function () {
   return `
-    <h2>Create Section</h2>
-    <p>Create a reusable section for the Section Library.</p>
+    <h2 style="margin:0 0 16px 0; font-size:24px; color:#333;">Create Section</h2>
+    <p style="margin:0 0 24px 0; color:#666;">Create a reusable section for the Section Library.</p>
 
     <div style="margin-top:16px; display:flex; flex-direction:column; gap:12px;">
-      <button data-action="start-blank">🆕 Start from Blank</button>
-      <button disabled style="opacity:.5;">Reuse Existing (Coming Soon)</button>
+      <button data-action="start-blank" style="padding:12px 20px; background:#007bff; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:16px; transition:background .2s;">🆕 Start from Blank</button>
+      <button disabled style="padding:12px 20px; background:#ccc; color:#666; border:none; border-radius:8px; font-size:16px; opacity:.5;">Reuse Existing (Coming Soon)</button>
     </div>
 
-    <div style="margin-top:20px; text-align:right;">
-      <button data-action="cancel">Cancel</button>
+    <div style="margin-top:32px; text-align:right;">
+      <button data-action="cancel" style="padding:10px 20px; background:#f8f9fa; color:#333; border:1px solid #ddd; border-radius:8px; cursor:pointer; font-size:14px;">Cancel</button>
     </div>
   `;
 };
@@ -4985,27 +5215,27 @@ window.renderSectionWizardStep2 = function () {
   const s = window.sectionWizardState.draftSection;
 
   return `
-    <h2>Section Details</h2>
+    <h2 style="margin:0 0 16px 0; font-size:24px; color:#333;">Section Details</h2>
 
-    <label>
-      <div>Section Title *</div>
-      <input id="wizardSectionTitle" value="${s.title}" />
+    <label style="display:block; margin-bottom:16px;">
+      <div style="margin-bottom:8px; font-weight:500; color:#333;">Section Title *</div>
+      <input id="wizardSectionTitle" value="${s.title}" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
     </label>
 
-    <label style="display:flex; gap:8px; margin-top:8px;">
+    <label style="display:flex; gap:8px; margin-bottom:16px; align-items:center;">
       <input type="checkbox" id="wizardSectionRequired"
-        ${s.required ? "checked" : ""} />
-      Required section
+        ${s.required ? "checked" : ""} style="margin:0;" />
+      <span style="color:#333;">Required section</span>
     </label>
 
-    <label style="margin-top:8px;">
-      <div>Description</div>
-      <textarea id="wizardSectionDescription" rows="3">${s.description}</textarea>
+    <label style="display:block; margin-bottom:24px;">
+      <div style="margin-bottom:8px; font-weight:500; color:#333;">Description</div>
+      <textarea id="wizardSectionDescription" rows="3" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; font-size:14px; resize:vertical;">${s.description}</textarea>
     </label>
 
-    <div style="margin-top:20px; display:flex; justify-content:space-between;">
-      <button data-action="back">Back</button>
-      <button data-action="next">Next</button>
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+      <button data-action="back" style="padding:10px 20px; background:#f8f9fa; color:#333; border:1px solid #ddd; border-radius:8px; cursor:pointer; font-size:14px;">Back</button>
+      <button data-action="next" style="padding:10px 20px; background:#007bff; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:14px;">Next</button>
     </div>
   `;
 };
@@ -5015,23 +5245,23 @@ window.renderSectionWizardStep3 = function () {
 
   const rows = fields.length
     ? fields.map((f, i) => `
-        <div style="border:1px solid #ddd; padding:8px; display:flex; justify-content:space-between;">
-          <div><strong>${f.label}</strong> (${f.type})</div>
-          <button data-action="remove-field" data-index="${i}">🗑</button>
+        <div style="border:1px solid #ddd; padding:12px; display:flex; justify-content:space-between; align-items:center; border-radius:8px; margin-bottom:8px; background:#f8f9fa;">
+          <div><strong style="color:#333;">${f.label}</strong> <span style="color:#666;">(${f.type})</span></div>
+          <button data-action="remove-field" data-index="${i}" style="background:#dc3545; color:#fff; border:none; border-radius:4px; padding:6px 12px; cursor:pointer; font-size:12px;">🗑 Remove</button>
         </div>
       `).join("")
-    : `<p><em>No fields added yet.</em></p>`;
+    : `<p style="color:#666; font-style:italic; margin:16px 0;">No fields added yet.</p>`;
 
   return `
-    <h2>Field Builder</h2>
+    <h2 style="margin:0 0 16px 0; font-size:24px; color:#333;">Field Builder</h2>
 
     <div style="margin-top:12px;">${rows}</div>
 
-    <button data-action="add-field" style="margin-top:12px;">➕ Add Field</button>
+    <button data-action="add-field" style="margin-top:16px; padding:12px 20px; background:#28a745; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:16px; transition:background .2s;">➕ Add Field</button>
 
-    <div style="margin-top:20px; display:flex; justify-content:space-between;">
-      <button data-action="back">Back</button>
-      <button data-action="next">Next</button>
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+      <button data-action="back" style="padding:10px 20px; background:#f8f9fa; color:#333; border:1px solid #ddd; border-radius:8px; cursor:pointer; font-size:14px;">Back</button>
+      <button data-action="next" style="padding:10px 20px; background:#007bff; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:14px;">Next</button>
     </div>
   `;
 };
@@ -5040,21 +5270,26 @@ window.renderSectionWizardStep4 = function () {
   const s = window.sectionWizardState.draftSection;
 
   return `
-    <h2>Review Section</h2>
+    <h2 style="margin:0 0 16px 0; font-size:24px; color:#333;">Review Section</h2>
 
-    <p><strong>Title:</strong> ${s.title}</p>
-    <p><strong>Required:</strong> ${s.required ? "Yes" : "No"}</p>
-    <p><strong>Description:</strong> ${s.description || "<em>None</em>"}</p>
+    <div style="background:#f8f9fa; padding:16px; border-radius:8px; margin-bottom:24px;">
+      <p style="margin:0 0 8px 0;"><strong style="color:#333;">Title:</strong> ${s.title}</p>
+      <p style="margin:0 0 8px 0;"><strong style="color:#333;">Required:</strong> ${s.required ? "Yes" : "No"}</p>
+      <p style="margin:0;"><strong style="color:#333;">Description:</strong> ${s.description || "<em style='color:#666;'>None</em>"}</p>
+    </div>
 
-    <ul>
-      ${s.fields.length
-        ? s.fields.map(f => `<li>${f.label} (${f.type})</li>`).join("")
-        : "<li><em>No fields</em></li>"}
-    </ul>
+    <div style="margin-bottom:24px;">
+      <h3 style="margin:0 0 12px 0; font-size:18px; color:#333;">Fields:</h3>
+      <ul style="margin:0; padding-left:20px;">
+        ${s.fields.length
+          ? s.fields.map(f => `<li style="margin-bottom:4px; color:#333;">${f.label} <span style="color:#666;">(${f.type})</span></li>`).join("")
+          : "<li style='color:#666; font-style:italic;'>No fields</li>"}
+      </ul>
+    </div>
 
-    <div style="margin-top:20px; display:flex; justify-content:space-between;">
-      <button data-action="back">Back</button>
-      <button data-action="confirm">✅ Save to Library</button>
+    <div style="margin-top:32px; display:flex; justify-content:space-between;">
+      <button data-action="back" style="padding:10px 20px; background:#f8f9fa; color:#333; border:1px solid #ddd; border-radius:8px; cursor:pointer; font-size:14px;">Back</button>
+      <button data-action="confirm" style="padding:10px 20px; background:#28a745; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:14px;">✅ Save to Library</button>
     </div>
   `;
 };
@@ -5074,14 +5309,18 @@ window.openSectionWizard = function () {
   const modal = document.createElement("div");
   modal.id = "sectionWizardModal";
   modal.style.cssText =
-    "position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:99999";
+    "position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:99999; display:flex; align-items:center; justify-content:center;";
 
   modal.innerHTML = `
     <div id="sectionWizardContent"
-         style="background:#fff; max-width:520px; margin:15vh auto; padding:24px;">
+         style="background:#fff; max-width:550px; width:90vw; margin:auto; padding:32px; border-radius:16px; box-shadow:0 20px 40px rgba(0,0,0,.3); position:relative;">
+      <button id="closeWizardBtn" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:24px; cursor:pointer; color:#666;">×</button>
       ${renderSectionWizardStep1()}
     </div>
   `;
+
+  // Close button
+  modal.querySelector('#closeWizardBtn').onclick = () => modal.remove();
 
   modal.addEventListener("click", e => {
     const action = e.target.dataset.action;
@@ -5094,7 +5333,7 @@ window.openSectionWizard = function () {
 
     if (action === "start-blank") {
       startBlankSection();
-      return content.innerHTML = renderSectionWizardStep2();
+      return content.innerHTML = `<button id="closeWizardBtn" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:24px; cursor:pointer; color:#666;">×</button>${renderSectionWizardStep2()}`;
     }
 
     if (action === "back") state.step--;
@@ -5114,18 +5353,80 @@ window.openSectionWizard = function () {
     }
 
     if (action === "add-field") {
-      const label = prompt("Field label?");
-      if (!label) return;
+      // Create a small modal for adding fields
+      const fieldModal = document.createElement("div");
+      fieldModal.id = "addFieldModal";
+      fieldModal.style.cssText =
+        "position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:99999; display:flex; align-items:center; justify-content:center;";
 
-      const type = prompt("Type: text, textarea, date, choice");
-      if (!["text", "textarea", "date", "choice"].includes(type)) return;
+      fieldModal.innerHTML = `
+        <div style="background:#fff; max-width:400px; width:90vw; padding:24px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.3);">
+          <h3 style="margin:0 0 16px 0; font-size:20px; color:#333;">Add New Field</h3>
 
-      const field = { id: crypto.randomUUID(), label, type };
-      if (type === "choice") {
-        const opts = prompt("Choices (comma-separated)");
-        field.choices = opts ? opts.split(",").map(v => v.trim()) : [];
-      }
-      state.draftSection.fields.push(field);
+          <label style="display:block; margin-bottom:12px;">
+            <div style="margin-bottom:4px; font-weight:500; color:#333;">Field Label *</div>
+            <input id="fieldLabel" type="text" placeholder="Enter field label" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:6px;" />
+          </label>
+
+          <label style="display:block; margin-bottom:12px;">
+            <div style="margin-bottom:4px; font-weight:500; color:#333;">Field Type</div>
+            <select id="fieldType" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:6px;">
+              <option value="text">Text</option>
+              <option value="textarea">Textarea</option>
+              <option value="date">Date</option>
+              <option value="choice">Choice (Dropdown)</option>
+            </select>
+          </label>
+
+          <div id="choicesContainer" style="display:none; margin-bottom:12px;">
+            <label style="display:block;">
+              <div style="margin-bottom:4px; font-weight:500; color:#333;">Choices (comma-separated)</div>
+              <input id="fieldChoices" type="text" placeholder="Option 1, Option 2, Option 3" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:6px;" />
+            </label>
+          </div>
+
+          <div style="margin-top:20px; display:flex; justify-content:flex-end; gap:8px;">
+            <button id="cancelFieldBtn" style="padding:8px 16px; background:#f8f9fa; color:#333; border:1px solid #ddd; border-radius:6px; cursor:pointer;">Cancel</button>
+            <button id="addFieldBtn" style="padding:8px 16px; background:#007bff; color:#fff; border:none; border-radius:6px; cursor:pointer;">Add Field</button>
+          </div>
+        </div>
+      `;
+
+      // Show choices input when choice type is selected
+      fieldModal.querySelector('#fieldType').addEventListener('change', (e) => {
+        const container = fieldModal.querySelector('#choicesContainer');
+        container.style.display = e.target.value === 'choice' ? 'block' : 'none';
+      });
+
+      // Cancel button
+      fieldModal.querySelector('#cancelFieldBtn').onclick = () => fieldModal.remove();
+
+      // Add field button
+      fieldModal.querySelector('#addFieldBtn').onclick = () => {
+        const label = fieldModal.querySelector('#fieldLabel').value.trim();
+        const type = fieldModal.querySelector('#fieldType').value;
+
+        if (!label) {
+          alert("Field label is required.");
+          return;
+        }
+
+        const field = { id: crypto.randomUUID(), label, type };
+        if (type === "choice") {
+          const choices = fieldModal.querySelector('#fieldChoices').value.trim();
+          field.choices = choices ? choices.split(",").map(c => c.trim()) : [];
+        }
+
+        state.draftSection.fields.push(field);
+        fieldModal.remove();
+
+        // Refresh the current step
+        content.innerHTML = `<button id="closeWizardBtn" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:24px; cursor:pointer; color:#666;">×</button>${renderSectionWizardStep3()}`;
+        content.querySelector('#closeWizardBtn').onclick = () => modal.remove();
+      };
+
+      document.body.appendChild(fieldModal);
+      return; // Don't continue with the rest of the event handler
     }
 
     if (action === "remove-field") {
@@ -5147,7 +5448,9 @@ window.openSectionWizard = function () {
       4: renderSectionWizardStep4
     };
 
-    content.innerHTML = renderMap[state.step]();
+    content.innerHTML = `<button id="closeWizardBtn" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:24px; cursor:pointer; color:#666;">×</button>${renderMap[state.step] ? renderMap[state.step]() : renderSectionWizardStep1()}`;
+    // Re-attach close button
+    content.querySelector('#closeWizardBtn').onclick = () => modal.remove();
   });
 
   document.body.appendChild(modal);
