@@ -95,39 +95,39 @@ document.addEventListener('DOMContentLoaded', function() {
             position: absolute;
             right: 18px;
             bottom: 12px;
-            background: linear-gradient(90deg, #4f8cff 0%, #6ad1e3 100%);
+            background: linear-gradient(90deg, #7c3aed 0%, #a855f7 100%);
             color: #fff;
             border: none;
             border-radius: 999px;
             padding: 7px 22px;
             font-size: 1rem;
             font-weight: 600;
-            box-shadow: 0 2px 8px rgba(60, 120, 180, 0.10);
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.20);
             cursor: pointer;
             transition: background 0.2s, box-shadow 0.2s;
             z-index: 2;
         }
         .repeatable-add:hover {
-            background: linear-gradient(90deg, #6ad1e3 0%, #4f8cff 100%);
-            box-shadow: 0 4px 16px rgba(60, 120, 180, 0.18);
+            background: linear-gradient(90deg, #a855f7 0%, #7c3aed 100%);
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.30);
         }
         /* Clarification pill button distinct style */
         .pill-btn-green {
-            background: linear-gradient(90deg, #ffb347 0%, #ffcc80 100%);
-            color: #333;
+            background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%);
+            color: #fff;
             border: none;
             border-radius: 999px;
             padding: 8px 24px;
             font-size: 1rem;
             font-weight: 600;
-            box-shadow: 0 2px 8px rgba(255, 180, 71, 0.10);
+            box-shadow: 0 2px 8px rgba(251, 191, 36, 0.20);
             cursor: pointer;
             transition: background 0.2s, box-shadow 0.2s;
             z-index: 3;
         }
         .pill-btn-green:hover {
-            background: linear-gradient(90deg, #ffcc80 0%, #ffb347 100%);
-            box-shadow: 0 4px 16px rgba(255, 180, 71, 0.18);
+            background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+            box-shadow: 0 4px 16px rgba(251, 191, 36, 0.30);
         }
         `;
         document.head.appendChild(style);
@@ -142,6 +142,91 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('create_template_guide').classList.remove('hidden');
             console.log('DEBUG: Guidance popup forced');
         };
+    }
+});
+// SIDEBAR TOGGLE LOGIC
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sideNav');
+    const sidebarTab = document.getElementById('sidebarTab');
+    const toggleIcon = document.getElementById('sidebarToggleIcon');
+    const toggleText = document.getElementById('sidebarToggleText');
+    if (sidebarToggle && sidebar && sidebarTab && toggleIcon && toggleText) {
+        sidebarToggle.addEventListener('click', function() {
+            const isVisible = sidebarToggle.dataset.sidebarVisible === 'true';
+            if (isVisible) {
+                sidebar.classList.add('sidebar-hidden');
+                sidebarTab.classList.remove('hidden');
+                sidebarToggle.dataset.sidebarVisible = 'false';
+                sidebarToggle.title = 'Show Sidebar';
+                toggleText.textContent = 'Show Sidebar';
+                // Change icon to show (arrow right)
+                toggleIcon.innerHTML = '<path d="M9 18l6-6-6-6"></path>';
+            } else {
+                sidebar.classList.remove('sidebar-hidden');
+                sidebarTab.classList.add('hidden');
+                sidebarToggle.dataset.sidebarVisible = 'true';
+                sidebarToggle.title = 'Hide Sidebar';
+                toggleText.textContent = 'Hide Sidebar';
+                // Change icon back to hide (lines)
+                toggleIcon.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
+            }
+        });
+
+        // Tab click handler
+        sidebarTab.addEventListener('click', function() {
+            sidebar.classList.remove('sidebar-hidden');
+            sidebarTab.classList.add('hidden');
+            sidebarToggle.dataset.sidebarVisible = 'true';
+            sidebarToggle.title = 'Hide Sidebar';
+            toggleText.textContent = 'Hide Sidebar';
+            // Change icon back to hide (lines)
+            toggleIcon.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
+        });
+
+        // Dragging functionality for sidebar tab
+        let isDragging = false;
+        let dragStartY = 0;
+        let initialTop = 0;
+
+        sidebarTab.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            dragStartY = e.clientY;
+            initialTop = sidebarTab.offsetTop;
+            sidebarTab.style.cursor = 'grabbing';
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+            
+            const deltaY = e.clientY - dragStartY;
+            let newTop = initialTop + deltaY;
+            
+            // Constrain to viewport bounds (with some padding)
+            const tabHeight = sidebarTab.offsetHeight;
+            const minTop = 10;
+            const maxTop = window.innerHeight - tabHeight - 10;
+            newTop = Math.max(minTop, Math.min(maxTop, newTop));
+            
+            sidebarTab.style.top = newTop + 'px';
+            sidebarTab.style.transform = 'translateY(0)'; // Remove the centering transform
+            localStorage.setItem('dpss_sidebarTabTop', newTop);
+        });
+
+        document.addEventListener('mouseup', function() {
+            if (isDragging) {
+                isDragging = false;
+                sidebarTab.style.cursor = '';
+            }
+        });
+
+        // Load saved position on initialization
+        const savedTop = localStorage.getItem('dpss_sidebarTabTop');
+        if (savedTop) {
+            sidebarTab.style.top = savedTop + 'px';
+            sidebarTab.style.transform = 'translateY(0)';
+        }
     }
 });
 // --- Universal label resolver (safe patch) ---
@@ -276,11 +361,38 @@ function buildJournalOutput() {
                 // =======================================================
                 if (field.closest('.repeatable-inner')) return;
 
+                // Follow-up children belong to their parent select and must not
+                // be treated as independent fields. They are marked with
+                // `data-followup="true"` when created by `handleFollowupInput()`.
+                if (field.dataset && field.dataset.followup === 'true') return;
+
                 const label = resolveFieldLabel(field);
                 if (!label) return;
 
-                const val = readVisibleValue(field);
+                
+
+                let val = readVisibleValue(field);
                 if (!val) return;
+
+                // If this is a select that has an associated follow-up textarea,
+                // merge the follow-up value into the parent's output instead of
+                // printing the follow-up as a separate field. Follow-up
+                // textarea is rendered into an element with id `${select.id}_followup`.
+                try {
+                    if (field.tagName === 'SELECT' && field.id) {
+                        const followupContainer = document.getElementById(`${field.id}_followup`);
+                        const followupEl = followupContainer && followupContainer.querySelector('textarea.journal-input[data-followup="true"]');
+                        const followupVal = followupEl ? readVisibleValue(followupEl) : '';
+                        if (followupVal) {
+                            // If the selected option ends with a colon, prefer the
+                            // follow-up text as the value (avoids double-colons).
+                            const base = val.trim().replace(/:\s*$/, '');
+val = `${base}: ${followupVal}`;
+                        }
+                    }
+                } catch (e) {
+                    // Non-fatal: if anything goes wrong, fall back to original val
+                }
 
                 printedAnyField = true;
                 output += `  ${label}: ${val}\n`;
@@ -1099,7 +1211,7 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
         card.innerHTML = `
             ${adminLabelPillHTML}${viewerLabelPillHTML}
             <div class=\"flex items-center gap-2 mb-2\">
-                <button class=\"collapse-toggle text-xs text-slate-600 hover:text-slate-800\" onclick=\"toggleSectionCollapse(${index})\" title=\"Collapse / Expand\"><span>${arrow}</span></button>
+                <!-- <button class=\"collapse-toggle px-2 py-1 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-md shadow-sm hover:shadow-md transition-all duration-200 text-xs font-medium\" onclick=\"toggleSectionCollapse(${index})\" title=\"Collapse / Expand\"><span>${arrow}</span></button> -->
                 <div>
                     <div class=\"section-label\">SECTION ${String(index+1).padStart(2,'0')}</div>
                     <h2 class=\"section-title flex items-center\">${sectionTitle} ${requiredBadge}</h2>
@@ -1462,9 +1574,14 @@ window.handleFollowupInput = function(selectEl, fieldId) {
         // Show follow-up text input if not already present
         if (!followupContainer.querySelector('textarea')) {
             followupContainer.innerHTML = `
-                <label class="text-xs text-slate-500 block mb-1">Please specify:</label>
-                <textarea class="journal-input" rows="2" placeholder="Enter details..."></textarea>
-            `;
+    <textarea
+        class="journal-input"
+        rows="2"
+        placeholder="Please specify..."
+        data-followup="true"
+    ></textarea>
+`;
+
         }
     } else {
         // Clear follow-up input
@@ -1886,16 +2003,151 @@ function initSidebarNavigation() { /* replaced by inline listeners in renderSide
 // DARK MODE / ADMIN
 // ============================================================================
 function initDarkMode() {
-    document.getElementById("btnThemeToggle").addEventListener("click", () => {
-        const isDark = document.body.classList.toggle("dark-mode");
-        document.getElementById("btnThemeToggle").textContent = isDark ? "Light Mode" : "Dark Mode";
+    const darkModeToggle = document.getElementById("darkModeToggle");
+
+    // Initialize toggle state based on current theme
+    const isCurrentlyDark = document.body.classList.contains("dark-mode");
+    darkModeToggle.checked = isCurrentlyDark;
+
+    // Handle toggle changes
+    darkModeToggle.addEventListener("change", () => {
+        const isDark = darkModeToggle.checked;
+        document.body.classList.toggle("dark-mode", isDark);
     });
 }
-function initAdminMode() {
-    document.getElementById("btnAdminToggle").addEventListener("click", async () => {
+
+function initSettingsModal() {
+    const settingsBtn = document.getElementById("btnSettings");
+    const settingsModal = document.getElementById("settings_modal");
+    const settingsBackdrop = document.getElementById("settings_modal_backdrop");
+    const closeBtn = document.getElementById("settings_modal_close");
+    const closeFooterBtn = document.getElementById("settings_modal_close_footer");
+
+    // Open settings modal
+    settingsBtn.addEventListener("click", () => {
+        settingsModal.classList.remove("hidden");
+        settingsBackdrop.classList.remove("hidden");
+    });
+
+    // Close settings modal functions
+    function closeSettingsModal() {
+        settingsModal.classList.add("hidden");
+        settingsBackdrop.classList.add("hidden");
+    }
+
+    closeBtn.addEventListener("click", closeSettingsModal);
+    closeFooterBtn.addEventListener("click", closeSettingsModal);
+    settingsBackdrop.addEventListener("click", closeSettingsModal);
+
+    // Initialize toggles
+    initSettingsToggles();
+}
+
+function initSettingsToggles() {
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    const isCurrentlyDark = document.body.classList.contains("dark-mode");
+    darkModeToggle.checked = isCurrentlyDark;
+    darkModeToggle.addEventListener("change", () => {
+        const isDark = darkModeToggle.checked;
+        document.body.classList.toggle("dark-mode", isDark);
+    });
+
+    // Progress bar toggle
+    const progressBarToggle = document.getElementById("progressBarToggle");
+    const progressBarEnabled = localStorage.getItem('dpss_progressBarEnabled') !== 'false'; // Default to true
+    progressBarToggle.checked = progressBarEnabled;
+    progressBarToggle.addEventListener("change", () => {
+        const enabled = progressBarToggle.checked;
+        localStorage.setItem('dpss_progressBarEnabled', enabled);
+
+        // Show/hide progress bar immediately
+        const progressBar = document.getElementById('floatingProgressBar');
+        const progressTab = document.getElementById('floatingProgressTab');
+
+        if (enabled) {
+            // If enabling, check if we need to create the progress bar
+            if (!progressBar && !progressTab) {
+                // Progress bar hasn't been created yet, trigger initialization
+                if (typeof initFloatingProgressBar === 'function') {
+                    initFloatingProgressBar();
+                } else {
+                    // Re-run the IIFE logic
+                    setTimeout(() => {
+                        const existingBar = document.getElementById('floatingProgressBar');
+                        const existingTab = document.getElementById('floatingProgressTab');
+                        if (!existingBar && !existingTab) {
+                            // Force re-initialization by clearing the check
+                            const script = document.createElement('script');
+                            script.textContent = `
+                                (function initFloatingProgressBar() {
+                                    function start() {
+                                        if (!document.body) return;
+                                        if (document.getElementById('floatingProgressBar')) return;
+                                        const isHidden = true;
+                                        // ... progress bar creation code would go here
+                                        console.log('Progress bar would be created here');
+                                    }
+                                    if (document.readyState === 'loading') {
+                                        document.addEventListener('DOMContentLoaded', start);
+                                    } else {
+                                        start();
+                                    }
+                                })();
+                            `;
+                            document.head.appendChild(script);
+                        }
+                    }, 100);
+                }
+            } else {
+                // Progress bar exists, just show it based on previous state
+                const wasHidden = localStorage.getItem('dpss_progressBarHidden') === 'true';
+                if (progressBar && progressTab) {
+                    if (wasHidden) {
+                        progressBar.classList.add('hidden');
+                        progressTab.classList.remove('hidden');
+                    } else {
+                        progressBar.classList.remove('hidden');
+                        progressTab.classList.add('hidden');
+                    }
+                }
+            }
+        } else {
+            // Hide both progress bar and tab
+            if (progressBar) progressBar.classList.add('hidden');
+            if (progressTab) progressTab.classList.add('hidden');
+        }
+    });
+
+    // Scroll Buttons toggle (controls both top and bottom buttons)
+    const scrollButtonsToggle = document.getElementById("scrollButtonsToggle");
+    const scrollButtonsEnabled = localStorage.getItem('dpss_scrollButtonsEnabled') !== 'false'; // Default to true
+    scrollButtonsToggle.checked = scrollButtonsEnabled;
+    scrollButtonsToggle.addEventListener("change", () => {
+        const enabled = scrollButtonsToggle.checked;
+        localStorage.setItem('dpss_scrollButtonsEnabled', enabled);
+
+        // Show/hide both scroll buttons immediately
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        const scrollToBottomBtn = document.getElementById('scrollToBottom');
+
+        if (enabled) {
+            if (scrollToTopBtn) scrollToTopBtn.style.display = ''; // Show button
+            if (scrollToBottomBtn) scrollToBottomBtn.style.display = ''; // Show button
+        } else {
+            if (scrollToTopBtn) scrollToTopBtn.style.display = 'none'; // Hide button
+            if (scrollToBottomBtn) scrollToBottomBtn.style.display = 'none'; // Hide button
+        }
+    });
+
+    // Admin mode toggle
+    const adminModeToggle = document.getElementById("adminModeToggle");
+    const isCurrentlyAdmin = document.body.classList.contains("admin-mode");
+    adminModeToggle.checked = isCurrentlyAdmin;
+    adminModeToggle.addEventListener("change", async () => {
         const wasOn = document.body.classList.contains('admin-mode');
-        const on = document.body.classList.toggle("admin-mode");
-        document.getElementById("btnAdminToggle").textContent = on ? "Admin: ON" : "Admin: OFF";
+        const on = adminModeToggle.checked;
+        document.body.classList.toggle("admin-mode", on);
 
         if (on && typeof renderSectionLibrary === "function") renderSectionLibrary();
         
@@ -1929,33 +2181,20 @@ function initAdminMode() {
                     if (originalTemplateState.label) activeTemplate.label = originalTemplateState.label;
                     if (originalTemplateState.title) activeTemplate.title = originalTemplateState.title;
                     
-                    // Save the reverted state
-                    persistActiveTemplateChanges();
-                    
-                    // Re-render
+                    // Re-render the template
                     renderTemplateSections(activeTemplate);
                     renderSidebarFromTemplate(activeTemplate);
                     
-                    // Clear change log and hide indicators
+                    // Clear change log and reset state
                     changeLog = [];
-                    updateChangeTracker();
-                    hideChangeTracker();
+                    originalTemplateState = null;
                     
-                    const publishBtn = document.getElementById('publishBtn');
-                    if (publishBtn) publishBtn.classList.remove('visible', 'pulsing');
-                    
-                    console.log('↩️ Reverted to original template state');
+                    console.log('🔄 Reverted all admin changes');
                 }
             }
-            // Clear original state when exiting admin mode
-            originalTemplateState = null;
         }
-        
-        applyAdminVisibility();
     });
 }
-
-
 function applyAdminVisibility() {
     const isOn = document.body.classList.contains('admin-mode');
     document.querySelectorAll('.admin-only').forEach(el => {
@@ -2011,11 +2250,85 @@ function initGenerateJournal() {
     function close() {
         modal.classList.add("hidden");
         backdrop.classList.add("hidden");
+        // Reset modal position when closing
+        const modalContent = modal.querySelector('.bg-white');
+        if (modalContent) {
+            modalContent.style.left = '';
+            modalContent.style.top = '';
+            modalContent.style.transform = '';
+        }
     }
 
     document.getElementById("journal_modal_close").onclick = close;
     document.getElementById("journal_modal_close_footer").onclick = close;
     backdrop.onclick = close;
+
+    // Dragging functionality for journal modal
+    const modalContent = modal.querySelector('.bg-white');
+    if (modalContent) {
+        let isDraggingModal = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let initialLeft = 0;
+        let initialTop = 0;
+
+        // Make the header draggable
+        const modalHeader = modalContent.querySelector('.flex.items-center.justify-between');
+        if (modalHeader) {
+            modalHeader.style.cursor = 'grab';
+            modalHeader.addEventListener('mousedown', function(e) {
+                isDraggingModal = true;
+                dragStartX = e.clientX;
+                dragStartY = e.clientY;
+                
+                // Get current position
+                const rect = modalContent.getBoundingClientRect();
+                initialLeft = rect.left;
+                initialTop = rect.top;
+                
+                modalHeader.style.cursor = 'grabbing';
+                e.preventDefault();
+            });
+        }
+
+        document.addEventListener('mousemove', function(e) {
+            if (!isDraggingModal) return;
+            
+            const deltaX = e.clientX - dragStartX;
+            const deltaY = e.clientY - dragStartY;
+            
+            let newLeft = initialLeft + deltaX;
+            let newTop = initialTop + deltaY;
+            
+            // Constrain to viewport bounds (with some padding)
+            const modalWidth = modalContent.offsetWidth;
+            const modalHeight = modalContent.offsetHeight;
+            const minLeft = 10;
+            const minTop = 10;
+            const maxLeft = window.innerWidth - modalWidth - 10;
+            const maxTop = window.innerHeight - modalHeight - 10;
+            
+            newLeft = Math.max(minLeft, Math.min(maxLeft, newLeft));
+            newTop = Math.max(minTop, Math.min(maxTop, newTop));
+            
+            // Change from centered positioning to absolute positioning
+            modal.style.justifyContent = 'flex-start';
+            modal.style.alignItems = 'flex-start';
+            modalContent.style.position = 'absolute';
+            modalContent.style.left = newLeft + 'px';
+            modalContent.style.top = newTop + 'px';
+            modalContent.style.transform = 'none';
+        });
+
+        document.addEventListener('mouseup', function() {
+            if (isDraggingModal) {
+                isDraggingModal = false;
+                if (modalHeader) {
+                    modalHeader.style.cursor = 'grab';
+                }
+            }
+        });
+    }
 }
 
 // ============================================================================
@@ -2551,7 +2864,7 @@ function convertHTMLToTemplate(html, name, dropdowns = []) {
             card.innerHTML = `
                 ${adminLabelPillHTML}${viewerLabelPillHTML}
                 <div class=\"flex items-center gap-2 mb-2\">
-                    <button class=\"collapse-toggle text-xs text-slate-600 hover:text-slate-800\" onclick=\"toggleSectionCollapse(${index})\" title=\"Collapse / Expand\"><span>${arrow}</span></button>
+                    <!--<button class=\"collapse-toggle px-2 py-1 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-md shadow-sm hover:shadow-md transition-all duration-200 text-xs font-medium\" onclick=\"toggleSectionCollapse(${index})\" title=\"Collapse / Expand\"><span>${arrow}</span></button>-->
                     <div>
                         <div class=\"section-label\">SECTION ${String(index+1).padStart(2,'0')}</div>
                         <h2 class=\"section-title flex items-center\">${sectionTitle} ${requiredBadge}</h2>
@@ -4392,6 +4705,13 @@ function initScrollButtons() {
     const scrollToBottom = document.getElementById('scrollToBottom');
     
     if (!scrollToTop || !scrollToBottom) return;
+
+    // Check stored preference for scroll buttons (combined setting)
+    const scrollButtonsEnabled = localStorage.getItem('dpss_scrollButtonsEnabled') !== 'false';
+    if (!scrollButtonsEnabled) {
+        scrollToTop.style.display = 'none';
+        scrollToBottom.style.display = 'none';
+    }
     
     // Show/hide buttons based on scroll position
     function updateScrollButtons() {
@@ -4401,15 +4721,18 @@ function initScrollButtons() {
         const atTop = scrollTop < 200;
         const atBottom = scrollTop + clientHeight >= scrollHeight - 100;
         
-        // Show top button if not at top
-        if (atTop) {
+        // Check stored preference for scroll buttons (combined setting)
+        const scrollButtonsEnabled = localStorage.getItem('dpss_scrollButtonsEnabled') !== 'false';
+        
+        // Show top button if not at top and buttons are enabled
+        if (atTop || !scrollButtonsEnabled) {
             scrollToTop.classList.remove('visible');
         } else {
             scrollToTop.classList.add('visible');
         }
         
-        // Show bottom button if not at bottom
-        if (atBottom) {
+        // Show bottom button if not at bottom and buttons are enabled
+        if (atBottom || !scrollButtonsEnabled) {
             scrollToBottom.classList.remove('visible');
         } else {
             scrollToBottom.classList.add('visible');
@@ -4603,7 +4926,7 @@ window.addEventListener("load", async () => {
     showPlaceholders(); // Show initial placeholder state
     initHeaderFilters();
     initDarkMode();
-    initAdminMode();
+    initSettingsModal();
     initSidebarNavigation();
     initGenerateJournal();
     initTemplateExport();
@@ -4741,6 +5064,10 @@ function hideRefreshToast() {
         if (!document.body) return;
         if (document.getElementById('floatingProgressBar')) return;
 
+        // Check if progress bar is enabled in settings
+        const progressBarEnabled = localStorage.getItem('dpss_progressBarEnabled') !== 'false';
+        if (!progressBarEnabled) return;
+
         // Always start hidden on page load for a cleaner initial experience
         const isHidden = true;
 
@@ -4787,6 +5114,12 @@ function hideRefreshToast() {
                 font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
                 z-index: 10000;
                 transition: transform 0.3s ease, opacity 0.3s ease;
+                cursor: grab;
+                user-select: none;
+            }
+
+            #floatingProgressBar:active {
+                cursor: grabbing;
             }
 
             #floatingProgressBar.hidden {
@@ -4801,7 +5134,7 @@ function hideRefreshToast() {
                 right: -10px;
                 width: 40px;
                 height: 40px;
-                background: #ffffff;
+                background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
                 border-radius: 12px 0 0 12px;
                 box-shadow: -4px 0 12px rgba(0,0,0,0.15);
                 display: flex;
@@ -4810,7 +5143,13 @@ function hideRefreshToast() {
                 font-size: 18px;
                 cursor: pointer;
                 z-index: 9999;
-                transition: right 0.3s ease;
+                transition: right 0.3s ease, background 0.2s ease;
+                user-select: none; /* Prevent text selection during drag */
+            }
+
+            #floatingProgressTab:hover {
+                background: linear-gradient(135deg, #1e3a8a 0%, #6d28d9 100%);
+                box-shadow: -4px 0 16px rgba(0,0,0,0.2);
             }
 
             #floatingProgressTab.hidden {
@@ -4843,24 +5182,35 @@ function hideRefreshToast() {
             #prevSectionBtn,
             #nextSectionBtn {
                 flex: 1;
-                background: #22c55e;
+                background: linear-gradient(90deg, #3b82f6, #8b5cf6);
                 color: white;
                 border: none;
                 border-radius: 10px;
                 padding: 6px;
                 font-size: 12px;
                 cursor: pointer;
+                transition: background 0.2s ease;
+            }
+
+            #prevSectionBtn:hover:not(:disabled),
+            #nextSectionBtn:hover:not(:disabled) {
+                background: linear-gradient(90deg, #2563eb, #7c3aed);
             }
 
             #hideProgressBtn {
                 flex: 0 0 32px;
-                background: #6b7280;
+                background: linear-gradient(90deg, #3b82f6, #8b5cf6);
                 color: white;
                 border: none;
                 border-radius: 10px;
                 padding: 6px;
                 font-size: 12px;
                 cursor: pointer;
+                transition: background 0.2s ease;
+            }
+
+            #hideProgressBtn:hover {
+                background: linear-gradient(90deg, #2563eb, #7c3aed);
             }
 
             #prevSectionBtn:disabled,
@@ -4890,11 +5240,129 @@ function hideRefreshToast() {
                 bar.classList.add('hidden');
                 showTab.classList.remove('hidden');
                 localStorage.setItem('dpss_progressBarHidden', 'true');
+                // Reset modal position when hiding
+                bar.style.left = '';
+                bar.style.top = '';
+                bar.style.bottom = '';
+                bar.style.right = '';
             }
         }
 
         document.getElementById('hideProgressBtn').onclick = toggleProgressBar;
         showTab.onclick = toggleProgressBar;
+
+        // Dragging functionality for progress bar tab
+        let isDraggingProgress = false;
+        let dragStartYProgress = 0;
+        let initialTopProgress = 0;
+
+        showTab.addEventListener('mousedown', function(e) {
+            isDraggingProgress = true;
+            dragStartYProgress = e.clientY;
+            initialTopProgress = showTab.offsetTop;
+            showTab.style.cursor = 'grabbing';
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (!isDraggingProgress) return;
+            
+            const deltaY = e.clientY - dragStartYProgress;
+            let newTop = initialTopProgress + deltaY;
+            
+            // Constrain to viewport bounds (with some padding)
+            const tabHeight = showTab.offsetHeight;
+            const minTop = 10;
+            const maxTop = window.innerHeight - tabHeight - 10;
+            newTop = Math.max(minTop, Math.min(maxTop, newTop));
+            
+            showTab.style.top = newTop + 'px';
+            showTab.style.bottom = 'auto'; // Override the default bottom positioning
+            localStorage.setItem('dpss_progressTabTop', newTop);
+        });
+
+        document.addEventListener('mouseup', function() {
+            if (isDraggingProgress) {
+                isDraggingProgress = false;
+                showTab.style.cursor = '';
+            }
+        });
+
+        // Load saved position on initialization
+        const savedProgressTop = localStorage.getItem('dpss_progressTabTop');
+        if (savedProgressTop) {
+            showTab.style.top = savedProgressTop + 'px';
+            showTab.style.bottom = 'auto';
+        }
+
+        // Dragging functionality for progress bar modal
+        let isDraggingModal = false;
+        let dragStartXModal = 0;
+        let dragStartYModal = 0;
+        let initialLeftModal = 0;
+        let initialTopModal = 0;
+
+        bar.addEventListener('mousedown', function(e) {
+            // Only allow dragging if not clicking on buttons
+            if (e.target.tagName === 'BUTTON') return;
+            
+            isDraggingModal = true;
+            dragStartXModal = e.clientX;
+            dragStartYModal = e.clientY;
+            
+            // Get current position
+            const rect = bar.getBoundingClientRect();
+            initialLeftModal = rect.left;
+            initialTopModal = rect.top;
+            
+            bar.style.cursor = 'grabbing';
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (!isDraggingModal) return;
+            
+            const deltaX = e.clientX - dragStartXModal;
+            const deltaY = e.clientY - dragStartYModal;
+            
+            let newLeft = initialLeftModal + deltaX;
+            let newTop = initialTopModal + deltaY;
+            
+            // Constrain to viewport bounds (with some padding)
+            const modalWidth = bar.offsetWidth;
+            const modalHeight = bar.offsetHeight;
+            const minLeft = 10;
+            const minTop = 10;
+            const maxLeft = window.innerWidth - modalWidth - 10;
+            const maxTop = window.innerHeight - modalHeight - 10;
+            
+            newLeft = Math.max(minLeft, Math.min(maxLeft, newLeft));
+            newTop = Math.max(minTop, Math.min(maxTop, newTop));
+            
+            bar.style.left = newLeft + 'px';
+            bar.style.top = newTop + 'px';
+            bar.style.bottom = 'auto';
+            bar.style.right = 'auto';
+            localStorage.setItem('dpss_progressBarLeft', newLeft);
+            localStorage.setItem('dpss_progressBarTop', newTop);
+        });
+
+        document.addEventListener('mouseup', function() {
+            if (isDraggingModal) {
+                isDraggingModal = false;
+                bar.style.cursor = '';
+            }
+        });
+
+        // Load saved modal position on initialization
+        const savedModalLeft = localStorage.getItem('dpss_progressBarLeft');
+        const savedModalTop = localStorage.getItem('dpss_progressBarTop');
+        if (savedModalLeft && savedModalTop) {
+            bar.style.left = savedModalLeft + 'px';
+            bar.style.top = savedModalTop + 'px';
+            bar.style.bottom = 'auto';
+            bar.style.right = 'auto';
+        }
 
         // Initial state
         if (isHidden) {
@@ -5125,6 +5593,21 @@ window.renderSectionLibrary = function () {
 };
 
 /* ---------------------------------------------------------------------------
+// LIBRARY DELETE FUNCTION (Admin-Only)
+// --------------------------------------------------------------------------- */
+
+// // new: delete library section
+window.deleteLibrarySection = function (idx) {
+  const sec = window.sectionLibrary[idx];
+  if (!sec) return;
+
+  window.sectionLibrary.splice(idx, 1);
+  persistSectionLibrary();
+  renderSectionLibrary();
+  showAnimatedMessage('Section deleted from library');
+};
+
+/* ---------------------------------------------------------------------------
 // LIBRARY EDIT FUNCTIONS (Admin-Only)
 // --------------------------------------------------------------------------- */
 
@@ -5283,7 +5766,7 @@ window.renderSectionWizardStep1 = function () {
     <p style="margin:0 0 24px 0; color:#666;">Create a reusable section for the Section Library.</p>
 
     <div style="margin-top:16px; display:flex; flex-direction:column; gap:12px;">
-      <button data-action="start-blank" style="padding:12px 20px; background:#007bff; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:16px; transition:background .2s;">🆕 Start from Blank</button>
+      <button data-action="start-blank" style="padding:12px 20px; background:linear-gradient(90deg, #3b82f6, #8b5cf6); color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:16px; transition:background .2s;">🆕 Start from Blank</button>
       <button disabled style="padding:12px 20px; background:#ccc; color:#666; border:none; border-radius:8px; font-size:16px; opacity:.5;">Reuse Existing (Coming Soon)</button>
     </div>
 
@@ -5317,7 +5800,7 @@ window.renderSectionWizardStep2 = function () {
 
     <div style="margin-top:32px; display:flex; justify-content:space-between;">
       <button data-action="back" style="padding:10px 20px; background:#f8f9fa; color:#333; border:1px solid #ddd; border-radius:8px; cursor:pointer; font-size:14px;">Back</button>
-      <button data-action="next" style="padding:10px 20px; background:#007bff; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:14px;">Next</button>
+      <button data-action="next" style="padding:10px 20px; background:linear-gradient(90deg, #3b82f6, #8b5cf6); color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:14px; transition:background 0.2s ease;">Next</button>
     </div>
   `;
 };
@@ -5343,7 +5826,7 @@ window.renderSectionWizardStep3 = function () {
 
     <div style="margin-top:32px; display:flex; justify-content:space-between;">
       <button data-action="back" style="padding:10px 20px; background:#f8f9fa; color:#333; border:1px solid #ddd; border-radius:8px; cursor:pointer; font-size:14px;">Back</button>
-      <button data-action="next" style="padding:10px 20px; background:#007bff; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:14px;">Next</button>
+      <button data-action="next" style="padding:10px 20px; background:linear-gradient(90deg, #3b82f6, #8b5cf6); color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:14px; transition:background 0.2s ease;">Next</button>
     </div>
   `;
 };
@@ -5469,7 +5952,7 @@ window.openSectionWizard = function () {
 
           <div style="margin-top:20px; display:flex; justify-content:flex-end; gap:8px;">
             <button id="cancelFieldBtn" style="padding:8px 16px; background:#f8f9fa; color:#333; border:1px solid #ddd; border-radius:6px; cursor:pointer;">Cancel</button>
-            <button id="addFieldBtn" style="padding:8px 16px; background:#007bff; color:#fff; border:none; border-radius:6px; cursor:pointer;">Add Field</button>
+            <button id="addFieldBtn" style="padding:8px 16px; background:linear-gradient(90deg, #3b82f6, #8b5cf6); color:#fff; border:none; border-radius:6px; cursor:pointer; transition:background 0.2s ease;">Add Field</button>
           </div>
         </div>
       `;

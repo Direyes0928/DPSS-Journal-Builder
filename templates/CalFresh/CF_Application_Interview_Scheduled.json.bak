@@ -1,6 +1,6 @@
 {
-  "id": "CF_Application_Interview_Scheduled",
-  "name": "CalFresh \u2013 Application Interview Scheduled",
+  "id": "cf_application_interview_scheduled",
+  "name": "CalFresh – Application Interview Scheduled",
   "file": "CF_Application_Interview_Scheduled.json",
   "program": "CalFresh",
   "version": "2025-12-02T00:00:00Z",
@@ -11,185 +11,240 @@
       "title": "SHORT DESCRIPTION",
       "fields": [
         {
-          "id": "shortDescription",
+          "id": "short_description",
           "label": "Short Description",
           "type": "note",
-          "content": "Application Interview Scheduled"
+          "content": "CF: Application Interview Scheduled"
         }
+      ],
+      "_clones": [
+        [
+          {
+            "id": "short_description",
+            "label": "Short Description",
+            "type": "note",
+            "content": "CF: Application Interview Scheduled"
+          }
+        ]
       ]
     },
     {
       "id": "section_2",
-      "title": "LONG DESCRIPTION",
+      "title": "APPLICATION INFORMATION",
       "fields": [
         {
-          "id": "longDescription",
-          "label": "Long Description",
-          "type": "textarea"
+          "id": "application_date",
+          "label": "APPLICATION DATE",
+          "type": "date"
+        },
+        {
+          "id": "language",
+          "label": "Choose LANGUAGE",
+          "type": "choice",
+          "choices": [
+            "English",
+            "Spanish- Certified SSO worker assisted- DPSS 1764 requirements fulfilled. Worker #:",
+            "Other (DPSS 1764 required) (Specify the requested language and how the request was accommodated):"
+          ]
+        },
+        {
+          "id": "reported_income",
+          "label": "REPORTED INCOME",
+          "type": "choice",
+          "choices": [
+            "Income questions were incomplete on the application.",
+            "REPORTED INCOME:"
+          ]
+        },
+        {
+          "id": "housing_expenses",
+          "label": "Choose HOUSING EXPENSES (MORTGAGE / RENT)",
+          "type": "choice",
+          "choices": [
+            "HOUSING EXPENSES (MORTGAGE / RENT): Housing questions were incomplete on the application.",
+            "HOUSING EXPENSES (MORTGAGE / RENT):"
+          ]
+        },
+        {
+          "id": "utility_allowance",
+          "label": "Choose UTILITY ALLOWANCE",
+          "type": "choice",
+          "choices": [
+            "UTILITY ALLOWANCE: Utility questions were incomplete on the application.",
+            "UTILITY ALLOWANCE: Standard Utility Allowance (SUA): CF HH incurs costs for heating and / or cooling.",
+            "UTILITY ALLOWANCE: Limited Utility Allowance (LUA): CF HH incurs costs for at least two utility expenses, but not for heating and / or cooling.",
+            "UTILITY ALLOWANCE: Telephone Utility Allowance (TUA): CF HH does not incur a cost for a housing utility but pays for a telephone, cell phone, fax line, or e-mail access."
+          ]
+        },
+        {
+          "id": "liquid_resources",
+          "label": "Choose LIQUID RESOURCES",
+          "type": "choice",
+          "choices": [
+            "LIQUID RESOURCES: Liquid resource questions were incomplete on the application.",
+            "LIQUID RESOURCES:"
+          ]
+        },
+        {
+          "id": "expedited_service",
+          "label": "Choose EXPEDITED SERVICE",
+          "type": "choice",
+          "choices": [
+            "EXPEDITED SERVICE: Ineligible. CF HH did not provide enough information to determine eligibility to Expedited Service.",
+            "EXPEDITED SERVICE: Ineligible. CF HH reported more than $150 in Gross Monthly Income or more than $100 in Liquid Resources that exceed reported monthly housing expenses.",
+            "EXPEDITED SERVICE: Potentially eligible. CF HH reported less than $150 in Gross Monthly Income and less than $100 in Liquid Resources.",
+            "EXPEDITED SERVICE: Potentially eligible. CF HH reported monthly housing expenses that exceed combined Gross Monthly Income and available Liquid Resources.",
+            "EXPEDITED SERVICE: Potentially eligible. CF HH reported to be a \"destitute\" Migrant Seasonal Farmworker and has less than $100 in available Liquid Resources."
+          ]
         }
+      ],
+      "_clones": [
+        [
+          {
+            "id": "application_date",
+            "label": "APPLICATION DATE",
+            "type": "date"
+          },
+          {
+            "id": "language",
+            "label": "Choose LANGUAGE",
+            "type": "choice",
+            "choices": [
+              "LANGUAGE: English",
+              "LANGUAGE: Spanish- Certified SSO worker assisted- DPSS 1764 requirements fulfilled. Worker #:",
+              "LANGUAGE: Other (DPSS 1764 required) (Specify the requested language and how the request was accommodated):"
+            ]
+          }
+        ]
       ]
     },
     {
       "id": "section_3",
-      "title": "APPLICATION INFORMATION",
+      "title": "INTERVIEW INFORMATION",
       "fields": [
         {
-          "id": "applicationDate",
-          "label": "Application Date",
-          "type": "date"
-        },
-        {
-          "id": "applicationType",
-          "label": "Application Type",
+          "id": "scheduled_interview_method",
+          "label": "Choose SCHEDULED INTERVIEW METHOD",
           "type": "choice",
           "choices": [
-            "Initial",
-            "Reapplication",
-            "Restoration",
-            "Late Reapplication",
-            "Other"
+            "SCHEDULED INTERVIEW METHOD: Telephone",
+            "SCHEDULED INTERVIEW METHOD: In-Person. Family requested.",
+            "SCHEDULED INTERVIEW METHOD: In-Person. No phone number provided on the application."
           ]
+        },
+        {
+          "id": "scheduled_interview_datetime",
+          "label": "SCHEDULED INTERVIEW DATE AND TIME",
+          "type": "text"
         }
+      ],
+      "_clones": [
+        [
+          {
+            "id": "scheduled_interview_method",
+            "label": "Choose SCHEDULED INTERVIEW METHOD",
+            "type": "choice",
+            "choices": [
+              "SCHEDULED INTERVIEW METHOD: Telephone",
+              "SCHEDULED INTERVIEW METHOD: In-Person. Family requested.",
+              "SCHEDULED INTERVIEW METHOD: In-Person. No phone number provided on the application."
+            ]
+          }
+        ]
       ]
     },
     {
       "id": "section_4",
-      "title": "INTERVIEW DETAILS",
+      "title": "CONTACT ATTEMPTS",
       "fields": [
         {
-          "id": "interviewMethod",
-          "label": "Interview Method",
+          "id": "first_call",
+          "label": "Choose FIRST CALL",
           "type": "choice",
           "choices": [
-            "In Person",
-            "Phone",
-            "Tele-Interview",
-            "Video",
-            "Waived"
+            "FIRST CALL: Unable to call. No phone number provided.",
+            "FIRST CALL: (Copy the information for each phone number on file) (Specify time called):"
           ]
         },
         {
-          "id": "interviewDate",
-          "label": "Scheduled Interview Date",
-          "type": "date"
-        },
-        {
-          "id": "interviewTime",
-          "label": "Scheduled Interview Time",
+          "id": "first_call_phone",
+          "label": "Phone Number",
           "type": "text"
         },
         {
-          "id": "interviewContact",
-          "label": "Interview Contact Name",
+          "id": "first_call_result",
+          "label": "Result",
+          "type": "choice",
+          "choices": [
+            "Result: Call unanswered. Unable to leave a message. No voicemail available.",
+            "Result: Call unanswered. Unable to leave a message. Voicemail is full.",
+            "Result: Call unanswered. Left the scripted message on voicemail.",
+            "Result: Call answered by non-case person. Call recipient denied association to the family. No further action taken.",
+            "Result: Call answered by non-case person. Call recipient confirmed association to the family. Left a message for the family.",
+            "Result: Call answered by family. Family was authenticated. Family is unable to conduct an interview at this time. Family scheduled for an interview.",
+            "Result: Other (Specify):"
+          ]
+        },
+        {
+          "id": "second_call",
+          "label": "Choose SECOND CALL",
+          "type": "choice"
+        },
+        {
+          "id": "second_call_phone",
+          "label": "Phone Number",
           "type": "text"
         },
         {
-          "id": "interviewPhone",
-          "label": "Interview Contact Phone",
-          "type": "text"
+          "id": "second_call_result",
+          "label": "Result",
+          "type": "choice",
+          "choices": [
+            "Result: Call unanswered. Unable to leave a message. No voicemail available.",
+            "Result: Call unanswered. Unable to leave a message. Voicemail is full.",
+            "Result: Call unanswered. Left the scripted message on voicemail.",
+            "Result: Call answered by non-case person. Call recipient denied association to the family. No further action taken.",
+            "Result: Call answered by non-case person. Call recipient confirmed association to the family. Left a message for the family.",
+            "Result: Call answered by family. Family was authenticated. Family is unable to conduct an interview at this time. Family scheduled for an interview.",
+            "Result: Other (Specify):"
+          ]
         }
+      ],
+      "_clones": [
+        [
+          {
+            "id": "first_call",
+            "label": "Choose FIRST CALL",
+            "type": "choice"
+          },
+          {
+            "id": "second_call",
+            "label": "Choose SECOND CALL",
+            "type": "choice"
+          }
+        ]
       ]
     },
     {
       "id": "section_5",
-      "title": "REQUIRED ACTIONS",
+      "title": "NOTICE",
       "fields": [
         {
-          "id": "verificationRequest",
-          "label": "Verifications Requested Before Interview",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "item",
-              "label": "Verification Item",
-              "type": "text"
-            },
-            {
-              "id": "status",
-              "label": "Status",
-              "type": "choice",
-              "choices": [
-                "Requested",
-                "Provided",
-                "Pending",
-                "Not Needed"
-              ]
-            }
-          ]
+          "id": "appointment_letter",
+          "label": "APPOINTMENT LETTER (GEN 102)",
+          "type": "note",
+          "content": "Generated and provided to the family."
         }
-      ]
-    },
-    {
-      "id": "section_6",
-      "title": "COMMUNICATION DETAILS",
-      "fields": [
-        {
-          "id": "noticeProvided",
-          "label": "Interview Notice Provided",
-          "type": "choice",
-          "choices": [
-            "Mailed",
-            "Text Message",
-            "Phone Call",
-            "Email",
-            "Client Portal",
-            "Other"
-          ]
-        },
-        {
-          "id": "contactAttempts",
-          "label": "Contact Attempts",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "date",
-              "label": "Date",
-              "type": "date"
-            },
-            {
-              "id": "method",
-              "label": "Method",
-              "type": "choice",
-              "choices": [
-                "Phone Call",
-                "Voicemail Left",
-                "Text Message",
-                "Email",
-                "Mail Notice",
-                "In-Person",
-                "Other"
-              ]
-            },
-            {
-              "id": "notes",
-              "label": "Notes",
-              "type": "text"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_7",
-      "title": "NOTICE OF ACTION (NOA)",
-      "fields": [
-        {
-          "id": "noaStatus",
-          "label": "NOA Status",
-          "type": "choice",
-          "choices": [
-            "Generated",
-            "Pending",
-            "Not Required"
-          ]
-        },
-        {
-          "id": "noaDate",
-          "label": "NOA Date",
-          "type": "date"
-        }
+      ],
+      "_clones": [
+        [
+          {
+            "id": "appointment_letter",
+            "label": "APPOINTMENT LETTER (GEN 102)",
+            "type": "note",
+            "content": "Generated and provided to the family."
+          }
+        ]
       ]
     }
   ]

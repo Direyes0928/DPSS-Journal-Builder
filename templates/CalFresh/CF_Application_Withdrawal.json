@@ -1,54 +1,92 @@
 {
-  "id": "cf_withdrawal",
-  "name": "CalFresh – Withdrawal",
+  "id": "cf_application_withdrawal",
+  "name": "CalFresh – Application Withdrawal",
+  "file": "CF_Application_Withdrawal.json",
   "program": "CalFresh",
-  "file": "CF_Withdrawal.json",
-
+  "version": "2025-08-25T00:00:00Z",
+  "imported": false,
   "sections": [
-
     {
       "id": "section_1",
       "title": "SHORT DESCRIPTION",
       "fields": [
         {
           "id": "withdrawalType",
+          "label": "Choose Withdrawal Type",
           "type": "choice",
-          "label": "Withdrawal Type",
           "choices": [
-            "CF: Verbal Request to Withdraw Application",
-            "CF: Written Request to Withdraw Application"
+            "Verbal Request to Withdraw Application",
+            "Written Request to Withdraw Application"
           ]
         }
       ]
     },
-
     {
       "id": "section_2",
-      "title": "Withdrawal Details",
+      "title": "APPLICATION INFORMATION",
       "fields": [
-        { "id": "applicationDate", "label": "Application Date", "type": "date" },
-        { "id": "primaryApplicant", "label": "Primary Applicant Who Requested Withdrawal", "type": "text" },
+        {
+          "id": "applicationDate",
+          "label": "Application Date",
+          "type": "date"
+        },
+        {
+          "id": "primaryApplicant",
+          "label": "Primary applicant who requested withdrawal",
+          "type": "text"
+        },
         {
           "id": "language",
-          "label": "Language",
+          "label": "Choose LANGUAGE",
           "type": "choice",
           "choices": [
             "English",
-            "Spanish",
-            "Other"
+            "Spanish- Certified SSO worker assisted- DPSS 1764 requirements fulfilled. Worker #:",
+            "Other (DPSS 1764 required) (Specify the requested language and how the request was accommodated):"
           ]
         }
       ]
     },
-
     {
       "id": "section_3",
-      "title": "FAMILY AUTHENTICATED WITH",
+      "title": "AUTHENTICATION",
       "fields": [
         {
-          "id": "familyAuthMethod",
+          "id": "familyAuthenticatedWith1",
+          "label": "Family authenticated with",
           "type": "choice",
-          "label": "Authentication Method",
+          "choices": [
+            "Full name of:",
+            "Last 4 digits of SSN for:",
+            "DOB for:",
+            "Address:",
+            "Telephone number:",
+            "SSN of child:",
+            "DOB of child:",
+            "Case number:",
+            "ID number for:"
+          ]
+        },
+        {
+          "id": "familyAuthenticatedWith2",
+          "label": "Family authenticated with",
+          "type": "choice",
+          "choices": [
+            "Full name of:",
+            "Last 4 digits of SSN for:",
+            "DOB for:",
+            "Address",
+            "Telephone number",
+            "SSN of child:",
+            "DOB of child:",
+            "Case number",
+            "ID number for:"
+          ]
+        },
+        {
+          "id": "familyAuthenticatedWith3",
+          "label": "Family authenticated with",
+          "type": "choice",
           "choices": [
             "Full name of:",
             "Last 4 digits of SSN for:",
@@ -63,133 +101,138 @@
         }
       ]
     },
-
     {
       "id": "section_4",
       "title": "EXPEDITED SERVICE",
       "fields": [
         {
-          "id": "expSvNote",
-          "label": "Expedited Service Note",
+          "id": "expeditedServiceStatus",
+          "label": "EXPEDITED SERVICE",
           "type": "note",
           "content": "EXPEDITED SERVICE: Ineligible. CF HH withdrew application."
         }
       ]
     },
-
     {
       "id": "section_5",
-      "title": "NEGATIVE ACTION",
+      "title": "DENIAL / SYSTEM ACTIONS",
       "fields": [
         {
           "id": "personsDenied",
-          "label": "Persons denied:",
-          "type": "text"
+          "label": "Persons denied",
+          "type": "repeatable",
+          "numbered": true,
+          "fields": [
+            {
+              "id": "personDenied",
+              "label": "Name",
+              "type": "text"
+            }
+          ]
         },
         {
-          "id": "negativeActionNote",
-          "label": "Negative Action Note",
+          "id": "negativeActionEdbc",
+          "label": "Negative action EDBC ran for",
+          "type": "choice",
+          "choices": [
+            "verbal withdrawal",
+            "written withdrawal"
+          ]
+        },
+        {
+          "id": "cw10Notice",
+          "label": "CW 10 generated",
           "type": "note",
-          "content": "Negative action EDBC ran for verbal/written withdrawal in CalSAWS.\nCW 10 generated, appended with mandatory language in DP 63-014 and mailed centrally."
-
+          "content": "CW 10 generated, appended with mandatory language in DP 63-014 and mailed centrally"
         }
       ]
     },
-
     {
       "id": "section_6",
-      "title": "IEVS / PVS / NHR / MEDS REVIEW",
+      "title": "INCOME AND ELIGIBILITY VERIFICATION SYSTEM (IEVS)",
       "fields": [
-
         {
           "id": "ievsApplicantReport",
+          "label": "Choose IEVS Applicant Report",
           "type": "choice",
-          "label": "IEVS Applicant Report",
           "choices": [
-            "Choose IEVS Applicant Report",
-            "IEVS Applicant Report: Received and reviewed for this application. No discrepancies.",
-            "IEVS Applicant Report: Pending. Task set for 10 days.",
-            "IEVS Applicant Report: Discrepant:",
-            "IEVS Applicant Report: Not generated"
+            "Received and reviewed for this application. No discrepancies.",
+            "Pending. Task set for 10 days.",
+            "Discrepant.",
+            "Not generated"
           ]
         },
-
         {
-          "id": "pvsStatus",
+          "id": "pvs",
+          "label": "Choose Payment Verification System (PVS)",
           "type": "choice",
-          "label": "Payment Verification System (PVS)",
           "choices": [
-            "Choose Payment Verification System (PVS)",
-            "PVS: Received and reviewed. No discrepancies.",
-            "PVS: Pending verification.",
-            "PVS: Discrepant"
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepant."
           ]
         },
-
         {
-          "id": "nhrStatus",
+          "id": "nhr",
+          "label": "Choose New Hire Registry (NHR)",
           "type": "choice",
-          "label": "New Hire Registry (NHR)",
           "choices": [
-            "Choose New Hire Registry (NHR)",
-            "NHR: No matches.",
-            "NHR: Match found – reviewed.",
-            "NHR: Pending review"
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepancy:"
           ]
         },
-
         {
-          "id": "medsStatus",
+          "id": "medsAlerts",
+          "label": "Choose Medi-Cal Eligibility Data System (MEDS) Alerts",
           "type": "choice",
-          "label": "MEDS Alerts",
           "choices": [
-            "Choose Medi-Cal Eligibility Data System (MEDS) Alerts",
-            "MEDS: No alerts.",
-            "MEDS: Alerts reviewed.",
-            "MEDS: Pending action"
+            "None found.",
+            "Alerts closed. No discrepancies.",
+            "Discrepancy:"
           ]
-        },
-
-        {
-          "id": "tasksCleared",
-          "label": "Tasks cleared (# and type of tasks cleared):",
-          "type": "text"
         }
-
       ]
     },
-
     {
       "id": "section_7",
+      "title": "TASKS",
+      "fields": [
+        {
+          "id": "tasksCleared",
+          "label": "Tasks cleared (# and type of tasks cleared)",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_8",
       "title": "FIRST CONTACT RESOLUTION",
       "fields": [
         {
-          "id": "impactToOtherPrograms",
+          "id": "impactOtherPrograms",
+          "label": "Choose Impact to Other Programs",
           "type": "choice",
-          "label": "Impact to Other Programs",
           "choices": [
-            "No impact",
-            "Potential impact",
-            "Confirmed impact",
-            "Other"
+            "No other open programs.",
+            "No impact as application was withdrawn",
+            "Unable to determine due to lack of skill. Team member skilled for that program notified.",
+            "See separate Journal Entry for impact determination."
           ]
         }
       ]
     },
-
     {
-      "id": "section_8",
+      "id": "section_9",
       "title": "IMPORTANT REMINDER",
       "fields": [
         {
-          "id": "adminReminder",
+          "id": "importantReminder",
+          "label": "Important Reminder",
           "type": "note",
-          "content": "Do not deny for withdrawal if eligibility factors have been discussed with the family. Instead, send a denial NOA for a correct reason (e.g., ineligible student, mandatory HH member, over income)."
-  
+          "content": "Important Reminder: Do not deny for withdrawal if eligibility factors have been discussed with the family. Instead, send a denial NOA for a correct reason (for example, ineligible student, mandatory HH member, over income)"
         }
       ]
     }
-
   ]
 }
-

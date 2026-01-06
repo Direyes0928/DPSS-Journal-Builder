@@ -1,6 +1,6 @@
 {
-  "id": "CF_Application_Interview_Scheduled",
-  "name": "CalFresh \u2013 Application Interview Scheduled",
+  "id": "cf_application_interview_scheduled",
+  "name": "CalFresh – Application Interview Scheduled",
   "file": "CF_Application_Interview_Scheduled.json",
   "program": "CalFresh",
   "version": "2025-12-02T00:00:00Z",
@@ -14,7 +14,7 @@
           "id": "shortDescription",
           "label": "Short Description",
           "type": "note",
-          "content": "Application Interview Scheduled"
+          "content": "CF: Application Interview Scheduled"
         }
       ]
     },
@@ -24,160 +24,163 @@
       "fields": [
         {
           "id": "applicationDate",
-          "label": "Application Date",
+          "label": "APPLICATION DATE",
           "type": "date"
         },
         {
-          "id": "applicationType",
-          "label": "Application Type",
+          "id": "language",
+          "label": "LANGUAGE",
           "type": "choice",
           "choices": [
-            "Initial",
-            "Reapplication",
-            "Restoration",
-            "Late Reapplication",
-            "Other"
+            "English",
+            "Spanish- Certified SSO worker assisted- DPSS 1764 requirements fulfilled. Worker #:",
+            "Other (DPSS 1764 required) (Specify the requested language and how the request was accommodated):"
+          ]
+        },
+        {
+          "id": "reportedIncome",
+          "label": "REPORTED INCOME",
+          "type": "choice",
+          "choices": [
+            "Income questions were incomplete on the application.",
+            "Household Income:"
+          ]
+        },
+        {
+          "id": "housingExpenses",
+          "label": "HOUSING EXPENSES (MORTGAGE / RENT)",
+          "type": "choice",
+          "choices": [
+            "Housing questions were incomplete on the application.",
+            "Expenses:"
+          ]
+        },
+        {
+          "id": "utilityAllowance",
+          "label": "UTILITY ALLOWANCE",
+          "type": "choice",
+          "choices": [
+            "Utility questions were incomplete on the application.",
+            "Standard Utility Allowance (SUA): CF HH incurs costs for heating and / or cooling.",
+            "Limited Utility Allowance (LUA): CF HH incurs costs for at least two utility expenses, but not for heating and / or cooling.",
+            "Telephone Utility Allowance (TUA): CF HH does not incur a cost for a housing utility but pays for a telephone, cell phone, fax line, or e-mail access."
+          ]
+        },
+        {
+          "id": "liquidResources",
+          "label": "LIQUID RESOURCES",
+          "type": "choice",
+          "choices": [
+            "Liquid resource questions were incomplete on the application.",
+            "Liquid Resources:"
+          ]
+        },
+        {
+          "id": "expeditedService",
+          "label": "EXPEDITED SERVICE",
+          "type": "choice",
+          "choices": [
+            "Ineligible. CF HH did not provide enough information to determine eligibility to Expedited Service.",
+            "Ineligible. CF HH reported more than $150 in Gross Monthly Income or more than $100 in Liquid Resources that exceed reported monthly housing expenses.",
+            "Potentially eligible. CF HH reported less than $150 in Gross Monthly Income and less than $100 in Liquid Resources.",
+            "Potentially eligible. CF HH reported monthly housing expenses that exceed combined Gross Monthly Income and available Liquid Resources.",
+            "Potentially eligible. CF HH reported to be a \"destitute\" Migrant Seasonal Farmworker and has less than $100 in available Liquid Resources."
           ]
         }
       ]
     },
     {
       "id": "section_3",
-      "title": "INTERVIEW DETAILS",
+      "title": "INTERVIEW INFORMATION",
       "fields": [
         {
-          "id": "interviewMethod",
-          "label": "Interview Method",
+          "id": "scheduledInterviewMethod",
+          "label": "SCHEDULED INTERVIEW METHOD",
           "type": "choice",
           "choices": [
-            "In Person",
-            "Phone",
-            "Tele-Interview",
-            "Video",
-            "Waived"
+            "Telephone",
+            "In-Person. Family requested.",
+            "In-Person. No phone number provided on the application."
           ]
         },
         {
-          "id": "interviewDate",
-          "label": "Scheduled Interview Date",
-          "type": "date"
-        },
-        {
-          "id": "interviewTime",
-          "label": "Scheduled Interview Time",
-          "type": "text"
-        },
-        {
-          "id": "interviewContact",
-          "label": "Interview Contact Name",
-          "type": "text"
-        },
-        {
-          "id": "interviewPhone",
-          "label": "Interview Contact Phone",
+          "id": "scheduledInterviewDateTime",
+          "label": "SCHEDULED INTERVIEW DATE AND TIME",
           "type": "text"
         }
       ]
     },
     {
       "id": "section_4",
-      "title": "REQUIRED ACTIONS",
+      "title": "CONTACT ATTEMPTS",
       "fields": [
         {
-          "id": "verificationRequest",
-          "label": "Verifications Requested Before Interview",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "item",
-              "label": "Verification Item",
-              "type": "text"
-            },
-            {
-              "id": "status",
-              "label": "Status",
-              "type": "choice",
-              "choices": [
-                "Requested",
-                "Provided",
-                "Pending",
-                "Not Needed"
-              ]
-            }
+          "id": "firstCall",
+          "label": "FIRST CALL",
+          "type": "choice",
+          "choices": [
+            "Unable to call. No phone number provided.",
+            "(Copy the information for each phone number on file) (Specify time called):"
+          ]
+        },
+        {
+          "id": "firstCallPhoneNumber",
+          "label": "Phone Number",
+          "type": "text"
+        },
+        {
+          "id": "firstCallResult",
+          "label": "Result",
+          "type": "choice",
+          "choices": [
+            "Call unanswered. Unable to leave a message. No voicemail available.",
+            "Call unanswered. Unable to leave a message. Voicemail is full.",
+            "Call unanswered. Left the scripted message on voicemail.",
+            "Call answered by non-case person. Call recipient denied association to the family. No further action taken.",
+            "Call answered by non-case person. Call recipient confirmed association to the family. Left a message for the family.",
+            "Call answered by family. Family was authenticated. Family is unable to conduct an interview at this time. Family scheduled for an interview.",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "secondCall",
+          "label": "SECOND CALL",
+          "type": "choice",
+          "choices": [
+            "Unable to call. No phone number provided.",
+            "(Copy the information for each phone number on file) (Specify time called):"
+          ]
+        },
+        {
+          "id": "secondCallPhoneNumber",
+          "label": "Phone Number",
+          "type": "text"
+        },
+        {
+          "id": "secondCallResult",
+          "label": "Result",
+          "type": "choice",
+          "choices": [
+            "Call unanswered. Unable to leave a message. No voicemail available.",
+            "Call unanswered. Unable to leave a message. Voicemail is full.",
+            "Call unanswered. Left the scripted message on voicemail.",
+            "Call answered by non-case person. Call recipient denied association to the family. No further action taken.",
+            "Call answered by non-case person. Call recipient confirmed association to the family. Left a message for the family.",
+            "Call answered by family. Family was authenticated. Family is unable to conduct an interview at this time. Family scheduled for an interview.",
+            "Other (Specify):"
           ]
         }
       ]
     },
     {
       "id": "section_5",
-      "title": "COMMUNICATION DETAILS",
+      "title": "NOTICE",
       "fields": [
         {
-          "id": "noticeProvided",
-          "label": "Interview Notice Provided",
-          "type": "choice",
-          "choices": [
-            "Mailed",
-            "Text Message",
-            "Phone Call",
-            "Email",
-            "Client Portal",
-            "Other"
-          ]
-        },
-        {
-          "id": "contactAttempts",
-          "label": "Contact Attempts",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "date",
-              "label": "Date",
-              "type": "date"
-            },
-            {
-              "id": "method",
-              "label": "Method",
-              "type": "choice",
-              "choices": [
-                "Phone Call",
-                "Voicemail Left",
-                "Text Message",
-                "Email",
-                "Mail Notice",
-                "In-Person",
-                "Other"
-              ]
-            },
-            {
-              "id": "notes",
-              "label": "Notes",
-              "type": "text"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_6",
-      "title": "NOTICE OF ACTION (NOA)",
-      "fields": [
-        {
-          "id": "noaStatus",
-          "label": "NOA Status",
-          "type": "choice",
-          "choices": [
-            "Generated",
-            "Pending",
-            "Not Required"
-          ]
-        },
-        {
-          "id": "noaDate",
-          "label": "NOA Date",
-          "type": "date"
+          "id": "appointmentLetter",
+          "label": "APPOINTMENT LETTER (GEN 102)",
+          "type": "note",
+          "content": "Generated and provided to the family."
         }
       ]
     }

@@ -1,11 +1,12 @@
 {
   "id": "cf_changes",
-  "name": "CalFresh \u2013 Changes",
+  "name": "CalFresh – Changes",
   "program": "CalFresh",
   "file": "CF_Changes.json",
   "version": "2025-12-02T00:00:00Z",
   "imported": false,
   "sections": [
+
     {
       "id": "section_1",
       "title": "SHORT DESCRIPTION",
@@ -23,18 +24,54 @@
         }
       ]
     },
+
     {
       "id": "section_2",
+      "title": "SOURCE",
+      "fields": [
+        {
+          "id": "source",
+          "label": "Source",
+          "type": "choice",
+          "choices": [
+            "Phone",
+            "In Person",
+            "Mail",
+            "Online",
+            "Collateral Contact",
+            "Other"
+          ]
+        },
+        {
+          "id": "familyContactDate",
+          "label": "Family Contact Date",
+          "type": "date"
+        },
+        {
+          "id": "familyContactWith",
+          "label": "Family Contact Conducted With",
+          "type": "text"
+        },
+        {
+          "id": "authentication",
+          "label": "Family Authentication (Specify what authentication factors were used)",
+          "type": "textarea"
+        }
+      ]
+    },
+
+    {
+      "id": "section_3",
       "title": "INFORMATION REPORTED",
       "fields": [
         {
           "id": "informationReported",
-          "label": "Reported Information",
+          "label": "Information Reported",
           "type": "repeatable",
           "numbered": true,
           "fields": [
             {
-              "id": "item",
+              "id": "detail",
               "label": "Detail",
               "type": "text"
             }
@@ -42,21 +79,23 @@
         }
       ]
     },
+
     {
-      "id": "section_3",
+      "id": "section_4",
       "title": "CHANGE EFFECTIVE MONTH",
       "fields": [
         {
-          "id": "changeMonth",
-          "label": "Effective Month",
-          "type": "text",
-          "placeholder": "Example: 02/2025"
+          "id": "changeEffectiveMonth",
+          "label": "Change Effective Month",
+          "type": "date",
+          "placeholder": "MM/YYYY"
         }
       ]
     },
+
     {
-      "id": "section_4",
-      "title": "LANGUAGE & REPRESENTATIVE",
+      "id": "section_5",
+      "title": "LANGUAGE",
       "fields": [
         {
           "id": "language",
@@ -64,112 +103,127 @@
           "type": "choice",
           "choices": [
             "English",
-            "Spanish",
-            "ASL",
-            "Other"
-          ]
-        },
-        {
-          "id": "authorizedRep",
-          "label": "Authorized Representative",
-          "type": "choice",
-          "choices": [
-            "Yes",
-            "No",
-            "Requested",
-            "Pending"
+            "Spanish – Certified SSO worker assisted (DPSS 1764 requirements fulfilled)",
+            "Other (DPSS 1764 required)"
           ]
         }
       ]
     },
-    {
-      "id": "section_5",
-      "title": "VOTER REGISTRATION",
-      "fields": [
-        {
-          "id": "voterRegName",
-          "label": "Name",
-          "type": "text"
-        },
-        {
-          "id": "voterPreference",
-          "label": "Voter Preference",
-          "type": "choice",
-          "choices": [
-            "Accepted",
-            "Declined",
-            "Needs Assistance",
-            "Already Registered"
-          ]
-        }
-      ]
-    },
+
     {
       "id": "section_6",
-      "title": "CONTACT INFORMATION",
-      "fields": [
-        {
-          "id": "physicalAddress",
-          "label": "Physical Address",
-          "type": "choice",
-          "choices": [
-            "No Change",
-            "Updated",
-            "Unable to Verify"
-          ]
-        },
-        {
-          "id": "mailingAddress",
-          "label": "Mailing Address",
-          "type": "text"
-        },
-        {
-          "id": "telephoneNote",
-          "label": "Telephone",
-          "type": "note",
-          "content": "Phone numbers on file updated and verified."
-        },
-        {
-          "id": "ivrSystem",
-          "label": "Outbound IVR System",
-          "type": "choice",
-          "choices": [
-            "Reviewed",
-            "Not Reviewed",
-            "Provided to Family"
-          ]
-        },
-        {
-          "id": "textMessage",
-          "label": "Text Message",
-          "type": "choice",
-          "choices": [
-            "Opted In",
-            "Opted Out",
-            "Updated",
-            "No Change"
-          ]
-        },
-        {
-          "id": "email",
-          "label": "E-Mail",
-          "type": "choice",
-          "choices": [
-            "Updated",
-            "No Change",
-            "Removed",
-            "Unable to Confirm"
-          ]
-        }
+      "title": "AUTHORIZED REPRESENTATIVE",
+  "fields": [
+    {
+      "id": "authorizedRepresentative",
+      "label": "Authorized Representative",
+      "type": "choice",
+      "choices": [
+        "(Specify who was requested and how the request was verified):",
+        "Other (Refer to policy for Drug / Alcohol Treatment Centers, Group Living Arrangements, Battered / Homeless Shelters):"
+      ]
+    }
+  ]
+},
+
+    {
+  "id": "section_7",
+  "title": "VOTER REGISTRATION",
+  "fields": [
+    {
+      "id": "voterRegistration",
+      "label": "Voter Registration",
+      "type": "choice",
+      "choices": [
+        "VOTER REGISTRATION (Copy the information for each person over 15 years of age): E-Application received. Response reviewed with the family and the outcome is:",
+        "VOTER REGISTRATION (Copy the information for each person over 15 years of age): Voter Preference Form provided to the family.",
+        "VOTER REGISTRATION (Copy the information for each person over 15 years of age): Voter Preference Form completed."
       ]
     },
     {
-      "id": "section_7",
+      "id": "voterName",
+      "label": "Name",
+      "type": "text"
+    },
+    {
+      "id": "voterPreference",
+      "label": "Voter Preference",
+      "type": "choice",
+      "choices": [
+        "Unable to determine",
+        "Declined to register",
+        "Already registered",
+        "Requested to register to vote. Voter Registration Card provided to the family."
+      ]
+    }
+  ]
+}
+,
+
+    {
+      "id": "section_8",
+       "title": "CONTACT",
+  "fields": [
+    {
+      "id": "physicalAddress",
+      "label": "Physical Address",
+      "type": "choice",
+      "choices": [
+        "None. Homeless.",
+        "Address updated and verified."
+      ]
+    },
+    {
+      "id": "mailingAddress",
+      "label": "Mailing Address",
+      "type": "text"
+    },
+    {
+      "id": "telephone",
+      "label": "Telephone",
+      "type": "note",
+      "content": "Phone numbers on file updated and verified."
+    },
+    {
+      "id": "ivr",
+      "label": "Outbound Interactive Voice Response (IVR) System",
+      "type": "choice",
+      "choices": [
+        "Declined.",
+        "Pending. CSF 139 provided to the family.",
+        "Verification. CSF 139 completed."
+      ]
+    },
+    {
+      "id": "textMessage",
+      "label": "Text Message",
+      "type": "choice",
+      "choices": [
+        "Declined.",
+        "Pending. Text Messages updated to complete the verification process.",
+        "Verification. Phone number verified through electronic verification process."
+      ]
+    },
+    {
+      "id": "email",
+      "label": "E-Mail",
+      "type": "choice",
+      "choices": [
+        "Declined.",
+        "Pending. E-Mail updated to complete the verification process.",
+        "Verification. E-Mail verified through electronic verification process."
+      ]
+    }
+  ]
+},
+
+    {
+      "id": "section_9",
       "title": "HOUSEHOLD COMPOSITION",
       "fields": [
         {
-          "id": "householdRow",
-          "label": "Household Composition",
+          "id": "householdMembers",
+          "label": "Household Members",
           "type": "repeatable",
           "numbered": true,
           "fields": [
@@ -188,1495 +242,793 @@
               "label": "Relationship",
               "type": "choice",
               "choices": [
-                "Parent",
+                "Self",
+                "Spouse",
+                "Registered Domestic Partner",
                 "Child",
+                "Stepchild",
+                "Foster Child",
                 "Sibling",
-                "Spouse/Partner",
+                "Half-Sibling",
+                "Stepsibling",
+                "Parent",
+                "Stepparent",
+                "Grandparent",
+                "Grandchild",
+                "Aunt / Uncle",
+                "Niece / Nephew",
+                "Cousin",
+                "Guardian",
+                "Caretaker Relative",
                 "Roommate",
+                "Live-In Partner",
                 "Other"
               ]
             },
             {
-              "id": "status",
-              "label": "Status",
+              "id": "purchasePrepareStatus",
+              "label": "Purchase & Prepare (P&P) Status",
               "type": "choice",
               "choices": [
-                "Active",
-                "Inactive",
-                "Pending",
-                "Other"
+                "P&P: Purchases and Prepares Meals Together",
+                "P&P: Purchases and Prepares Separately",
+                "P&P: Temporarily Purchases/Prepares Separately",
+                "P&P: Verified Separate Household",
+                "P&P: Unable to Verify",
+                "P&P: Not Applicable",
+                "P&P: Other"
               ]
             }
           ]
         }
       ]
     },
+
     {
-      "id": "section_8",
-      "title": "PURCHASE & PREPARE (P&P)",
-      "fields": [
-        {
-          "id": "ppName",
-          "label": "Name",
-          "type": "text"
-        },
-        {
-          "id": "ppStatus",
-          "label": "P&P Status",
-          "type": "choice",
-          "choices": [
-            "Shares Meals",
-            "Does Not Share Meals",
-            "Temporarily Separate",
-            "Unknown / Pending"
-          ]
-        }
+  "id": "section_10",
+  "title": "TAX HOUSEHOLD",
+  "fields": [
+    {
+      "id": "taxHouseholdStatus",
+      "label": "Tax Household",
+      "type": "choice",
+      "choices": [
+        "Pending. Request for Tax Household Information (RFTHI) (DPSS 4373) provided to the family.",
+        "Copy the information for each Tax Household:"
       ]
     },
     {
-      "id": "section_9",
-      "title": "TAX HOUSEHOLD",
+      "id": "sourceOfAttestation",
+      "label": "Source of Attestation",
+      "type": "choice",
+      "choices": [
+        "Customer Attestation",
+        "Reasonable Compatibility",
+        "Tax Documents Reviewed",
+        "System Verified (CALHEERS)",
+        "Other:"
+      ]
+    }
+  ]
+},
+
+    {
+  "id": "section_11",
+  "title": "TAX HOUSEHOLD DETAILS",
+  "fields": [
+    {
+      "id": "taxHouseholdDetails",
+      "label": "Tax Household Details",
+      "type": "repeatable",
+      "numbered": true,
       "fields": [
         {
-          "id": "taxAttestationSource",
-          "label": "Source of Attestation",
-          "type": "text"
-        },
-        {
-          "id": "taxPrimaryFiler",
+          "id": "primaryTaxFiler",
           "label": "Primary Tax Filer",
           "type": "text"
         },
         {
-          "id": "taxFilingStatus",
+          "id": "filingStatus",
           "label": "Filing Status",
-          "type": "text"
+          "type": "choice",
+          "choices": [
+            "Single",
+            "Married Filing Jointly",
+            "Married Filing Separately",
+            "Head of Household",
+            "Qualifying Widow(er)",
+            "Unknown",
+            "Other"
+          ]
         },
         {
-          "id": "taxDependents",
+          "id": "dependents",
           "label": "Dependents",
           "type": "text"
         }
       ]
+    }
+  ]
+},
+
+    {
+  "id": "section_12",
+  "title": "SOCIAL SECURITY NUMBER (SSN)",
+  "fields": [
+    {
+      "id": "ssnStatus",
+      "label": "Social Security Number (SSN)",
+      "type": "choice",
+      "choices": [
+        "Unable to determine. Clarification needed.",
+        "Not applicable. HH is composed of only non-citizens without SSNs.",
+        "Pending",
+        "Verification: Categorically Eligible (CE) Household. Receiving CE Public Assistance and was verified by the other program.",
+        "Copy the information for each person:"
+      ]
     },
     {
-      "id": "section_10",
-      "title": "SOCIAL SECURITY NUMBER (SSN)",
+      "id": "ssnDetails",
+      "label": "SSN Details",
+      "type": "repeatable",
+      "numbered": true,
       "fields": [
         {
-          "id": "ssnStatus",
-          "label": "SOCIAL SECURITY NUMBER (SSN)",
-          "type": "choice",
-          "choices": [
-            "SOCIAL SECURITY NUMBER (SSN): Unable to determine. Clarification needed.",
-            "SOCIAL SECURITY NUMBER (SSN): Not applicable. HH is composed of only non-citizens without SSNs.",
-            "SOCIAL SECURITY NUMBER (SSN): Pending",
-            "SOCIAL SECURITY NUMBER (SSN): Verification: Categorically Eligible (CE) Household. Receiving CE Public Assistance and was verified by the other program.",
-            "SOCIAL SECURITY NUMBER (SSN) (Copy the information for each person):"
-          ]
-        },
-        {
-          "id": "ssnName",
+          "id": "name",
           "label": "Name",
           "type": "text"
         },
         {
-          "id": "ssnVerification",
+          "id": "verification",
           "label": "Verification",
           "type": "text"
         }
       ]
-    },
+    }
+  ]
+},
+
+   {
+  "id": "section_13",
+  "title": "DEMOGRAPHICS QUESTIONNAIRE (CW 2223) (Copy the information for each adult)",
+  "fields": [
     {
-      "id": "section_11",
-      "title": "DEMOGRAPHICS QUESTIONNAIRE (CW 2223)",
+      "id": "cw2223List",
+      "label": "CW 2223 Entries",
+      "type": "repeatable",
+      "numbered": true,
       "fields": [
         {
-          "id": "cw2223List",
-          "label": "Demographics Entries",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "cw2223Name",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "cw2223Verification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verification: Pending. CW 2223 provided to the family.",
-                "Verification: CW 2223 completed."
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_12",
-      "title": "CITIZENSHIP",
-      "fields": [
+          "id": "name",
+          "label": "Name",
+          "type": "text"
+        },
         {
-          "id": "citizenshipList",
-          "label": "Citizenship Entries",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "citName",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "citType",
-              "label": "Naturalized Citizen / Non-Citizen Type",
-              "type": "text"
-            },
-            {
-              "id": "citNonCitizenOption",
-              "label": "Non-Citizen Option",
-              "type": "choice",
-              "choices": [
-                "Citizen",
-                "Naturalized",
-                "Lawful Permanent Resident",
-                "Refugee",
-                "Asylee",
-                "Parolee",
-                "Victim of Trafficking",
-                "U Non-Immigrant",
-                "T Non-Immigrant",
-                "Other Non-Citizen"
-              ]
-            },
-            {
-              "id": "citAlienNumber",
-              "label": "Alien Number",
-              "type": "text"
-            },
-            {
-              "id": "citDocumentNumber",
-              "label": "Document Number",
-              "type": "text"
-            },
-            {
-              "id": "citCategoryCode",
-              "label": "Category Code",
-              "type": "text"
-            },
-            {
-              "id": "citEntryDate",
-              "label": "Entry Date",
-              "type": "date"
-            },
-            {
-              "id": "citSponsor",
-              "label": "Sponsor",
-              "type": "choice",
-              "choices": [
-                "None",
-                "Individual Sponsor",
-                "Organization Sponsor",
-                "Multiple Sponsors",
-                "Pending Verification"
-              ]
-            },
-            {
-              "id": "citVerification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Pending",
-                "Provided",
-                "Not Provided",
-                "Unable to Verify"
-              ]
-            },
-            {
-              "id": "citSAVE",
-              "label": "Systematic Alien Verification for Entitlements (SAVE)",
-              "type": "choice",
-              "choices": [
-                "Verified in SAVE",
-                "Pending SAVE Response",
-                "SAVE Not Applicable"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_13",
-      "title": "SPONSORSHIP",
-      "fields": [
-        {
-          "id": "sponsorshipList",
-          "label": "Sponsorship Entries",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "sponsorName",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "sponsorVerification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Pending",
-                "Not Provided",
-                "Unable to Verify",
-                "Provided",
-                "Reviewed"
-              ]
-            },
-            {
-              "id": "sponsorDeemedIncome",
-              "label": "Deemed Income (Specify how income was calculated)",
-              "type": "textarea"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_14",
-      "title": "RESIDENCY",
-      "fields": [
-        {
-          "id": "residencyCF",
-          "label": "Residency (CF)",
+          "id": "verification",
+          "label": "Choose Verification",
           "type": "choice",
           "choices": [
-            "Verified",
-            "Not Verified",
-            "Pending",
-            "No Change",
-            "Updated",
-            "Unable to Verify"
-          ]
-        },
-        {
-          "id": "residencyCW",
-          "label": "Residency (CW)",
-          "type": "choice",
-          "choices": [
-            "Verified",
-            "Not Verified",
-            "Pending",
-            "No Change",
-            "Updated",
-            "Unable to Verify"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_15",
-      "title": "NON-COMPLIANCE QUESTIONS",
-      "fields": [
-        {
-          "id": "dupSnap",
-          "label": "Anyone convicted of fraudulently receiving duplicate SNAP benefits after 09/22/96?",
-          "type": "choice",
-          "choices": [
-            "Yes",
-            "No",
-            "Unknown"
-          ]
-        },
-        {
-          "id": "traffic500",
-          "label": "Anyone convicted of trafficking SNAP benefits of $500 or more after 09/22/96?",
-          "type": "choice",
-          "choices": [
-            "Yes",
-            "No",
-            "Unknown"
-          ]
-        },
-        {
-          "id": "drugTrade",
-          "label": "Anyone found guilty of trading SNAP benefits for drugs after 09/22/96?",
-          "type": "choice",
-          "choices": [
-            "Yes",
-            "No",
-            "Unknown"
-          ]
-        },
-        {
-          "id": "weaponTrade",
-          "label": "Anyone found guilty of trading SNAP benefits for guns, ammunition, or explosives after 09/22/96?",
-          "type": "choice",
-          "choices": [
-            "Yes",
-            "No",
-            "Unknown"
-          ]
-        },
-        {
-          "id": "fleeingFelony",
-          "label": "Anyone hiding or running from the law to avoid prosecution, being taken into custody, or going to jail for a felony crime?",
-          "type": "choice",
-          "choices": [
-            "Yes",
-            "No",
-            "Unknown"
-          ]
-        },
-        {
-          "id": "paroleViolation",
-          "label": "Anyone found by a court of law to be in violation of probation or parole?",
-          "type": "choice",
-          "choices": [
-            "Yes",
-            "No",
-            "Unknown"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_16",
-      "title": "SCHOOL ATTENDANCE",
-      "fields": [
-        {
-          "id": "schoolAttendance",
-          "label": "School Attendance Entries",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "saName",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "saSchoolName",
-              "label": "School Name",
-              "type": "text"
-            },
-            {
-              "id": "saSchoolType",
-              "label": "School Type",
-              "type": "text"
-            },
-            {
-              "id": "saUnits",
-              "label": "Units Enrolled",
-              "type": "text"
-            },
-            {
-              "id": "saCFDetermination",
-              "label": "CalFresh Student Determination",
-              "type": "choice",
-              "choices": [
-                "Meets Student Eligibility",
-                "Does Not Meet Eligibility",
-                "Pending Verification",
-                "Not Applicable"
-              ]
-            },
-            {
-              "id": "saExemption",
-              "label": "Student Exemption",
-              "type": "choice",
-              "choices": [
-                "Working 20+ hours weekly",
-                "Self-Employed 20+ hours",
-                "Approved Work Study",
-                "Participating in WIOA",
-                "CalWORKs Recipient",
-                "Other",
-                "Not Applicable"
-              ]
-            },
-            {
-              "id": "saFinancialAid",
-              "label": "Financial Aid",
-              "type": "choice",
-              "choices": [
-                "Pell Grant",
-                "Cal Grant",
-                "Federal Loan",
-                "Scholarship",
-                "None",
-                "Unknown"
-              ]
-            },
-            {
-              "id": "saVerification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Pending",
-                "Not Provided"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_17",
-      "title": "LIVING ARRANGEMENTS",
-      "fields": [
-        {
-          "id": "livingArrangement",
-          "label": "Living Arrangement",
-          "type": "choice",
-          "choices": [
-            "Own Home",
-            "Renting",
-            "Room/Board",
-            "Staying with Friends/Family",
-            "Shelter",
-            "Homeless",
-            "Motel/Temporary Housing",
-            "Institutional Setting",
-            "Other"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_18",
-      "title": "MEDICAL CONDITION",
-      "fields": [
-        {
-          "id": "medicalCondition",
-          "label": "Medical Condition",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "conditionType",
-              "label": "Medical Condition Type (Do not include diagnosis information)",
-              "type": "text"
-            },
-            {
-              "id": "verification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Not Verified",
-                "Pending",
-                "Unable to Obtain"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_19",
-      "title": "OTHER PROGRAM ASSISTANCE",
-      "fields": [
-        {
-          "id": "otherProgramAssistance",
-          "label": "Other Program Assistance",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "source",
-              "label": "Source",
-              "type": "text"
-            },
-            {
-              "id": "frequency",
-              "label": "Frequency",
-              "type": "text"
-            },
-            {
-              "id": "verification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Not Verified",
-                "Pending",
-                "No Verification Required"
-              ]
-            },
-            {
-              "id": "amountUsed",
-              "label": "Amount Used",
-              "type": "text"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_20",
-      "title": "EMPLOYMENT HISTORY",
-      "fields": [
-        {
-          "id": "employmentHistory",
-          "label": "Employment History",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "employer",
-              "label": "Employer",
-              "type": "text"
-            },
-            {
-              "id": "lastWorked",
-              "label": "Last Date Worked",
-              "type": "date"
-            },
-            {
-              "id": "lastPaid",
-              "label": "Last Date Paid",
-              "type": "date"
-            },
-            {
-              "id": "reasonEnded",
-              "label": "Reason Employment Ended",
-              "type": "text"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_21",
-      "title": "STRIKER",
-      "fields": [
-        {
-          "id": "strikerList",
-          "label": "Striker",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "unionName",
-              "label": "Union Name",
-              "type": "text"
-            },
-            {
-              "id": "employer",
-              "label": "Employer",
-              "type": "text"
-            },
-            {
-              "id": "beforeStrikeIncome",
-              "label": "Before Strike Income",
-              "type": "text"
-            },
-            {
-              "id": "dateLastPay",
-              "label": "Date of Last Pay",
-              "type": "date"
-            },
-            {
-              "id": "startDate",
-              "label": "Start Date",
-              "type": "date"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_22",
-      "title": "CURRENT EMPLOYMENT / INCOME",
-      "fields": [
-        {
-          "id": "currentIncome",
-          "label": "Current Income Entries",
-          "type": "repeatable",
-          "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "source",
-              "label": "Employer / Source",
-              "type": "text"
-            },
-            {
-              "id": "startDate",
-              "label": "Start Date",
-              "type": "date"
-            },
-            {
-              "id": "rate",
-              "label": "Hourly Rate",
-              "type": "text"
-            },
-            {
-              "id": "hours",
-              "label": "Average Hours Weekly",
-              "type": "text"
-            },
-            {
-              "id": "frequency",
-              "label": "Frequency",
-              "type": "text"
-            },
-            {
-              "id": "verification",
-              "label": "Verification",
-              "type": "text"
-            },
-            {
-              "id": "amountUsed",
-              "label": "Amount Used",
-              "type": "text"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_23",
-      "title": "WORK REGISTRATION",
-      "fields": [
-        {
-          "id": "workRegistration",
-          "label": "Work Registration",
-          "type": "repeatable",
-          "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "status",
-              "label": "Work Registration Status",
-              "type": "choice",
-              "choices": [
-                "Registered",
-                "Exempt",
-                "Pending",
-                "Unable to Contact"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_24",
-      "title": "ABLE-BODIED ADULTS WITHOUT DEPENDENTS (ABAWD)",
-      "fields": [
-        {
-          "id": "abawd",
-          "label": "ABAWD Status",
-          "type": "repeatable",
-          "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "status",
-              "label": "ABAWD Status",
-              "type": "choice",
-              "choices": [
-                "Compliant",
-                "Exempt",
-                "Non-Compliant",
-                "Pending"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_25",
-      "title": "CF 886 SENT",
-      "fields": [
-        {
-          "id": "cf886Sent",
-          "label": "CF 886 Sent",
-          "type": "choice",
-          "choices": [
-            "Yes",
-            "No",
-            "Provided Orally",
-            "Not Applicable"
-          ]
-        },
-        {
-          "id": "cfWorkRulesReviewed",
-          "label": "CF Work Rules Oral Script Reviewed For",
-          "type": "text",
-          "placeholder": "List name(s) for each work registrant in the HH"
-        }
-      ]
-    },
-    {
-      "id": "section_26",
-      "title": "PROPERTY",
-      "fields": [
-        {
-          "id": "realProperty",
-          "label": "Real Property",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "owner",
-              "label": "Owner",
-              "type": "text"
-            },
-            {
-              "id": "propertyType",
-              "label": "Type (Home, Mobile Home, Land Rights, etc.)",
-              "type": "text"
-            },
-            {
-              "id": "verification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Not Verified",
-                "Pending",
-                "Not Provided"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "vehicles",
-          "label": "Vehicles",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "owner",
-              "label": "Owner",
-              "type": "text"
-            },
-            {
-              "id": "make",
-              "label": "Make",
-              "type": "text"
-            },
-            {
-              "id": "model",
-              "label": "Model",
-              "type": "text"
-            },
-            {
-              "id": "year",
-              "label": "Year",
-              "type": "text"
-            },
-            {
-              "id": "verification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Not Verified",
-                "Pending",
-                "Not Provided"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "bankAccounts",
-          "label": "Bank Accounts",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "institution",
-              "label": "Name of Financial Institution",
-              "type": "text"
-            },
-            {
-              "id": "owner",
-              "label": "Owner",
-              "type": "text"
-            },
-            {
-              "id": "accountType",
-              "label": "Type",
-              "type": "text"
-            },
-            {
-              "id": "accountNumber",
-              "label": "Account Number",
-              "type": "text"
-            },
-            {
-              "id": "verification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Not Verified",
-                "Pending",
-                "Not Provided"
-              ]
-            },
-            {
-              "id": "value",
-              "label": "Value",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "retirementAccounts",
-          "label": "Retirement Accounts",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "owner",
-              "label": "Owner",
-              "type": "text"
-            },
-            {
-              "id": "type",
-              "label": "Type",
-              "type": "text"
-            },
-            {
-              "id": "verification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Not Verified",
-                "Pending",
-                "Not Provided"
-              ]
-            },
-            {
-              "id": "value",
-              "label": "Value",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "payCards",
-          "label": "Pay Cards",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "owner",
-              "label": "Owner",
-              "type": "text"
-            },
-            {
-              "id": "company",
-              "label": "Company",
-              "type": "text"
-            },
-            {
-              "id": "verification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Not Provided",
-                "Pending"
-              ]
-            },
-            {
-              "id": "value",
-              "label": "Value",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "cashOnHand",
-          "label": "Cash on Hand",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "owner",
-              "label": "Owner",
-              "type": "text"
-            },
-            {
-              "id": "verification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Not Verified",
-                "Pending"
-              ]
-            },
-            {
-              "id": "value",
-              "label": "Value",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "otherProperty",
-          "label": "Other Property",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "owner",
-              "label": "Owner",
-              "type": "text"
-            },
-            {
-              "id": "type",
-              "label": "Type",
-              "type": "text"
-            },
-            {
-              "id": "verification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Not Verified",
-                "Pending"
-              ]
-            },
-            {
-              "id": "value",
-              "label": "Value",
-              "type": "text"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_27",
-      "title": "EXPENSES",
-      "fields": [
-        {
-          "id": "housingExpense",
-          "label": "Housing Expense",
-          "type": "repeatable",
-          "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "housingType",
-              "label": "Type",
-              "type": "text"
-            },
-            {
-              "id": "frequency",
-              "label": "Frequency",
-              "type": "text"
-            },
-            {
-              "id": "verification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Pending",
-                "Not Provided"
-              ]
-            },
-            {
-              "id": "incurred",
-              "label": "Amount Incurred (Explain)",
-              "type": "text"
-            },
-            {
-              "id": "paid",
-              "label": "Amount Paid (Explain)",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "utilityAllowance",
-          "label": "Utility Allowance",
-          "type": "choice",
-          "choices": [
-            "Heating & Cooling SUA",
-            "Basic SUA",
-            "Phone SUA",
-            "Individual Utility Basis",
-            "Not Eligible"
-          ]
-        },
-        {
-          "id": "suas",
-          "label": "Standard Utility Allowance Subsidy (SUAS)",
-          "type": "choice",
-          "choices": [
-            "Eligible",
-            "Not Eligible",
-            "Not Applicable"
-          ]
-        },
-        {
-          "id": "selfEmploymentExpenses",
-          "label": "Self-Employment Expenses",
-          "type": "repeatable",
-          "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "expType",
-              "label": "Type",
-              "type": "text"
-            },
-            {
-              "id": "frequency",
-              "label": "Frequency",
-              "type": "text"
-            },
-            {
-              "id": "verification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Pending",
-                "Not Provided"
-              ]
-            },
-            {
-              "id": "amount",
-              "label": "Amount",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "childSupportPaid",
-          "label": "Court-Ordered Child Support Paid",
-          "type": "repeatable",
-          "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "frequency",
-              "label": "Frequency",
-              "type": "text"
-            },
-            {
-              "id": "verificationOrder",
-              "label": "Verification of Court-Ordered Amount",
-              "type": "text"
-            },
-            {
-              "id": "verificationPaid",
-              "label": "Verification of Amount Paid",
-              "type": "text"
-            },
-            {
-              "id": "amount",
-              "label": "Amount Used",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "dependentCare",
-          "label": "Dependent Care",
-          "type": "repeatable",
-          "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "frequency",
-              "label": "Frequency",
-              "type": "text"
-            },
-            {
-              "id": "verification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Pending",
-                "Not Provided"
-              ]
-            },
-            {
-              "id": "amount",
-              "label": "Amount",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "medicalExpenses",
-          "label": "Medical Expenses",
-          "type": "repeatable",
-          "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "frequency",
-              "label": "Frequency",
-              "type": "text"
-            },
-            {
-              "id": "verification",
-              "label": "Verification",
-              "type": "text"
-            },
-            {
-              "id": "amount",
-              "label": "Amount",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "medicare",
-          "label": "Medicare",
-          "type": "repeatable",
-          "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "type": "text"
-            },
-            {
-              "id": "verification",
-              "label": "Verification",
-              "type": "choice",
-              "choices": [
-                "Verified",
-                "Pending",
-                "Not Provided"
-              ]
-            },
-            {
-              "id": "amount",
-              "label": "Amount",
-              "type": "text"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_28",
-      "title": "INCOME VERSUS EXPENSES",
-      "fields": [
-        {
-          "id": "incomeVsExpenses",
-          "label": "Income Versus Expenses",
-          "type": "choice",
-          "choices": [
-            "Choose INCOME VERSUS EXPENSES",
-            "INCOME VERSUS EXPENSES: No discrepancies. Information is not questionable.",
-            "INCOME VERSUS EXPENSES: Questionable. Unable to connect with family. Information to be reviewed at next SAR 7 or recertification.",
-            "INCOME VERSUS EXPENSES: Questionable. Resolution:"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_29",
-      "title": "INCOME AND ELIGIBILITY VERIFICATION SYSTEM (IEVS)",
-      "fields": [
-        {
-          "id": "ievsApplicantReport",
-          "label": "IEVS Applicant Report",
-          "type": "choice",
-          "choices": [
-            "Choose IEVS Applicant Report",
-            "IEVS Applicant Report: Received and reviewed for this application. No discrepancies.",
-            "IEVS Applicant Report: Pending. Task set for 10 days.",
-            "IEVS Applicant Report: Discrepant:",
-            "IEVS Applicant Report: Not generated"
-          ]
-        },
-        {
-          "id": "pvsReport",
-          "label": "Payment Verification System (PVS)",
-          "type": "choice",
-          "choices": [
-            "Choose Payment Verification System (PVS)",
-            "PVS: Received and reviewed. No discrepancies.",
-            "PVS: Pending. Clarification needed.",
-            "PVS: Discrepant:",
-            "PVS: Not generated"
-          ]
-        },
-        {
-          "id": "nhrReport",
-          "label": "New Hire Registry (NHR)",
-          "type": "choice",
-          "choices": [
-            "Choose New Hire Registry (NHR)",
-            "NHR: Reviewed. No discrepancies.",
-            "NHR: Match found. Verified.",
-            "NHR: Match found. Clarification needed.",
-            "NHR: Not generated"
-          ]
-        },
-        {
-          "id": "medsAlerts",
-          "label": "Medi-Cal Eligibility Data System (MEDS) Alerts",
-          "type": "choice",
-          "choices": [
-            "Choose Medi-Cal Eligibility Data System (MEDS) Alerts",
-            "MEDS Alerts: Reviewed. No discrepancies.",
-            "MEDS Alerts: Pending. Clarification needed.",
-            "MEDS Alerts: Discrepant:",
-            "MEDS Alerts: Not generated"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_30",
-      "title": "E-SIGNATURE LIST",
-      "fields": [
-        {
-          "id": "esignList",
-          "label": "E-Signature Entry",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "esignName",
-              "label": "Name / Signature",
-              "type": "text"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_31",
-      "title": "FIRST CONTACT RESOLUTION",
-      "fields": [
-        {
-          "id": "fcrElectronicVerification",
-          "label": "Electronic Verification Sources",
-          "type": "choice",
-          "choices": [
-            "Electronic Verification Sources: Reviewed.",
-            "Electronic Verification Sources: Not reviewed.",
-            "Electronic Verification Sources: Reviewed; clarification needed.",
-            "Electronic Verification Sources: Not applicable."
-          ]
-        },
-        {
-          "id": "fcrCollateralContact",
-          "label": "Collateral Contact",
-          "type": "choice",
-          "choices": [
-            "Collateral Contact: Completed.",
-            "Collateral Contact: Attempted; unable to reach.",
-            "Collateral Contact: Not needed.",
-            "Collateral Contact: Pending.",
-            "Collateral Contact: Not applicable."
-          ]
-        },
-        {
-          "id": "fcrOtherPrograms",
-          "label": "Other Programs Review",
-          "type": "choice",
-          "choices": [
-            "Other Programs Review: Completed.",
-            "Other Programs Review: No impact.",
-            "Other Programs Review: Impact identified.",
-            "Other Programs Review: Pending.",
-            "Other Programs Review: Not applicable."
-          ]
-        },
-        {
-          "id": "fcrImpactOtherPrograms",
-          "label": "Impact to Other Programs",
-          "type": "choice",
-          "choices": [
-            "Impact to Other Programs: None.",
-            "Impact to Other Programs: Positive.",
-            "Impact to Other Programs: Negative.",
-            "Impact to Other Programs: Pending evaluation.",
-            "Impact to Other Programs: Not applicable."
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_32",
-      "title": "PENDING VERIFICATIONS",
-      "fields": [
-        {
-          "id": "pendingVerifications",
-          "label": "Pending Verifications",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "Verif",
-              "label": "Verifs",
-              "type": "text"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_33",
-      "title": "TASKS DUE FUTURE",
-      "fields": [
-        {
-          "id": "tasksDueFuture",
-          "label": "Future Tasks",
-          "type": "repeatable",
-          "numbered": true,
-          "fields": [
-            {
-              "id": "task",
-              "label": "Task",
-              "type": "text"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_34",
-      "title": "RESTAURANT MEALS PROGRAM",
-      "fields": [
-        {
-          "id": "restaurantMealsProgram",
-          "label": "Restaurant Meals Program",
-          "type": "choice",
-          "choices": [
-            "RESTAURANT MEALS PROGRAM: Household meets RMP criteria.",
-            "RESTAURANT MEALS PROGRAM: Household does NOT meet RMP criteria.",
-            "RESTAURANT MEALS PROGRAM: Information pending \u2014 verification requested.",
-            "RESTAURANT MEALS PROGRAM: Not applicable."
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_35",
-      "title": "ELECTRONIC BENEFIT TRANSFER (EBT) ACCOUNT AND CARD",
-      "fields": [
-        {
-          "id": "ebtAccountCard",
-          "label": "EBT Account and Card",
-          "type": "choice",
-          "choices": [
-            "EBT ACCOUNT AND CARD: Active. Card in possession in good working order.",
-            "EBT ACCOUNT AND CARD: Reactivated. Card in possession in good working order.",
-            "EBT ACCOUNT AND CARD: Reactivated. HH offered to mail card or pick-up. Opted to pick-up.",
-            "EBT ACCOUNT AND CARD: Reactivated. HH offered to mail card or pick-up. Opted to mail to address on file.",
-            "EBT ACCOUNT AND CARD: New account created. HH offered to mail card or pick-up. Opted to pick-up.",
-            "EBT ACCOUNT AND CARD: New account created. HH offered to mail card or pick-up. Opted to mail to address on file."
-          ]
-        },
-        {
-          "id": "designatedCardHolder",
-          "label": "Designated Card Holder",
-          "type": "choice",
-          "choices": [
-            "Alternate Designated Card Holder: None requested.",
-            "Alternate Designated Card Holder (Specify who was requested and how request was verified):"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_36",
-      "title": "REPORTING TYPE",
-      "fields": [
-        {
-          "id": "reportingType",
-          "label": "Reporting Type",
-          "type": "choice",
-          "choices": [
-            "Reporting Type: Change Report",
-            "Reporting Type: SAR 7",
-            "Reporting Type: Recertification",
-            "Reporting Type: Mid-Period Report",
-            "Reporting Type: Periodic Report",
-            "Reporting Type: Other:"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_37",
-      "title": "NOTICE OF ACTION (NOA)",
-      "fields": [
-        {
-          "id": "noaStatus",
-          "label": "Notice of Action (NOA)",
-          "type": "choice",
-          "choices": [
-            "NOTICE OF ACTION (NOA): Not required. Reported change is not related to eligibility determination.",
-            "NOTICE OF ACTION (NOA): Pending",
-            "NOTICE OF ACTION (NOA): Generated, reviewed, and appended, if applicable, then provided to the family."
+            "Verification: Pending. CW 2223 provided to the family.",
+            "Verification: CW 2223 completed."
           ]
         }
       ]
     }
+  ]
+},
+{
+  "id": "section_14",
+  "title": "CITIZENSHIP",
+  "fields": [
+    {
+      "id": "citizenshipStatus",
+      "label": "Citizenship",
+      "type": "choice",
+      "choices": [
+        "CITIZENSHIP: Unable to determine. Clarification needed.",
+        "CITIZENSHIP: All applicants are reported as U.S.-born citizens. No discrepancies.",
+        "CITIZENSHIP (Copy the information for each naturalized citizen and non-citizen):"
+      ]
+    },
+    {
+      "id": "citizenshipDetails",
+      "label": "Citizenship Details",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "citizenType",
+          "label": "Naturalized Citizen / Non-Citizen Type",
+          "type": "text"
+        },
+        {
+          "id": "nonCitizenOption",
+          "label": "Non-Citizen Option",
+          "type": "choice",
+          "choices": [
+            "Non-Citizen Option: Opting out of benefits.",
+            "Non-Citizen Option: Opting in for benefits."
+          ]
+        },
+        {
+          "id": "alienNumber",
+          "label": "Alien Number",
+          "type": "text"
+        },
+        {
+          "id": "documentNumber",
+          "label": "Document Number",
+          "type": "text"
+        },
+        {
+          "id": "categoryCode",
+          "label": "Category Code",
+          "type": "text"
+        },
+        {
+          "id": "entryDate",
+          "label": "Entry Date",
+          "type": "date"
+        },
+        {
+          "id": "sponsor",
+          "label": "Sponsor",
+          "type": "choice",
+          "choices": [
+            "Sponsor: Not required. Categorically Eligible (CE). Receiving CE Public Assistance and was verified by the other program.",
+            "Sponsor: Not required. Non-citizen under 18 years of age.",
+            "Sponsor: Not required. Entry date is before amnesty date of 12/19/97.",
+            "Sponsor: Not required. Non-citizen has 40 quarters of work.",
+            "Sponsor: Not required. Sponsor is deceased.",
+            "Sponsor: Not required. Non-citizen is determined to be indigent. Refer to DP 63-405D.",
+            "Sponsor:"
+          ]
+        },
+        {
+          "id": "verification",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "save",
+          "label": "Systematic Alien Verification for Entitlements (SAVE)",
+          "type": "choice",
+          "choices": [
+            "Systematic Alien Verification for Entitlements (SAVE): Pending",
+            "Systematic Alien Verification for Entitlements (SAVE): Received and reviewed for this application. No discrepancies.",
+            "Systematic Alien Verification for Entitlements (SAVE): Discrepant:"
+          ]
+        }
+      ]
+    }
+  ]
+},
+    {
+  "id": "section_15",
+  "title": "SPONSORSHIP",
+  "fields": [
+    {
+      "id": "sponsorshipStatus",
+      "label": "Sponsorship",
+      "type": "choice",
+      "choices": [
+        "SPONSORSHIP: Unable to determine. Clarification needed.",
+        "SPONSORSHIP: No one in CF HH is sponsored.",
+        "SPONSORSHIP: Categorically Eligible (CE). Receiving CE Public Assistance and was verified by the other program.",
+        "SPONSORSHIP (Copy the information for each sponsored non-citizen):"
+      ]
+    },
+    {
+      "id": "sponsoredNonCitizen",
+      "label": "Sponsored Non-Citizen",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "verification",
+          "label": "Verification",
+          "type": "choice",
+          "choices": [
+            "Verification: None. Non-citizen is determined to be indigent.",
+            "Verification: None. Opted out.",
+            "Verification: Pending. SAR 22 provided to the family.",
+            "Verification: SAR 22 completed."
+          ]
+        },
+        {
+          "id": "deemedIncome",
+          "label": "Deemed Income (Specify how income was calculated)",
+          "type": "textarea"
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_16",
+  "title": "RESIDENCY",
+  "fields": [
+    {
+      "id": "residencyStatus",
+      "label": "Residency",
+      "type": "choice",
+      "choices": [
+        "RESIDENCY: Family has moved to another county in California. Inter County Transfer initiated to (Specify county):",
+        "RESIDENCY: Family moved out of state. No longer a California resident."
+      ]
+    }
+  ]
+},
+
+
+    {
+  "id": "section_17",
+  "title": "NON-COMPLIANCE QUESTIONS",
+  "fields": [
+    {
+      "id": "nonComplianceHeader",
+      "label": "NON-COMPLIANCE QUESTIONS",
+      "type": "choice",
+      "choices": [
+        "NON-COMPLIANCE QUESTIONS: Unable to determine. Clarification needed.",
+        "NON-COMPLIANCE QUESTIONS"
+      ]
+    },
+    {
+      "id": "dupSnap",
+      "label": "Anyone convicted of fraudulently receiving duplicate SNAP benefits after 09/22/96?",
+      "type": "choice",
+      "choices": [
+        "Anyone convicted of fraudulently receiving duplicate SNAP benefits after 09/22/96? No. No discrepancies.",
+        "Anyone convicted of fraudulently receiving duplicate SNAP benefits after 09/22/96? Yes."
+      ]
+    },
+    {
+      "id": "trafficSnap",
+      "label": "Anyone convicted of trafficking SNAP benefits of $500 or more after 09/22/96?",
+      "type": "choice",
+      "choices": [
+        "Anyone convicted of trafficking SNAP benefits of $500 or more after 09/22/96? No. No discrepancies.",
+        "Anyone convicted of trafficking SNAP benefits of $500 or more after 09/22/96? Yes."
+      ]
+    },
+    {
+      "id": "drugTrade",
+      "label": "Anyone found guilty of trading SNAP benefits for drugs after 09/22/96?",
+      "type": "choice",
+      "choices": [
+        "Anyone found guilty of trading SNAP benefits for drugs after 09/22/96? No. No discrepancies.",
+        "Anyone found guilty of trading SNAP benefits for drugs after 09/22/96? Yes."
+      ]
+    },
+    {
+      "id": "weaponTrade",
+      "label": "Anyone found guilty of trading SNAP benefits for guns, ammunition, or explosives after 09/22/96?",
+      "type": "choice",
+      "choices": [
+        "Anyone found guilty of trading SNAP benefits for guns, ammunition, or explosives after 09/22/96? No. No discrepancies.",
+        "Anyone found guilty of trading SNAP benefits for guns, ammunition, or explosives after 09/22/96? Yes."
+      ]
+    },
+    {
+      "id": "fleeingFelon",
+      "label": "Anyone hiding or running from the law to avoid prosecution, being taken into custody, or going to jail for a felony crime or attempted felony crime?",
+      "type": "choice",
+      "choices": [
+        "Anyone hiding or running from the law to avoid prosecution, being taken into custody, or going to jail for a felony crime or attempted felony crime? No. No discrepancies.",
+        "Anyone hiding or running from the law to avoid prosecution, being taken into custody, or going to jail for a felony crime or attempted felony crime? Yes."
+      ]
+    },
+    {
+      "id": "probationViolation",
+      "label": "Anyone been found by a court of law to be in violation of probation or parole?",
+      "type": "choice",
+      "choices": [
+        "Anyone been found by a court of law to be in violation of probation or parole? No. No discrepancies.",
+        "Anyone been found by a court of law to be in violation of probation or parole? Yes."
+      ]
+    }
+  ]
+},
+
+    {
+  "id": "section_18",
+  "title": "SCHOOL ATTENDANCE",
+  "fields": [
+    {
+      "id": "schoolAttendanceStatus",
+      "label": "School Attendance",
+      "type": "choice",
+      "choices": [
+        "SCHOOL ATTENDANCE: Unable to determine. Clarification needed.",
+        "SCHOOL ATTENDANCE: None reported. No discrepancies.",
+        "SCHOOL ATTENDANCE (Copy the information for each student over 15 years of age):"
+      ]
+    },
+    {
+      "id": "schoolAttendanceDetails",
+      "label": "School Attendance Details",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "schoolName",
+          "label": "School Name",
+          "type": "text"
+        },
+        {
+          "id": "schoolType",
+          "label": "School Type",
+          "type": "text"
+        },
+        {
+          "id": "unitsEnrolled",
+          "label": "Units Enrolled",
+          "type": "text"
+        },
+        {
+          "id": "calfreshStudentDetermination",
+          "label": "CalFresh Student Determination",
+          "type": "choice",
+          "choices": [
+            "CalFresh Student Determination: No. Reported school does not meet criteria for Higher Education.",
+            "CalFresh Student Determination: No. Student is under 18 years of age or over 49 years of age.",
+            "CalFresh Student Determination: No. Student states to be physically or mentally unfit for work.",
+            "CalFresh Student Determination: No. Student is determined to be attending less than half-time.",
+            "CalFresh Student Determination: Yes"
+          ]
+        },
+        {
+          "id": "studentExemption",
+          "label": "Student Exemption",
+          "type": "choice",
+          "choices": [
+            "Student exerts parental control over a dependent HH member who is under 6 years of age.",
+            "Student exerts parental control over a dependent HH member age 6 through 11 and adequate child care services are not available.",
+            "Student is a single parent responsible for the care of a child under the age of 12.",
+            "Student is employed an average of at least 20 hours per week or 80 hours per month.",
+            "Student is self-employed an average of at least 20 hours per week or 80 hours per month.",
+            "Student is participating in an employment and training program.",
+            "Student is enrolled in a local program that increases employability.",
+            "Student was approved, awarded, or accepted for state or federally financed work study for the current school term, anticipates working during the term, and has not refused a work assignment.",
+            "Student receives CalWORKs benefits.",
+            "Student receives Tribal TANF benefits.",
+            "Student receives TANF funded Cal Grants A or B."
+          ]
+        },
+        {
+          "id": "financialAid",
+          "label": "Financial Aid",
+          "type": "choice",
+          "choices": [
+            "Financial Aid: No",
+            "Financial Aid: Yes"
+          ]
+        },
+        {
+          "id": "verification",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+},
+
+
+
+
+    {
+  "id": "section_19",
+  "title": "LIVING ARRANGEMENTS",
+  "fields": [
+    {
+      "id": "livingArrangements",
+      "label": "Living Arrangements",
+      "type": "choice",
+      "choices": [
+        "LIVING ARRANGEMENTS: Unable to determine. Clarification needed.",
+        "LIVING ARRANGEMENTS: None reported. No discrepancies.",
+        "LIVING ARRANGEMENTS: Drug and Alcohol Rehabilitation Center. Program participation pending.",
+        "LIVING ARRANGEMENTS: Drug and Alcohol Rehabilitation Center. Program participation verification.",
+        "LIVING ARRANGEMENTS: Homeless. Verification: Self-Certification on the application accepted. No discrepancies.",
+        "LIVING ARRANGEMENTS: Other (Specify living arrangement and verification used):"
+      ]
+    }
+  ]
+},
+{
+  "id": "section_19",
+  "title": "MEDICAL CONDITION",
+  "fields": [
+    {
+      "id": "medicalConditionStatus",
+      "label": "Medical Condition",
+      "type": "choice",
+      "choices": [
+        "MEDICAL CONDITION: Unable to determine. Clarification needed.",
+        "MEDICAL CONDITION: None reported. No discrepancies.",
+        "MEDICAL CONDITION (Copy the information for each disabled person):"
+      ]
+    },
+    {
+      "id": "medicalConditionDetails",
+      "label": "Medical Condition Details",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "conditionType",
+          "label": "Medical Condition Type (Do not include diagnosis information per HIPAA)",
+          "type": "text"
+        },
+        {
+          "id": "verification",
+          "label": "Verification",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "Verified",
+            "Not required"
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_20",
+  "title": "OTHER PROGRAM ASSISTANCE",
+  "fields": [
+    {
+      "id": "otherProgramAssistanceStatus",
+      "label": "Other Program Assistance",
+      "type": "choice",
+      "choices": [
+        "OTHER PROGRAM ASSISTANCE: Unable to determine. Clarification needed.",
+        "OTHER PROGRAM ASSISTANCE: None reported. No discrepancies.",
+        "OTHER PROGRAM ASSISTANCE (Copy the information for each source of assistance):"
+      ]
+    },
+    {
+      "id": "otherProgramAssistanceDetails",
+      "label": "Other Program Assistance Details",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "source",
+          "label": "Source",
+          "type": "text"
+        },
+        {
+          "id": "frequency",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "verification",
+          "label": "Verification",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "Verified",
+            "Not required"
+          ]
+        },
+        {
+          "id": "amountUsed",
+          "label": "Amount Used",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_21",
+  "title": "EMPLOYMENT HISTORY",
+  "fields": [
+    {
+      "id": "employmentHistoryStatus",
+      "label": "Employment History",
+      "type": "choice",
+      "choices": [
+        "EMPLOYMENT HISTORY: Unable to determine. Clarification needed.",
+        "EMPLOYMENT HISTORY: No employment within prior 60 days reported. No discrepancies.",
+        "EMPLOYMENT HISTORY (Copy the information for each previous employer):"
+      ]
+    },
+    {
+      "id": "employmentHistoryDetails",
+      "label": "Employment History Details",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "employer",
+          "label": "Employer",
+          "type": "text"
+        },
+        {
+          "id": "lastDateWorked",
+          "label": "Last Date Worked",
+          "type": "date"
+        },
+        {
+          "id": "lastDatePaid",
+          "label": "Last Date Paid",
+          "type": "date"
+        },
+        {
+          "id": "reasonEnded",
+          "label": "Reason Employment Ended",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "section_22",
+  "title": "STRIKER",
+  "fields": [
+    {
+      "id": "strikerStatus",
+      "label": "Striker",
+      "type": "choice",
+      "choices": [
+        "STRIKER: Unable to determine. Clarification needed.",
+        "STRIKER: None reported. No discrepancies.",
+        "STRIKER (Specify who is striking and with which employer):"
+      ]
+    },
+    {
+      "id": "strikerDetails",
+      "label": "Striker Details",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "unionName",
+          "label": "Union Name",
+          "type": "text"
+        },
+        {
+          "id": "employer",
+          "label": "Employer",
+          "type": "text"
+        },
+        {
+          "id": "beforeStrikeIncome",
+          "label": "Before Strike Income",
+          "type": "text"
+        },
+        {
+          "id": "lastPayDate",
+          "label": "Date of Last Pay",
+          "type": "date"
+        },
+        {
+          "id": "startDate",
+          "label": "Start Date",
+          "type": "date"
+        }
+      ]
+    }
+  ]
+}, 
+{
+  "id": "section_current_employment_income",
+  "title": "CURRENT EMPLOYMENT / INCOME",
+  "fields": [
+    {
+      "id": "currentEmployment",
+      "label": "Current Employment",
+      "type": "choice",
+      "choices": [
+        "Unable to determine. Clarification needed.",
+        "None reported. No discrepancies.",
+        "Copy the information for each employer:"
+      ]
+    },
+    {
+      "id": "incomeStatus",
+      "label": "Income",
+      "type": "choice",
+      "choices": [
+        "Zero income reported. No discrepancies.",
+        "CF HH only has the income reported under Other Program Assistance.",
+        "Copy the information for each source of income:"
+      ]
+    },
+    {
+      "id": "incomeDetails",
+      "label": "Income Details",
+      "type": "repeatable",
+      "numbered": true,
+      "fields": [
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "employerSource",
+          "label": "Employer / Source",
+          "type": "text"
+        },
+        {
+          "id": "startDate",
+          "label": "Start Date",
+          "type": "date"
+        },
+        {
+          "id": "hourlyRate",
+          "label": "Hourly Rate",
+          "type": "text"
+        },
+        {
+          "id": "averageHoursWeekly",
+          "label": "Average Hours Weekly",
+          "type": "text"
+        },
+        {
+          "id": "frequency",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "verification",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "amountUsed",
+          "label": "Amount Used (Specify how income was calculated)",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+
+
+
   ]
 }

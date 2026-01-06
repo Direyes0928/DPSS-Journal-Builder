@@ -1,9 +1,9 @@
 {
   "id": "cf_benefit_replacement_power_outage",
-  "name": "CalFresh \u2013 Benefit Replacement (Power Outage)",
+  "name": "CalFresh – Benefit Replacement Due to Power Outage",
+  "file": "CF_Benefit_Replacement_Power_Outage.json",
   "program": "CalFresh",
-  "file": "CF_Benefit_Replacement_PowerOutage.json",
-  "version": "2025-12-02T00:00:00Z",
+  "version": "2025-03-03T00:00:00Z",
   "imported": false,
   "sections": [
     {
@@ -20,7 +20,7 @@
     },
     {
       "id": "section_2",
-      "title": "POWER OUTAGE DETAILS",
+      "title": "MISFORTUNE DETAILS",
       "fields": [
         {
           "id": "disasterDate",
@@ -34,77 +34,68 @@
         },
         {
           "id": "cf303ReceivedDate",
-          "label": "Date of receipt of completed and signed CF 303",
+          "label": "Date of receipt of completed and signed CF 303, Replacement or Disaster Supplement Affidavit",
           "type": "date"
         },
         {
-          "id": "cf303ReceivedBy",
+          "id": "cf303Source",
           "label": "CF 303 received by",
           "type": "choice",
           "choices": [
-            "Phone",
-            "In Person",
             "Mail",
-            "E-mail",
             "Fax",
-            "Other"
+            "Office visit",
+            "BenefitsCal",
+            "Other (Specify):"
           ]
         },
         {
-          "id": "canVerifyFoodLoss",
-          "label": "Can the HH verify the amount of food loss?",
-          "type": "choice",
-          "choices": [
-            "Yes",
-            "No",
-            "Pending",
-            "Partially Verified"
-          ]
-        },
-        {
-          "id": "verifiedFoodLossAmount",
-          "label": "Verified food loss amount ($)",
+          "id": "verifyFoodLoss",
+          "label": "Can the HH verify the amount of food loss due to the misfortune? If so, how much ($)",
           "type": "text"
         },
         {
           "id": "foodLossVerificationType",
-          "label": "Verification type for amount of food loss",
+          "label": "Verification type for amount of food loss due to misfortune, if applicable",
           "type": "text"
         },
         {
-          "id": "verificationOfMisfortune",
+          "id": "misfortuneVerification",
           "label": "Verification of misfortune",
           "type": "choice",
           "choices": [
-            "Media report",
-            "Fire department documentation",
-            "Police report",
-            "Insurance documentation",
-            "Self-attestation accepted",
-            "Other"
+            "Fire Department",
+            "The Red Cross",
+            "A utility company",
+            "Home visit",
+            "Other (Specify):"
           ]
         },
         {
           "id": "issuanceDate",
-          "label": "HH\u2019s monthly allotment issuance date",
+          "label": "HH’s monthly allotment issuance date",
           "type": "choice",
           "choices": [
-            "1st of Month",
-            "2nd of Month",
-            "3rd of Month",
-            "Weekly",
-            "Semi-monthly",
-            "Other"
+            "1st",
+            "2nd",
+            "3rd",
+            "4th",
+            "5th",
+            "6th",
+            "7th",
+            "8th",
+            "9th",
+            "10th"
           ]
         },
         {
           "id": "allotmentReceived",
-          "label": "CF allotment received in the month of misfortune/disaster ($)",
+          "label": "CF allotment received in the month of misfortune or disaster ($)",
           "type": "text"
         },
         {
           "id": "daysBetween",
-          "label": "Number of days between misfortune and next issuance",
+          "label": "Number of days between the HH’s misfortune and the HH’s next monthly issuance of benefits",
           "type": "text"
         }
       ]
@@ -114,38 +105,38 @@
       "title": "BENEFIT REPLACEMENT CALCULATION",
       "fields": [
         {
-          "id": "calc_step1_amount",
+          "id": "step1Allotment",
           "label": "Step 1(a) Amount of allotment",
           "type": "text"
         },
         {
-          "id": "calc_step1_days",
+          "id": "step1Days",
           "label": "Step 1(b) Number of days in allotment/misfortune month",
           "type": "text"
         },
         {
-          "id": "calc_step1_daily",
-          "label": "Step 1(c) Daily issuance amount (a \u00f7 b)",
+          "id": "step1Daily",
+          "label": "Step 1(c) Divide a/b = daily issuance amount",
           "type": "text"
         },
         {
-          "id": "calc_step2_daily",
+          "id": "step2Daily",
           "label": "Step 2(a) Daily issuance amount from Step 1(c)",
           "type": "text"
         },
         {
-          "id": "calc_step2_daysBetween",
-          "label": "Step 2(b) Number of days between misfortune and next issuance",
+          "id": "step2Days",
+          "label": "Step 2(b) The number of days between the HH misfortune and the next monthly issuance of benefits",
           "type": "text"
         },
         {
-          "id": "calc_step2_total",
-          "label": "Step 2(c) Multiply a \u00d7 b",
+          "id": "step2Multiply",
+          "label": "Step 2(c) Multiply a × b",
           "type": "text"
         },
         {
-          "id": "calc_step3_totalAfter70pct",
-          "label": "Step 3: Multiply Step 2(c) by 70% (amount \u00d7 0.70)",
+          "id": "step3SeventyPercent",
+          "label": "Step 3 Multiply the amount from Step 2(c) by 70% (amount × .70)",
           "type": "text"
         },
         {
@@ -165,15 +156,13 @@
       "title": "AUTHORIZATION",
       "fields": [
         {
-          "id": "authorizedBy",
+          "id": "authorizationSource",
           "label": "Reviewed/Authorized by",
           "type": "choice",
           "choices": [
-            "EW Supervisor:",
-            "Lead Worker:",
-            "Eligibility Supervisor:",
-            "Manager:",
-            "Other:"
+            "Supervisor (specify):",
+            "Manager (specify):",
+            "Other (specify):"
           ]
         }
       ]

@@ -146,6 +146,19 @@
             color: var(--dpss-accent-600);
         }
 
+        /* Sidebar toggle */
+        aside.sidebar-hidden {
+            display: none;
+        }
+
+        /* Sidebar tab */
+        #sidebarTab {
+            user-select: none; /* Prevent text selection during drag */
+        }
+        #sidebarTab button:hover {
+            transform: translateX(2px);
+        }
+
         /* Header accents */
 /* =========================================
    Header — Solid, centered, template-width
@@ -267,11 +280,23 @@ body.dark-mode select.journal-input {
         body.dark-mode .clone-group,
         body.dark-mode .toolbox,
         body.dark-mode aside,
-        body.dark-mode nav {
+        body.dark-mode nav,
+        body.dark-mode #settings_modal .bg-white {
             background: var(--surface-1) !important;
             color: var(--muted-text) !important;
             border-color: var(--subtle-border) !important;
             box-shadow: 0 6px 18px rgba(2,6,23,0.6) !important;
+        }
+
+        /* Dark mode toggle switch */
+        body.dark-mode #settings_modal label {
+            color: var(--muted-text) !important;
+        }
+        body.dark-mode #settings_modal .w-11 {
+            background: #374151 !important;
+        }
+        body.dark-mode #settings_modal .peer-checked\:bg-blue-600 {
+            background: #3b82f6 !important;
         }
 
         body.dark-mode .section-body { color: var(--muted-text); }
@@ -362,15 +387,25 @@ body.dark-mode select.journal-input {
             box-shadow: none !important;
         }
 
-        /* Keep pill-btn-green buttons with original styling in dark mode */
+        /* Keep pill-btn-green buttons with vibrant yellow gradient in dark mode */
         body.dark-mode .pill-btn-green {
-            background: linear-gradient(90deg, #ffb347 0%, #ffcc80 100%) !important;
-            color: #333 !important;
-            box-shadow: 0 2px 8px rgba(255, 180, 71, 0.10) !important;
+            background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%) !important;
+            color: #fff !important;
+            box-shadow: 0 2px 8px rgba(251, 191, 36, 0.20) !important;
         }
         body.dark-mode .pill-btn-green:hover {
-            background: linear-gradient(90deg, #ffcc80 0%, #ffb347 100%) !important;
-            box-shadow: 0 4px 16px rgba(255, 180, 71, 0.18) !important;
+            background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%) !important;
+            box-shadow: 0 4px 16px rgba(251, 191, 36, 0.30) !important;
+        }
+
+        /* Keep repeatable-add buttons with purple gradient in dark mode */
+        body.dark-mode .repeatable-add {
+            background: linear-gradient(90deg, #7c3aed 0%, #a855f7 100%) !important;
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.20) !important;
+        }
+        body.dark-mode .repeatable-add:hover {
+            background: linear-gradient(90deg, #a855f7 0%, #7c3aed 100%) !important;
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.30) !important;
         }
 
         /* Make change items muted but readable */
@@ -401,7 +436,7 @@ body.dark-mode select.journal-input {
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: var(--dpss-accent);
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             color: white;
             border: none;
             cursor: pointer;
@@ -422,8 +457,9 @@ body.dark-mode select.journal-input {
         }
         
         .scroll-btn:hover {
-            background: #4338ca;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
         
         #scrollToTop {
@@ -712,6 +748,17 @@ body.dark-mode select.journal-input {
         #create_template_guide_backdrop, #create_template_guide {
             z-index: 999999 !important;
         }
+
+        /* Journal modal dragging */
+        #journal_output_container .bg-white {
+            user-select: none;
+        }
+        #journal_output_container .flex.items-center.justify-between {
+            cursor: grab;
+        }
+        #journal_output_container .flex.items-center.justify-between:active {
+            cursor: grabbing;
+        }
     </style>
         <style>
         /* Header search suggestions dropdown */
@@ -779,14 +826,7 @@ body.dark-mode select.journal-input {
         h3 + .sidebar-action { margin-top: 0.4rem !important; }
 
         /* Color variants matching the DPSS palette */
-        #generate_journal_btn { background: var(--btn-green); color: #fff; border: 1px solid rgba(0,0,0,0.06); }
-        #generate_journal_btn:hover { background: var(--btn-green-600); }
-
-        #btnClearValues { background: var(--btn-neutral-bg); color: #0f172a; border: 1px solid var(--btn-neutral-border); }
-        #btnClearValues:hover { background: #e9eef6; }
-
-        #refreshAppBtn { background: var(--btn-amber); color: #fff; border: 1px solid rgba(0,0,0,0.06); }
-        #refreshAppBtn:hover { background: var(--btn-amber-600); }
+        /* Note: Button colors now use gradient styling directly */
 
         /* Ensure small descriptive text below keeps spacing from buttons */
         .section-card > p.text-xs { margin-top: 0.75rem; }
@@ -871,8 +911,12 @@ body.dark-mode select.journal-input {
                 </div>
 
                 <!-- TOGGLES -->
-                <button id="btnThemeToggle" class="px-3 py-1.5 rounded-full border border-slate-300 text-slate-700 hover:bg-slate-100 text-[11px]">
-                    Dark Mode
+                <button id="btnSettings" class="px-3 py-1.5 rounded-full border border-slate-300 text-slate-700 hover:bg-slate-100 text-[11px] flex items-center gap-1">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                    Settings
                 </button>
             </div>
         </div>
@@ -910,6 +954,16 @@ body.dark-mode select.journal-input {
                 <span class="badge bg-indigo-50 text-indigo-700 border border-indigo-100">Builder</span>
             </div>
 
+            <!-- SIDEBAR TOGGLE BUTTON -->
+            <button id="sidebarToggle" class="w-full mb-3 px-3 py-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 font-medium text-sm" title="Hide Sidebar" data-sidebar-visible="true">
+                <svg id="sidebarToggleIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+                <span id="sidebarToggleText">Hide Sidebar</span>
+            </button>
+
             <nav class="flex flex-col gap-1 text-sm overflow-y-auto max-h-[60vh] pr-1" style="scrollbar-width: thin;">
                 <button class="sidebar-item sidebar-item-active" data-target="section-general">
                     <span class="w-6 text-xs font-mono text-slate-500">01</span>General Application Details
@@ -942,17 +996,29 @@ body.dark-mode select.journal-input {
 
             <!-- GENERATE -->
             <h3 class="text-lg font-semibold text-gray-800 mb-3">Journal Export</h3>
-            <button id="generate_journal_btn" class="sidebar-action px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">
+            <button id="generate_journal_btn" class="w-full px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 font-medium text-sm">
                 Generate Journal
             </button>
 
-            <button id="btnClearValues" class="sidebar-action mt-3 px-4 py-2 bg-slate-200 text-slate-800 rounded-md hover:bg-slate-300 text-xs">Clear All Values</button>
+            <button id="btnClearValues" class="w-full mt-3 px-4 py-2 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 font-medium text-sm">Clear All Values</button>
 
-            <button id="refreshAppBtn" class="sidebar-action mt-2 px-4 py-2 rounded-md border border-slate-300 text-slate-700 hover:bg-slate-100 text-xs" title="Refresh app">🔄 Refresh</button>
+            <button id="refreshAppBtn" class="w-full mt-2 px-4 py-2 bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 font-medium text-sm" title="Refresh app">🔄 Refresh</button>
 
             <p class="text-xs text-slate-500 mt-2">💡 Tip: Open → Edit → Copy.</p>
         </div>
     </aside>
+
+    <!-- SIDEBAR TAB (shown when sidebar is hidden) -->
+    <div id="sidebarTab" class="fixed left-0 top-1/2 transform -translate-y-1/2 z-40 hidden">
+        <button class="bg-gradient-to-r from-blue-700 to-purple-800 hover:from-blue-800 hover:to-purple-900 text-white px-3 py-2 rounded-r-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 font-medium" title="Show Sidebar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <span class="text-xs font-medium">Menu</span>
+        </button>
+    </div>
 
     <!-- MAIN CONTENT -->
    <!-- MAIN CONTENT -->
@@ -1161,6 +1227,71 @@ body.dark-mode select.journal-input {
         <div class="flex justify-end gap-2">
             <button id="confirm_no" class="px-3 py-1.5 rounded-md border text-xs">Cancel</button>
             <button id="confirm_yes" class="px-3 py-1.5 rounded-md bg-red-600 text-white text-xs">Continue</button>
+        </div>
+    </div>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div id="settings_modal_backdrop" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
+<div id="settings_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-sm w-full p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold">Settings</h3>
+            <button id="settings_modal_close" class="text-slate-500 hover:text-slate-800 text-xl">✕</button>
+        </div>
+
+        <div class="space-y-4">
+            <!-- Dark Mode Toggle -->
+            <div class="flex items-center justify-between">
+                <div>
+                    <label class="text-sm font-medium text-slate-700">Dark Mode</label>
+                    <p class="text-xs text-slate-500">Toggle between light and dark themes</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="darkModeToggle" class="sr-only peer">
+                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                </label>
+            </div>
+
+            <!-- Progress Bar Toggle -->
+            <div class="flex items-center justify-between">
+                <div>
+                    <label class="text-sm font-medium text-slate-700">Progress Bar</label>
+                    <p class="text-xs text-slate-500">Show/hide the floating progress indicator</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="progressBarToggle" class="sr-only peer">
+                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                </label>
+            </div>
+
+            <!-- Scroll Buttons Toggle -->
+            <div class="flex items-center justify-between">
+                <div>
+                    <label class="text-sm font-medium text-slate-700">Scroll Buttons</label>
+                    <p class="text-xs text-slate-500">Show/hide scroll to top and bottom buttons</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="scrollButtonsToggle" class="sr-only peer">
+                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                </label>
+            </div>
+
+            <!-- Admin Mode Toggle -->
+            <div class="flex items-center justify-between">
+                <div>
+                    <label class="text-sm font-medium text-slate-700">Admin Mode</label>
+                    <p class="text-xs text-slate-500">Enable admin features for template editing</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="adminModeToggle" class="sr-only peer">
+                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                </label>
+            </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t flex justify-end">
+            <button id="settings_modal_close_footer" class="px-4 py-2 rounded-md border text-sm hover:bg-slate-50">Close</button>
         </div>
     </div>
 </div>
@@ -1492,10 +1623,6 @@ body.dark-mode select.journal-input {
     <p id="refreshSubtext" class="text-sm text-slate-500"></p>
 </div>
 
-<!-- ADMIN TOGGLE (fixed bottom-left) -->
-<div id="adminToggleFixed" class="admin-toggle-fixed">
-    <button id="btnAdminToggle" class="px-3 py-1.5 rounded-full border border-amber-500 text-amber-700 hover:bg-amber-50 text-[11px]">Admin: OFF</button>
-</div>
 <!-- SECTION PREVIEW MODAL (Admin) -->
 <div id="previewModal" class="modal hidden">
   <div class="modal-content">
