@@ -175,10 +175,11 @@ header.sticky-header {
 
 /* Centered header content container */
 header.sticky-header > div {
-    background: #ffffff;
-    border-radius: 12px;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 4px 12px rgba(15,23,42,0.06);
+    background: #f8fafc; /* Match sidebar background color */
+    /* Removed border and box-shadow for flat appearance */
+    position: relative;
+    z-index: 35; /* Above sidebar (z-30) */
+    padding-left: clamp(240px, 22vw, 320px); /* Push content to right of sidebar */
 }
 
 /* Header title color stays accent-aware */
@@ -236,21 +237,6 @@ body.dark-mode {
         );
 }
 /* 2025-12-17 // new */
-body.dark-mode header.sticky-header > div {
-    background: #071428;
-    border: 1px solid rgba(255,255,255,0.06);
-    box-shadow: 0 10px 28px rgba(2,6,23,0.7);
-}
-/* 2025-12-17 // new */
-body.dark-mode header.sticky-header {
-    background: linear-gradient(
-        180deg,
-        #0b1324 0%,
-        #09101f 100%
-    );
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    box-shadow: 0 4px 18px rgba(2,6,23,0.6);
-}
 
 
 /* 2025-12-17 // new */
@@ -411,8 +397,22 @@ body.dark-mode select.journal-input {
         /* Make change items muted but readable */
         body.dark-mode .change-item { background: rgba(255,255,255,0.02); color: var(--muted-text-2); }
 
-        /* Reduce contrast for header background in dark mode */
-        body.dark-mode header { background: linear-gradient(180deg, rgba(2,6,23,0.8), rgba(2,6,23,0.9)); border-top-color: rgba(79,70,229,0.04); }
+        /* Dark mode: Mirror light mode header styling */
+        body.dark-mode header.sticky-header {
+            background: #071028 !important; /* Match sidebar background color */
+            border-bottom: none !important; /* No border for flat appearance */
+            box-shadow: none !important; /* No shadow for flat appearance */
+        }
+
+        /* Dark mode header content container - mirror light mode */
+        body.dark-mode header.sticky-header > div {
+            background: #071028; /* Match sidebar background color */
+            /* Removed border and box-shadow for flat appearance */
+            margin-top: 0; /* Remove the top margin */
+            position: relative;
+            z-index: 35; /* Above sidebar (z-30) */
+            padding-left: clamp(240px, 22vw, 320px); /* Push content to right of sidebar */
+        }
 
         /* Ensure focus outlines are visible but subtle */
         body.dark-mode .journal-input:focus { box-shadow: 0 0 0 3px var(--accent-glow) !important; border-color: rgba(79,140,255,0.28) !important; }
@@ -799,12 +799,35 @@ body.dark-mode select.journal-input {
         top: 0;
         left: 0;
         height: 100vh;
-        width: 18rem;            /* w-72 */
+        width: 22vw;             /* Changed from 18rem to 22vw for zoom-friendly scaling */
+        min-width: 240px;        /* Minimum width to prevent too narrow */
+        max-width: 320px;        /* Maximum width to prevent too wide */
         z-index: 30;             /* above header (header is z-20) */
         overflow: hidden;
         background: #f8fafc;
         border-right: 1px solid #e5e7eb;
         box-shadow: 4px 0 12px rgba(15,23,42,0.06);
+    }
+
+    /* Header extends from left edge, full width */
+    header.sticky-header {
+        position: fixed;
+        top: 0;
+        left: 0; /* Start from left edge */
+        width: 100vw; /* Full viewport width */
+        z-index: 20; /* Below sidebar (z-30) */
+    }
+
+    /* Header content container - higher z-index to stay above sidebar */
+    header.sticky-header > div {
+        position: relative;
+        z-index: 35; /* Above sidebar (z-30) */
+        padding-left: clamp(240px, 22vw, 320px); /* Push content to right of sidebar */
+    }
+
+    /* Main content starts below header */
+    #mainContent {
+        margin-top: 4rem; /* Account for header height (py-3 = 0.75rem * 2 + content) */
     }
 
     /* Only the section list scrolls */
@@ -850,9 +873,47 @@ body.dark-mode select.journal-input {
 @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-18px);} }
 </style>
 
+<style>
+/* Remove the "pill" look from field groups */
+.clone-group {
+    background: transparent !important;
+    border: none !important;
+    border-left: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 0 1rem 0 !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Optional: Remove alternating backgrounds completely */
+.clone-bg-a,
+.clone-bg-b {
+    background: transparent !important;
+    border-left: none !important;
+}
+
+/* Make individual fields cleaner */
+.mb-3 {
+    margin-bottom: 1rem !important;
+}
+
+.journal-input {
+    background: #ffffff !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 0.375rem !important; /* smaller corners */
+    box-shadow: none !important;
+}
+
+/* Keep focus style but subtle */
+.journal-input:focus {
+    border-color: #4f46e5 !important;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15) !important;
+}
+</style>
+
 <!-- HEADER -->
 <header class="sticky top-0 z-20 bg-white sticky-header border-b border-slate-200">
-    <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-4">
+    <div class="px-4 py-3 flex items-center justify-between gap-4">
 
         <!-- LEFT -->
         <div class="flex items-center gap-3">
@@ -937,7 +998,6 @@ body.dark-mode select.journal-input {
   id="sideNav"
   class="
     left-pane
-    w-72 lg:w-80
     shrink-0
     bg-slate-50
     border-r border-slate-200
@@ -1026,8 +1086,8 @@ body.dark-mode select.journal-input {
   id="mainContent"
   class="flex-1 overflow-y-auto bg-slate-50"
 >
-    <!-- CENTERED DOCUMENT WRAPPER (THIS IS THE FIX) -->
-    <div class="mx-auto max-w-6xl px-4 py-4 space-y-4">
+    <!-- CENTERED DOCUMENT WRAPPER (ZOOM-FRIENDLY) -->
+    <div class="mx-auto max-w-[90vw] px-4 py-4 space-y-4" style="max-width: min(90vw, 1200px);">
 
         <!-- JSON-DRIVEN CORE -->
         <div id="dynamicCoreSections"></div>
@@ -1631,6 +1691,7 @@ body.dark-mode select.journal-input {
     <button onclick="closePreview()">Close</button>
   </div>
 </div>
+
 
 <!-- JS -->
 <script src="./app.js?v=20251124_001"></script>
