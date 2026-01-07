@@ -82,6 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
             padding: 18px 16px 38px 16px;
             position: relative;
             transition: box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
         }
         .repeatable-container:hover {
             box-shadow: 0 4px 16px rgba(60, 120, 180, 0.13);
@@ -92,42 +94,158 @@ document.addEventListener('DOMContentLoaded', function() {
         .repeatable-inner { flex: 1; display: flex; flex-direction: column; gap: 6px; }
         .repeatable-del { background: transparent; border: none; color: #900; font-size: 20px; cursor: pointer; }
         .repeatable-add {
-            position: absolute;
-            right: 18px;
-            bottom: 12px;
-            background: linear-gradient(90deg, #7c3aed 0%, #a855f7 100%);
+            background: linear-gradient(135deg, #0BDA8F 0%, #059669 100%);
             color: #fff;
             border: none;
-            border-radius: 999px;
-            padding: 7px 22px;
-            font-size: 1rem;
-            font-weight: 600;
-            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.20);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(11, 218, 143, 0.15);
             cursor: pointer;
-            transition: background 0.2s, box-shadow 0.2s;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 8px;
+            margin-left: auto;
             z-index: 2;
         }
         .repeatable-add:hover {
-            background: linear-gradient(90deg, #a855f7 0%, #7c3aed 100%);
-            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.30);
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            box-shadow: 0 4px 8px rgba(11, 218, 143, 0.25);
+            transform: translateY(-1px);
         }
-        /* Clarification pill button distinct style */
-        .pill-btn-green {
-            background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%);
+        .repeatable-add:active {
+            transform: translateY(0);
+        }
+        /* Clarification button professional style */
+        .clarification-btn {
+            background: linear-gradient(135deg, #EF7119 0%, #d97706 100%);
             color: #fff;
             border: none;
-            border-radius: 999px;
-            padding: 8px 24px;
-            font-size: 1rem;
-            font-weight: 600;
-            box-shadow: 0 2px 8px rgba(251, 191, 36, 0.20);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(239, 113, 25, 0.15);
             cursor: pointer;
-            transition: background 0.2s, box-shadow 0.2s;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             z-index: 3;
         }
-        .pill-btn-green:hover {
-            background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
-            box-shadow: 0 4px 16px rgba(251, 191, 36, 0.30);
+        .clarification-btn:hover {
+            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+            box-shadow: 0 4px 8px rgba(239, 113, 25, 0.25);
+            transform: translateY(-1px);
+        }
+        .clarification-btn:active {
+            transform: translateY(0);
+        }
+        /* Generate Journal button professional style - smaller and sleeker */
+        .generate-journal-btn {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            box-shadow: 0 1px 3px rgba(14, 165, 233, 0.12);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 32px;
+            white-space: nowrap;
+        }
+        .generate-journal-btn:hover {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            box-shadow: 0 2px 6px rgba(14, 165, 233, 0.2);
+            transform: translateY(-0.5px);
+        }
+        .generate-journal-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 2px rgba(14, 165, 233, 0.15);
+        }
+        /* Clear Values button professional style - smaller and sleeker */
+        .clear-values-btn {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            box-shadow: 0 1px 3px rgba(239, 68, 68, 0.12);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 32px;
+            white-space: nowrap;
+        }
+        .clear-values-btn:hover {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.2);
+            transform: translateY(-0.5px);
+        }
+        .clear-values-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 2px rgba(239, 68, 68, 0.15);
+        }
+        /* Sidebar menu button professional style - smaller size */
+        .sidebar-menu-btn {
+            background: linear-gradient(135deg, #418DC3 0%, #2c6a9c 100%);
+            color: #fff;
+            border: none;
+            border-radius: 0 6px 6px 0;
+            padding: 6px;
+            box-shadow: 0 2px 4px rgba(65, 141, 195, 0.15);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+        }
+        .sidebar-menu-btn:hover {
+            background: linear-gradient(135deg, #2c6a9c 0%, #1e4f73 100%);
+            box-shadow: 0 4px 8px rgba(65, 141, 195, 0.25);
+            transform: translateX(2px);
+        }
+        .sidebar-menu-btn:active {
+            transform: translateX(0);
+        }
+        /* Undo button professional style */
+        .undo-btn {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.15);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 8px;
+        }
+        .undo-btn:hover {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            box-shadow: 0 4px 8px rgba(239, 68, 68, 0.25);
+            transform: translateY(-1px);
+        }
+        .undo-btn:active {
+            transform: translateY(0);
         }
         `;
         document.head.appendChild(style);
@@ -152,63 +270,167 @@ document.addEventListener('DOMContentLoaded', function() {
     const toggleIcon = document.getElementById('sidebarToggleIcon');
     const toggleText = document.getElementById('sidebarToggleText');
     if (sidebarToggle && sidebar && sidebarTab && toggleIcon && toggleText) {
+        // Initialize sidebarTab visibility - hide it since sidebar is visible by default
+        sidebarTab.style.display = 'none';
+        sidebarToggle.dataset.sidebarVisible = 'true'; // Sidebar is visible by default
         sidebarToggle.addEventListener('click', function() {
             const isVisible = sidebarToggle.dataset.sidebarVisible === 'true';
             if (isVisible) {
                 sidebar.classList.add('sidebar-hidden');
-                sidebarTab.classList.remove('hidden');
+                sidebarTab.style.display = 'block'; // Show tab when sidebar is hidden
                 sidebarToggle.dataset.sidebarVisible = 'false';
                 sidebarToggle.title = 'Show Sidebar';
-                toggleText.textContent = 'Show Sidebar';
+                // toggleText.textContent = 'Show Sidebar';
                 // Change icon to show (arrow right)
                 toggleIcon.innerHTML = '<path d="M9 18l6-6-6-6"></path>';
             } else {
                 sidebar.classList.remove('sidebar-hidden');
-                sidebarTab.classList.add('hidden');
+                sidebarTab.style.display = 'none'; // Hide tab when sidebar is shown
                 sidebarToggle.dataset.sidebarVisible = 'true';
                 sidebarToggle.title = 'Hide Sidebar';
-                toggleText.textContent = 'Hide Sidebar';
+                // toggleText.textContent = 'Hide Sidebar';
                 // Change icon back to hide (lines)
                 toggleIcon.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
             }
         });
 
-        // Tab click handler
+        // Tab click handler - now toggles instead of just showing
         sidebarTab.addEventListener('click', function() {
-            sidebar.classList.remove('sidebar-hidden');
-            sidebarTab.classList.add('hidden');
-            sidebarToggle.dataset.sidebarVisible = 'true';
-            sidebarToggle.title = 'Hide Sidebar';
-            toggleText.textContent = 'Hide Sidebar';
-            // Change icon back to hide (lines)
-            toggleIcon.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
+            const isVisible = sidebarToggle.dataset.sidebarVisible === 'true';
+            if (isVisible) {
+                sidebar.classList.add('sidebar-hidden');
+                sidebarTab.style.display = 'block'; // Show tab when sidebar is hidden
+                sidebarToggle.dataset.sidebarVisible = 'false';
+                sidebarToggle.title = 'Show Sidebar';
+                // toggleText.textContent = 'Show Sidebar';
+                // Change icon to show (arrow right)
+                toggleIcon.innerHTML = '<path d="M9 18l6-6-6-6"></path>';
+            } else {
+                sidebar.classList.remove('sidebar-hidden');
+                sidebarTab.style.display = 'none'; // Hide tab when sidebar is shown
+                sidebarToggle.dataset.sidebarVisible = 'true';
+                sidebarToggle.title = 'Hide Sidebar';
+                // toggleText.textContent = 'Hide Sidebar';
+                // Change icon back to hide (lines)
+                toggleIcon.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
+            }
         });
 
-        // Dragging functionality for sidebar tab
+        // Auto-hide sidebar on significant horizontal viewport narrowing
+        // Detects horizontal resizing by comparing width vs height deltas
+        let previousViewportWidth = window.innerWidth;
+        let previousViewportHeight = window.innerHeight;
+        let previousViewportScale = window.visualViewport ? window.visualViewport.scale : 1;
+
+        window.addEventListener('resize', function() {
+            const currentWidth = window.innerWidth;
+            const currentHeight = window.innerHeight;
+            const currentScale = window.visualViewport ? window.visualViewport.scale : 1;
+            const widthDelta = previousViewportWidth - currentWidth;
+            const heightDelta = Math.abs(previousViewportHeight - currentHeight);
+
+            // Only trigger on significant horizontal shrinking (ignore vertical-only or minor changes)
+            // Width must decrease by at least 100px more than height changes
+            // And final width must be ≤900px (narrow/split-screen state)
+            if (widthDelta > (heightDelta + 100) && currentWidth <= 900) {
+                const isVisible = sidebarToggle.dataset.sidebarVisible === 'true';
+                if (isVisible) {
+                    // Auto-hide sidebar when viewport becomes narrow
+                    sidebar.classList.add('sidebar-hidden');
+                    sidebarTab.style.display = 'block';
+                    sidebarToggle.dataset.sidebarVisible = 'false';
+                    sidebarToggle.title = 'Show Sidebar';
+                    toggleIcon.innerHTML = '<path d="M9 18l6-6-6-6"></path>';
+                }
+            }
+
+            // New logic: Detect real window resizing (not zoom) and hide sidebar when layout width is ~50-65% of screen
+            // Ignore zoom-based changes using visualViewport.scale
+            const scaleUnchanged = Math.abs(currentScale - previousViewportScale) < 0.01; // Allow small floating point differences
+            const screenWidth = screen.width;
+            const layoutWidthThreshold = 0.6 * screenWidth; // ~60% of screen width
+
+            if (scaleUnchanged && currentWidth < layoutWidthThreshold) {
+                const isVisible = sidebarToggle.dataset.sidebarVisible === 'true';
+                if (isVisible) {
+                    // Auto-hide sidebar when layout width shrinks significantly (real window resize, not zoom)
+                    sidebar.classList.add('sidebar-hidden');
+                    sidebarTab.style.display = 'block';
+                    sidebarToggle.dataset.sidebarVisible = 'false';
+                    sidebarToggle.title = 'Show Sidebar';
+                    toggleIcon.innerHTML = '<path d="M9 18l6-6-6-6"></path>';
+                }
+            }
+
+            // Update previous dimensions for next resize event
+            previousViewportWidth = currentWidth;
+            previousViewportHeight = currentHeight;
+            previousViewportScale = currentScale;
+        });
+
+        // Dragging functionality for sidebar tab - make it smaller and add label
         let isDragging = false;
         let dragStartY = 0;
         let initialTop = 0;
 
+        // Function to constrain sidebar tab position within viewport bounds
+        function constrainSidebarTabPosition() {
+            const tabHeight = sidebarTab.offsetHeight;
+            const minTop = 10;
+            const maxTop = window.innerHeight - tabHeight - 10;
+            let currentTop = parseFloat(sidebarTab.style.top) || 0;
+            let newTop = Math.max(minTop, Math.min(maxTop, currentTop));
+
+            if (newTop !== currentTop) {
+                sidebarTab.style.top = newTop + 'px';
+                localStorage.setItem('dpss_sidebarTabTop', newTop);
+            }
+        }
+
+        // Make button smaller and add label
+        const button = sidebarTab.querySelector('button');
+        button.style.width = '36px';
+        button.style.height = '36px';
+        button.style.padding = '6px';
+
+        // Add label next to button
+        const label = document.createElement('span');
+        label.textContent = 'Menu';
+        label.style.fontSize = '11px';
+        label.style.fontWeight = '600';
+        label.style.color = '#64748b';
+        label.style.marginLeft = '6px';
+        label.style.whiteSpace = 'nowrap';
+        sidebarTab.appendChild(label);
+
+        // Update dark mode label color
+        if (document.body.classList.contains('dark-mode')) {
+            label.style.color = '#cbd5e1';
+        }
+
         sidebarTab.addEventListener('mousedown', function(e) {
-            isDragging = true;
-            dragStartY = e.clientY;
-            initialTop = sidebarTab.offsetTop;
-            sidebarTab.style.cursor = 'grabbing';
-            e.preventDefault();
+            // Only start dragging if clicking on the button or label area
+            if (e.target === button || e.target === label || e.target.closest('button') || e.target.closest('span')) {
+                isDragging = true;
+                dragStartY = e.clientY;
+                initialTop = sidebarTab.offsetTop;
+                sidebarTab.style.cursor = 'grabbing';
+                e.preventDefault();
+            }
         });
 
         document.addEventListener('mousemove', function(e) {
             if (!isDragging) return;
-            
+
             const deltaY = e.clientY - dragStartY;
             let newTop = initialTop + deltaY;
-            
+
             // Constrain to viewport bounds (with some padding)
             const tabHeight = sidebarTab.offsetHeight;
             const minTop = 10;
             const maxTop = window.innerHeight - tabHeight - 10;
             newTop = Math.max(minTop, Math.min(maxTop, newTop));
-            
+
             sidebarTab.style.top = newTop + 'px';
             sidebarTab.style.transform = 'translateY(0)'; // Remove the centering transform
             localStorage.setItem('dpss_sidebarTabTop', newTop);
@@ -221,12 +443,30 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Load saved position on initialization
+        // Load saved position on initialization and constrain it
         const savedTop = localStorage.getItem('dpss_sidebarTabTop');
         if (savedTop) {
             sidebarTab.style.top = savedTop + 'px';
             sidebarTab.style.transform = 'translateY(0)';
         }
+        // Always constrain the position to ensure it's within bounds
+        constrainSidebarTabPosition();
+
+        // Re-constrain position on resize/zoom changes
+        window.addEventListener('resize', constrainSidebarTabPosition, { passive: true });
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', constrainSidebarTabPosition, { passive: true });
+        }
+        window.addEventListener('orientationchange', constrainSidebarTabPosition, { passive: true });
+
+        // Fallback poll for devicePixelRatio changes
+        let lastDPR = window.devicePixelRatio;
+        const dprPoll = setInterval(() => {
+            if (window.devicePixelRatio !== lastDPR) {
+                lastDPR = window.devicePixelRatio;
+                constrainSidebarTabPosition();
+            }
+        }, 500);
     }
 });
 // --- Universal label resolver (safe patch) ---
@@ -1186,7 +1426,7 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
 
         const card = document.createElement('section');
         card.id = `dynamic_${sec.id}`;
-        card.className = 'section-card mb-4 flex-1';
+        card.className = `section-card mb-4 flex-1 ${index === 0 ? 'mt-6' : ''}`;
         const sectionLabel = sec.sectionLabel || '';
         const adminLabelPillHTML = `<div class="section-label-pill admin-only" title="Admin: Section label"><input type="text" placeholder="Add label..." value="${sectionLabel}" onchange="updateSectionLabel(${index}, this.value)" onclick="event.stopPropagation()" /></div>`;
         const viewerLabelPillHTML = sectionLabel ? `<div class="section-label-pill non-admin-only" title="Section label">${sectionLabel}</div>` : '';
@@ -1206,7 +1446,7 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
         // Hide clarification button for Short Description / Long Description sections
         const _secTitleRaw = sec.label || sec.title || '';
         const _hideClarBtn = /short descriptions?|long descriptions?/i.test(_secTitleRaw);
-        const addClarBtnHTML = _hideClarBtn ? '' : `<div style="position:relative;"><button type=\"button\" class=\"pill-btn pill-btn-green\" style=\"position:absolute;right:0;bottom:-44px;z-index:2;\" onclick=\"addClarification(${index})\">+ Add Further Clarification</button></div>`;
+        const addClarBtnHTML = _hideClarBtn ? '' : `<div class="mt-3"><button type="button" class="clarification-btn" onclick="addClarification(${index})"><svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>Add Clarification</button></div>`;
 
         card.innerHTML = `
             ${adminLabelPillHTML}${viewerLabelPillHTML}
@@ -1237,10 +1477,7 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
             const undoBtn = document.createElement('button');
             undoBtn.textContent = 'Undo';
             undoBtn.type = 'button';
-            undoBtn.className = 'pill-btn pill-btn-red';
-            undoBtn.style.position = 'absolute';
-            undoBtn.style.right = '0';
-            undoBtn.style.top = '-36px';
+            undoBtn.className = 'undo-btn';
             undoBtn.onclick = async function() {
                 const confirmed = await showConfirm('Remove Clarification', 'Are you sure you want to remove this clarification?');
                 if (!confirmed) return;
@@ -1659,81 +1896,75 @@ function renderField(sec, sectionIndex) {
             const subfields = Array.isArray(f.subfields) ? f.subfields :
                               Array.isArray(f.fields) ? f.fields : [];
             if (f.type === "repeatable") {
-                const containerId = `repeatable_${sectionIndex}_${fieldIndex}`;
-                const listId = `${containerId}_list`;
-
-                function renderSubfields() {
-                    return subfields.map(sf => {
-                        // Ensure safe label/id values for embedding
-                        const lbl = (sf.label || '').toString();
-                        const fid = (sf.id || '').toString();
-
-                        if (sf.type === "text") {
-                            return `<input class=\"journal-input\" type=\"text\" placeholder=\"${escapeHtml(lbl)}\" data-label=\"${escapeHtml(lbl)}\" data-field-id=\"${escapeHtml(fid)}\">`;
-                        }
-                        if (sf.type === "choice" && sf.choices) {
-                            // Lazy select for repeatable subfield
-                            const safe = JSON.stringify(sf.choices || []).replace(/</g, '\\u003c');
-                            return `<select class=\"journal-input\" data-lazy=\"true\" data-choices='${safe}' data-label=\"${escapeHtml(lbl)}\" data-field-id=\"${escapeHtml(fid)}\"><option value=\"\" disabled selected>Choose an Option</option></select>`;
-                        }
-                        return '';
-                    }).join('');
-                }
-
-                setTimeout(() => {
-                    if (!window._repeatableHandlers) window._repeatableHandlers = {};
-                    if (!window._repeatableHandlers[containerId]) {
-                        window._repeatableHandlers[containerId] = true;
-
-                        const container = document.getElementById(containerId);
-                        const list = document.getElementById(listId);
-
-                        function renumber() {
-                            Array.from(list.children).forEach((row, idx) => {
-                                const num = row.querySelector('.repeatable-number');
-                                if (num) num.textContent = (idx + 1) + '.';
-                            });
-                        }
-
-                        function addRow() {
-                            const row = document.createElement('div');
-                            row.className = 'repeatable-row';
-                            row.innerHTML = `
-                                <span class=\"repeatable-number\">1.</span>
-                                <div class=\"repeatable-inner\">${renderSubfields()}</div>
-                                <button class=\"repeatable-del\" title=\"Remove\">×</button>
-                            `;
-                            row.querySelector('.repeatable-del').onclick = () => {
-                                row.remove();
-                                renumber();
-                            };
-                            list.appendChild(row);
-                            renumber();
-                            // Ensure any lazy-selects inside the newly added row are wired and populated
-                            try {
-                                setupLazySelects(row);
-                                const lazySelects = row.querySelectorAll('select[data-lazy="true"]');
-                                lazySelects.forEach(s => lazyPopulateSelect(s));
-                            } catch (e) {
-                                console.warn('Lazy-init for repeatable row failed', e);
-                            }
-                        }
-
-                        if (list.children.length === 0) addRow();
-
-                        const addBtn = container.querySelector('.repeatable-add');
-                        addBtn.onclick = addRow;
-                    }
-                }, 0);
-
-                return `
-                    <div class=\"repeatable-container\" id=\"${containerId}\">\n${adminToolbar}
-                        <label class=\"text-xs text-slate-600 block mb-1\">${label}</label>
-                        <div class=\"repeatable-list\" id=\"${listId}\"></div>
-                        <button type=\"button\" class=\"repeatable-add\">+ Add ${label}</button>
-                    </div>
-                `;
+    const containerId = `repeatable_${sectionIndex}_${fieldIndex}`;
+    const listId = `${containerId}_list`;
+    function renderSubfields() {
+        return subfields.map(sf => {
+            const lbl = (sf.label || '').toString();
+            const fid = (sf.id || '').toString();
+            if (sf.type === "text") {
+                return `<input class="journal-input" type="text" placeholder="${escapeHtml(lbl)}" data-label="${escapeHtml(lbl)}" data-field-id="${escapeHtml(fid)}">`;
             }
+            if (sf.type === "choice" && sf.choices) {
+                const safe = JSON.stringify(sf.choices || []).replace(/</g, '\\u003c');
+                return `<select class="journal-input" data-lazy="true" data-choices='${safe}' data-label="${escapeHtml(lbl)}" data-field-id="${escapeHtml(fid)}"><option value="" disabled selected>Choose an Option</option></select>`;
+            }
+            return '';
+        }).join('');
+    }
+
+    // Initialize repeatable with first row and proper lazy setup
+    setTimeout(() => {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const list = document.getElementById(listId);
+        if (!list) return;
+
+        function renumber() {
+            Array.from(list.children).forEach((row, idx) => {
+                const num = row.querySelector('.repeatable-number');
+                if (num) num.textContent = (idx + 1) + '.';
+            });
+        }
+
+        function addRow() {
+            const row = document.createElement('div');
+            row.className = 'repeatable-row';
+            row.innerHTML = `
+                <span class="repeatable-number">1.</span>
+                <div class="repeatable-inner">${renderSubfields()}</div>
+                <button class="repeatable-del" title="Remove">×</button>
+            `;
+            row.querySelector('.repeatable-del').onclick = () => {
+                row.remove();
+                renumber();
+            };
+            list.appendChild(row);
+            renumber();
+
+            // CRITICAL FIX: Re-run lazy select setup on the new row
+            setupLazySelects(row);
+        }
+
+        // Add first row if none exist
+        if (list.children.length === 0) addRow();
+
+        // Attach add button
+        const addBtn = container.querySelector('.repeatable-add');
+        if (addBtn) {
+            addBtn.onclick = addRow;
+        }
+    }, 0);
+
+    return `
+        <div class="repeatable-container" id="${containerId}">
+            ${adminToolbar}
+            <label class="text-xs text-slate-600 block mb-1">${label}</label>
+            <div class="repeatable-list" id="${listId}"></div>
+            <button type="button" class="repeatable-add"><svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>Add ${label}</button>
+        </div>
+    `;
+}
             return "";
         // Inject minimal CSS for repeatable layout if not present
         if (!document.getElementById('repeatable-css')) {
@@ -1749,6 +1980,8 @@ function renderField(sec, sectionIndex) {
                 padding: 18px 16px 38px 16px;
                 position: relative;
                 transition: box-shadow 0.2s;
+                display: flex;
+                flex-direction: column;
             }
             .repeatable-container:hover {
                 box-shadow: 0 4px 16px rgba(60, 120, 180, 0.13);
@@ -1759,24 +1992,30 @@ function renderField(sec, sectionIndex) {
             .repeatable-inner { flex: 1; display: flex; flex-direction: column; gap: 6px; }
             .repeatable-del { background: transparent; border: none; color: #900; font-size: 20px; cursor: pointer; }
             .repeatable-add {
-                position: absolute;
-                right: 18px;
-                bottom: 12px;
-                background: linear-gradient(90deg, #4f8cff 0%, #6ad1e3 100%);
+                background: linear-gradient(135deg, #0BDA8F 0%, #059669 100%);
                 color: #fff;
                 border: none;
-                border-radius: 999px;
-                padding: 7px 22px;
-                font-size: 1rem;
-                font-weight: 600;
-                box-shadow: 0 2px 8px rgba(60, 120, 180, 0.10);
+                border-radius: 8px;
+                padding: 6px 12px;
+                font-size: 0.875rem;
+                font-weight: 500;
+                box-shadow: 0 2px 4px rgba(11, 218, 143, 0.15);
                 cursor: pointer;
-                transition: background 0.2s, box-shadow 0.2s;
+                transition: all 0.2s ease;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 8px;
+                margin-left: auto;
                 z-index: 2;
             }
             .repeatable-add:hover {
-                background: linear-gradient(90deg, #6ad1e3 0%, #4f8cff 100%);
-                box-shadow: 0 4px 16px rgba(60, 120, 180, 0.18);
+                background: linear-gradient(135deg, #059669 0%, #047857 100%);
+                box-shadow: 0 4px 8px rgba(11, 218, 143, 0.25);
+                transform: translateY(-1px);
+            }
+            .repeatable-add:active {
+                transform: translateY(0);
             }
             /* Clarification pill button distinct style */
             .pill-btn-green {
@@ -2211,6 +2450,16 @@ function initGenerateJournal() {
     const backdrop = document.getElementById("journal_modal_backdrop");
 
     btn.onclick = () => {
+        // Check if a template is selected
+        if (!activeTemplate) {
+            // Show template required modal
+            const modal = document.getElementById("template_required_modal");
+            const backdrop = document.getElementById("template_required_modal_backdrop");
+            modal.classList.remove("hidden");
+            backdrop.classList.remove("hidden");
+            return;
+        }
+
         // Build and inject output
         const output = buildJournalOutput();
         const ta = document.getElementById('journal_output');
@@ -2262,6 +2511,19 @@ function initGenerateJournal() {
     document.getElementById("journal_modal_close").onclick = close;
     document.getElementById("journal_modal_close_footer").onclick = close;
     backdrop.onclick = close;
+
+    // Template required modal close handler
+    const templateRequiredModal = document.getElementById("template_required_modal");
+    const templateRequiredBackdrop = document.getElementById("template_required_modal_backdrop");
+    const templateRequiredClose = document.getElementById("template_required_close");
+
+    function closeTemplateRequiredModal() {
+        templateRequiredModal.classList.add("hidden");
+        templateRequiredBackdrop.classList.add("hidden");
+    }
+
+    templateRequiredClose.onclick = closeTemplateRequiredModal;
+    templateRequiredBackdrop.onclick = closeTemplateRequiredModal;
 
     // Dragging functionality for journal modal
     const modalContent = modal.querySelector('.bg-white');
@@ -2360,6 +2622,16 @@ function initTemplateExport() {
 // CLEAR VALUES (UI-only reset of form inputs)
 // ============================================================================
 async function clearAllFieldValues() {
+    // Check if a template is selected
+    if (!activeTemplate) {
+        // Show template required modal
+        const modal = document.getElementById("template_required_modal");
+        const backdrop = document.getElementById("template_required_modal_backdrop");
+        modal.classList.remove("hidden");
+        backdrop.classList.remove("hidden");
+        return;
+    }
+
     const root = document.getElementById('dynamicCoreSections');
     if (!root) return;
     const ok = await showConfirm('Reset All Values', 'Reset all entered field values to blank/default? This cannot be undone.');
@@ -2860,7 +3132,7 @@ function convertHTMLToTemplate(html, name, dropdowns = []) {
             // Hide clarification button for Short Description / Long Description sections
             const _secTitleRaw = sec.label || sec.title || '';
             const _hideClarBtn = /short descriptions?|long descriptions?/i.test(_secTitleRaw);
-            const addClarBtnHTML = _hideClarBtn ? '' : `<div style="position:relative;"><button type=\"button\" class=\"pill-btn pill-btn-green\" style=\"position:absolute;right:0;bottom:-44px;z-index:2;\" onclick=\"addClarification(${index})\">+ Add Further Clarification</button></div>`;
+            const addClarBtnHTML = _hideClarBtn ? '' : `<div class="mt-3"><button type="button" class="clarification-btn" onclick="addClarification(${index})"><svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>Add Clarification</button></div>`;
             card.innerHTML = `
                 ${adminLabelPillHTML}${viewerLabelPillHTML}
                 <div class=\"flex items-center gap-2 mb-2\">
@@ -5093,7 +5365,12 @@ function hideRefreshToast() {
         // Create the show tab
         const showTab = document.createElement('div');
         showTab.id = 'floatingProgressTab';
-        showTab.innerHTML = '📊';
+        showTab.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+            <rect x="2" y="2" width="20" height="8" rx="1"></rect>
+        </svg>`;
         showTab.title = 'Show Progress Bar';
         document.body.appendChild(showTab);
 
@@ -5130,30 +5407,58 @@ function hideRefreshToast() {
 
             #floatingProgressTab {
                 position: fixed;
-                bottom: 24px;
+                top: 120px; /* Position under header */
                 right: -10px;
-                width: 40px;
-                height: 40px;
-                background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
-                border-radius: 12px 0 0 12px;
-                box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+                width: 44px;
+                height: 44px;
+                background: linear-gradient(135deg, #078996 0%, #056b74 100%);
+                color: #fff;
+                border: none;
+                border-radius: 6px 0 0 6px;
+                box-shadow: 0 2px 4px rgba(7, 137, 150, 0.15);
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 18px;
-                cursor: pointer;
+                font-size: 16px;
+                cursor: grab;
                 z-index: 9999;
-                transition: right 0.3s ease, background 0.2s ease;
-                user-select: none; /* Prevent text selection during drag */
+                transition: all 0.2s ease;
+                user-select: none;
+                padding: 8px;
+            }
+
+            #floatingProgressTab:active {
+                cursor: grabbing;
             }
 
             #floatingProgressTab:hover {
-                background: linear-gradient(135deg, #1e3a8a 0%, #6d28d9 100%);
-                box-shadow: -4px 0 16px rgba(0,0,0,0.2);
+                background: linear-gradient(135deg, #056b74 0%, #034e52 100%);
+                box-shadow: 0 4px 8px rgba(7, 137, 150, 0.25);
+                transform: translateX(2px);
             }
 
             #floatingProgressTab.hidden {
-                right: -50px;
+                right: -46px;
+            }
+
+            /* Add label for progress tab */
+            #floatingProgressTab::after {
+                content: 'Progress';
+                position: absolute;
+                right: 52px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 11px;
+                font-weight: 600;
+                color: #64748b;
+                white-space: nowrap;
+                opacity: 0;
+                transition: opacity 0.2s ease;
+                pointer-events: none;
+            }
+
+            #floatingProgressTab:hover::after {
+                opacity: 1;
             }
 
             #progressBarLabel {
@@ -5182,9 +5487,9 @@ function hideRefreshToast() {
             #prevSectionBtn,
             #nextSectionBtn {
                 flex: 1;
-                background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-                color: white;
-                border: none;
+                background: white;
+                color: #374151;
+                border: 1px solid #cbd5e1;
                 border-radius: 10px;
                 padding: 6px;
                 font-size: 12px;
@@ -5194,7 +5499,7 @@ function hideRefreshToast() {
 
             #prevSectionBtn:hover:not(:disabled),
             #nextSectionBtn:hover:not(:disabled) {
-                background: linear-gradient(90deg, #2563eb, #7c3aed);
+                background: #f1f5f9;
             }
 
             #hideProgressBtn {
@@ -5288,12 +5593,46 @@ function hideRefreshToast() {
             }
         });
 
-        // Load saved position on initialization
+        // Load saved position on initialization and constrain it
         const savedProgressTop = localStorage.getItem('dpss_progressTabTop');
         if (savedProgressTop) {
             showTab.style.top = savedProgressTop + 'px';
             showTab.style.bottom = 'auto';
         }
+        
+        // Function to constrain progress tab position within viewport bounds
+        function constrainProgressTabPosition() {
+            const tabHeight = showTab.offsetHeight;
+            const headerHeight = 120; // Approximate header height
+            const minTop = headerHeight + 10; // Keep under header
+            const maxTop = window.innerHeight - tabHeight - 10;
+            let currentTop = parseFloat(showTab.style.top) || headerHeight + 10;
+            let newTop = Math.max(minTop, Math.min(maxTop, currentTop));
+            
+            if (newTop !== currentTop) {
+                showTab.style.top = newTop + 'px';
+                localStorage.setItem('dpss_progressTabTop', newTop);
+            }
+        }
+        
+        // Always constrain the position to ensure it's within bounds and under header
+        constrainProgressTabPosition();
+        
+        // Re-constrain position on resize/zoom changes
+        window.addEventListener('resize', constrainProgressTabPosition, { passive: true });
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', constrainProgressTabPosition, { passive: true });
+        }
+        window.addEventListener('orientationchange', constrainProgressTabPosition, { passive: true });
+
+        // Fallback poll for devicePixelRatio changes
+        let lastDPRProgress = window.devicePixelRatio;
+        const dprPollProgress = setInterval(() => {
+            if (window.devicePixelRatio !== lastDPRProgress) {
+                lastDPRProgress = window.devicePixelRatio;
+                constrainProgressTabPosition();
+            }
+        }, 500);
 
         // Dragging functionality for progress bar modal
         let isDraggingModal = false;

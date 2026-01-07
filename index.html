@@ -110,13 +110,15 @@
         .sidebar-number {
             min-width: 28px;
             text-align: center;
-            font-size: 0.7rem;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            color: var(--dpss-accent);
-            background: var(--dpss-accent-50);
-            border: 1px solid rgba(99,102,241,0.12);
-            border-radius: 9999px; /* pill */
-            padding: 0.05rem 0.35rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: #64748b;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 0.125rem 0.5rem;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
         }
 
         .sidebar-title {
@@ -154,6 +156,12 @@
         /* Sidebar tab */
         #sidebarTab {
             user-select: none; /* Prevent text selection during drag */
+            display: flex;
+            align-items: center;
+            cursor: grab;
+        }
+        #sidebarTab:active {
+            cursor: grabbing;
         }
         #sidebarTab button:hover {
             transform: translateX(2px);
@@ -184,15 +192,20 @@ header.sticky-header > div {
 
 /* Header title color stays accent-aware */
 header.sticky-header h1 {
-    color: var(--dpss-accent-600);
+    /* Using gradient text now - removing solid color */
 }
 
-        /* Ensure current template pill in header uses accent (override utility classes) */
-        #currentTemplateTag {
-            background: var(--dpss-accent-50) !important;
-            color: var(--dpss-accent-600) !important;
-            border-color: rgba(79,70,229,0.12) !important;
-        }
+/* Ensure current template pill in header uses accent (override utility classes) */
+#currentTemplateTag {
+    /* Using inline gradient styles now */
+}
+
+/* Dark mode current template tag - better contrast */
+body.dark-mode #currentTemplateTag {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+    color: #f1f5f9 !important;
+    border-color: #475569 !important;
+}
 
         /* Small hint under header title */
         #headerHint {
@@ -267,11 +280,12 @@ body.dark-mode select.journal-input {
         body.dark-mode .toolbox,
         body.dark-mode aside,
         body.dark-mode nav,
-        body.dark-mode #settings_modal .bg-white {
+        body.dark-mode #settings_modal .bg-white,
+        body.dark-mode #template_required_modal .bg-white {
             background: var(--surface-1) !important;
             color: var(--muted-text) !important;
             border-color: var(--subtle-border) !important;
-            box-shadow: 0 6px 18px rgba(2,6,23,0.6) !important;
+            box-shadow: 0 2px 8px rgba(2,6,23,0.3) !important;
         }
 
         /* Dark mode toggle switch */
@@ -285,17 +299,39 @@ body.dark-mode select.journal-input {
             background: #3b82f6 !important;
         }
 
-        body.dark-mode .section-body { color: var(--muted-text); }
+        body.dark-mode .clone-group {
+            background: transparent !important;
+            box-shadow: none !important;
+        }
 
         /* Stronger text contrast for headings, labels and nav */
         body.dark-mode .section-label { color: var(--muted-text-2) !important; }
         body.dark-mode .section-title { color: var(--muted-text) !important; }
         body.dark-mode .sidebar-title { color: var(--muted-text) !important; }
         body.dark-mode .sidebar-item { color: var(--muted-text) !important; }
-        body.dark-mode .sidebar-item:hover { color: var(--muted-text) !important; }
+        body.dark-mode .sidebar-item:hover { 
+            color: var(--muted-text) !important; 
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
 
         body.dark-mode .pill,
         body.dark-mode .sidebar-item-active { background: rgba(79,70,229,0.06) !important; color: var(--muted-text) !important; }
+
+        /* Dark mode sidebar numbers */
+        body.dark-mode .sidebar-number {
+            color: #cbd5e1 !important;
+            background: var(--surface-2) !important;
+            border-color: var(--subtle-border) !important;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        /* Dark mode title */
+        body.dark-mode .main-title {
+            background: linear-gradient(135deg, #1ECCBD 0%, #0ea5a9 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
 
         body.dark-mode .journal-input,
         body.dark-mode select.journal-input,
@@ -310,9 +346,18 @@ body.dark-mode select.journal-input {
             color: #94a3b8 !important;
             opacity: 1;
         }
-        body.dark-mode select.journal-input option {
-            color: var(--muted-text) !important;
-            background: #071428 !important;
+        body.dark-mode select.journal-input {
+            background: #0f1a2e !important; /* Lighter background for dropdowns */
+        }
+
+        body.dark-mode input[type="date"].journal-input {
+            background: #ffffff !important; /* White background for calendar inputs */
+            color: #1f2937 !important; /* Dark text for contrast */
+            border-color: #d1d5db !important; /* Light border for contrast */
+        }
+        body.dark-mode input[type="date"].journal-input:focus {
+            border-color: #4f46e5 !important; /* Focus color */
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15) !important;
         }
 
         body.dark-mode .repeatable-container {
@@ -342,16 +387,95 @@ body.dark-mode select.journal-input {
         body.dark-mode .border-slate-300 { border-color: var(--subtle-border) !important; }
         body.dark-mode .bg-slate-50 { background-color: var(--surface-2) !important; }
         body.dark-mode .hover\:bg-slate-100:hover { background-color: var(--surface-2) !important; }
+        body.dark-mode .hover\:bg-slate-50:hover { background-color: rgba(255, 255, 255, 0.03) !important; }
         body.dark-mode .bg-white { background-color: var(--surface-1) !important; }
 
         /* Keep specific buttons unchanged in dark mode */
-        body.dark-mode #btnClearValues {
-            background: var(--btn-neutral-bg) !important;
-            color: #0f172a !important;
-            border: 1px solid var(--btn-neutral-border) !important;
+        /* Dark mode clear values button */
+        body.dark-mode .clear-values-btn {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+            color: #fff !important;
+            box-shadow: 0 1px 3px rgba(239, 68, 68, 0.12) !important;
         }
-        body.dark-mode #btnClearValues:hover {
-            background: #e9eef6 !important;
+        body.dark-mode .clear-values-btn:hover {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.2) !important;
+        }
+
+        /* Dark mode scroll buttons */
+        body.dark-mode .scroll-btn {
+            background: var(--surface-1) !important;
+            color: var(--muted-text) !important;
+            border-color: var(--subtle-border) !important;
+        }
+        body.dark-mode .scroll-btn:hover {
+            background: var(--surface-2) !important;
+        }
+
+        /* Dark mode floating progress tab */
+        body.dark-mode #floatingProgressTab {
+            background: linear-gradient(135deg, #078996 0%, #056b74 100%) !important;
+            color: #fff !important;
+            box-shadow: 0 2px 4px rgba(7, 137, 150, 0.15) !important;
+        }
+        body.dark-mode #floatingProgressTab:hover {
+            background: linear-gradient(135deg, #056b74 0%, #034e52 100%) !important;
+            box-shadow: 0 4px 8px rgba(7, 137, 150, 0.25) !important;
+        }
+
+        /* Dark mode progress tab label */
+        body.dark-mode #floatingProgressTab::after {
+            color: #cbd5e1 !important;
+        }
+
+        /* Dark mode floating progress bar buttons */
+        body.dark-mode #prevSectionBtn,
+        body.dark-mode #nextSectionBtn {
+            background: var(--surface-1) !important;
+            color: var(--muted-text) !important;
+            border-color: var(--subtle-border) !important;
+        }
+        body.dark-mode #prevSectionBtn:hover:not(:disabled),
+        body.dark-mode #nextSectionBtn:hover:not(:disabled) {
+            background: var(--surface-2) !important;
+        }
+
+        /* Dark mode undo button */
+        body.dark-mode .undo-btn {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+            color: #fff !important;
+            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.15) !important;
+        }
+        body.dark-mode .undo-btn:hover {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+            box-shadow: 0 4px 8px rgba(239, 68, 68, 0.25) !important;
+        }
+
+        /* Dark mode generate journal button */
+        body.dark-mode .generate-journal-btn {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%) !important;
+            color: #fff !important;
+            box-shadow: 0 2px 4px rgba(14, 165, 233, 0.15) !important;
+        }
+        body.dark-mode .generate-journal-btn:hover {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+            box-shadow: 0 4px 8px rgba(14, 165, 233, 0.25) !important;
+        }
+
+        /* Dark mode sidebar menu button */
+        body.dark-mode .sidebar-menu-btn {
+            background: linear-gradient(135deg, #418DC3 0%, #2c6a9c 100%) !important;
+            color: #fff !important;
+            box-shadow: 0 2px 4px rgba(65, 141, 195, 0.15) !important;
+        }
+        body.dark-mode .sidebar-menu-btn:hover {
+            background: linear-gradient(135deg, #2c6a9c 0%, #1e4f73 100%) !important;
+            box-shadow: 0 4px 8px rgba(65, 141, 195, 0.25) !important;
+        }
+
+        /* Dark mode sidebar tab label */
+        body.dark-mode #sidebarTab span {
+            color: #cbd5e1 !important;
         }
 
         /* Dark mode overrides for indigo classes */
@@ -373,25 +497,26 @@ body.dark-mode select.journal-input {
             box-shadow: none !important;
         }
 
-        /* Keep pill-btn-green buttons with vibrant yellow gradient in dark mode */
-        body.dark-mode .pill-btn-green {
-            background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%) !important;
+        /* Keep clarification-btn with vibrant orange gradient in dark mode */
+        body.dark-mode .clarification-btn {
+            background: linear-gradient(135deg, #EF7119 0%, #d97706 100%) !important;
             color: #fff !important;
-            box-shadow: 0 2px 8px rgba(251, 191, 36, 0.20) !important;
+            box-shadow: 0 2px 4px rgba(239, 113, 25, 0.15) !important;
         }
-        body.dark-mode .pill-btn-green:hover {
-            background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%) !important;
-            box-shadow: 0 4px 16px rgba(251, 191, 36, 0.30) !important;
+        body.dark-mode .clarification-btn:hover {
+            background: linear-gradient(135deg, #d97706 0%, #b45309 100%) !important;
+            box-shadow: 0 4px 8px rgba(239, 113, 25, 0.25) !important;
         }
 
-        /* Keep repeatable-add buttons with purple gradient in dark mode */
+        /* Keep repeatable-add buttons with vibrant green gradient in dark mode */
         body.dark-mode .repeatable-add {
-            background: linear-gradient(90deg, #7c3aed 0%, #a855f7 100%) !important;
-            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.20) !important;
+            background: linear-gradient(135deg, #0BDA8F 0%, #059669 100%) !important;
+            color: #fff !important;
+            box-shadow: 0 2px 4px rgba(11, 218, 143, 0.15) !important;
         }
         body.dark-mode .repeatable-add:hover {
-            background: linear-gradient(90deg, #a855f7 0%, #7c3aed 100%) !important;
-            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.30) !important;
+            background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+            box-shadow: 0 4px 8px rgba(11, 218, 143, 0.25) !important;
         }
 
         /* Make change items muted but readable */
@@ -411,7 +536,9 @@ body.dark-mode select.journal-input {
             margin-top: 0; /* Remove the top margin */
             position: relative;
             z-index: 35; /* Above sidebar (z-30) */
-            padding-left: clamp(240px, 22vw, 320px); /* Push content to right of sidebar */
+            max-width: min(90vw, 1200px); /* Match main content max-width */
+            margin: 0 auto; /* Center like main content */
+            padding: 0 16px; /* Match main content px-4 (16px) */
         }
 
         /* Ensure focus outlines are visible but subtle */
@@ -435,12 +562,12 @@ body.dark-mode select.journal-input {
             right: 20px;
             width: 48px;
             height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            color: white;
-            border: none;
+            border-radius: 9999px;
+            background: white;
+            color: #374151;
+            border: 1px solid #cbd5e1;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -457,9 +584,9 @@ body.dark-mode select.journal-input {
         }
         
         .scroll-btn:hover {
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            transform: scale(1.1);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            background: #f1f5f9;
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         #scrollToTop {
@@ -777,6 +904,7 @@ body.dark-mode select.journal-input {
         #headerSearchResults.hidden { display: none; }
         #headerSearchResults .result-item { padding: 8px 12px; cursor: pointer; display: flex; gap: 8px; align-items: center; }
         #headerSearchResults .result-item:hover { background: #f1f5ff; }
+        body.dark-mode #headerSearchResults .result-item:hover { background: rgba(255, 255, 255, 0.05) !important; }
         #headerSearchResults .result-title { font-weight: 600; color: #0f172a; }
         #headerSearchResults .result-program { font-size: 12px; color: #6b7280; margin-left: auto; }
         /* Left sidebar / floating pane styles */
@@ -822,12 +950,24 @@ body.dark-mode select.journal-input {
     header.sticky-header > div {
         position: relative;
         z-index: 35; /* Above sidebar (z-30) */
-        padding-left: clamp(240px, 22vw, 320px); /* Push content to right of sidebar */
+        max-width: min(90vw, 1200px); /* Match main content max-width */
+        margin: 0 auto; /* Center like main content */
+        padding: 0 16px; /* Match main content px-4 (16px) */
     }
 
     /* Main content starts below header */
     #mainContent {
-        margin-top: 4rem; /* Account for header height (py-3 = 0.75rem * 2 + content) */
+        margin-top: 2.5rem; /* Further reduced spacing to bring header even closer to first section */
+    }
+
+    /* Dark mode main content background matches section cards */
+    body.dark-mode #mainContent {
+        background: var(--surface-1) !important;
+    }
+
+    /* Dark mode sidebar background matches main content */
+    body.dark-mode #sideNav {
+        background: var(--surface-1) !important;
     }
 
     /* Only the section list scrolls */
@@ -913,30 +1053,35 @@ body.dark-mode select.journal-input {
 
 <!-- HEADER -->
 <header class="sticky top-0 z-20 bg-white sticky-header border-b border-slate-200">
-    <div class="px-4 py-3 flex items-center justify-between gap-4">
+    <div class="px-4 py-5 flex items-center justify-between gap-4">
 
         <!-- LEFT -->
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-700" aria-hidden="false" title="SSD">
-                <!-- Inline clipboard/form SVG as logo -->
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SSD logo: form">
-                    <rect x="7" y="3" width="10" height="18" rx="2" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
-                    <path d="M9 7h6" stroke="#94a3b8" stroke-width="1.4" stroke-linecap="round"/>
-                    <path d="M9 11h6" stroke="#94a3b8" stroke-width="1.4" stroke-linecap="round"/>
-                    <path d="M9 15h4" stroke="#94a3b8" stroke-width="1.4" stroke-linecap="round"/>
-                    <rect x="8" y="1" width="8" height="3" rx="1" fill="#6366f1" />
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center text-sm font-bold text-white shadow-lg" aria-hidden="false" title="SSD">
+                <!-- Professional SSD Journal Builder logo -->
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SSD Journal Builder: professional documentation">
+                    <!-- Document base -->
+                    <rect x="4" y="2" width="16" height="20" rx="2" fill="#ffffff" stroke="#ffffff" stroke-width="1.5"/>
+                    <!-- Header line -->
+                    <rect x="6" y="5" width="8" height="2" rx="1" fill="#475569"/>
+                    <!-- Content lines -->
+                    <rect x="6" y="9" width="12" height="1.5" rx="0.5" fill="#64748b"/>
+                    <rect x="6" y="12" width="10" height="1.5" rx="0.5" fill="#64748b"/>
+                    <rect x="6" y="15" width="8" height="1.5" rx="0.5" fill="#64748b"/>
+                    <!-- Professional accent -->
+                    <circle cx="16" cy="18" r="2" fill="#0f172a"/>
+                    <path d="M14 18h4" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
                 <span class="sr-only">SSD</span>
             </div>
 
             <div>
-                <div class="flex items-center gap-2 flex-wrap">
-                    <h1 class="text-lg font-bold tracking-tight">SSD Journal Builder</h1>
-                    <span id="currentTemplateTag" class="pill text-slate-600 bg-slate-50">
-                        Default Template
+                <div class="flex items-center gap-3 flex-wrap">
+                    <h1 class="main-title text-2xl font-bold tracking-tight" style="background: linear-gradient(135deg, #1ECCBD 0%, #0ea5a9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">SSD Journal Builder</h1>
+                    <span id="currentTemplateTag" class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                        default template
                     </span>
                 </div>
-                <p class="text-xs text-slate-500">Structured journal template.</p>
             </div>
         </div>
 
@@ -1011,18 +1156,28 @@ body.dark-mode select.journal-input {
 
             <div class="flex items-center justify-between mb-2">
                 <h2 class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Sections</h2>
-                <span class="badge bg-indigo-50 text-indigo-700 border border-indigo-100">Builder</span>
+                <div class="flex items-center gap-2">
+                    <!-- SIDEBAR TOGGLE BUTTON -->
+                    <button id="sidebarToggle" class="px-2 py-1.5 bg-transparent hover:bg-slate-100 text-slate-600 hover:text-slate-700 rounded-md border border-slate-200 hover:border-slate-300 transition-all duration-200 flex items-center justify-center gap-1.5 font-medium text-xs shadow-sm hover:shadow-md" title="Hide Sidebar" data-sidebar-visible="true">
+                        <svg id="sidebarToggleIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                        <span id="sidebarToggleText" class="hidden">Hide Sidebar</span>
+                    </button>
+                    <!-- REFRESH BUTTON -->
+                    <button id="refreshAppBtn" class="px-2 py-1.5 bg-transparent hover:bg-slate-100 text-slate-600 hover:text-slate-700 rounded-md border border-slate-200 hover:border-slate-300 transition-all duration-200 flex items-center justify-center gap-1.5 font-medium text-xs shadow-sm hover:shadow-md" title="Refresh app">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                            <path d="M21 3v5h-5"/>
+                            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                            <path d="M8 16H3v5"/>
+                        </svg>
+                        <span>Refresh</span>
+                    </button>
+                </div>
             </div>
-
-            <!-- SIDEBAR TOGGLE BUTTON -->
-            <button id="sidebarToggle" class="w-full mb-3 px-3 py-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 font-medium text-sm" title="Hide Sidebar" data-sidebar-visible="true">
-                <svg id="sidebarToggleIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-                <span id="sidebarToggleText">Hide Sidebar</span>
-            </button>
 
             <nav class="flex flex-col gap-1 text-sm overflow-y-auto max-h-[60vh] pr-1" style="scrollbar-width: thin;">
                 <button class="sidebar-item sidebar-item-active" data-target="section-general">
@@ -1056,27 +1211,31 @@ body.dark-mode select.journal-input {
 
             <!-- GENERATE -->
             <h3 class="text-lg font-semibold text-gray-800 mb-3">Journal Export</h3>
-            <button id="generate_journal_btn" class="w-full px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 font-medium text-sm">
-                Generate Journal
-            </button>
+            <div class="flex gap-3">
+                <button id="generate_journal_btn" class="generate-journal-btn flex-1">
+                    Generate Journal
+                </button>
 
-            <button id="btnClearValues" class="w-full mt-3 px-4 py-2 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 font-medium text-sm">Clear All Values</button>
-
-            <button id="refreshAppBtn" class="w-full mt-2 px-4 py-2 bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 font-medium text-sm" title="Refresh app">🔄 Refresh</button>
+                <button id="btnClearValues" class="clear-values-btn flex-1">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                    Clear All
+                </button>
+            </div>
 
             <p class="text-xs text-slate-500 mt-2">💡 Tip: Open → Edit → Copy.</p>
         </div>
     </aside>
 
-    <!-- SIDEBAR TAB (shown when sidebar is hidden) -->
-    <div id="sidebarTab" class="fixed left-0 top-1/2 transform -translate-y-1/2 z-40 hidden">
-        <button class="bg-gradient-to-r from-blue-700 to-purple-800 hover:from-blue-800 hover:to-purple-900 text-white px-3 py-2 rounded-r-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 font-medium" title="Show Sidebar">
+    <!-- SIDEBAR TAB (always visible menu button) -->
+    <div id="sidebarTab" class="fixed left-0 top-1/2 transform -translate-y-1/2 z-40">
+        <button class="sidebar-menu-btn" title="Toggle Sidebar">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="3" y1="12" x2="21" y2="12"></line>
                 <line x1="3" y1="6" x2="21" y2="6"></line>
                 <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
-            <span class="text-xs font-medium">Menu</span>
         </button>
     </div>
 
@@ -1287,6 +1446,18 @@ body.dark-mode select.journal-input {
         <div class="flex justify-end gap-2">
             <button id="confirm_no" class="px-3 py-1.5 rounded-md border text-xs">Cancel</button>
             <button id="confirm_yes" class="px-3 py-1.5 rounded-md bg-red-600 text-white text-xs">Continue</button>
+        </div>
+    </div>
+</div>
+
+<!-- TEMPLATE REQUIRED MODAL -->
+<div id="template_required_modal_backdrop" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
+<div id="template_required_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-5">
+        <h3 class="text-base font-semibold mb-2">Template Required</h3>
+        <p class="text-sm text-slate-600 mb-4">Please select a template before generating a journal.</p>
+        <div class="flex justify-end">
+            <button id="template_required_close" class="px-3 py-1.5 rounded-md border text-xs">OK</button>
         </div>
     </div>
 </div>
