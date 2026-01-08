@@ -92,16 +92,55 @@ document.addEventListener('DOMContentLoaded', function() {
         .repeatable-row { display: flex; align-items: center; gap: 10px; }
         .repeatable-number { width: 24px; font-weight: bold; color: #4f8cff; }
         .repeatable-inner { flex: 1; display: flex; flex-direction: column; gap: 6px; }
-        .repeatable-del { background: transparent; border: none; color: #900; font-size: 20px; cursor: pointer; }
+        .repeatable-del { 
+            background: transparent; 
+            border: none; 
+            color: #900; 
+            cursor: pointer; 
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .repeatable-del:hover { 
+            color: #c00; 
+            background-color: rgba(204, 0, 0, 0.1);
+            transform: scale(1.05);
+        }
+        .repeatable-del:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 6px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 1000;
+            margin-bottom: 4px;
+        }
+        .repeatable-del:hover::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: #333;
+            margin-bottom: -4px;
+        }
         .repeatable-add {
-            background: linear-gradient(135deg, #0BDA8F 0%, #059669 100%);
+            background: #0ea5e9;
             color: #fff;
-            border: none;
+            border: 1px solid #0ea5e9;
             border-radius: 8px;
             padding: 6px 12px;
             font-size: 0.875rem;
             font-weight: 500;
-            box-shadow: 0 2px 4px rgba(11, 218, 143, 0.15);
+            box-shadow: 0 2px 4px rgba(14, 165, 233, 0.15);
             cursor: pointer;
             transition: all 0.2s ease;
             display: inline-flex;
@@ -112,8 +151,9 @@ document.addEventListener('DOMContentLoaded', function() {
             z-index: 2;
         }
         .repeatable-add:hover {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            box-shadow: 0 4px 8px rgba(11, 218, 143, 0.25);
+            background: #0284c7;
+            border-color: #0284c7;
+            box-shadow: 0 4px 8px rgba(14, 165, 233, 0.25);
             transform: translateY(-1px);
         }
         .repeatable-add:active {
@@ -144,59 +184,59 @@ document.addEventListener('DOMContentLoaded', function() {
         .clarification-btn:active {
             transform: translateY(0);
         }
-        /* Generate Journal button professional style - smaller and sleeker */
+        /* Generate Journal button professional style - compact and refined */
         .generate-journal-btn {
             background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
             color: #fff;
             border: none;
-            border-radius: 6px;
-            padding: 6px 12px;
-            font-size: 0.8rem;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 0.75rem;
             font-weight: 500;
-            box-shadow: 0 1px 3px rgba(14, 165, 233, 0.12);
+            box-shadow: 0 1px 2px rgba(14, 165, 233, 0.1);
             cursor: pointer;
             transition: all 0.15s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 32px;
+            min-height: 28px;
             white-space: nowrap;
         }
         .generate-journal-btn:hover {
             background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-            box-shadow: 0 2px 6px rgba(14, 165, 233, 0.2);
+            box-shadow: 0 2px 4px rgba(14, 165, 233, 0.15);
             transform: translateY(-0.5px);
         }
         .generate-journal-btn:active {
             transform: translateY(0);
-            box-shadow: 0 1px 2px rgba(14, 165, 233, 0.15);
+            box-shadow: 0 1px 2px rgba(14, 165, 233, 0.1);
         }
-        /* Clear Values button professional style - smaller and sleeker */
+        /* Clear Values button professional style - compact and refined */
         .clear-values-btn {
             background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             color: #fff;
             border: none;
-            border-radius: 6px;
-            padding: 6px 12px;
-            font-size: 0.8rem;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 0.75rem;
             font-weight: 500;
-            box-shadow: 0 1px 3px rgba(239, 68, 68, 0.12);
+            box-shadow: 0 1px 2px rgba(239, 68, 68, 0.1);
             cursor: pointer;
             transition: all 0.15s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 32px;
+            min-height: 28px;
             white-space: nowrap;
         }
         .clear-values-btn:hover {
             background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.2);
+            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.15);
             transform: translateY(-0.5px);
         }
         .clear-values-btn:active {
             transform: translateY(0);
-            box-shadow: 0 1px 2px rgba(239, 68, 68, 0.15);
+            box-shadow: 0 1px 2px rgba(239, 68, 68, 0.1);
         }
         /* Sidebar menu button professional style - smaller size */
         .sidebar-menu-btn {
@@ -292,6 +332,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Change icon back to hide (lines)
                 toggleIcon.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
             }
+            // Update header controls visibility after sidebar toggle
+            try { if (typeof updateSidebarControlsVisibility === 'function') updateSidebarControlsVisibility(); } catch (e) {}
         });
 
         // Tab click handler - now toggles instead of just showing
@@ -314,6 +356,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Change icon back to hide (lines)
                 toggleIcon.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
             }
+            // Update header controls visibility after sidebar toggle
+            try { if (typeof updateSidebarControlsVisibility === 'function') updateSidebarControlsVisibility(); } catch (e) {}
         });
 
         // Auto-hide sidebar on significant horizontal viewport narrowing
@@ -341,6 +385,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     sidebarToggle.dataset.sidebarVisible = 'false';
                     sidebarToggle.title = 'Show Sidebar';
                     toggleIcon.innerHTML = '<path d="M9 18l6-6-6-6"></path>';
+                    // Update header controls visibility after auto-hide
+                    try { if (typeof updateSidebarControlsVisibility === 'function') updateSidebarControlsVisibility(); } catch (e) {}
                 }
             }
 
@@ -359,6 +405,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     sidebarToggle.dataset.sidebarVisible = 'false';
                     sidebarToggle.title = 'Show Sidebar';
                     toggleIcon.innerHTML = '<path d="M9 18l6-6-6-6"></path>';
+                    // Update header controls visibility after auto-hide
+                    try { if (typeof updateSidebarControlsVisibility === 'function') updateSidebarControlsVisibility(); } catch (e) {}
                 }
             }
 
@@ -366,6 +414,13 @@ document.addEventListener('DOMContentLoaded', function() {
             previousViewportWidth = currentWidth;
             previousViewportHeight = currentHeight;
             previousViewportScale = currentScale;
+        });
+
+        // Update header controls on window resize in case sidebar auto-hide triggers
+        window.addEventListener('resize', () => {
+            setTimeout(() => {
+                try { if (typeof updateSidebarControlsVisibility === 'function') updateSidebarControlsVisibility(); } catch (e) {}
+            }, 100);
         });
 
         // Dragging functionality for sidebar tab - make it smaller and add label
@@ -540,7 +595,7 @@ function buildJournalOutput() {
             }
 
             const fields = group.querySelectorAll(
-                '.journal-input, .repeatable-container'
+                '.journal-input, .note-field, .repeatable-container'
             );
 
             fields.forEach(field => {
@@ -549,50 +604,39 @@ function buildJournalOutput() {
                 // REPEATABLE CONTAINER
                 // =======================================================
                 if (field.classList.contains('repeatable-container')) {
-
-                    const label =
-                        field.querySelector('label')?.textContent.trim() || '';
+                    const label = field.querySelector('label')?.textContent.trim() || '';
                     if (!label) return;
 
                     const rows = field.querySelectorAll('.repeatable-row');
 
+                    // Only include this repeatable if there is at least one entry
                     if (rows.length === 0) {
-                        output += `  ${label}: \n`;
-                        printedAnyField = true;
-                        return;
+                        return;  // ← This is the key: do nothing, skip entirely
                     }
 
+                    // Otherwise, print normally with [1], [2], etc.
                     rows.forEach((row, rIdx) => {
                         printedAnyField = true;
-                        output += `  ${label} [${rIdx + 1}]:\n`;
-
+                        output += ` ${label} [${rIdx + 1}]:\n`;
                         const subfields = row.querySelectorAll(
                             '.repeatable-inner input, ' +
                             '.repeatable-inner textarea, ' +
                             '.repeatable-inner select, ' +
-                            '.repeatable-inner .journal-input[data-type="note"]'
+                            '.repeatable-inner .note-field[data-type="note"]'
                         );
-
                         subfields.forEach(sf => {
-
                             const sublabel =
-                                sf.closest('.mb-3')
-                                    ?.querySelector('label')
-                                    ?.textContent.trim() ||
+                                sf.closest('.mb-3')?.querySelector('label')?.textContent.trim() ||
                                 sf.getAttribute('placeholder') ||
                                 sf.dataset?.label ||
                                 sf.id ||
                                 '';
-
                             if (!sublabel) return;
-
                             const val = readVisibleValue(sf);
                             if (!val) return;
-
-                            output += `    ${sublabel}: ${val}\n`;
+                            output += `   ${sublabel}: ${val}\n`;  // indented a bit more for clarity
                         });
                     });
-
                     return;
                 }
 
@@ -982,7 +1026,19 @@ function initHeaderFilters() {
         const file = ddTemplate.value;
         console.log("🎯 Template selected:", file);
         
-        if (!file) return;
+        if (!file) {
+            // Clear the active template and reset UI to no template state
+            activeTemplate = null;
+            document.getElementById("currentTemplateTag").textContent = "Default Template";
+            
+            // Show placeholders
+            showPlaceholders();
+            // Hide sidebar controls when no template is selected
+            try { if (typeof updateSidebarControlsVisibility === 'function') updateSidebarControlsVisibility(); } catch (e) {}
+            
+            applyHeaderFilters();
+            return;
+        }
 
         const tpl = allTemplates.find(x => x.file === file);
         console.log("🎯 Found template:", tpl);
@@ -1104,8 +1160,9 @@ function positionHeaderSearchContainer(container) {
     const input = document.getElementById('headerTemplateSearch');
     if (!input) return;
     const rect = input.getBoundingClientRect();
-    const top = rect.bottom + window.scrollY + 6;
-    const left = rect.left + window.scrollX;
+    const parentRect = container.parentElement.getBoundingClientRect();
+    const top = rect.bottom - parentRect.top + 2;
+    const left = rect.left - parentRect.left;
     container.style.top = top + 'px';
     container.style.left = left + 'px';
 }
@@ -1123,30 +1180,44 @@ function renderHeaderSearchResults(container, matches) {
         div.className = 'result-item';
         div.innerHTML = `<div class="result-title">${escapeHtml(m.name)}</div><div class="result-program">${escapeHtml(m.program)}</div>`;
         div.onclick = function() {
-            // Select template and trigger load
-            const dd = document.getElementById('headerTemplateSelector');
-            if (dd) dd.value = m.file || '';
-            // program filter set
-            const prog = document.getElementById('headerProgramFilter');
-            if (prog) prog.value = m.program || '';
-            // Apply filters so template selector matches and then trigger change
-            applyHeaderFilters();
-            // small timeout to allow ddTemplate to populate
-            setTimeout(() => {
-                const tpl = allTemplates.find(t => t.file === m.file && t.program === m.program) || allTemplates.find(t => t.file === m.file);
+            // Directly load the template using the same logic as the dropdown
+            const file = m.file || '';
+            console.log("🎯 Template selected from search:", file);
+
+            if (!file) {
+                // Clear the active template and reset UI to no template state
+                activeTemplate = null;
+                document.getElementById("currentTemplateTag").textContent = "Default Template";
+
+                // Show placeholders
+                showPlaceholders();
+                // Hide sidebar controls when no template is selected
+                try { if (typeof updateSidebarControlsVisibility === 'function') updateSidebarControlsVisibility(); } catch (e) {}
+
+                applyHeaderFilters();
+            } else {
+                const tpl = allTemplates.find(x => x.file === file);
+                console.log("🎯 Found template:", tpl);
+
                 if (tpl) {
-    activeTemplate = {
-        ...tpl,
-        sections: normalizeTemplateSections(tpl.sections)
-    };
+                    activeTemplate = tpl;
+                    document.getElementById("currentTemplateTag").textContent = tpl.name;
 
-    document.getElementById('currentTemplateTag').textContent = activeTemplate.name;
-    renderTemplateSections(activeTemplate);
-    renderSidebarFromTemplate(activeTemplate);
-    setTimeout(() => initializeFollowupInputs(), 100);
-}
+                    console.log("🎯 Rendering sections:", tpl.sections);
+                    renderTemplateSections(tpl);
+                    renderSidebarFromTemplate(tpl);
+                    // Show/hide sidebar controls based on whether a template is active
+                    try { if (typeof updateSidebarControlsVisibility === 'function') updateSidebarControlsVisibility(); } catch (e) {}
 
-            }, 80);
+                    // Initialize follow-up inputs after render
+                    setTimeout(() => initializeFollowupInputs(), 100);
+                }
+            }
+
+            // Update the dropdown to reflect the current selection
+            const dd = document.getElementById('headerTemplateSelector');
+            if (dd) dd.value = file;
+
             hideHeaderSearchResults(container);
             // Clear search input after selection
             const input = document.getElementById('headerTemplateSearch'); if (input) input.value = '';
@@ -1439,7 +1510,7 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
             // Only show remove button for groups beyond the first
             const removeBtn = groupIdx > 0 ? `<button type=\"button\" class=\"clone-remove pill-btn pill-btn-red\" onclick=\"removeCloneGroup(${index},${groupIdx})\" title=\"Remove this group\">×</button>` : '';
             // Render all fields in the group as a single section
-            return `<div class=\"clone-group ${altBg} animate-popin\" data-group=\"${groupIdx}\">${renderField({fields: fields}, index)}${removeBtn}</div>`;
+            return `<div class=\"clone-group ${altBg}\" data-group=\"${groupIdx}\">${renderField({fields: fields}, index)}${removeBtn}</div>`;
         }
         let groupsHTML = sec._clones.map((fields, i) => renderCloneGroup(fields, i)).join('');
 
@@ -1485,9 +1556,8 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
                 // Capture current value so we can restore on undo
                 const prevText = textarea.value;
 
-                // Animate out then remove
-                try { wrapper.classList.add('animate-popout'); } catch (e) {}
-                setTimeout(() => { try { wrapper.remove(); } catch (e) {} }, 260);
+                // Remove immediately
+                try { wrapper.remove(); } catch (e) {}
 
                 // Offer undo via toast
                 showUndoToast('Clarification removed', () => {
@@ -1505,7 +1575,7 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
                                     // Small pop-in & focus
                                     try {
                                         const wrapper = newTa.parentElement;
-                                        if (wrapper) wrapper.classList.add('animate-popin');
+                                        // Removed animation
                                     } catch (e) {}
                                     try { newTa.focus(); } catch (e) {}
                                     // Brief highlight to draw attention
@@ -1716,32 +1786,15 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
         if (!sec._clones) sec._clones = [JSON.parse(JSON.stringify(sec.fields))];
         sec._clones.push(JSON.parse(JSON.stringify(sec.fields)));
         renderTemplateSections(tpl);
-        // Animate the last group
-        setTimeout(() => {
-            const last = document.querySelector(`#section-body-${sectionIdx} .clone-group:last-child`);
-            if (last) {
-                last.classList.remove('animate-popout');
-                last.classList.add('animate-popin');
-            }
-        }, 10);
+        // Removed animation for last group
     };
     window.removeCloneGroup = function(sectionIdx, groupIdx) {
         const sec = tpl.sections[sectionIdx];
         if (!sec._clones) return;
         if (sec._clones.length <= 1) return; // Always keep at least one group
-        // Animate out, then remove
-        const groupEl = document.querySelector(`#section-body-${sectionIdx} .clone-group[data-group='${groupIdx}']`);
-        if (groupEl) {
-            groupEl.classList.remove('animate-popin');
-            groupEl.classList.add('animate-popout');
-            setTimeout(() => {
-                sec._clones.splice(groupIdx, 1);
-                renderTemplateSections(tpl);
-            }, 350);
-        } else {
-            sec._clones.splice(groupIdx, 1);
-            renderTemplateSections(tpl);
-        }
+        // Remove immediately
+        sec._clones.splice(groupIdx, 1);
+        renderTemplateSections(tpl);
     };
     // --- CLONE GROUP STYLES & ANIMATION ---
     if (!document.getElementById('clone-group-css')) {
@@ -1758,10 +1811,6 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
         .pill-btn-red { background: #ef4444; color: #fff; }
         .pill-btn-red:hover { background: #b91c1c; }
         .clone-remove { position: absolute; top: 12px; right: 12px; font-size: 20px; line-height: 1; }
-        .animate-popin { animation: popin 0.35s cubic-bezier(.5,1.8,.5,1) both; }
-        .animate-popout { animation: popout 0.35s cubic-bezier(.5,1.8,.5,1) both; }
-        @keyframes popin { 0% { opacity: 0; transform: scale(.92); } 80% { opacity: 1; transform: scale(1.04); } 100% { opacity: 1; transform: scale(1); } }
-        @keyframes popout { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(.85); } }
         /* Section admin box styles */
         .section-admin-box { min-width: 180px; max-width: 220px; background: #f6f7fa; border-radius: 12px; box-shadow: 0 2px 8px 0 rgba(60,80,120,0.04); padding: 18px 12px; margin-left: 12px; display: flex; flex-direction: column; align-items: flex-end; }
         .section-admin-controls { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
@@ -1837,7 +1886,7 @@ function renderField(sec, sectionIndex) {
                 const safeContent = escapeHtml(f.content || f.label || '');
                 return `
                     <div class="mb-3">
-                        <div class="journal-input p-3 rounded bg-slate-50 text-slate-700 text-base" data-type="note" data-label="${safeLabel}" data-content="${safeContent}">
+                        <div class="note-field p-3 text-base" data-type="note" data-label="${safeLabel}" data-content="${safeContent}">
                             ${safeContent}
                         </div>
                     </div>
@@ -1906,8 +1955,9 @@ function renderField(sec, sectionIndex) {
                 return `<input class="journal-input" type="text" placeholder="${escapeHtml(lbl)}" data-label="${escapeHtml(lbl)}" data-field-id="${escapeHtml(fid)}">`;
             }
             if (sf.type === "choice" && sf.choices) {
+                const selectId = `repeatable_select_${sectionIndex}_${fieldIndex}_${fid}`;
                 const safe = JSON.stringify(sf.choices || []).replace(/</g, '\\u003c');
-                return `<select class="journal-input" data-lazy="true" data-choices='${safe}' data-label="${escapeHtml(lbl)}" data-field-id="${escapeHtml(fid)}"><option value="" disabled selected>Choose an Option</option></select>`;
+                return `<select id="${selectId}" class="journal-input" data-lazy="true" data-choices='${safe}' data-label="${escapeHtml(lbl)}" data-field-id="${escapeHtml(fid)}" onchange="handleFollowupInput(this, '${selectId}')"><option value="" disabled selected>Choose an Option</option></select><div id="${selectId}_followup" class="followup-container mt-2"></div>`;
             }
             return '';
         }).join('');
@@ -1927,23 +1977,40 @@ function renderField(sec, sectionIndex) {
             });
         }
 
+        const helper = document.getElementById(`${containerId}_helper`);
+        function updateHelper() {
+            if (list.children.length === 0) {
+                helper.style.display = 'block';
+            } else {
+                helper.style.display = 'none';
+            }
+        }
+
         function addRow() {
             const row = document.createElement('div');
             row.className = 'repeatable-row';
             row.innerHTML = `
                 <span class="repeatable-number">1.</span>
                 <div class="repeatable-inner">${renderSubfields()}</div>
-                <button class="repeatable-del" title="Remove">×</button>
+                <button class="repeatable-del" data-tooltip="Remove ${label}?">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 6h18"></path>
+                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                    </svg>
+                </button>
             `;
             row.querySelector('.repeatable-del').onclick = () => {
                 row.remove();
                 renumber();
+                updateHelper();
             };
             list.appendChild(row);
             renumber();
 
             // CRITICAL FIX: Re-run lazy select setup on the new row
             setupLazySelects(row);
+            updateHelper();
         }
 
         // Add first row if none exist
@@ -1961,6 +2028,7 @@ function renderField(sec, sectionIndex) {
             ${adminToolbar}
             <label class="text-xs text-slate-600 block mb-1">${label}</label>
             <div class="repeatable-list" id="${listId}"></div>
+            <div class="repeatable-helper" id="${containerId}_helper">No ${label} entries added. Add only if applicable.</div>
             <button type="button" class="repeatable-add"><svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>Add ${label}</button>
         </div>
     `;
@@ -1990,7 +2058,46 @@ function renderField(sec, sectionIndex) {
             .repeatable-row { display: flex; align-items: center; gap: 10px; }
             .repeatable-number { width: 24px; font-weight: bold; color: #4f8cff; }
             .repeatable-inner { flex: 1; display: flex; flex-direction: column; gap: 6px; }
-            .repeatable-del { background: transparent; border: none; color: #900; font-size: 20px; cursor: pointer; }
+            .repeatable-del { 
+                background: transparent; 
+                border: none; 
+                color: #900; 
+                cursor: pointer; 
+                padding: 4px;
+                border-radius: 4px;
+                transition: all 0.2s ease;
+                position: relative;
+            }
+            .repeatable-del:hover { 
+                color: #c00; 
+                background-color: rgba(204, 0, 0, 0.1);
+                transform: scale(1.05);
+            }
+            .repeatable-del:hover::after {
+                content: attr(data-tooltip);
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #333;
+                color: white;
+                padding: 6px 8px;
+                border-radius: 4px;
+                font-size: 12px;
+                white-space: nowrap;
+                z-index: 1000;
+                margin-bottom: 4px;
+            }
+            .repeatable-del:hover::before {
+                content: '';
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                border: 5px solid transparent;
+                border-top-color: #333;
+                margin-bottom: -4px;
+            }
             .repeatable-add {
                 background: linear-gradient(135deg, #0BDA8F 0%, #059669 100%);
                 color: #fff;
@@ -2016,6 +2123,12 @@ function renderField(sec, sectionIndex) {
             }
             .repeatable-add:active {
                 transform: translateY(0);
+            .repeatable-helper {
+                font-size: 0.875rem;
+                color: #6b7280;
+                margin-top: 8px;
+                text-align: center;
+                display: none;
             }
             /* Clarification pill button distinct style */
             .pill-btn-green {
@@ -2108,6 +2221,8 @@ function renderSidebarFromTemplate(tpl) {
                 // highlight
                 document.querySelectorAll('.section-card').forEach(c => c.classList.remove('active'));
                 target.classList.add('active');
+                // Remove highlight after 3 seconds
+                setTimeout(() => target.classList.remove('active'), 3000);
             }
             document.querySelectorAll('.sidebar-item').forEach(x => x.classList.remove('sidebar-item-active'));
             btn.classList.add('sidebar-item-active');
@@ -2223,11 +2338,20 @@ function showPlaceholders() {
 }
 
 // Toggle visibility of sidebar journal controls based on whether a template is selected.
+// Also show header journal controls when sidebar is hidden and template is selected.
 function updateSidebarControlsVisibility() {
     try {
         const visible = !!activeTemplate;
         const jc = document.getElementById('journalControls');
         if (jc) jc.style.display = visible ? 'flex' : 'none';
+
+        // Handle header journal controls
+        const sidebar = document.getElementById('sideNav');
+        const headerControls = document.getElementById('headerJournalControls');
+        if (headerControls) {
+            const sidebarHidden = sidebar && sidebar.classList.contains('sidebar-hidden');
+            headerControls.classList.toggle('hidden', !(visible && sidebarHidden));
+        }
     } catch (e) {
         console.warn('updateSidebarControlsVisibility failed', e);
     }
@@ -2455,8 +2579,11 @@ function initGenerateJournal() {
             // Show template required modal
             const modal = document.getElementById("template_required_modal");
             const backdrop = document.getElementById("template_required_modal_backdrop");
+            const message = document.getElementById("template_required_message");
+            message.textContent = "Please select a template before generating a journal.";
             modal.classList.remove("hidden");
             backdrop.classList.remove("hidden");
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
             return;
         }
 
@@ -2471,6 +2598,7 @@ function initGenerateJournal() {
         if (dlBtn) dlBtn.disabled = false;
         modal.classList.remove("hidden");
         backdrop.classList.remove("hidden");
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
     };
 
     // Copy to clipboard
@@ -2499,6 +2627,7 @@ function initGenerateJournal() {
     function close() {
         modal.classList.add("hidden");
         backdrop.classList.add("hidden");
+        document.body.style.overflow = ''; // Restore scrolling
         // Reset modal position when closing
         const modalContent = modal.querySelector('.bg-white');
         if (modalContent) {
@@ -2520,6 +2649,7 @@ function initGenerateJournal() {
     function closeTemplateRequiredModal() {
         templateRequiredModal.classList.add("hidden");
         templateRequiredBackdrop.classList.add("hidden");
+        document.body.style.overflow = ''; // Restore scrolling
     }
 
     templateRequiredClose.onclick = closeTemplateRequiredModal;
@@ -2627,6 +2757,8 @@ async function clearAllFieldValues() {
         // Show template required modal
         const modal = document.getElementById("template_required_modal");
         const backdrop = document.getElementById("template_required_modal_backdrop");
+        const message = document.getElementById("template_required_message");
+        message.textContent = "Please select a template before clearing all fields.";
         modal.classList.remove("hidden");
         backdrop.classList.remove("hidden");
         return;
@@ -2695,7 +2827,7 @@ async function clearAllFieldValues() {
                     // If addBtn not wired yet, attempt to create a single empty row
                     const placeholderRow = document.createElement('div');
                     placeholderRow.className = 'repeatable-row';
-                    placeholderRow.innerHTML = '<span class="repeatable-number">1.</span><div class="repeatable-inner"></div><button class="repeatable-del" title="Remove">×</button>';
+                    placeholderRow.innerHTML = '<span class="repeatable-number">1.</span><div class="repeatable-inner"></div><button class="repeatable-del" data-tooltip="Remove entry"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg></button>';
                     list.appendChild(placeholderRow);
                 }
             }
@@ -2711,6 +2843,18 @@ async function clearAllFieldValues() {
         } catch (e) { /* ignore */ }
     });
 
+    // Clear clarification textareas
+    const clarificationContainers = root.querySelectorAll('[id^="clarification-container"]');
+    clarificationContainers.forEach(container => {
+        container.innerHTML = '';
+    });
+
+    // Clear followup specify textareas
+    const followupContainers = root.querySelectorAll('[id$="_followup"]');
+    followupContainers.forEach(container => {
+        container.innerHTML = '';
+    });
+
     showAnimatedMessage('All field values have been cleared.');
 }
 
@@ -2718,6 +2862,28 @@ function initClearValuesButton() {
     const btn = document.getElementById('btnClearValues');
     if (!btn) return;
     btn.addEventListener('click', clearAllFieldValues);
+}
+
+// ============================================================================
+// HEADER JOURNAL CONTROLS (shown when sidebar hidden)
+// ============================================================================
+function initHeaderJournalControls() {
+    const headerGenerateBtn = document.getElementById('headerGenerateJournalBtn');
+    const headerClearBtn = document.getElementById('headerClearValuesBtn');
+    const originalGenerateBtn = document.getElementById('generate_journal_btn');
+    const originalClearBtn = document.getElementById('btnClearValues');
+
+    if (headerGenerateBtn && originalGenerateBtn) {
+        headerGenerateBtn.addEventListener('click', () => {
+            originalGenerateBtn.click();
+        });
+    }
+
+    if (headerClearBtn && originalClearBtn) {
+        headerClearBtn.addEventListener('click', () => {
+            originalClearBtn.click();
+        });
+    }
 }
 
 // ============================================================================
@@ -3125,7 +3291,7 @@ function convertHTMLToTemplate(html, name, dropdowns = []) {
             function renderCloneGroup(fields, groupIdx) {
                 const altBg = groupIdx % 2 === 0 ? 'clone-bg-a' : 'clone-bg-b';
                 const removeBtn = groupIdx > 0 ? `<button type=\"button\" class=\"clone-remove pill-btn pill-btn-red\" onclick=\"removeCloneGroup(${index},${groupIdx})\" title=\"Remove this group\">×</button>` : '';
-                return `<div class=\"clone-group ${altBg} animate-popin\" data-group=\"${groupIdx}\">${renderField({fields: fields}, index)}${removeBtn}</div>`;
+                return `<div class=\"clone-group ${altBg}\" data-group=\"${groupIdx}\">${renderField({fields: fields}, index)}${removeBtn}</div>`;
             }
             let groupsHTML = sec._clones.map((fields, i) => renderCloneGroup(fields, i)).join('');
 
@@ -5193,6 +5359,27 @@ window.showPublishIndicator = function() {
 // ============================================================================
 // INIT
 // ============================================================================
+function initSizeControls() {
+    const sizes = ['small', 'medium', 'large'];
+    sizes.forEach(size => {
+        const btn = document.getElementById(`size-${size}`);
+        if (btn) {
+            btn.addEventListener('click', () => {
+                // Remove existing size classes
+                document.body.classList.remove('size-small', 'size-medium', 'size-large');
+                // Add the selected size class
+                document.body.classList.add(`size-${size}`);
+                // Update button styles
+                document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('bg-blue-500', 'text-white'));
+                btn.classList.add('bg-blue-500', 'text-white');
+            });
+        }
+    });
+    // Default to medium
+    document.body.classList.add('size-medium');
+    document.getElementById('size-medium').classList.add('bg-blue-500', 'text-white');
+}
+
 window.addEventListener("load", async () => {
     await loadAllTemplates();
     showPlaceholders(); // Show initial placeholder state
@@ -5207,9 +5394,16 @@ window.addEventListener("load", async () => {
     renderTemplateManager(); // Render template manager on load
     initScrollButtons(); // Initialize scroll buttons
     initPublishButton(); // Initialize publish button
-    initRefreshButton(); // Initialize refresh button
     // Initialize Clear Values button
     initClearValuesButton();
+    initHeaderJournalControls(); // Initialize header journal controls
+    initSizeControls(); // Initialize size controls
+    updateSidebarControlsVisibility(); // Initialize controls visibility
+    
+    // Ensure header controls are updated after everything is loaded
+    setTimeout(() => {
+        updateSidebarControlsVisibility();
+    }, 100);
 });
 console.log("🔥🔥 app.js is LOADED from LIVE SERVER 🔥🔥");
 
@@ -5252,74 +5446,6 @@ function hideSaveToast() {
     }
 }
 
-// ============================================
-// REFRESH BUTTON & TOAST
-// ============================================
-function initRefreshButton() {
-    const btn = document.getElementById('refreshAppBtn');
-    if (!btn) return;
-    btn.addEventListener('click', async () => {
-        await refreshApplicationState();
-    });
-}
-
-async function refreshApplicationState() {
-    showRefreshToast('loading');
-    // Simulate slight delay for UX
-    await new Promise(r => setTimeout(r, 500));
-    // Reload all templates
-    await loadAllTemplates();
-    // Reset active template and show placeholders
-    activeTemplate = null;
-    document.getElementById('currentTemplateTag').textContent = 'Default Template';
-    showPlaceholders();
-    // Re-render manager
-    renderTemplateManager();
-    // Hide publish button & change tracker
-    const publishBtn = document.getElementById('publishBtn');
-    if (publishBtn) publishBtn.classList.remove('visible','pulsing');
-    changeLog = [];
-    updateChangeTracker();
-    hideChangeTracker();
-    // Success state
-    showRefreshToast('success');
-    setTimeout(() => hideRefreshToast(), 2000);
-    console.log('🔄 Application state refreshed');
-}
-
-function showRefreshToast(state) {
-    const toast = document.getElementById('refreshToast');
-    const spinner = document.getElementById('refreshSpinner');
-    const icon = document.getElementById('refreshIcon');
-    const message = document.getElementById('refreshMessage');
-    const subtext = document.getElementById('refreshSubtext');
-    if (!toast) return;
-    if (state === 'loading') {
-        spinner.style.display = 'block';
-        icon.style.display = 'none';
-        message.textContent = 'Refreshing...';
-        message.className = 'text-lg font-bold text-slate-800 mb-1';
-        subtext.textContent = 'Please wait';
-    } else if (state === 'success') {
-        spinner.style.display = 'none';
-        icon.style.display = 'block';
-        message.textContent = 'Refreshed SSD Journal Builder';
-        message.className = 'text-lg font-bold text-indigo-600 mb-1';
-        subtext.textContent = 'Content reloaded';
-    }
-    toast.classList.add('visible');
-}
-
-function hideRefreshToast() {
-    const toast = document.getElementById('refreshToast');
-    if (toast) {
-        toast.classList.remove('visible');
-        setTimeout(() => {
-            const msg = document.getElementById('refreshMessage');
-            if (msg) msg.className = 'text-lg font-bold text-slate-800 mb-1';
-        }, 300);
-    }
-}
 // ============================================================================
 // FLOATING PROGRESS BAR — FINAL, SAFE, DPSS-FRIENDLY
 // ============================================================================
@@ -5421,7 +5547,7 @@ function hideRefreshToast() {
                 justify-content: center;
                 font-size: 16px;
                 cursor: grab;
-                z-index: 9999;
+                z-index: 30; /* Behind modal (modal is z-40 = 40) */
                 transition: all 0.2s ease;
                 user-select: none;
                 padding: 8px;
@@ -5525,9 +5651,8 @@ function hideRefreshToast() {
             }
 
             .section-highlight {
-                outline: 2px solid #22c55e;
-                outline-offset: 4px;
-                transition: outline 0.3s ease;
+                border-right: 4px solid rgba(34, 197, 94, 0.5);
+                transition: border 0.3s ease;
             }
         `;
         document.head.appendChild(style);
@@ -5740,7 +5865,7 @@ function hideRefreshToast() {
 
             setTimeout(() => {
                 section.classList.remove('section-highlight');
-            }, 1200);
+            }, 1000);
         }
 
         // ===========================================================
