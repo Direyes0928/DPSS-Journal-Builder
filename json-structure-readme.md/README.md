@@ -1,9 +1,6 @@
 # SSD Journal Builder (Static Application)
 
 The SSD Journal Builder is a static, browser-based application designed to render structured journal templates from JSON files.  
-It allows templates to be updated, added, or corrected without modifying application code.
-
-The application focuses on accuracy, consistency, and maintainability while mirroring official journal language and structure as closely as possible.
 
 ---
 
@@ -70,7 +67,6 @@ Detailed documentation for the JSON structure is available in the `docs/` folder
 - `JSON_BASIC_FIELDS.md`
 - `JSON_REPEATABLE_FIELDS.md`
 - `JSON_CONDITIONAL_FIELDS.md`
-- `JSON_ACKNOWLEDGEMENTS.md`
 - `JSON_RULES_AND_CONVENTIONS.md`
 
 These documents explain how templates are structured and how each JSON component behaves.
@@ -116,7 +112,7 @@ This project is intended for:
 ## Notes
 
 This repository intentionally excludes:
-- Build tools
+- Admin Build Tools
 - One-off scripts
 - Conversion utilities
 - Experimental features
