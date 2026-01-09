@@ -642,11 +642,20 @@ body.dark-mode select.journal-input {
         /* Ensure focus outlines are visible but subtle */
         body.dark-mode .journal-input:focus { box-shadow: 0 0 0 3px rgba(156, 163, 175, 0.2) !important; border-color: #9ca3af !important; }
 
-        /* Admin-only visibility (override Tailwind display utilities) */
-        .admin-only { display: none !important; }
-        body.admin-mode .admin-only { display: block !important; }
-        /* Non-admin-only visibility */
-        body.admin-mode .non-admin-only { display: none !important; }
+                /* production: hide all admin / builder UI */
+                .admin-only,
+                .section-admin-box,
+                .section-admin-controls,
+                .section-admin-btn,
+                .admin-panel,
+                .template-manager,
+                .builder-controls {
+                    display: none !important;
+                }
+                /* Preserve an explicit override when body has admin-mode class (reversible) */
+                body.admin-mode .admin-only { display: block !important; }
+                /* Non-admin-only visibility */
+                body.admin-mode .non-admin-only { display: none !important; }
         /* Collapsed section body */
         .section-body.collapsed { display: none; }
         .collapse-toggle { cursor: pointer; }

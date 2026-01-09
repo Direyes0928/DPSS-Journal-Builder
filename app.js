@@ -17,6 +17,18 @@ const SECTION_LIBRARY = {
   }
 };
 
+// Force admin mode OFF globally (production safety)
+Object.defineProperty(window, 'isAdminMode', {
+    get: () => false,
+    set: () => {},
+    configurable: false
+});
+
+// Ensure body doesn't carry admin-mode class on startup
+document.addEventListener('DOMContentLoaded', function() {
+    try { document.body.classList.remove('admin-mode'); } catch (e) {}
+});
+
 // ==================================================
 // TEMPLATE SECTION NORMALIZER
 // Supports legacy + section-library formats
@@ -1705,6 +1717,8 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
 
         // Save button
         document.getElementById('section-json-save-btn').onclick = function() {
+            // Guard admin-only save
+            if (!window.isAdminMode) { alert('Admin Mode required to save changes.'); return; }
             let newVal = textarea.value;
             try {
                 let newObj = JSON.parse(newVal);
@@ -2409,154 +2423,78 @@ function initSettingsModal() {
 function initSettingsToggles() {
     // Dark mode toggle
     const darkModeToggle = document.getElementById("darkModeToggle");
-    const isCurrentlyDark = document.body.classList.contains("dark-mode");
-    darkModeToggle.checked = isCurrentlyDark;
-    darkModeToggle.addEventListener("change", () => {
-        const isDark = darkModeToggle.checked;
-        document.body.classList.toggle("dark-mode", isDark);
-    });
+    if (darkModeToggle) {
+        const isCurrentlyDark = document.body.classList.contains("dark-mode");
+        darkModeToggle.checked = isCurrentlyDark;
+        darkModeToggle.addEventListener("change", () => {
+            const isDark = darkModeToggle.checked;
+            document.body.classList.toggle("dark-mode", isDark);
+        });
+    }
 
     // Progress bar toggle
     const progressBarToggle = document.getElementById("progressBarToggle");
-    const progressBarEnabled = localStorage.getItem('dpss_progressBarEnabled') !== 'false'; // Default to true
-    progressBarToggle.checked = progressBarEnabled;
-    progressBarToggle.addEventListener("change", () => {
-        const enabled = progressBarToggle.checked;
-        localStorage.setItem('dpss_progressBarEnabled', enabled);
+    if (progressBarToggle) {
+        const progressBarEnabled = localStorage.getItem('dpss_progressBarEnabled') !== 'false'; // Default: true
+        progressBarToggle.checked = progressBarEnabled;
 
-        // Show/hide progress bar immediately
-        const progressBar = document.getElementById('floatingProgressBar');
-        const progressTab = document.getElementById('floatingProgressTab');
+        progressBarToggle.addEventListener("change", () => {
+            const enabled = progressBarToggle.checked;
+            localStorage.setItem('dpss_progressBarEnabled', enabled);
 
-        if (enabled) {
-            // If enabling, check if we need to create the progress bar
-            if (!progressBar && !progressTab) {
-                // Progress bar hasn't been created yet, trigger initialization
-                if (typeof initFloatingProgressBar === 'function') {
-                    initFloatingProgressBar();
-                } else {
-                    // Re-run the IIFE logic
-                    setTimeout(() => {
-                        const existingBar = document.getElementById('floatingProgressBar');
-                        const existingTab = document.getElementById('floatingProgressTab');
-                        if (!existingBar && !existingTab) {
-                            // Force re-initialization by clearing the check
-                            const script = document.createElement('script');
-                            script.textContent = `
-                                (function initFloatingProgressBar() {
-                                    function start() {
-                                        if (!document.body) return;
-                                        if (document.getElementById('floatingProgressBar')) return;
-                                        const isHidden = true;
-                                        // ... progress bar creation code would go here
-                                        console.log('Progress bar would be created here');
-                                    }
-                                    if (document.readyState === 'loading') {
-                                        document.addEventListener('DOMContentLoaded', start);
-                                    } else {
-                                        start();
-                                    }
-                                })();
-                            `;
-                            document.head.appendChild(script);
-                        }
-                    }, 100);
-                }
-            } else {
-                // Progress bar exists, just show it based on previous state
-                const wasHidden = localStorage.getItem('dpss_progressBarHidden') === 'true';
-                if (progressBar && progressTab) {
-                    if (wasHidden) {
-                        progressBar.classList.add('hidden');
-                        progressTab.classList.remove('hidden');
+            const progressBar = document.getElementById('floatingProgressBar');
+            const progressTab = document.getElementById('floatingProgressTab');
+
+            if (enabled) {
+                // If progress bar doesn't exist yet, trigger the IIFE to run
+                if (!progressBar && !progressTab) {
+                    // The IIFE is already in the file — we can force it to run again safely
+                    // by calling a reinit helper if available.
+                    if (typeof window.reinitProgressBar === 'function') {
+                        window.reinitProgressBar();
                     } else {
-                        progressBar.classList.remove('hidden');
-                        progressTab.classList.add('hidden');
+                        console.warn("Progress bar not initialized yet — will appear on next interaction or reload.");
                     }
                 }
+                // If it exists, just make sure it's visible
+                if (progressBar) progressBar.classList.remove('hidden');
+                if (progressTab) progressTab.classList.remove('hidden');
+            } else {
+                // Hide both when disabled
+                if (progressBar) progressBar.classList.add('hidden');
+                if (progressTab) progressTab.classList.add('hidden');
             }
-        } else {
-            // Hide both progress bar and tab
-            if (progressBar) progressBar.classList.add('hidden');
-            if (progressTab) progressTab.classList.add('hidden');
-        }
-    });
+        });
+    }
 
     // Scroll Buttons toggle (controls both top and bottom buttons)
     const scrollButtonsToggle = document.getElementById("scrollButtonsToggle");
-    const scrollButtonsEnabled = localStorage.getItem('dpss_scrollButtonsEnabled') !== 'false'; // Default to true
-    scrollButtonsToggle.checked = scrollButtonsEnabled;
-    scrollButtonsToggle.addEventListener("change", () => {
-        const enabled = scrollButtonsToggle.checked;
-        localStorage.setItem('dpss_scrollButtonsEnabled', enabled);
+    if (scrollButtonsToggle) {
+        const scrollButtonsEnabled = localStorage.getItem('dpss_scrollButtonsEnabled') !== 'false';
+        scrollButtonsToggle.checked = scrollButtonsEnabled;
+        scrollButtonsToggle.addEventListener("change", () => {
+            const enabled = scrollButtonsToggle.checked;
+            localStorage.setItem('dpss_scrollButtonsEnabled', enabled);
 
-        // Show/hide both scroll buttons immediately
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        const scrollToBottomBtn = document.getElementById('scrollToBottom');
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            const scrollToBottomBtn = document.getElementById('scrollToBottom');
 
-        if (enabled) {
-            if (scrollToTopBtn) scrollToTopBtn.style.display = ''; // Show button
-            if (scrollToBottomBtn) scrollToBottomBtn.style.display = ''; // Show button
-        } else {
-            if (scrollToTopBtn) scrollToTopBtn.style.display = 'none'; // Hide button
-            if (scrollToBottomBtn) scrollToBottomBtn.style.display = 'none'; // Hide button
-        }
-    });
+            if (enabled) {
+                if (scrollToTopBtn) scrollToTopBtn.style.display = '';
+                if (scrollToBottomBtn) scrollToBottomBtn.style.display = '';
+            } else {
+                if (scrollToTopBtn) scrollToTopBtn.style.display = 'none';
+                if (scrollToBottomBtn) scrollToBottomBtn.style.display = 'none';
+            }
+        });
+    }
 
-    // Admin mode toggle
+    // Admin Mode toggle — safely disabled in production
     const adminModeToggle = document.getElementById("adminModeToggle");
-    const isCurrentlyAdmin = document.body.classList.contains("admin-mode");
-    adminModeToggle.checked = isCurrentlyAdmin;
-    adminModeToggle.addEventListener("change", async () => {
-        const wasOn = document.body.classList.contains('admin-mode');
-        const on = adminModeToggle.checked;
-        document.body.classList.toggle("admin-mode", on);
-
-        if (on && typeof renderSectionLibrary === "function") renderSectionLibrary();
-        
-        if (on && !wasOn) {
-            // Entering admin mode - capture original state
-            if (activeTemplate) {
-                originalTemplateState = deepClone(activeTemplate);
-                console.log('💾 Captured original template state');
-            }
-
-            // ===============================
-            // FORCE SECTION LIBRARY RENDER
-            // 2025-12-29 // new
-            // ===============================
-            if (typeof renderSectionLibrary === "function") {
-                renderSectionLibrary(); // // new
-                console.log('📚 Section Library rendered on admin enable'); // // new
-            }
-
-        } else if (!on && wasOn) {
-            // Exiting admin mode - offer to undo changes
-            if (activeTemplate && originalTemplateState && changeLog.length > 0) {
-                const confirmed = await showConfirm(
-                    'Revert Changes?',
-                    `You made ${changeLog.length} change(s) in admin mode. Do you want to revert all changes back to the original state?`
-                );
-                
-                if (confirmed) {
-                    // Restore original template state
-                    activeTemplate.sections = deepClone(originalTemplateState.sections);
-                    if (originalTemplateState.label) activeTemplate.label = originalTemplateState.label;
-                    if (originalTemplateState.title) activeTemplate.title = originalTemplateState.title;
-                    
-                    // Re-render the template
-                    renderTemplateSections(activeTemplate);
-                    renderSidebarFromTemplate(activeTemplate);
-                    
-                    // Clear change log and reset state
-                    changeLog = [];
-                    originalTemplateState = null;
-                    
-                    console.log('🔄 Reverted all admin changes');
-                }
-            }
-        }
-    });
+    if (adminModeToggle) {
+        adminModeToggle.checked = false;
+        adminModeToggle.disabled = true; // Keeps it off
+    }
 }
 function applyAdminVisibility() {
     const isOn = document.body.classList.contains('admin-mode');
@@ -3623,6 +3561,8 @@ function refreshTemplateDropdown() {
 // ============================================================================
 // Replace prompt-based edit with modal-driven workflow
 window.editSection = function(sectionIndex) {
+    // Guard admin-only action
+    if (!window.isAdminMode) return;
     if (!activeTemplate) return;
     const sec = activeTemplate.sections[sectionIndex];
     if (!sec) return;
@@ -3720,6 +3660,8 @@ window.toggleToolbox = function(sectionIndex) {
 };
 
 window.addField = function(sectionIndex, fieldType) {
+    // Guard admin-only action
+    if (!window.isAdminMode) return;
     if (!activeTemplate) return;
     
     const sec = activeTemplate.sections[sectionIndex];
@@ -3819,6 +3761,8 @@ window.addField = function(sectionIndex, fieldType) {
 // replaced by modal-based deleteField later (keep stub if earlier defined)
 
 window.undoLastAction = function() {
+    // Guard admin-only action
+    if (!window.isAdminMode) return;
     if (undoStack.length === 0) return;
     
     const lastAction = undoStack.pop();
@@ -4078,6 +4022,8 @@ window.toggleSectionRequired = function(index) {
 
 // Delete section
 window.deleteSection = async function(sectionIndex) {
+    // Guard admin-only action
+    if (!window.isAdminMode) return;
     if (!activeTemplate || !activeTemplate.sections[sectionIndex]) return;
     
     const sec = activeTemplate.sections[sectionIndex];
@@ -4120,6 +4066,8 @@ window.deleteSection = async function(sectionIndex) {
 };
 
 window.moveSection = function(index, direction) {
+    // Guard admin-only action
+    if (!window.isAdminMode) return;
     if (!activeTemplate) return;
     const newIndex = index + direction;
     if (newIndex < 0 || newIndex >= activeTemplate.sections.length) return;
@@ -4927,11 +4875,8 @@ window.loadPreviewedTemplate = function() {
     // Close modal
     closePreviewModal();
     
-    // Load template
-    activeTemplate = {
-  ...newTemplate,
-  sections: normalizeTemplateSections(newTemplate.sections || [])
-};
+        // Load template
+        activeTemplate = tpl;
     document.getElementById('currentTemplateTag').textContent = tpl.name;
     renderTemplateSections(tpl);
     renderSidebarFromTemplate(tpl);
