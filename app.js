@@ -824,7 +824,7 @@ function persistActiveTemplateChanges() {
     try {
         const snapshot = deepClone(activeTemplate);
         localStorage.setItem(PERSIST_PREFIX + snapshot.file, JSON.stringify(snapshot));
-        console.log('💾 Persisted template changes to localStorage for', snapshot.file);
+        console.log('Persisted template changes to localStorage for', snapshot.file);
     } catch (e) {
         console.warn('Persist failed:', e);
     }
@@ -856,11 +856,11 @@ async function loadAllTemplates() {
         const storedIndex = localStorage.getItem('dpss_templatesIndex');
         if (storedIndex) {
             templatesIndex = JSON.parse(storedIndex);
-            console.log('📦 Loaded templatesIndex from localStorage');
+            console.log('Loaded templatesIndex from localStorage');
         } else {
             const res = await fetch("templatesIndex.json");
             templatesIndex = await res.json();
-            console.log('📦 Loaded templatesIndex from file');
+            console.log('Loaded templatesIndex from file');
         }
         
         // Load program metadata (emojis and display info)
@@ -870,11 +870,11 @@ async function loadAllTemplates() {
         } else {
             // Initialize with default emojis for existing programs
             programMetadata = {
-                'CalFresh': { emoji: '🍎', name: 'CalFresh' },
-                'CalWORKs': { emoji: '👨‍👩‍👧‍👦', name: 'CalWORKs' },
-                'Medi-Cal': { emoji: '🏥', name: 'Medi-Cal' },
-                'ChildCare': { emoji: '👶', name: 'ChildCare' },
-                'General': { emoji: '📋', name: 'General' }
+                'CalFresh': { emoji: '', name: 'CalFresh' },
+                'CalWORKs': { emoji: '', name: 'CalWORKs' },
+                'Medi-Cal': { emoji: '', name: 'Medi-Cal' },
+                'ChildCare': { emoji: '', name: 'ChildCare' },
+                'General': { emoji: '', name: 'General' }
             };
         }
 
@@ -893,7 +893,7 @@ async function loadAllTemplates() {
                         template.program = programName;
                         template.imported = true;
                         loaded.push(template);
-                        console.log('📥 Loaded imported template:', template.name);
+                        console.log('Loaded imported template:', template.name);
                     }
                     continue;
                 }
@@ -976,7 +976,7 @@ function applyHeaderFilters() {
         const matchQ = !tokens.length || tokens.every(t => haystack.includes(t));
 
         if (matchP && matchQ) {
-            const importedBadge = tpl.imported ? ' 📥' : '';
+            const importedBadge = tpl.imported ? ' (imported)' : '';
             ddTemplate.innerHTML += `<option value="${tpl.file}">${tpl.name}${importedBadge}</option>`;
         }
     });
@@ -1272,9 +1272,9 @@ function initializeFollowupInputs() {
 // RENDER TEMPLATE => MAIN BODY
 // ============================================================================
 function renderTemplateSections(tpl) {
-    console.log("🎨 renderTemplateSections called with:", tpl);
+    console.log("renderTemplateSections called with:", tpl);
     const root = document.getElementById("dynamicCoreSections");
-    console.log("🎨 Root element:", root);
+    console.log("Root element:", root);
     
     root.innerHTML = "";
     // Add section button for admins
@@ -1468,7 +1468,7 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
     }
 };
 
-    console.log("🎨 Rendering", tpl.sections.length, "sections");
+    console.log("Rendering", tpl.sections.length, "sections");
     
     // Special message for newly created blank templates
     if (tpl.blank && tpl.sections.length === 0) {
@@ -1482,7 +1482,7 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
             <p class="text-sm text-blue-600 mb-4">${tpl.program} Program</p>
             <p class="text-sm text-slate-600 mb-6">Your new template is ready! Add sections from the Section Library below to get started.</p>
             <div class="text-xs text-slate-500">
-                <p>💡 Tip: Use the Section Library to add pre-built sections, or create custom ones.</p>
+                <p>Tip: Use the Section Library to add pre-built sections, or create custom ones.</p>
             </div>
         `;
         root.appendChild(blankMessage);
@@ -1615,19 +1615,19 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
         adminCol.className = 'admin-only section-admin-box';
         adminCol.innerHTML = `
             <div class=\"section-admin-controls\">
-                <button class=\"section-admin-btn edit\" onclick=\"editSection(${index})\" title=\"Edit section title\">✏️ Edit Title</button>
+                <button class=\"section-admin-btn edit\" onclick=\"editSection(${index})\" title=\"Edit section title\">Edit Title</button>
                 <button class=\"section-admin-btn move\" onclick=\"moveSection(${index}, -1)\" ${index===0?'disabled':''} title=\"Move up\">↑</button>
                 <button class=\"section-admin-btn move\" onclick=\"moveSection(${index}, 1)\" ${index===tpl.sections.length-1?'disabled':''} title=\"Move down\">↓</button>
-                <button class=\"section-admin-btn delete\" onclick=\"deleteSection(${index})\" title=\"Delete section\">🗑️ Delete</button>
-                <button class=\"section-admin-btn json\" onclick=\"showSectionJSON(${index})\" title=\"Show section JSON\">🗂️ Show JSON</button>
+                <button class=\"section-admin-btn delete\" onclick=\"deleteSection(${index})\" title=\"Delete section\">Delete</button>
+                <button class=\"section-admin-btn json\" onclick=\"showSectionJSON(${index})\" title=\"Show section JSON\">Show JSON</button>
             </div>
             <div class=\"section-admin-fieldbox\">
-                <button class=\"section-admin-btn field\" onclick=\"toggleToolbox(${index})\" title=\"Add field\">🧰 Field</button>
-                <div id=\"toolbox-${index}\" class=\"hidden section-admin-toolbox\">\n                    <button class=\"toolbox-btn\" onclick=\"addField(${index}, 'text')\">📝 Text Box</button>
-                    <button class=\"toolbox-btn\" onclick=\"addField(${index}, 'textarea')\">📄 Text Area</button>
-                    <button class=\"toolbox-btn\" onclick=\"addField(${index}, 'date')\">📅 Date Picker</button>
-                    <button class=\"toolbox-btn\" onclick=\"addField(${index}, 'choice')\">☑️ Dropdown</button>
-                    <button class=\"toolbox-btn\" onclick=\"addField(${index}, 'static-text')\">🗒️ Static Text</button>
+                <button class=\"section-admin-btn field\" onclick=\"toggleToolbox(${index})\" title=\"Add field\">Field</button>
+                <div id=\"toolbox-${index}\" class=\"hidden section-admin-toolbox\">\n                    <button class=\"toolbox-btn\" onclick=\"addField(${index}, 'text')\">Text Box</button>
+                    <button class=\"toolbox-btn\" onclick=\"addField(${index}, 'textarea')\">Text Area</button>
+                    <button class=\"toolbox-btn\" onclick=\"addField(${index}, 'date')\">Date Picker</button>
+                    <button class=\"toolbox-btn\" onclick=\"addField(${index}, 'choice')\">Dropdown</button>
+                    <button class=\"toolbox-btn\" onclick=\"addField(${index}, 'static-text')\">Static Text</button>
                 </div>
             </div>
         `;
@@ -1767,7 +1767,7 @@ window.importSectionFromPicker = function(templateFile, sectionIdx) {
         function showSaveConfirmation() {
             let notif = document.createElement('div');
             notif.className = 'save-confirmation-toast';
-            notif.innerHTML = '<span>✔️ Changes saved</span>';
+            notif.innerHTML = '<span>Changes saved</span>';
             notif.style.position = 'fixed';
             notif.style.top = '24px';
             notif.style.right = '24px';
@@ -1858,7 +1858,7 @@ setTimeout(() => {
     }
 }, 50);
 
-    console.log("🎨 Done rendering sections");
+    console.log("Done rendering sections");
 }
 
 // FIELD RENDERER
@@ -1909,9 +1909,9 @@ function renderField(sec, sectionIndex) {
             const label = f.label || f.id || "";
             const adminToolbar = `
                 <div class="admin-only flex gap-1 mb-1">
-                    <button class="px-2 py-1 text-xs bg-amber-50 text-amber-700 border border-amber-200 rounded-full hover:bg-amber-100" onclick="editField(${sectionIndex}, ${fieldIndex})" title="Edit field">✏️ Edit</button>
-                    <button class="px-2 py-1 text-xs bg-blue-50 text-blue-700 border border-blue-200 rounded-full hover:bg-blue-100" onclick="convertFieldType(${sectionIndex}, ${fieldIndex})" title="Convert type">🔄 Type</button>
-                    <button class="px-2 py-1 text-xs bg-red-50 text-red-600 border border-red-200 rounded-full hover:bg-red-100" onclick="deleteField(${sectionIndex}, ${fieldIndex})" title="Delete">🗑️ Delete</button>
+                    <button class="px-2 py-1 text-xs bg-amber-50 text-amber-700 border border-amber-200 rounded-full hover:bg-amber-100" onclick="editField(${sectionIndex}, ${fieldIndex})" title="Edit field">Edit</button>
+                    <button class="px-2 py-1 text-xs bg-blue-50 text-blue-700 border border-blue-200 rounded-full hover:bg-blue-100" onclick="convertFieldType(${sectionIndex}, ${fieldIndex})" title="Convert type">Type</button>
+                    <button class="px-2 py-1 text-xs bg-red-50 text-red-600 border border-red-200 rounded-full hover:bg-red-100" onclick="deleteField(${sectionIndex}, ${fieldIndex})" title="Delete">Delete</button>
                 </div>
             `;
             
@@ -2334,7 +2334,7 @@ function showPlaceholders() {
             <h3 class="text-lg font-semibold text-slate-700 mb-2">No Template Selected</h3>
             <p class="text-sm text-slate-500 mb-4">Use the filters above to select a template</p>
             <div class="text-xs text-slate-400">
-                <p>💡 Tip: Filter by Program → Scenario → Template Name</p>
+                <p>Tip: Filter by Program → Scenario → Template Name</p>
             </div>
         </div>
     `;
@@ -2682,7 +2682,7 @@ function initTemplateExport() {
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        console.log('📤 Exported template JSON:', a.download);
+        console.log('Exported template JSON:', a.download);
     });
 }
 
@@ -2892,7 +2892,7 @@ async function handleJSONTemplateUpload(file) {
     // Add to runtime
     addTemplateToRuntime(template);
     
-    console.log('✅ JSON template uploaded:', template.name);
+    console.log('JSON template uploaded:', template.name);
 }
 
 // Extract dropdown/combobox content controls from DOCX XML
@@ -3003,8 +3003,8 @@ async function handleDocxTemplateUpload(file) {
     
     addTemplateToRuntime(template);
     
-    console.log('✅ DOCX template uploaded and converted:', template.name);
-    console.log('📋 Extracted', dropdowns.length, 'dropdown controls');
+    console.log('DOCX template uploaded and converted:', template.name);
+    console.log('Extracted', dropdowns.length, 'dropdown controls');
 }
 
 async function handleDocTemplateUpload(file) {
@@ -3026,7 +3026,7 @@ async function handleDocTemplateUpload(file) {
     
     addTemplateToRuntime(template);
     
-    console.log('✅ DOC template uploaded and converted:', template.name);
+    console.log('DOC template uploaded and converted:', template.name);
 }
 
 async function handleRTFTemplateUpload(file) {
@@ -3042,7 +3042,7 @@ async function handleRTFTemplateUpload(file) {
         
         const template = convertTextToTemplate(cleanText, file.name.replace(/\.rtf$/i, ''));
         addTemplateToRuntime(template);
-        console.log('✅ RTF template uploaded (text mode):', template.name);
+        console.log('RTF template uploaded (text mode):', template.name);
         return;
     }
     
@@ -3054,7 +3054,7 @@ async function handleRTFTemplateUpload(file) {
     
     addTemplateToRuntime(template);
     
-    console.log('✅ RTF template uploaded and converted:', template.name);
+    console.log('RTF template uploaded and converted:', template.name);
 }
 
 async function handleTXTTemplateUpload(file) {
@@ -3068,7 +3068,7 @@ async function handleTXTTemplateUpload(file) {
     
     addTemplateToRuntime(template);
     
-    console.log('✅ TXT template uploaded and converted:', template.name);
+    console.log('TXT template uploaded and converted:', template.name);
 }
 
 // ============================================================================
@@ -3259,17 +3259,17 @@ function convertHTMLToTemplate(html, name, dropdowns = []) {
             const adminCol = document.createElement('div');
             adminCol.className = 'admin-only flex flex-col gap-2 mt-1 pr-1';
             adminCol.innerHTML = `
-                <button class=\"px-2 py-1 bg-amber-500 text-white text-xs rounded hover:bg-amber-600\" onclick=\"editSection(${index})\" title=\"Edit section title\">✏️ Edit</button>
+                <button class=\"px-2 py-1 bg-amber-500 text-white text-xs rounded hover:bg-amber-600\" onclick=\"editSection(${index})\" title=\"Edit section title\">Edit</button>
                 <button class=\"px-2 py-1 bg-slate-500 text-white text-xs rounded hover:bg-slate-600 disabled:opacity-40\" onclick=\"moveSection(${index}, -1)\" ${index===0?'disabled':''} title=\"Move up\">↑</button>
                 <button class=\"px-2 py-1 bg-slate-500 text-white text-xs rounded hover:bg-slate-600 disabled:opacity-40\" onclick=\"moveSection(${index}, 1)\" ${index===tpl.sections.length-1?'disabled':''} title=\"Move down\">↓</button>
-                <button class=\"px-2 py-1 bg-red-600 text-white text-xs rounded hover:bg-red-700\" onclick=\"deleteSection(${index})\" title=\"Delete section\">🗑️ Delete</button>
+                <button class=\"px-2 py-1 bg-red-600 text-white text-xs rounded hover:bg-red-700\" onclick=\"deleteSection(${index})\" title=\"Delete section\">Delete</button>
                 <div class=\"relative\">
-                    <button class=\"px-2 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600\" onclick=\"toggleToolbox(${index})\" title=\"Add field\">🧰 Field</button>
-                    <div id=\"toolbox-${index}\" class=\"hidden absolute left-0 top-full mt-1 bg-white border border-slate-300 rounded shadow-lg p-2 w-40 z-10\">\n                        <button class=\"block w-full text-left px-2 py-1 text-xs hover:bg-slate-100 rounded\" onclick=\"addField(${index}, 'text')\">📝 Text Box</button>
-                        <button class=\"block w-full text-left px-2 py-1 text-xs hover:bg-slate-100 rounded\" onclick=\"addField(${index}, 'textarea')\">📄 Text Area</button>
-                        <button class=\"block w-full text-left px-2 py-1 text-xs hover:bg-slate-100 rounded\" onclick=\"addField(${index}, 'date')\">📅 Date Picker</button>
-                        <button class=\"block w-full text-left px-2 py-1 text-xs hover:bg-slate-100 rounded\" onclick=\"addField(${index}, 'choice')\">☑️ Dropdown</button>
-                                <button class=\"block w-full text-left px-2 py-1 text-xs hover:bg-slate-100 rounded\" onclick=\"addField(${index}, 'static-text')\">🗒️ Static Text</button>
+                    <button class=\"px-2 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600\" onclick=\"toggleToolbox(${index})\" title=\"Add field\">Field</button>
+                    <div id=\"toolbox-${index}\" class=\"hidden absolute left-0 top-full mt-1 bg-white border border-slate-300 rounded shadow-lg p-2 w-40 z-10\">\n                        <button class=\"block w-full text-left px-2 py-1 text-xs hover:bg-slate-100 rounded\" onclick=\"addField(${index}, 'text')\">Text Box</button>
+                        <button class=\"block w-full text-left px-2 py-1 text-xs hover:bg-slate-100 rounded\" onclick=\"addField(${index}, 'textarea')\">Text Area</button>
+                        <button class=\"block w-full text-left px-2 py-1 text-xs hover:bg-slate-100 rounded\" onclick=\"addField(${index}, 'date')\">Date Picker</button>
+                        <button class=\"block w-full text-left px-2 py-1 text-xs hover:bg-slate-100 rounded\" onclick=\"addField(${index}, 'choice')\">Dropdown</button>
+                                <button class=\"block w-full text-left px-2 py-1 text-xs hover:bg-slate-100 rounded\" onclick=\"addField(${index}, 'static-text')\">Static Text</button>
                     </div>
                 </div>
             `;
@@ -3325,8 +3325,8 @@ window.showProgramModal = function(template) {
         btn.onclick = () => selectProgram(program);
         
         // Get icon from metadata or fallback
-        const metadata = programMetadata[program] || { emoji: '📁', name: program };
-        const icon = metadata.emoji || '📁';
+        const metadata = programMetadata[program] || { emoji: '', name: program };
+        const icon = metadata.emoji || '';
         
         btn.innerHTML = `
             <div class="flex items-center gap-3">
@@ -3340,7 +3340,7 @@ window.showProgramModal = function(template) {
         // Add edit button
         const editBtn = document.createElement('button');
         editBtn.className = 'absolute top-2 right-2 px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded text-xs transition-colors';
-        editBtn.innerHTML = '✏️';
+        editBtn.innerHTML = 'Edit';
         editBtn.title = 'Edit program';
         editBtn.onclick = (e) => {
             e.stopPropagation();
@@ -3456,7 +3456,7 @@ window.createAndSelectNewProgram = function() {
     
     // Clear input and reset emoji
     input.value = '';
-    document.getElementById('selected_emoji').textContent = '📁';
+    document.getElementById('selected_emoji').textContent = '';
     
     // Hide emoji picker if open
     document.getElementById('emoji_picker').classList.add('hidden');
@@ -3476,7 +3476,7 @@ window.selectEmoji = function(emoji) {
 
 // Edit program (name and emoji)
 window.editProgram = function(oldProgramName) {
-    const metadata = programMetadata[oldProgramName] || { emoji: '📁', name: oldProgramName };
+    const metadata = programMetadata[oldProgramName] || { emoji: '', name: oldProgramName };
     
     // Prompt for new name
     const newName = prompt(`Edit program name:`, oldProgramName);
@@ -3543,7 +3543,7 @@ window.closeProgramModal = function() {
     backdrop.classList.add('hidden');
     input.value = '';
     emojiPicker.classList.add('hidden');
-    document.getElementById('selected_emoji').textContent = '📁';
+    document.getElementById('selected_emoji').textContent = '';
     
     // If user cancelled, clear pending template
     if (pendingTemplate) {
@@ -3642,7 +3642,7 @@ window.editField = function(sectionIndex, fieldIndex) {
     persistActiveTemplateChanges();
     showPublishIndicator();
 
-    console.log("✏️ Field label/content updated:", field);
+    console.log("Field label/content updated:", field);
 };
 
 window.toggleToolbox = function(sectionIndex) {
@@ -3739,7 +3739,7 @@ window.addField = function(sectionIndex, fieldType) {
             let notif = document.createElement('div');
             notif.className = 'field-add-notification';
             const sectionTitle = sec.label || sec.title || 'Untitled Section';
-            notif.innerHTML = `🧰 Added <b>${fieldType}</b> field: "${fieldLabel}"<br>to <b>${sectionTitle}</b>`;
+            notif.innerHTML = `Added <b>${fieldType}</b> field: "${fieldLabel}"<br>to <b>${sectionTitle}</b>`;
             notif.style = 'background:#e0f7fa;color:#00796b;padding:10px 18px;border-radius:8px;position:absolute;top:-38px;right:0;z-index:10;font-size:15px;font-weight:600;box-shadow:0 2px 8px rgba(60,80,120,0.08);pointer-events:none;transition:opacity 0.3s;opacity:1;';
             sectionBody.appendChild(notif);
             setTimeout(() => { notif.style.opacity = '0'; setTimeout(() => notif.remove(), 400); }, 2200);
@@ -3753,7 +3753,7 @@ window.addField = function(sectionIndex, fieldType) {
     // Show undo notification
     showUndoNotification();
 
-    console.log("➕ Field added:", newField);
+    console.log("Field added:", newField);
     persistActiveTemplateChanges();
     showPublishIndicator();
 };
@@ -3783,7 +3783,7 @@ window.undoLastAction = function() {
     renderTemplateSections(activeTemplate);
     hideUndoNotification();
     
-    console.log("↩️ Undo:", lastAction);
+    console.log("Undo:", lastAction);
 };
 
 function showUndoNotification() {
@@ -3795,7 +3795,7 @@ function showUndoNotification() {
         notification.innerHTML = `
             <span class="text-sm">Action completed</span>
             <button onclick="undoLastAction()" class="px-3 py-1 bg-amber-500 hover:bg-amber-600 rounded text-xs font-semibold">
-                ↩️ Undo
+                Undo
             </button>
         `;
         document.body.appendChild(notification);
@@ -3956,7 +3956,7 @@ document.addEventListener("click", e => {
     return;
   }
 
-  console.log("🆕 Create Blank Template clicked"); // // debug
+  console.log("Create Blank Template clicked"); // // debug
   createBlankTemplate();
 });
 
@@ -3973,7 +3973,7 @@ document.addEventListener("click", e => {
   try {
     localStorage.setItem(PERSIST_PREFIX + window.activeTemplate.file, JSON.stringify(window.activeTemplate));
     showAnimatedMessage(`Template "${window.activeTemplate.name}" saved successfully!`);
-    console.log("💾 Template saved:", window.activeTemplate.file);
+    console.log("Template saved:", window.activeTemplate.file);
   } catch (error) {
     console.error("Failed to save template:", error);
     alert("Failed to save template. Please try again.");
@@ -4001,7 +4001,7 @@ window.updateSectionLabel = function(sectionIndex, newLabel) {
     // Show publish indicator
     showPublishIndicator();
     
-    console.log('🏷️ Section label updated:', newLabel);
+    console.log('Section label updated:', newLabel);
 };
 
 window.toggleSectionCollapse = function(index) {
@@ -4062,7 +4062,7 @@ window.deleteSection = async function(sectionIndex) {
     // Show publish indicator
     showPublishIndicator();
     
-    console.log('🗑️ Section deleted:', sectionTitle);
+    console.log('Section deleted:', sectionTitle);
 };
 
 window.moveSection = function(index, direction) {
@@ -4276,7 +4276,7 @@ window.selectFieldType = async function(newType) {
     renderTemplateSections(activeTemplate);
     showPublishIndicator();
     
-    console.log('🔄 Field type converted:', {from: oldType, to: newType, field});
+    console.log('Field type converted:', {from: oldType, to: newType, field});
     
     // Clear context
     convertFieldContext = null;
@@ -4329,7 +4329,7 @@ window.closeConvertModal = function() {
          input.className = 'flex-1 px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100';
      
          const deleteBtn = document.createElement('button');
-         deleteBtn.innerHTML = '🗑️';
+         deleteBtn.innerHTML = 'X';
          deleteBtn.className = 'px-3 py-2 text-sm hover:bg-red-50 hover:text-red-600 rounded transition-colors';
          deleteBtn.title = 'Remove option';
          deleteBtn.onclick = () => wrapper.remove();
@@ -4388,7 +4388,7 @@ window.closeConvertModal = function() {
          showPublishIndicator();
      
         const action = isNewField ? 'Field created' : 'Field type converted';
-        console.log(`🔄 ${action}:`, {from: oldType, to: 'choice', options, field});
+        console.log(`${action}:`, {from: oldType, to: 'choice', options, field});
      
          // Close modal
          closeDropdownModal();
@@ -4612,7 +4612,7 @@ window.deleteField = async function(sectionIndex, fieldIndex) {
         persistActiveTemplateChanges();
         showUndoNotification();
         showPublishIndicator();
-        console.log('🗑️ Field deleted:', field);
+        console.log('Field deleted:', field);
 };
 
 const originalEditField = window.editField;
@@ -4652,7 +4652,7 @@ window.editField = async function(sectionIndex, fieldIndex) {
         persistActiveTemplateChanges();
         
         renderTemplateSections(activeTemplate);
-        console.log('✏️ Field updated (modal flow):', field);
+        console.log('Field updated (modal flow):', field);
         
         // Show publish button indicator
         showPublishIndicator();
@@ -4713,14 +4713,14 @@ function renderTemplateManager() {
                         <div class="flex-1">
                             <div class="text-sm font-semibold text-slate-800">${tpl.name}</div>
                             <div class="text-xs text-slate-500">${tpl.sections?.length || 0} sections • ${tpl.file}</div>
-                            ${isHidden ? '<span class="text-xs text-red-600">🚫 Hidden</span>' : ''}
+                            ${isHidden ? '<span class="text-xs text-red-600">Hidden</span>' : ''}
                         </div>
                         <div class="flex gap-1">
-                            <button onclick="previewTemplate('${tpl.file}')" class="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200" title="Preview">👁️</button>
-                            <button onclick="editTemplateMetadata('${tpl.file}')" class="px-2 py-1 text-xs bg-green-100 text-green-700 rounded hover:bg-green-200" title="Edit Sections">✏️</button>
-                            <button onclick="renameTemplate('${tpl.file}')" class="px-2 py-1 text-xs bg-yellow-100 text-yellow-700 rounded hover:bg-yellow-200" title="Rename">📝</button>
-                            <button onclick="toggleTemplateVisibility('${tpl.file}')" class="px-2 py-1 text-xs bg-purple-100 text-purple-700 rounded hover:bg-purple-200" title="${isHidden ? 'Show' : 'Hide'}">${isHidden ? '👁️' : '🚫'}</button>
-                            <button onclick="deleteTemplate('${tpl.file}')" class="px-2 py-1 text-xs bg-red-100 text-red-700 rounded hover:bg-red-200" title="Delete">🗑️</button>
+                            <button onclick="previewTemplate('${tpl.file}')" class="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200" title="Preview">Preview</button>
+                            <button onclick="editTemplateMetadata('${tpl.file}')" class="px-2 py-1 text-xs bg-green-100 text-green-700 rounded hover:bg-green-200" title="Edit Sections">Edit</button>
+                            <button onclick="renameTemplate('${tpl.file}')" class="px-2 py-1 text-xs bg-yellow-100 text-yellow-700 rounded hover:bg-yellow-200" title="Rename">Rename</button>
+                            <button onclick="toggleTemplateVisibility('${tpl.file}')" class="px-2 py-1 text-xs bg-purple-100 text-purple-700 rounded hover:bg-purple-200" title="${isHidden ? 'Show' : 'Hide'}">${isHidden ? 'Show' : 'Hide'}</button>
+                            <button onclick="deleteTemplate('${tpl.file}')" class="px-2 py-1 text-xs bg-red-100 text-red-700 rounded hover:bg-red-200" title="Delete">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -4831,7 +4831,7 @@ window.previewTemplate = function(file) {
                         <div class=\"mb-3\">
                             <label class=\"text-xs text-slate-600 block mb-1 font-medium\">${label}</label>
                             <div class=\"w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-400\">
-                                📅 (Date picker)
+                                (Date picker)
                             </div>
                         </div>
                     `;
@@ -4881,7 +4881,7 @@ window.loadPreviewedTemplate = function() {
     renderTemplateSections(tpl);
     renderSidebarFromTemplate(tpl);
     
-    console.log('✅ Loaded template from preview:', tpl.name);
+    console.log('Loaded template from preview:', tpl.name);
 };
 
 // Close preview modal
@@ -5004,20 +5004,20 @@ window.deleteTemplate = async function(file) {
     
     // 1. Remove from localStorage
     localStorage.removeItem(PERSIST_PREFIX + file);
-    console.log('🗑️ Removed from localStorage:', PERSIST_PREFIX + file);
+    console.log('Removed from localStorage:', PERSIST_PREFIX + file);
     
     // 2. Remove from templatesIndex
     Object.keys(templatesIndex).forEach(prog => {
         templatesIndex[prog] = templatesIndex[prog].filter(t => t.file !== file);
     });
     localStorage.setItem('dpss_templatesIndex', JSON.stringify(templatesIndex));
-    console.log('📋 Updated templatesIndex, removed:', file);
+    console.log('Updated templatesIndex, removed:', file);
     
     // 3. Remove from allTemplates array
     const idx = allTemplates.indexOf(tpl);
     if (idx > -1) {
         allTemplates.splice(idx, 1);
-        console.log('📦 Removed from allTemplates[]:', tpl.name);
+        console.log('Removed from allTemplates[]:', tpl.name);
     }
     
     // 4. Clear active template if it was the deleted one
@@ -5025,7 +5025,7 @@ window.deleteTemplate = async function(file) {
         activeTemplate = null;
         document.getElementById('currentTemplateTag').textContent = 'Default Template';
         showPlaceholders();
-        console.log('🔄 Cleared active template');
+        console.log('Cleared active template');
     }
     
     // 5. Refresh UI
@@ -5034,7 +5034,7 @@ window.deleteTemplate = async function(file) {
     
     // 6. Show success state
     showDeleteToast(tpl.name, 'success');
-    console.log('✅ Delete complete:', tpl.name);
+    console.log('Delete complete:', tpl.name);
     
     // Hide toast after 2 seconds
     setTimeout(() => {
@@ -5175,15 +5175,15 @@ function updateChangeTracker() {
         switch(change.type) {
             case 'added':
                 typeLabel = 'Added';
-                icon = '➕';
+                icon = '';
                 break;
             case 'edited':
                 typeLabel = 'Edited';
-                icon = '✏️';
+                icon = '';
                 break;
             case 'deleted':
                 typeLabel = 'Deleted';
-                icon = '🗑️';
+                icon = '';
                 break;
         }
         
@@ -5289,7 +5289,7 @@ function initPublishButton() {
                 renderSidebarFromTemplate(activeTemplate);
             });
         
-        console.log('📤 Published changes:', activeTemplate);
+        console.log('Published changes:', activeTemplate);
     });
 }
 
@@ -5786,13 +5786,13 @@ function hideSaveToast() {
         // Motivation messages (UNCHANGED)
         // ===========================================================
         function getMotivationMessage(percent) {
-            if (percent === 100) return "✅ Journal Complete — Ready to generate";
-            if (percent >= 90) return "🔥 Final stretch — almost there!";
-            if (percent >= 75) return "🚀 Almost done — keep going!";
-            if (percent >= 60) return "💪 Strong progress — past halfway!";
-            if (percent >= 40) return "📈 Good momentum — stay focused!";
-            if (percent >= 20) return "📝 Nice start — keep it moving!";
-            return "👋 Let’s get started!";
+            if (percent === 100) return "Journal Complete — Ready to generate";
+            if (percent >= 90) return "Final stretch — almost there!";
+            if (percent >= 75) return "Almost done — keep going!";
+            if (percent >= 60) return "Strong progress — past halfway!";
+            if (percent >= 40) return "Good momentum — stay focused!";
+            if (percent >= 20) return "Nice start — keep it moving!";
+            return "Let's get started!";
         }
 
         // ===========================================================
@@ -5989,9 +5989,9 @@ window.renderSectionLibrary = function () {
           <button class="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200" 
                   onclick="previewLibrarySection('${sec.id}')">Preview</button>
           <button class="px-3 py-1 text-xs bg-amber-100 text-amber-700 rounded hover:bg-amber-200" 
-                  onclick="editLibrarySection(${idx})">✏️ Edit</button>
+                  onclick="editLibrarySection(${idx})">Edit</button>
           <button class="px-3 py-1 text-xs bg-red-100 text-red-600 rounded hover:bg-red-200" 
-                  onclick="deleteLibrarySection(${idx})">🗑️</button>
+                  onclick="deleteLibrarySection(${idx})">Delete</button>
           <button class="px-3 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700" 
                   onclick="addLibrarySectionToTemplate('${sec.id}')">+ Add</button>
         </div>
@@ -6175,7 +6175,7 @@ window.renderSectionWizardStep1 = function () {
     <p style="margin:0 0 24px 0; color:#666;">Create a reusable section for the Section Library.</p>
 
     <div style="margin-top:16px; display:flex; flex-direction:column; gap:12px;">
-      <button data-action="start-blank" style="padding:12px 20px; background:linear-gradient(90deg, #3b82f6, #8b5cf6); color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:16px; transition:background .2s;">🆕 Start from Blank</button>
+      <button data-action="start-blank" style="padding:12px 20px; background:linear-gradient(90deg, #3b82f6, #8b5cf6); color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:16px; transition:background .2s;">Start from Blank</button>
       <button disabled style="padding:12px 20px; background:#ccc; color:#666; border:none; border-radius:8px; font-size:16px; opacity:.5;">Reuse Existing (Coming Soon)</button>
     </div>
 
@@ -6221,7 +6221,7 @@ window.renderSectionWizardStep3 = function () {
     ? fields.map((f, i) => `
         <div style="border:1px solid #ddd; padding:12px; display:flex; justify-content:space-between; align-items:center; border-radius:8px; margin-bottom:8px; background:#f8f9fa;">
           <div><strong style="color:#333;">${f.label}</strong> <span style="color:#666;">(${f.type})</span></div>
-          <button data-action="remove-field" data-index="${i}" style="background:#dc3545; color:#fff; border:none; border-radius:4px; padding:6px 12px; cursor:pointer; font-size:12px;">🗑 Remove</button>
+          <button data-action="remove-field" data-index="${i}" style="background:#dc3545; color:#fff; border:none; border-radius:4px; padding:6px 12px; cursor:pointer; font-size:12px;">Remove</button>
         </div>
       `).join("")
     : `<p style="color:#666; font-style:italic; margin:16px 0;">No fields added yet.</p>`;
@@ -6231,7 +6231,7 @@ window.renderSectionWizardStep3 = function () {
 
     <div style="margin-top:12px;">${rows}</div>
 
-    <button data-action="add-field" style="margin-top:16px; padding:12px 20px; background:#28a745; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:16px; transition:background .2s;">➕ Add Field</button>
+    <button data-action="add-field" style="margin-top:16px; padding:12px 20px; background:#28a745; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:16px; transition:background .2s;">Add Field</button>
 
     <div style="margin-top:32px; display:flex; justify-content:space-between;">
       <button data-action="back" style="padding:10px 20px; background:#f8f9fa; color:#333; border:1px solid #ddd; border-radius:8px; cursor:pointer; font-size:14px;">Back</button>
@@ -6263,7 +6263,7 @@ window.renderSectionWizardStep4 = function () {
 
     <div style="margin-top:32px; display:flex; justify-content:space-between;">
       <button data-action="back" style="padding:10px 20px; background:#f8f9fa; color:#333; border:1px solid #ddd; border-radius:8px; cursor:pointer; font-size:14px;">Back</button>
-      <button data-action="confirm" style="padding:10px 20px; background:#28a745; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:14px;">✅ Save to Library</button>
+      <button data-action="confirm" style="padding:10px 20px; background:#28a745; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:14px;">Save to Library</button>
     </div>
   `;
 };
@@ -6564,7 +6564,7 @@ window.openSectionPreview = function (section) {
   const body = document.getElementById("previewBody");
 
   if (!modal || !body) {
-    console.warn("⚠️ Preview modal elements not found");
+    console.warn("Preview modal elements not found");
     return;
   }
 

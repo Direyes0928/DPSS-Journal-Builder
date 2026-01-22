@@ -1328,7 +1328,7 @@ body.dark-mode select.journal-input {
                 </button>
             </div>
 
-            <p class="text-xs text-slate-500 mt-2">💡 Tip: Open → Edit → Copy.</p>
+            <p class="text-xs text-slate-500 mt-2">Tip: Open → Edit → Copy.</p>
         </div>
     </aside>
 
@@ -1502,7 +1502,7 @@ body.dark-mode select.journal-input {
 
 <div id="sectionLibraryList" class="space-y-2 admin-only"></div>
 
-    </div> <!-- ✅ CLOSE CENTERED DOCUMENT WRAPPER -->
+    </div> <!-- CLOSE CENTERED DOCUMENT WRAPPER -->
 </section>
 </main>
 </section>
@@ -1649,7 +1649,7 @@ body.dark-mode select.journal-input {
         <div class="space-y-2 mb-4">
             <button onclick="selectFieldType('text')" class="w-full text-left px-4 py-3 border-2 border-slate-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all">
                 <div class="flex items-center gap-3">
-                    <span class="text-2xl">📝</span>
+                    <span class="text-2xl"></span>
                     <div class="flex-1">
                         <div class="font-semibold text-sm">Text Box</div>
                         <div class="text-xs text-slate-500">Single-line input for short text</div>
@@ -1658,7 +1658,7 @@ body.dark-mode select.journal-input {
             </button>
             <button onclick="selectFieldType('textarea')" class="w-full text-left px-4 py-3 border-2 border-slate-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all">
                 <div class="flex items-center gap-3">
-                    <span class="text-2xl">📄</span>
+                    <span class="text-2xl"></span>
                     <div class="flex-1">
                         <div class="font-semibold text-sm">Text Area</div>
                         <div class="text-xs text-slate-500">Multi-line input for longer text</div>
@@ -1667,7 +1667,7 @@ body.dark-mode select.journal-input {
             </button>
             <button onclick="selectFieldType('date')" class="w-full text-left px-4 py-3 border-2 border-slate-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all">
                 <div class="flex items-center gap-3">
-                    <span class="text-2xl">📅</span>
+                    <span class="text-2xl"></span>
                     <div class="flex-1">
                         <div class="font-semibold text-sm">Date Picker</div>
                         <div class="text-xs text-slate-500">Calendar date selection</div>
@@ -1676,7 +1676,7 @@ body.dark-mode select.journal-input {
             </button>
             <button onclick="selectFieldType('choice')" class="w-full text-left px-4 py-3 border-2 border-slate-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all">
                 <div class="flex items-center gap-3">
-                    <span class="text-2xl">☑️</span>
+                    <span class="text-2xl"></span>
                     <div class="flex-1">
                         <div class="font-semibold text-sm">Dropdown</div>
                         <div class="text-xs text-slate-500">Select from predefined options</div>
@@ -1714,7 +1714,7 @@ body.dark-mode select.journal-input {
             <div class="space-y-2">
                 <div class="flex gap-2">
                     <button id="emoji_picker_btn" onclick="toggleEmojiPicker()" class="px-3 py-2 border border-slate-300 rounded-lg text-2xl hover:bg-slate-50 transition-colors" title="Choose emoji">
-                        <span id="selected_emoji">📁</span>
+                        <span id="selected_emoji"></span>
                     </button>
                     <input type="text" id="new_program_input" placeholder="Enter new program name..." class="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100" onkeypress="if(event.key==='Enter') createAndSelectNewProgram()">
                     <button onclick="createAndSelectNewProgram()" class="px-4 py-2 bg-green-500 text-white rounded-lg text-sm font-semibold hover:bg-green-600 transition-colors">Create</button>
@@ -1722,22 +1722,6 @@ body.dark-mode select.journal-input {
                 <div id="emoji_picker" class="hidden bg-slate-50 border border-slate-200 rounded-lg p-3">
                     <p class="text-xs font-semibold text-slate-600 mb-2">Choose an emoji:</p>
                     <div class="flex flex-wrap gap-2">
-                        <button onclick="selectEmoji('📁')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">📁</button>
-                        <button onclick="selectEmoji('🍎')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">🍎</button>
-                        <button onclick="selectEmoji('👨‍👩‍👧‍👦')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">👨‍👩‍👧‍👦</button>
-                        <button onclick="selectEmoji('🏥')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">🏥</button>
-                        <button onclick="selectEmoji('👶')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">👶</button>
-                        <button onclick="selectEmoji('📋')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">📋</button>
-                        <button onclick="selectEmoji('💼')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">💼</button>
-                        <button onclick="selectEmoji('🏠')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">🏠</button>
-                        <button onclick="selectEmoji('🎓')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">🎓</button>
-                        <button onclick="selectEmoji('💰')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">💰</button>
-                        <button onclick="selectEmoji('⚖️')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">⚖️</button>
-                        <button onclick="selectEmoji('🚗')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">🚗</button>
-                        <button onclick="selectEmoji('🔧')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">🔧</button>
-                        <button onclick="selectEmoji('📱')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">📱</button>
-                        <button onclick="selectEmoji('✨')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">✨</button>
-                        <button onclick="selectEmoji('🌟')" class="text-2xl hover:bg-white rounded px-2 py-1 transition-colors">🌟</button>
                     </div>
                 </div>
             </div>
@@ -1870,7 +1854,6 @@ body.dark-mode select.journal-input {
 <button id="scrollToTop" class="scroll-btn" title="Scroll to top">↑</button>
 <button id="scrollToBottom" class="scroll-btn" title="Scroll to bottom">↓</button><!-- PUBLISH BUTTON -->
 <button id="publishBtn" class="admin-only" title="Save all changes">
-    <span>💾</span>
     <span>Publish Changes</span>
 </button>
 
@@ -1945,7 +1928,7 @@ body.dark-mode select.journal-input {
 <!-- DELETE TOAST -->
 <div id="deleteToast">
     <div id="deleteSpinner" class="delete-spinner"></div>
-    <div id="deleteIcon" class="delete-icon" style="display:none;">🗑️✓</div>
+    <div id="deleteIcon" class="delete-icon" style="display:none;"></div>
     <h3 id="deleteMessage" class="text-lg font-bold text-slate-800 mb-1">Deleting...</h3>
     <p id="deleteSubtext" class="text-sm text-slate-500"></p>
 </div>
@@ -1953,7 +1936,7 @@ body.dark-mode select.journal-input {
 <!-- SAVE/PUBLISH TOAST -->
 <div id="saveToast">
     <div id="saveSpinner" class="save-spinner"></div>
-    <div id="saveIcon" class="save-icon" style="display:none;">💾✓</div>
+    <div id="saveIcon" class="save-icon" style="display:none;"></div>
     <h3 id="saveMessage" class="text-lg font-bold text-slate-800 mb-1">Saving...</h3>
     <p id="saveSubtext" class="text-sm text-slate-500"></p>
 </div>
