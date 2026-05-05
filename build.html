@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SSD Journal Builder — Single-File Bundler</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; max-width: 900px; margin: 32px auto; padding: 24px; color: #1e293b; background: #f8fafc; }
+  h1 { color: #0f172a; margin: 0 0 4px; }
+  .sub { color: #64748b; margin: 0 0 28px; }
+  .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+  .step-num { display: inline-block; width: 28px; height: 28px; background: #3b82f6; color: #fff; border-radius: 50%; text-align: center; line-height: 28px; font-weight: 600; margin-right: 8px; }
+  .drop { border: 2px dashed #cbd5e1; border-radius: 8px; padding: 24px; text-align: center; background: #f8fafc; cursor: pointer; transition: all .15s; margin-top: 12px; }
+  .drop:hover, .drop.over { border-color: #3b82f6; background: #eff6ff; }
+  .drop input { display: none; }
+  .drop-label { color: #64748b; font-size: 0.95rem; }
+  .drop.has-files { border-color: #10b981; background: #ecfdf5; }
+  .file-list { font-size: 0.85rem; color: #047857; margin-top: 8px; max-height: 100px; overflow-y: auto; text-align: left; }
+  .file-list li { list-style: none; padding: 2px 0; }
+  button { background: #3b82f6; color: #fff; border: none; padding: 14px 28px; font-size: 1rem; font-weight: 600; border-radius: 8px; cursor: pointer; transition: background .15s; }
+  button:hover:not(:disabled) { background: #2563eb; }
+  button:disabled { background: #cbd5e1; cursor: not-allowed; }
+  .build-btn { width: 100%; padding: 18px; font-size: 1.1rem; margin-top: 8px; }
+  #log { background: #0f172a; color: #94a3b8; font-family: ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 0.85rem; padding: 16px; border-radius: 8px; max-height: 300px; overflow-y: auto; white-space: pre-wrap; margin-top: 16px; display: none; }
+  #log.show { display: block; }
+  .ok { color: #10b981; }
+  .warn { color: #f59e0b; }
+  .err { color: #ef4444; }
+  .small { font-size: 0.85rem; color: #64748b; }
+  .tip { background: #fef9c3; border: 1px solid #fde047; padding: 12px; border-radius: 6px; font-size: 0.9rem; margin: 12px 0; }
+  code { background: #e2e8f0; padding: 1px 6px; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 0.85em; }
+</style>
+</head>
+<body>
+
+<h1>📦 SSD Journal Builder — Bundler</h1>
+<p class="sub">Drop in your repo files, click Build, get a single self-contained HTML file. No Python, no install.</p>
+
+<div class="card">
+  <h3><span class="step-num">1</span> App source files</h3>
+  <p class="small">Drop: <code>index.html</code>, <code>app.js</code>, <code>templatesIndex.json</code>, and <strong>all template JSON files</strong> (drag the whole <code>templates/</code> folder, or select all files inside)</p>
+  <label class="drop" id="dropApp">
+    <input type="file" id="appFiles" multiple webkitdirectory directory>
+    <div class="drop-label">📁 Click to pick the <strong>repo folder</strong> (or drag files here)</div>
+    <ul class="file-list" id="appList"></ul>
+  </label>
+  <p class="small" style="margin-top:8px;">Or pick individual files instead:</p>
+  <label class="drop" id="dropAppFiles" style="padding:14px;">
+    <input type="file" id="appFilesIndividual" multiple accept=".html,.js,.json">
+    <div class="drop-label">📄 Pick individual files (.html, .js, .json)</div>
+  </label>
+</div>
+
+<div class="card">
+  <h3><span class="step-num">2</span> Library files (one-time setup)</h3>
+  <p class="small">Drop the 3 library files. <strong>Get them once from these URLs</strong> (right-click → Save link as):</p>
+  <ul class="small" style="line-height:1.8;">
+    <li><code>tailwind.js</code> → <a href="https://cdn.tailwindcss.com" target="_blank">https://cdn.tailwindcss.com</a></li>
+    <li><code>mammoth.browser.min.js</code> → <a href="https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js" target="_blank">jsdelivr link</a></li>
+    <li><code>jszip.min.js</code> → <a href="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" target="_blank">jsdelivr link</a></li>
+  </ul>
+  <div class="tip">💡 If your work network blocks the CDN, save them at home or via phone hotspot. Save once, reuse forever.</div>
+  <label class="drop" id="dropLibs">
+    <input type="file" id="libFiles" multiple accept=".js">
+    <div class="drop-label">📚 Drop or click to add the 3 .js library files</div>
+    <ul class="file-list" id="libList"></ul>
+  </label>
+</div>
+
+<div class="card">
+  <h3><span class="step-num">3</span> Build</h3>
+  <p class="small">Once both sections show files, click below. Output downloads automatically.</p>
+  <button class="build-btn" id="buildBtn" disabled>⏳ Waiting for files...</button>
+  <div id="log"></div>
+</div>
+
+<script>
+const state = {
+  index: null,
+  templates: {},   // path -> json
+  indexHtml: null,
+  appJs: null,
+  libs: {}         // name -> source string
+};
+
+const REQUIRED_LIBS = ['tailwind.js', 'mammoth.browser.min.js', 'jszip.min.js'];
+
+const logEl = document.getElementById('log');
+function log(msg, cls) {
+  logEl.classList.add('show');
+  const span = document.createElement('div');
+  if (cls) span.className = cls;
+  span.textContent = msg;
+  logEl.appendChild(span);
+  logEl.scrollTop = logEl.scrollHeight;
+}
+
+function readFileAsText(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result);
+    r.onerror = () => rej(r.error);
+    r.readAsText(file);
+  });
+}
+
+async function ingestAppFiles(files) {
+  let added = 0;
+  for (const f of files) {
+    const path = f.webkitRelativePath || f.name;
+    const name = f.name;
+    try {
+      if (name === 'index.html') {
+        state.indexHtml = await readFileAsText(f);
+        added++;
+      } else if (name === 'app.js') {
+        state.appJs = await readFileAsText(f);
+        added++;
+      } else if (name === 'templatesIndex.json') {
+        state.index = JSON.parse(await readFileAsText(f));
+        added++;
+      } else if (name.endsWith('.json') && (path.includes('templates/') || path.includes('templates\\'))) {
+        // store under canonical templates/Program/file.json key
+        const idx = path.search(/templates[\/\\]/);
+        const key = idx >= 0 ? path.substring(idx).replace(/\\/g, '/') : `templates/${name}`;
+        try {
+          state.templates[key] = JSON.parse(await readFileAsText(f));
+          added++;
+        } catch (e) {
+          log(`  ⚠ Skipped malformed JSON: ${key} (${e.message})`, 'warn');
+        }
+      }
+    } catch (e) {
+      log(`  ⚠ Could not read ${name}: ${e.message}`, 'warn');
+    }
+  }
+  return added;
+}
+
+async function ingestLibs(files) {
+  for (const f of files) {
+    if (REQUIRED_LIBS.includes(f.name)) {
+      state.libs[f.name] = await readFileAsText(f);
+    }
+  }
+}
+
+function refreshUI() {
+  // App files list
+  const appList = document.getElementById('appList');
+  appList.innerHTML = '';
+  const items = [];
+  if (state.indexHtml) items.push('✓ index.html');
+  if (state.appJs) items.push('✓ app.js');
+  if (state.index) items.push('✓ templatesIndex.json');
+  const tCount = Object.keys(state.templates).length;
+  if (tCount) items.push(`✓ ${tCount} template JSON files`);
+  items.forEach(t => { const li = document.createElement('li'); li.textContent = t; appList.appendChild(li); });
+  document.getElementById('dropApp').classList.toggle('has-files', items.length > 0);
+  document.getElementById('dropAppFiles').classList.toggle('has-files', items.length > 0);
+
+  // Lib files list
+  const libList = document.getElementById('libList');
+  libList.innerHTML = '';
+  REQUIRED_LIBS.forEach(name => {
+    const li = document.createElement('li');
+    li.textContent = state.libs[name] ? `✓ ${name}` : `✗ ${name} (missing)`;
+    li.style.color = state.libs[name] ? '#047857' : '#94a3b8';
+    libList.appendChild(li);
+  });
+  document.getElementById('dropLibs').classList.toggle('has-files', Object.keys(state.libs).length === 3);
+
+  // Build button state
+  const ready = state.indexHtml && state.appJs && state.index && tCount > 0 && Object.keys(state.libs).length === 3;
+  const btn = document.getElementById('buildBtn');
+  btn.disabled = !ready;
+  btn.textContent = ready ? '🔨 Build SSD-Journal-Builder.html' : '⏳ Waiting for all files...';
+}
+
+// Wire up file inputs
+['appFiles', 'appFilesIndividual'].forEach(id => {
+  document.getElementById(id).addEventListener('change', async (e) => {
+    const n = await ingestAppFiles(e.target.files);
+    log(`Loaded ${n} app file(s) from your selection.`, 'ok');
+    refreshUI();
+  });
+});
+document.getElementById('libFiles').addEventListener('change', async (e) => {
+  await ingestLibs(e.target.files);
+  log(`Loaded ${Object.keys(state.libs).length}/3 library files.`, 'ok');
+  refreshUI();
+});
+
+// Drag & drop visual feedback
+document.querySelectorAll('.drop').forEach(d => {
+  d.addEventListener('dragover', e => { e.preventDefault(); d.classList.add('over'); });
+  d.addEventListener('dragleave', () => d.classList.remove('over'));
+  d.addEventListener('drop', e => d.classList.remove('over'));
+});
+
+// === BUILD ===
+document.getElementById('buildBtn').addEventListener('click', async () => {
+  log('\n=== Building bundle ===', 'ok');
+  log(`Templates: ${Object.keys(state.templates).length}`);
+  log(`Libraries: ${Object.keys(state.libs).length}/3`);
+
+  let html = state.indexHtml;
+
+  // Build embedded block
+  const embedded = `<script>
+/* === EMBEDDED DATA (no fetch needed) === */
+window.__EMBEDDED_INDEX__ = ${JSON.stringify(state.index)};
+window.__EMBEDDED_TEMPLATES__ = ${JSON.stringify(state.templates)};
+
+/* Intercept fetch() so existing app code keeps working unchanged */
+(function(){
+  const origFetch = window.fetch ? window.fetch.bind(window) : null;
+  window.fetch = function(url, opts) {
+    const u = (typeof url === 'string') ? url : (url && url.url) || '';
+    if (u === 'templatesIndex.json' || u.endsWith('/templatesIndex.json')) {
+      return Promise.resolve(new Response(JSON.stringify(window.__EMBEDDED_INDEX__), {
+        status: 200, headers: {'Content-Type':'application/json'}
+      }));
+    }
+    const key = u.replace(/^\\.\\//,'');
+    if (window.__EMBEDDED_TEMPLATES__[key]) {
+      return Promise.resolve(new Response(JSON.stringify(window.__EMBEDDED_TEMPLATES__[key]), {
+        status: 200, headers: {'Content-Type':'application/json'}
+      }));
+    }
+    if (origFetch) return origFetch(url, opts);
+    return Promise.reject(new Error('fetch unavailable: ' + u));
+  };
+})();
+<\/script>
+<script>/* tailwind */
+${state.libs['tailwind.js']}
+<\/script>
+<script>/* mammoth */
+${state.libs['mammoth.browser.min.js']}
+<\/script>
+<script>/* jszip */
+${state.libs['jszip.min.js']}
+<\/script>`;
+
+  // Replace various library reference patterns
+  // Pattern 1: local lib/ references (LAUNCH-READY version)
+  const localPattern = /<!-- Local libraries[^>]*-->[\s\S]*?<script src="lib\/jszip\.min\.js"><\/script>/;
+  // Pattern 2: original CDN references
+  const cdnPattern = /<!-- Tailwind CDN -->[\s\S]*?<script src="https:\/\/cdn\.jsdelivr\.net\/npm\/(?:rtf\.js|jszip)[^"]*"><\/script>/;
+
+  if (localPattern.test(html)) {
+    html = html.replace(localPattern, () => embedded);
+    log('  Replaced local lib/ script tags', 'ok');
+  } else if (cdnPattern.test(html)) {
+    html = html.replace(cdnPattern, () => embedded);
+    log('  Replaced CDN script tags', 'ok');
+  } else {
+    log('  ⚠ Could not find script tag block to replace. Inserting before </head>.', 'warn');
+    html = html.replace('</head>', embedded + '\n</head>');
+  }
+
+  // Remove file:// guard if present (no longer needed)
+  html = html.replace(/<!-- file:\/\/ protocol guard -->[\s\S]*?<\/script>/, '');
+
+  // Inline app.js (handle ./app.js, app.js, with optional ?v=... cache buster)
+  const appJsPattern = /<script\s+src=["']\.?\/?app\.js(\?[^"']*)?["']\s*><\/script>/;
+  if (appJsPattern.test(html)) {
+    html = html.replace(appJsPattern, () => `<script>\n${state.appJs}\n<\/script>`);
+    log('  Inlined app.js', 'ok');
+  } else {
+    log('  ⚠ Could not find <script src="app.js"> tag', 'warn');
+  }
+
+  const sizeMb = (html.length / (1024*1024)).toFixed(2);
+  log(`\n✓ Build complete. Size: ${sizeMb} MB`, 'ok');
+
+  // Trigger download
+  const blob = new Blob([html], { type: 'text/html' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'SSD-Journal-Builder.html';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  log('✓ Download started: SSD-Journal-Builder.html', 'ok');
+  log('\nOpen the downloaded file by double-clicking it. No server needed.', 'ok');
+});
+
+refreshUI();
+</script>
+
+</body>
+</html>
