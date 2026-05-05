@@ -1,0 +1,68 @@
+{
+  "id": "authorization_denied",
+  "name": "Child Care – Authorization Denied",
+  "file": "Authorization_Denied.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "DENIAL INFORMATION",
+      "fields": [
+        {
+          "id": "applicationDate",
+          "label": "Application date",
+          "type": "text"
+        },
+        {
+          "id": "nameOfAllIndividualsTheDenialIsApplicableTo",
+          "label": "Name of all individuals the denial is applicable to",
+          "type": "text"
+        },
+        {
+          "id": "denialReason",
+          "label": "Denial reason",
+          "type": "choice",
+          "choices": [
+            "Family is not eligible to a Stage One authorization. Enter reason:",
+            "Parent/Caretaker is WTW exempt and does not intend to participate.",
+            "Parent/Caretaker is WTW sanctioned and does not intend to cure.",
+            "Unable to determine the parent/caretaker's intent within 3 days."
+          ]
+        },
+        {
+          "id": "denialEffectiveDate",
+          "label": "Denial effective date",
+          "type": "date"
+        },
+        {
+          "id": "dateNa834MailedToParentcaretaker",
+          "label": "Date NA 834 mailed to parent/caretaker",
+          "type": "date"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "DOCUMENTATION",
+      "fields": [
+        {
+          "id": "listOfPagesReviewedAndUpdatedInCalsaws",
+          "label": "List of pages reviewed and updated in CalSAWS",
+          "type": "text"
+        },
+        {
+          "id": "listOfDocumentsverificationsImaged",
+          "label": "List of documents/verifications imaged",
+          "type": "text"
+        },
+        {
+          "id": "additionalInformationAndComments",
+          "label": "Additional information and comments",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

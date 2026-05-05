@@ -1,0 +1,1380 @@
+{
+  "id": "ga_changes",
+  "name": "General Assistance – Changes",
+  "file": "General/GA_Changes.json",
+  "program": "General",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "GENERAL",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "action",
+          "label": "ACTION",
+          "type": "choice",
+          "choices": [
+            "GA: Case Reviewed",
+            "GA: Case Reviewed by Eligibility Clerk"
+          ]
+        },
+        {
+          "id": "longDescription",
+          "label": "LONG DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "source",
+          "label": "SOURCE",
+          "type": "choice",
+          "choices": [
+            "Telephone",
+            "In-Person",
+            "Reported by another program.",
+            "Reported to another program.",
+            "Assigned Task",
+            "Exception List",
+            "External Communication (Specify):",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "familyContactDate",
+          "label": "Family Contact Date",
+          "type": "date"
+        },
+        {
+          "id": "familyContactConductedWith",
+          "label": "Family Contact Conducted With",
+          "type": "text"
+        },
+        {
+          "id": "familyAuthenticationSpecifyWhatAuthenticationFactorsWereUsed",
+          "label": "Family Authentication (Specify what authentication factors were used)",
+          "type": "text"
+        },
+        {
+          "id": "informationReportedListTheInformationBeingReported",
+          "label": "INFORMATION REPORTED (List the information being reported)",
+          "type": "text"
+        },
+        {
+          "id": "changeEffectiveMonth",
+          "label": "CHANGE EFFECTIVE MONTH",
+          "type": "text"
+        },
+        {
+          "id": "language",
+          "label": "LANGUAGE",
+          "type": "choice",
+          "choices": [
+            "English",
+            "Spanish- Certified SSO worker assisted- DPSS 1764 requirements fulfilled. Worker #:",
+            "Other (DPSS 1764 required) (Specify the requested language and how the request was accommodated):"
+          ]
+        },
+        {
+          "id": "declarationOfLanguageSpecialNeedsDpss3167",
+          "label": "Declaration of Language / Special Needs (DPSS 3167)",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "Completed"
+          ]
+        },
+        {
+          "id": "authorizedRepresentativeSpecifyWhoWasRequestedAndHowRequestWasVerified",
+          "label": "AUTHORIZED REPRESENTATIVE (Specify who was requested and how request was verified)",
+          "type": "text"
+        },
+        {
+          "id": "voterRegistration",
+          "label": "VOTER REGISTRATION",
+          "type": "choice",
+          "choices": [
+            "VOTER REGISTRATION (Copy the information for each person over 15 years of age): Voter Preference Form provided to the family.",
+            "VOTER REGISTRATION (Copy the information for each person over 15 years of age): Voter Preference Form completed."
+          ]
+        },
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "voterPreference",
+          "label": "Voter Preference",
+          "type": "choice",
+          "choices": [
+            "Declined to register to vote.",
+            "Already registered to vote.",
+            "Requested to register to vote. Voter Registration Card provided to the family."
+          ]
+        },
+        {
+          "id": "contact",
+          "label": "CONTACT",
+          "type": "text"
+        },
+        {
+          "id": "physicalAddress",
+          "label": "Physical Address",
+          "type": "choice",
+          "choices": [
+            "None. Homeless",
+            "Reported on the application.",
+            "Physical Address (Different than reported on the application):"
+          ]
+        },
+        {
+          "id": "mailingAddress",
+          "label": "Mailing Address",
+          "type": "choice",
+          "choices": [
+            "Reported on the application.",
+            "Mailing Address (Different than reported on the application):"
+          ]
+        },
+        {
+          "id": "email",
+          "label": "E-Mail",
+          "type": "choice",
+          "choices": [
+            "None reported.",
+            "Already on file.",
+            "Updated"
+          ]
+        },
+        {
+          "id": "householdCompositionListEachPersonLivingInTheHomeWithAges",
+          "label": "HOUSEHOLD COMPOSITION (List each person living in the home with ages)",
+          "type": "text"
+        },
+        {
+          "id": "relationship",
+          "label": "RELATIONSHIP",
+          "type": "choice",
+          "choices": [
+            "Primary applicant only.",
+            "RELATIONSHIP (Define the relationships to establish the Needs Unit):"
+          ]
+        },
+        {
+          "id": "pregnancy",
+          "label": "PREGNANCY",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "None reported. No discrepancies.",
+            "PREGNANCY (List each person reported as pregnant):"
+          ]
+        },
+        {
+          "id": "name2",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "expectedDateOfConfinementEdc",
+          "label": "Expected Date of Confinement (EDC)",
+          "type": "text"
+        },
+        {
+          "id": "potentialCalworksEligibilityDp44205",
+          "label": "Potential CalWORKs Eligibility (DP 44-205)",
+          "type": "choice",
+          "choices": [
+            "Yes, 18 years of age or younger.",
+            "Yes, 19 years of age or older and in the second or third trimester.",
+            "No"
+          ]
+        },
+        {
+          "id": "sharedExpensesResources",
+          "label": "SHARED EXPENSES & RESOURCES",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "Primary applicant only",
+            "SHARED EXPENSES & RESOURCES (List all persons who share expenses and resources with the primary applicant):"
+          ]
+        },
+        {
+          "id": "socialSecurityNumberSsn",
+          "label": "SOCIAL SECURITY NUMBER (SSN)",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "Not applicable. Needs Unit is composed of only non-citizens without SSNs.",
+            "SOCIAL SECURITY NUMBER (SSN) (Copy the information for each person):"
+          ]
+        },
+        {
+          "id": "name3",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "verification",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "citizenship",
+          "label": "CITIZENSHIP",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "All applicants are reported as U.S.-born citizens. No discrepancies.",
+            "CITIZENSHIP (Copy the information for each naturalized citizen and non-citizen):"
+          ]
+        },
+        {
+          "id": "name4",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "noncitizenType",
+          "label": "Non-Citizen Type",
+          "type": "text"
+        },
+        {
+          "id": "alienNumber",
+          "label": "Alien Number",
+          "type": "text"
+        },
+        {
+          "id": "documentNumber",
+          "label": "Document Number",
+          "type": "text"
+        },
+        {
+          "id": "categoryCode",
+          "label": "Category Code",
+          "type": "text"
+        },
+        {
+          "id": "entryDate",
+          "label": "Entry Date",
+          "type": "text"
+        },
+        {
+          "id": "verification2",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "sponsor",
+          "label": "Sponsor",
+          "type": "choice",
+          "choices": [
+            "None. Non-citizen is not eligible to benefits.",
+            "None. Non-citizen is not sponsored.",
+            "Not required. Non-citizen opted out for benefits.",
+            "Not required. Entry date is before amnesty date of 12/19/97.",
+            "Not required. Non-citizen has 40 quarters of work.",
+            "Not required. Sponsor is deceased."
+          ]
+        },
+        {
+          "id": "verification3",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "responsibleRelatives",
+          "label": "RESPONSIBLE RELATIVES",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "None reported. No discrepancies.",
+            "RESPONSIBLE RELATIVES (Copy the information for each responsible relative):"
+          ]
+        },
+        {
+          "id": "name5",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "responsibleRelative",
+          "label": "Responsible Relative",
+          "type": "text"
+        },
+        {
+          "id": "relationship2",
+          "label": "Relationship",
+          "type": "text"
+        },
+        {
+          "id": "responsibleRelativeSponsorLetterDpss23",
+          "label": "Responsible Relative / Sponsor Letter (DPSS 23)",
+          "type": "choice",
+          "choices": [
+            "Pending: DPSS 23 provided to the family.",
+            "Verification: DPSS 23 completed."
+          ]
+        },
+        {
+          "id": "residency",
+          "label": "RESIDENCY",
+          "type": "choice",
+          "choices": [
+            "Family has moved to another county in California. No longer a resident of Riverside County.",
+            "Family moved out of state. No longer a California resident."
+          ]
+        },
+        {
+          "id": "noncompliance",
+          "label": "NON-COMPLIANCE",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "None reported. No discrepancies.",
+            "NON-COMPLIANCE (Copy the information for each person):"
+          ]
+        },
+        {
+          "id": "name6",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "type",
+          "label": "Type",
+          "type": "text"
+        },
+        {
+          "id": "verification4",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "timeLimits",
+          "label": "TIME LIMITS",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "Not applicable. Exempt / Unemployable",
+            "None reported. No discrepancies.",
+            "TIME LIMITS (Copy the information for each non-exempt / employable person):"
+          ]
+        },
+        {
+          "id": "name7",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "previous12MonthPeriodStartDate",
+          "label": "Previous 12 Month Period Start Date",
+          "type": "text"
+        },
+        {
+          "id": "workParticipation",
+          "label": "WORK PARTICIPATION",
+          "type": "choice",
+          "choices": [
+            "Not applicable. Exempt/Unemployable",
+            "WORK PARTICIPATION (Copy the information for each non-exempt / employable person):"
+          ]
+        },
+        {
+          "id": "name8",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "workParticipationOption",
+          "label": "Work Participation Option",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "Independent Job Search",
+            "Job Training/Readiness Tool",
+            "Work Fare Program",
+            "CalFresh Employment & Training (CFET) (Only available if receiving CalFresh)"
+          ]
+        },
+        {
+          "id": "schoolAttendance",
+          "label": "SCHOOL ATTENDANCE",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "None reported. No discrepancies.",
+            "SCHOOL ATTENDANCE (Copy the information for each student):"
+          ]
+        },
+        {
+          "id": "name9",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "schoolName",
+          "label": "School Name",
+          "type": "text"
+        },
+        {
+          "id": "schoolType",
+          "label": "School Type",
+          "type": "text"
+        },
+        {
+          "id": "verification5",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "needsMetBySchool",
+          "label": "Needs Met by School",
+          "type": "text"
+        },
+        {
+          "id": "livingArrangements",
+          "label": "LIVING ARRANGEMENTS",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "None reported. No discrepancies.",
+            "Drug and Alcohol Rehabilitation Center. Program participation pending.",
+            "Drug and Alcohol Rehabilitation Center. Program participation verification:",
+            "Homeless: Self-Certification on the application accepted. No discrepancies.",
+            "Other (Specify living arrangement and verification used, if unable to participate in work activites):"
+          ]
+        },
+        {
+          "id": "emergencyShelterReferralProgram",
+          "label": "EMERGENCY SHELTER REFERRAL PROGRAM",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "Ineligible. Needs Unit is not homeless.",
+            "Ineligible. Declined / Refused to participate. Family was informed that they would not be eligible to the Homeless Housing Benefit.",
+            "EMERGENCY SHELTER REFERRAL PROGRAM (Copy the information for each person being referred):"
+          ]
+        },
+        {
+          "id": "name10",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "releaseOfInformationRoi",
+          "label": "Release of Information (ROI)",
+          "type": "choice",
+          "choices": [
+            "Pending. Homeless Youth (18 - 24) ROI provided to the family.",
+            "Pending. Universal ROI provided to the family.",
+            "Verification: Homeless Youth (18 - 24) ROI completed.",
+            "Verification: Universal ROI completed."
+          ]
+        },
+        {
+          "id": "serviceReferralCsf136",
+          "label": "Service Referral (CSF 136)",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "Generated and sent with ROI and referral form to FSS."
+          ]
+        },
+        {
+          "id": "referralStatus",
+          "label": "Referral Status",
+          "type": "choice",
+          "choices": [
+            "Denied",
+            "Pending",
+            "Approved"
+          ]
+        },
+        {
+          "id": "potentialHomelessHousingBenefit",
+          "label": "Potential Homeless Housing Benefit",
+          "type": "choice",
+          "choices": [
+            "Ineligible. Homeless shelter referral was approved.",
+            "Pending",
+            "Eligible. Needs Unit is complying with emergency shelter referral program."
+          ]
+        },
+        {
+          "id": "potentiallyAvailableIncome",
+          "label": "POTENTIALLY AVAILABLE INCOME",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "None reported. No discrepancies.",
+            "POTENTIALLY AVAILABLE INCOME (Copy the information for each source):"
+          ]
+        },
+        {
+          "id": "name11",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "howWasPotentialEligibilityDetermined",
+          "label": "How was Potential Eligibility Determined",
+          "type": "text"
+        },
+        {
+          "id": "proofOfApplicationVerification",
+          "label": "Proof of Application Verification",
+          "type": "text"
+        },
+        {
+          "id": "militaryVeterans",
+          "label": "MILITARY / VETERANS",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "None reported with no discrepancies.",
+            "MILITARY / VETERANS (Copy the information for each military / veteran person):"
+          ]
+        },
+        {
+          "id": "name12",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "branch",
+          "label": "Branch",
+          "type": "text"
+        },
+        {
+          "id": "enlistmentDate",
+          "label": "Enlistment Date",
+          "type": "text"
+        },
+        {
+          "id": "verification6",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "unemployableExempt",
+          "label": "UNEMPLOYABLE / EXEMPT",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "None reported. No discrepancies.",
+            "UNEMPLOYABLE / EXEMPT (Copy the information for each person claiming an exemption):"
+          ]
+        },
+        {
+          "id": "name13",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "exemption",
+          "label": "Exemption",
+          "type": "choice",
+          "choices": [
+            "Medically disabled.",
+            "Attending a substance abuse treatment program that prevents Work Participation.",
+            "Caring full time for another Budget Unit Member that is ill or disabled.",
+            "Emancipated Minor attending school full-time.",
+            "18 year old attending school full time for a High School Diploma.",
+            "Adult over 65 years of age.",
+            "Participant in an approved training or education program approved by EDD. See DP 90-001 for conditions."
+          ]
+        },
+        {
+          "id": "unemployableStatus",
+          "label": "Unemployable Status",
+          "type": "choice",
+          "choices": [
+            "Full Exemption. No work requirement.",
+            "Partial Exemption. Work requirement (Specify):"
+          ]
+        },
+        {
+          "id": "durationOfUnemployableStatus",
+          "label": "Duration of Unemployable Status",
+          "type": "text"
+        },
+        {
+          "id": "verification7",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "interimAssistanceIa",
+          "label": "INTERIM ASSISTANCE (IA)",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "Ineligible. No one is over 65 years of age or expected to be disabled for 12 months.",
+            "INTERIM ASSISTANCE (IA) (Copy the information for each aged / disabled person):"
+          ]
+        },
+        {
+          "id": "name14",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "potentialEligibilityDetermination",
+          "label": "Potential Eligibility Determination",
+          "type": "choice",
+          "choices": [
+            "Disability lasting or expected to last longer than 12 months.",
+            "Over 65 years of age."
+          ]
+        },
+        {
+          "id": "authorizationForReimbursementSsp14",
+          "label": "Authorization for Reimbursement (SSP 14)",
+          "type": "choice",
+          "choices": [
+            "Pending. SSP 14 provided to the family.",
+            "Verification: SSP 14 completed and sent to SSA."
+          ]
+        },
+        {
+          "id": "iaSupplementalAgreementDpss2424",
+          "label": "IA Supplemental Agreement (DPSS 2424)",
+          "type": "choice",
+          "choices": [
+            "Pending. DPSS 2424 provided to the family.",
+            "Verification: DPSS 2424 completed."
+          ]
+        },
+        {
+          "id": "proofOfApplicationVerificationCurrentStatusVerification",
+          "label": "Proof of Application Verification / Current Status Verification",
+          "type": "choice",
+          "choices": [
+            "Proof of Application Verification: Pending",
+            "Proof of Application Verification:",
+            "Current Status Verification: Pending",
+            "Current Status Verification: Application Pending:",
+            "Current Status Verification: Application Denied. Appeal for reconsideration:",
+            "Current Status Verification: Application Denied. Appeal for Administrative Law Judge hearing:",
+            "Current Status Verification: Application Denied. Appeal for Appeals Council Review:",
+            "Current Status Verification: Application Denied. Appeal for Federal Court Review:"
+          ]
+        },
+        {
+          "id": "housingAndDisabilityAdvocacyProgramReferralHdap",
+          "label": "HOUSING AND DISABILITY ADVOCACY PROGRAM REFERRAL (HDAP)",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "Ineligible. Needs Unit is not both homeless and disabled.",
+            "Ineligible. Declined / Refused to participate. Needs Unit was informed that they would be ineligible to the Homeless Housing Benefit.",
+            "HOUSING AND DISABILITY ADVOCACY PROGRAM REFERRAL (HDAP) (Copy the information for each person screened):"
+          ]
+        },
+        {
+          "id": "name15",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "hdapScreeningDpss4698",
+          "label": "HDAP Screening (DPSS 4698)",
+          "type": "choice",
+          "choices": [
+            "Ineligible. Pending application with Social Security Administration for disability or retirement benefits.",
+            "Ineligible. Able to participate in work participation activities.",
+            "Ineligible. Primary residence is intended for human habitation.",
+            "Potentially eligible"
+          ]
+        },
+        {
+          "id": "hdapApplicationDpss4697",
+          "label": "HDAP Application (DPSS 4697)",
+          "type": "choice",
+          "choices": [
+            "Pending. DPSS 4697 provided to the family.",
+            "Verification: DPSS 4697 completed."
+          ]
+        },
+        {
+          "id": "authorizationForReimbursementSsp142",
+          "label": "Authorization for Reimbursement (SSP 14)",
+          "type": "choice",
+          "choices": [
+            "Pending. SSP 14 provided to the family.",
+            "Verification: SSP 14 completed and sent to SSA."
+          ]
+        },
+        {
+          "id": "potentialHomelessHousingBenefit2",
+          "label": "Potential Homeless Housing Benefit",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "Eligible. Needs Unit completed HDAP application. HDAP application sent to the HDAP Coordinator."
+          ]
+        },
+        {
+          "id": "otherProgramAssistance",
+          "label": "OTHER PROGRAM ASSISTANCE",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "None reported. No discrepancies.",
+            "OTHER PROGRAM ASSISTANCE (Copy the information for each source of assistance):"
+          ]
+        },
+        {
+          "id": "name16",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "source2",
+          "label": "Source",
+          "type": "text"
+        },
+        {
+          "id": "frequency",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "verification8",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "amountUsed",
+          "label": "Amount Used",
+          "type": "text"
+        },
+        {
+          "id": "employment",
+          "label": "EMPLOYMENT",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "None reported. No discrepancies.",
+            "EMPLOYMENT (Copy the information for each employer):"
+          ]
+        },
+        {
+          "id": "name17",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "employer",
+          "label": "Employer",
+          "type": "text"
+        },
+        {
+          "id": "startDate",
+          "label": "Start Date",
+          "type": "text"
+        },
+        {
+          "id": "hourlyRate",
+          "label": "Hourly Rate",
+          "type": "text"
+        },
+        {
+          "id": "averageHoursWeekly",
+          "label": "Average Hours Weekly",
+          "type": "text"
+        },
+        {
+          "id": "employmentHistory",
+          "label": "EMPLOYMENT HISTORY",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "No employment by W-2 employer within prior 18 months reported. No discrepancies.",
+            "EMPLOYMENT HISTORY (Copy the information for each previous employer):"
+          ]
+        },
+        {
+          "id": "name18",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "employer2",
+          "label": "Employer",
+          "type": "text"
+        },
+        {
+          "id": "lateDateWorked",
+          "label": "Late Date Worked",
+          "type": "text"
+        },
+        {
+          "id": "lastDatePaid",
+          "label": "Last Date Paid",
+          "type": "text"
+        },
+        {
+          "id": "reasonEmploymentEnded",
+          "label": "Reason Employment Ended",
+          "type": "text"
+        },
+        {
+          "id": "income",
+          "label": "INCOME",
+          "type": "choice",
+          "choices": [
+            "Zero Income reported. No discrepancies.",
+            "Needs Unit only has the income reported under Other Program Assistance.",
+            "INCOME (Copy the information for each source of income):"
+          ]
+        },
+        {
+          "id": "name19",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "source3",
+          "label": "Source",
+          "type": "text"
+        },
+        {
+          "id": "frequency2",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "verification9",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "amountUsedSpecifyHowIncomeWasCalculated",
+          "label": "Amount Used (Specify how income was calculated)",
+          "type": "text"
+        },
+        {
+          "id": "property",
+          "label": "PROPERTY",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "None reported. No discrepancies.",
+            "PROPERTY (Must verify each property over $25 in value):"
+          ]
+        },
+        {
+          "id": "realPropertyCopyTheInformationForEachProperty",
+          "label": "Real Property (Copy the information for each property)",
+          "type": "text"
+        },
+        {
+          "id": "owner",
+          "label": "Owner",
+          "type": "text"
+        },
+        {
+          "id": "encumbrance",
+          "label": "Encumbrance",
+          "type": "text"
+        },
+        {
+          "id": "verification10",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "value",
+          "label": "Value",
+          "type": "text"
+        },
+        {
+          "id": "vehiclesCopyTheInformationForEachVehicle",
+          "label": "Vehicles (Copy the information for each vehicle)",
+          "type": "text"
+        },
+        {
+          "id": "owner2",
+          "label": "Owner",
+          "type": "text"
+        },
+        {
+          "id": "make",
+          "label": "Make",
+          "type": "text"
+        },
+        {
+          "id": "model",
+          "label": "Model",
+          "type": "text"
+        },
+        {
+          "id": "year",
+          "label": "Year",
+          "type": "text"
+        },
+        {
+          "id": "numberOfDoors",
+          "label": "Number of Doors",
+          "type": "text"
+        },
+        {
+          "id": "color",
+          "label": "Color",
+          "type": "text"
+        },
+        {
+          "id": "mileage",
+          "label": "Mileage",
+          "type": "text"
+        },
+        {
+          "id": "encumbrance2",
+          "label": "Encumbrance",
+          "type": "text"
+        },
+        {
+          "id": "verification11",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "value2",
+          "label": "Value",
+          "type": "text"
+        },
+        {
+          "id": "bankAccountsCopyTheInformationForEachAccount",
+          "label": "Bank Accounts (Copy the information for each account)",
+          "type": "text"
+        },
+        {
+          "id": "owner3",
+          "label": "Owner",
+          "type": "text"
+        },
+        {
+          "id": "type2",
+          "label": "Type",
+          "type": "text"
+        },
+        {
+          "id": "accountNumber",
+          "label": "Account Number",
+          "type": "text"
+        },
+        {
+          "id": "verification12",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "value3",
+          "label": "Value",
+          "type": "text"
+        },
+        {
+          "id": "retirementAccountsCopyTheInformationForEachAccount",
+          "label": "Retirement Accounts (Copy the information for each account)",
+          "type": "text"
+        },
+        {
+          "id": "owner4",
+          "label": "Owner",
+          "type": "text"
+        },
+        {
+          "id": "type3",
+          "label": "Type",
+          "type": "text"
+        },
+        {
+          "id": "accountNumber2",
+          "label": "Account Number",
+          "type": "text"
+        },
+        {
+          "id": "verification13",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "value4",
+          "label": "Value",
+          "type": "text"
+        },
+        {
+          "id": "payCardsCopyTheInformationForEachAccount",
+          "label": "Pay Cards (Copy the information for each account)",
+          "type": "text"
+        },
+        {
+          "id": "owner5",
+          "label": "Owner",
+          "type": "text"
+        },
+        {
+          "id": "company",
+          "label": "Company",
+          "type": "text"
+        },
+        {
+          "id": "verification14",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "value5",
+          "label": "Value",
+          "type": "text"
+        },
+        {
+          "id": "cashOnHandCopyTheInformationForEachAccount",
+          "label": "Cash on Hand (Copy the information for each account)",
+          "type": "text"
+        },
+        {
+          "id": "owner6",
+          "label": "Owner",
+          "type": "text"
+        },
+        {
+          "id": "verification15",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "value6",
+          "label": "Value",
+          "type": "text"
+        },
+        {
+          "id": "otherPropertyCopyTheInformationForEachAccount",
+          "label": "Other Property (Copy the information for each account)",
+          "type": "text"
+        },
+        {
+          "id": "owner7",
+          "label": "Owner",
+          "type": "text"
+        },
+        {
+          "id": "type4",
+          "label": "Type",
+          "type": "text"
+        },
+        {
+          "id": "verification16",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "value7",
+          "label": "Value",
+          "type": "text"
+        },
+        {
+          "id": "specialNeeds",
+          "label": "SPECIAL NEEDS",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "None requested.",
+            "SPECIAL NEEDS (Copy the information for each person):"
+          ]
+        },
+        {
+          "id": "name20",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "verification17",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "amount",
+          "label": "Amount",
+          "type": "text"
+        },
+        {
+          "id": "needs",
+          "label": "NEEDS",
+          "type": "text"
+        },
+        {
+          "id": "housingAndOrUtilityNeeds",
+          "label": "Housing and / or Utility Needs",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "Ineligible. None reported. No discrepancies.",
+            "Ineligible. Needs are met. (Specify how):",
+            "Ineligible. Needs Unit refused / declined to verify expenses.",
+            "Ineligible. Needs Unit refused / declined to participate in the Emergency Shelter Referral Program.",
+            "Ineligible. Needs Unit refused / declined to participate in the Housing and Disability Advocacy Program Referral.",
+            "Eligible. Homeless Housing Benefit",
+            "Housing and / or Utility Needs (Copy the information for each expense):"
+          ]
+        },
+        {
+          "id": "name21",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "frequency3",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "verification18",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "amountPaidByNeedsUnitExplainHowAmountWasDetermined",
+          "label": "Amount Paid by Needs Unit (Explain how amount was determined)",
+          "type": "text"
+        },
+        {
+          "id": "foodNeeds",
+          "label": "Food Needs",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "Ineligible. Needs are met. (Specify how):",
+            "Eligible"
+          ]
+        },
+        {
+          "id": "personalNeeds",
+          "label": "Personal Needs",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "Ineligible. Needs are met. (Specify how):",
+            "Eligible"
+          ]
+        },
+        {
+          "id": "expenses",
+          "label": "EXPENSES",
+          "type": "text"
+        },
+        {
+          "id": "selfemploymentExpenses",
+          "label": "Self-Employment Expenses",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "Self-Employment Expenses (Copy the information for each expense):"
+          ]
+        },
+        {
+          "id": "name22",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "type5",
+          "label": "Type",
+          "type": "choice",
+          "choices": [
+            "Standard self-employment expenses claimed.",
+            "Actual self-employment expenses claimed."
+          ]
+        },
+        {
+          "id": "frequency4",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "verification19",
+          "label": "Verification",
+          "type": "choice",
+          "choices": [
+            "Not required. Standard self-employment expenses claimed.",
+            "Pending. Actual self-employment expenses claimed."
+          ]
+        },
+        {
+          "id": "amount2",
+          "label": "Amount",
+          "type": "text"
+        },
+        {
+          "id": "incomeAndEligibilityVerificationSystemIevs",
+          "label": "INCOME AND ELIGIBILITY VERIFICATION SYSTEM (IEVS)",
+          "type": "text"
+        },
+        {
+          "id": "ievsApplicantReport",
+          "label": "IEVS Applicant Report",
+          "type": "choice",
+          "choices": [
+            "Received and reviewed. No discrepancies.",
+            "Reports closed. No discrepancies.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "paymentVerificationSystemPvs",
+          "label": "Payment Verification System (PVS)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "newHireRegistryNhr",
+          "label": "New Hire Registry (NHR)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        },
+        {
+          "id": "medicalEligibilityDataSystemMedsAlerts",
+          "label": "Medi-Cal Eligibility Data System (MEDS) Alerts",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Alerts closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        },
+        {
+          "id": "firstContactResolution",
+          "label": "FIRST CONTACT RESOLUTION",
+          "type": "text"
+        },
+        {
+          "id": "electronicVerificationSources",
+          "label": "Electronic Verification Sources",
+          "type": "choice",
+          "choices": [
+            "Not required. No pending verifications.",
+            "Attempted. Unable to obtain verifications."
+          ]
+        },
+        {
+          "id": "otherProgramsReview",
+          "label": "Other Programs Review",
+          "type": "choice",
+          "choices": [
+            "No other open programs.",
+            "No action required. Programs are current.",
+            "Action required for another program. Family declined to resolve.",
+            "Action required for another program. Unable to assist due to lack of skill. Family connected to team member skilled for that program.",
+            "Action required for another program. See separate Journal Entry for resolution."
+          ]
+        },
+        {
+          "id": "impactToOtherPrograms",
+          "label": "Impact to Other Programs",
+          "type": "choice",
+          "choices": [
+            "No other open programs.",
+            "No impact as family did not provide verifications.",
+            "Unable to determine due to lack of skill. Team member skilled for that program notified.",
+            "See separate Journal Entry for impact determination."
+          ]
+        },
+        {
+          "id": "pendingVerifications",
+          "label": "PENDING VERIFICATIONS",
+          "type": "choice",
+          "choices": [
+            "None",
+            "PENDING VERIFICATIONS (List verifications and due dates):"
+          ]
+        },
+        {
+          "id": "tasksDueFuture",
+          "label": "TASKS DUE FUTURE",
+          "type": "choice",
+          "choices": [
+            "None",
+            "TASKS DUE FUTURE (List task and due date):"
+          ]
+        },
+        {
+          "id": "electronicBenefitTransferEbtAccount",
+          "label": "ELECTRONIC BENEFIT TRANSFER (EBT) ACCOUNT",
+          "type": "choice",
+          "choices": [
+            "Cash account will need to be reactivated.",
+            "Cash account is active."
+          ]
+        },
+        {
+          "id": "electronicBenefitTransferEbtCard",
+          "label": "Electronic Benefit Transfer (EBT) Card",
+          "type": "choice",
+          "choices": [
+            "Family stated to have an EBT card in good, working order.",
+            "Family requested a replacement."
+          ]
+        },
+        {
+          "id": "designatedCardHolder",
+          "label": "Designated Card Holder",
+          "type": "choice",
+          "choices": [
+            "None requested.",
+            "Designated Card Holder (Specify who was requested and how request was verified):"
+          ]
+        },
+        {
+          "id": "budgetWorksheet",
+          "label": "BUDGET WORKSHEET",
+          "type": "choice",
+          "choices": [
+            "Not required for determination.",
+            "Pending",
+            "To be completed by an Eligibility Technician.",
+            "Completed and imaged."
+          ]
+        },
+        {
+          "id": "eligibilityDeterminationBenefitCalculationEdbcResults",
+          "label": "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS",
+          "type": "choice",
+          "choices": [
+            "Not required. Reported change does not lead to a determination change.",
+            "Discontinued (Specify reason):",
+            "Pending",
+            "Ready to process. Task set for Eligibility Technician to process.",
+            "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS (List each month run and the allotment that was issued):"
+          ]
+        },
+        {
+          "id": "noticeOfActionNoa",
+          "label": "NOTICE OF ACTION (NOA)",
+          "type": "choice",
+          "choices": [
+            "Not required. Reported change does not lead to a determination change.",
+            "Pending",
+            "To be completed by an Eligibility Technician.",
+            "Completed and imaged, then provided to the family."
+          ]
+        }
+      ]
+    }
+  ]
+}

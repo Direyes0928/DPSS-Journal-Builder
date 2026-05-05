@@ -1,0 +1,220 @@
+{
+  "id": "ga_missed_interview",
+  "name": "General Assistance – Missed Interview",
+  "file": "GA_Missed_Interview.json",
+  "program": "General Assistance",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "missedInterviewAction",
+          "label": "MISSED INTERVIEW ACTION",
+          "type": "choice",
+          "choices": [
+            "GA: Missed Application Interview",
+            "GA: Missed Reapplication Interview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "INTERVIEW INFORMATION",
+      "fields": [
+        {
+          "id": "applicationReapplication",
+          "label": "APPLICATION / REAPPLICATION",
+          "type": "choice",
+          "choices": [
+            "APPLICATION DATE:",
+            "REAPPLICATION MONTH:"
+          ]
+        },
+        {
+          "id": "interviewMethod",
+          "label": "INTERVIEW METHOD",
+          "type": "choice",
+          "choices": [
+            "Telephone",
+            "In-Person. Family requested.",
+            "In-Person. No phone number provided on the application."
+          ]
+        },
+        {
+          "id": "interviewDateAndTime",
+          "label": "Interview Date and Time",
+          "type": "text"
+        },
+        {
+          "id": "language",
+          "label": "LANGUAGE",
+          "type": "choice",
+          "choices": [
+            "English",
+            "Spanish- Certified SSO worker assisted- DPSS 1764 requirements fulfilled. Worker #:",
+            "Other (DPSS 1764 required) (Specify the requested language and how the request was accommodated):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "CONTACT ATTEMPTS",
+      "fields": [
+        {
+          "id": "firstCall",
+          "label": "FIRST CALL",
+          "type": "choice",
+          "choices": [
+            "Unable to call. No phone number provided. Office reception log reviewed (Specify time reviewed):",
+            "FIRST CALL (Copy the information for each phone number on file) (Specify time called):"
+          ]
+        },
+        {
+          "id": "callAttempts",
+          "label": "Call Attempts",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "callType",
+              "label": "Call Type",
+              "type": "choice",
+              "choices": [
+                "FIRST CALL (Copy the information for each phone number on file) (Specify time called):",
+                "Unable to call. No phone number provided."
+              ]
+            },
+            {
+              "id": "phoneNumber",
+              "label": "Phone Number",
+              "type": "text"
+            },
+            {
+              "id": "result",
+              "label": "Result",
+              "type": "choice",
+              "choices": [
+                "Call unanswered. Unable to leave a message. No voicemail available.",
+                "Call unanswered. Unable to leave a message. Voicemail is full.",
+                "Call unanswered. Left the scripted message on voicemail.",
+                "Call answered by non-case person. Call recipient denied association to the family. No further action taken.",
+                "Call answered by non-case person. Call recipient confirmed association to the family. Left a message for the family.",
+                "Call answered by family. Family was authenticated. Family is unable to conduct an interview at this time. Family scheduled for an interview.",
+                "Other (Specify):"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "IEVS / PVS / NHR / MEDS",
+      "fields": [
+        {
+          "id": "incomeAndEligibilityVerificationSystemIevs",
+          "label": "INCOME AND ELIGIBILITY VERIFICATION SYSTEM (IEVS)",
+          "type": "text"
+        },
+        {
+          "id": "ievsApplicantReport",
+          "label": "IEVS Applicant Report",
+          "type": "choice",
+          "choices": [
+            "Received and reviewed for this application. No discrepancies.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "paymentVerificationSystemPvs",
+          "label": "Payment Verification System (PVS)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "newHireRegistryNhr",
+          "label": "New Hire Registry (NHR)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        },
+        {
+          "id": "medicalEligibilityDataSystemMedsAlerts",
+          "label": "Medi-Cal Eligibility Data System (MEDS) Alerts",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Alerts closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "FIRST CONTACT RESOLUTION",
+      "fields": [
+        {
+          "id": "firstContactResolution",
+          "label": "FIRST CONTACT RESOLUTION",
+          "type": "text"
+        },
+        {
+          "id": "impactToOtherPrograms",
+          "label": "Impact to Other Programs",
+          "type": "choice",
+          "choices": [
+            "No other open programs.",
+            "No impact as interview was not conducted.",
+            "Unable to determine due to lack of skill. Team member skilled for that program notified.",
+            "See separate Journal Entry for impact determination."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "EDBC / NOA",
+      "fields": [
+        {
+          "id": "eligibilityDeterminationBenefitCalculationEdbcResults",
+          "label": "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS",
+          "type": "choice",
+          "choices": [
+            "Not run. Previously processed for missed interview.",
+            "Denied: Failed to complete determination.",
+            "Discontinued: Failed to complete redetermination.",
+            "Ready to process. Task set for Eligibility Technician to process."
+          ]
+        },
+        {
+          "id": "noticeOfActionNoa",
+          "label": "NOTICE OF ACTION (NOA)",
+          "type": "choice",
+          "choices": [
+            "Not required. DPSS 1366A previously provided.",
+            "Not required. DPSS 1366M previously provided.",
+            "Pending for Eligibility Technician.",
+            "Completed and imaged, then provided to the family."
+          ]
+        }
+      ]
+    }
+  ]
+}

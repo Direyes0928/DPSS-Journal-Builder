@@ -1,0 +1,289 @@
+{
+  "id": "stage_two_transfer",
+  "name": "Child Care – Stage Two Transfer",
+  "file": "Stage_Two_Transfer.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "GENERAL",
+      "fields": [
+        {
+          "id": "shortDescriptionStageTwoTransferClickOrTapToEnterADate",
+          "label": "Short Description - STAGE TWO TRANSFER – Click or tap to enter a date.",
+          "type": "date"
+        },
+        {
+          "id": "currentProgramInformation",
+          "label": "CURRENT PROGRAM INFORMATION",
+          "type": "text"
+        },
+        {
+          "id": "dateCalworksDiscontinued",
+          "label": "Date CalWORKs Discontinued",
+          "type": "date"
+        },
+        {
+          "id": "fundingSourceUpdatedToStage1UnableToMoveToStage2",
+          "label": "Funding Source updated to “Stage 1 - Unable to Move to Stage 2”",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "childCareTimeLimitUpdated",
+          "label": "Child Care Time Limit Updated",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "dateFamilyWasContactedToConfirmTransferInformation",
+          "label": "Date family was contacted to confirm transfer information",
+          "type": "date"
+        },
+        {
+          "id": "familyAuthenticatedWith",
+          "label": "Family authenticated with",
+          "type": "choice",
+          "choices": [
+            "Full name of:",
+            "Last 4 digits of SSN for:",
+            "DOB for:",
+            "Address",
+            "Telephone number",
+            "SSN of child:",
+            "DOB of child:",
+            "Case number",
+            "ID number for:"
+          ]
+        },
+        {
+          "id": "currentContactInformation",
+          "label": "CURRENT CONTACT INFORMATION",
+          "type": "text"
+        },
+        {
+          "id": "physicalAddress",
+          "label": "Physical Address",
+          "type": "choice",
+          "choices": [
+            "Reported is the same as listed in CalSAWS",
+            "Change reported and CalSAWS updated.",
+            "None - Homeless"
+          ]
+        },
+        {
+          "id": "mailingAddress",
+          "label": "Mailing Address",
+          "type": "choice",
+          "choices": [
+            "Reported is the same as listed in CalSAWS",
+            "Change reported and CalSAWS updated."
+          ]
+        },
+        {
+          "id": "phoneNumber",
+          "label": "Phone Number",
+          "type": "choice",
+          "choices": [
+            "Reported is the same as listed in CalSAWS",
+            "Change reported and CalSAWS updated."
+          ]
+        },
+        {
+          "id": "emailAddress",
+          "label": "Email Address",
+          "type": "choice",
+          "choices": [
+            "Reported is the same as listed in CalSAWS",
+            "Change reported and CalSAWS updated.",
+            "No email on file/Family reported no email address"
+          ]
+        },
+        {
+          "id": "ivrPinLetter",
+          "label": "IVR PIN Letter",
+          "type": "choice",
+          "choices": [
+            "No action. Previously provided to the family.",
+            "Generated and provided to the family."
+          ]
+        },
+        {
+          "id": "outboundIvrSystem",
+          "label": "Outbound IVR System",
+          "type": "choice",
+          "choices": [
+            "Declined. IVR Consent Opt-Out",
+            "Pending. CSF 139 provided to the family.",
+            "Verification: CSF 139 previously completed. IVR Consent Opt-In",
+            "Verification: CSF 139 completed. IVR Consent Opt-In"
+          ]
+        },
+        {
+          "id": "textMessage",
+          "label": "Text Message",
+          "type": "choice",
+          "choices": [
+            "Declined",
+            "Pending. Text Messages updated to complete the verification process.",
+            "Verification: Phone number verified through electronic verification process."
+          ]
+        },
+        {
+          "id": "email",
+          "label": "E-Mail",
+          "type": "choice",
+          "choices": [
+            "Declined",
+            "Pending. E-Mail updated to complete the verification process.",
+            "Verification: E-Mail verified through electronic verification process."
+          ]
+        },
+        {
+          "id": "currentFamilyInformation",
+          "label": "CURRENT FAMILY INFORMATION",
+          "type": "text"
+        },
+        {
+          "id": "familySize",
+          "label": "Family size",
+          "type": "text"
+        },
+        {
+          "id": "income",
+          "label": "Income",
+          "type": "text"
+        },
+        {
+          "id": "isTheFamilyStageTwoIncomeEligible",
+          "label": "Is the family Stage Two income eligible",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes - Income is below 85% of the SMI",
+            "No - Income is over 85% of the SMI"
+          ]
+        },
+        {
+          "id": "parentcaretakerStageTwoCcNeed",
+          "label": "Parent/Caretaker Stage Two CC need",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Employed",
+            "Vocational Training",
+            "Seeking Employment",
+            "Seeking Permanent Housing",
+            "Incapacitated"
+          ]
+        },
+        {
+          "id": "parentcaretakerStageTwoCcNeedInformationIfApplicable",
+          "label": "Parent/Caretaker Stage Two CC need information (if applicable)",
+          "type": "text"
+        },
+        {
+          "id": "2ndParentcaretakerStageTwoCcNeed",
+          "label": "2nd Parent/Caretaker Stage Two CC need",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Employed",
+            "Vocational Training",
+            "Seeking Employment",
+            "Seeking Permanent Housing",
+            "Incapacitated",
+            "Non-Applicable"
+          ]
+        },
+        {
+          "id": "currentProviderInformation",
+          "label": "CURRENT PROVIDER INFORMATION",
+          "type": "text"
+        },
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "type",
+          "label": "Type",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Licensed",
+            "TrustLine Exempt",
+            "TrustLine Required"
+          ]
+        },
+        {
+          "id": "addressWhereServiceIsProvided",
+          "label": "Address where service is provided",
+          "type": "text"
+        },
+        {
+          "id": "dateDpss2985Completed",
+          "label": "Date DPSS 2985 completed",
+          "type": "date"
+        },
+        {
+          "id": "dateTransferPacketemailedTo",
+          "label": "Date transfer packet e-mailed to",
+          "type": "date"
+        },
+        {
+          "id": "documentsIncludedInPacketEmailedToRcoe",
+          "label": "Documents included in packet e-mailed to RCOE",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "DPSS 2985",
+      "fields": [
+        {
+          "id": "dateListOfDocumentsverificationsSentForImaging",
+          "label": "Date list of documents/verifications sent for imaging",
+          "type": "date"
+        },
+        {
+          "id": "dateRcoeIsExpectedToPickUpStageTwoChildCareServices",
+          "label": "Date RCOE is expected to pick up Stage Two Child Care services",
+          "type": "date"
+        },
+        {
+          "id": "dateNa835Dpss3794AndRevisedCertificatesMailedToParent",
+          "label": "Date NA 835, DPSS 3794 and revised certificates mailed to parent",
+          "type": "date"
+        },
+        {
+          "id": "dateDpss3057AndRevisedCertificatesMailedToProvider",
+          "label": "Date DPSS 3057 and revised certificates mailed to provider",
+          "type": "date"
+        },
+        {
+          "id": "listOfPagesReviewedAndUpdatedInCalsaws",
+          "label": "List of pages reviewed and updated in CalSAWS",
+          "type": "text"
+        },
+        {
+          "id": "additionalInformationAndComments",
+          "label": "Additional information and comments",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

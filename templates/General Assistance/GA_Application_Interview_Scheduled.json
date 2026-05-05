@@ -1,0 +1,141 @@
+{
+  "id": "ga_application_interview_scheduled",
+  "name": "General Assistance – Application Interview Scheduled",
+  "file": "GA_Application_Interview_Scheduled.json",
+  "program": "General Assistance",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "ga",
+          "label": "GA",
+          "type": "note",
+          "content": "Application Interview Scheduled"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "APPLICATION INFORMATION",
+      "fields": [
+        {
+          "id": "applicationDate",
+          "label": "APPLICATION DATE",
+          "type": "date"
+        },
+        {
+          "id": "applicationType",
+          "label": "APPLICATION TYPE",
+          "type": "choice",
+          "choices": [
+            "DPSS 1354",
+            "DPSS 1354B (Untimely Reapplication)",
+            "SAWS 2 Plus and DPSS 1354C"
+          ]
+        },
+        {
+          "id": "language",
+          "label": "LANGUAGE",
+          "type": "choice",
+          "choices": [
+            "English",
+            "Spanish- Certified SSO worker assisted- DPSS 1764 requirements fulfilled. Worker #:",
+            "Other (DPSS 1764 required) (Specify the requested language and how the request was accommodated):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "INTERVIEW INFORMATION",
+      "fields": [
+        {
+          "id": "scheduledInterviewMethod",
+          "label": "SCHEDULED INTERVIEW METHOD",
+          "type": "choice",
+          "choices": [
+            "Telephone",
+            "In-Person. Family requested.",
+            "In-Person. No phone number provided on the application."
+          ]
+        },
+        {
+          "id": "scheduledInterviewDateAndTime",
+          "label": "SCHEDULED INTERVIEW DATE AND TIME",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "CONTACT ATTEMPTS",
+      "fields": [
+        {
+          "id": "firstCall",
+          "label": "FIRST CALL",
+          "type": "choice",
+          "choices": [
+            "Unable to call. No phone number provided.",
+            "FIRST CALL (Copy the information for each phone number on file) (Specify time called):"
+          ]
+        },
+        {
+          "id": "callAttempts",
+          "label": "Call Attempts",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "callType",
+              "label": "Call Type",
+              "type": "choice",
+              "choices": [
+                "FIRST CALL (Copy the information for each phone number on file) (Specify time called):",
+                "Unable to call. No phone number provided."
+              ]
+            },
+            {
+              "id": "phoneNumber",
+              "label": "Phone Number",
+              "type": "text"
+            },
+            {
+              "id": "result",
+              "label": "Result",
+              "type": "choice",
+              "choices": [
+                "Call unanswered. Unable to leave a message. No voicemail available.",
+                "Call unanswered. Unable to leave a message. Voicemail is full.",
+                "Call unanswered. Left the scripted message on voicemail.",
+                "Call answered by non-case person. Call recipient denied association to the family. No further action taken.",
+                "Call answered by non-case person. Call recipient confirmed association to the family. Left a message for the family.",
+                "Call answered by family. Family was authenticated. Family is unable to conduct an interview at this time. Family scheduled for an interview.",
+                "Other (Specify):"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "NOTICE",
+      "fields": [
+        {
+          "id": "appointmentLetterGen102",
+          "label": "APPOINTMENT LETTER (GEN 102)",
+          "type": "note",
+          "content": "Generated and provided to the family."
+        }
+      ]
+    }
+  ]
+}

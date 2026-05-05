@@ -1,0 +1,1249 @@
+{
+  "id": "ga_changes",
+  "name": "General Assistance – Changes",
+  "file": "GA_Changes.json",
+  "program": "General Assistance",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "action",
+          "label": "ACTION",
+          "type": "choice",
+          "choices": [
+            "GA: Case Reviewed",
+            "GA: Case Reviewed by Eligibility Clerk"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "CONTACT INFORMATION",
+      "fields": [
+        {
+          "id": "source",
+          "label": "SOURCE",
+          "type": "choice",
+          "choices": [
+            "Telephone",
+            "In-Person",
+            "Reported by another program.",
+            "Reported to another program.",
+            "Assigned Task",
+            "Exception List",
+            "External Communication (Specify):",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "familyContactDate",
+          "label": "Family Contact Date",
+          "type": "date"
+        },
+        {
+          "id": "familyContactConductedWith",
+          "label": "Family Contact Conducted With",
+          "type": "text"
+        },
+        {
+          "id": "familyAuthenticationSpecifyWhatAuthenticationFactorsWereUsed",
+          "label": "Family Authentication (Specify what authentication factors were used)",
+          "type": "text"
+        },
+        {
+          "id": "informationReportedListTheInformationBeingReported",
+          "label": "INFORMATION REPORTED (List the information being reported)",
+          "type": "text"
+        },
+        {
+          "id": "changeEffectiveMonth",
+          "label": "CHANGE EFFECTIVE MONTH",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "LANGUAGE",
+      "fields": [
+        {
+          "id": "language",
+          "label": "LANGUAGE",
+          "type": "choice",
+          "choices": [
+            "English",
+            "Spanish- Certified SSO worker assisted- DPSS 1764 requirements fulfilled. Worker #:",
+            "Other (DPSS 1764 required) (Specify the requested language and how the request was accommodated):"
+          ]
+        },
+        {
+          "id": "declarationOfLanguageSpecialNeedsDpss3167",
+          "label": "Declaration of Language / Special Needs (DPSS 3167)",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "Completed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "AUTHORIZED REPRESENTATIVE",
+      "fields": [
+        {
+          "id": "authorizedRepresentativeSpecifyWhoWasRequestedAndHowRequestWasVerified",
+          "label": "AUTHORIZED REPRESENTATIVE (Specify who was requested and how request was verified)",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "VOTER REGISTRATION",
+      "fields": [
+        {
+          "id": "voterRegistration",
+          "label": "VOTER REGISTRATION",
+          "type": "choice",
+          "choices": [
+            "VOTER REGISTRATION (Copy the information for each person over 15 years of age): Voter Preference Form provided to the family.",
+            "VOTER REGISTRATION (Copy the information for each person over 15 years of age): Voter Preference Form completed."
+          ]
+        },
+        {
+          "id": "voterRegistrationEntries",
+          "label": "Voter Registration",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "voterPreference",
+              "label": "Voter Preference",
+              "type": "choice",
+              "choices": [
+                "Voter Preference: Declined to register to vote.",
+                "Voter Preference: Already registered to vote.",
+                "Voter Preference: Requested to register to vote. Voter Registration Card provided to the family."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "CONTACT",
+      "fields": [
+        {
+          "id": "contact",
+          "label": "CONTACT",
+          "type": "text"
+        },
+        {
+          "id": "physicalAddress",
+          "label": "Physical Address",
+          "type": "choice",
+          "choices": [
+            "None. Homeless",
+            "Reported on the application.",
+            "Physical Address (Different than reported on the application):"
+          ]
+        },
+        {
+          "id": "mailingAddress",
+          "label": "Mailing Address",
+          "type": "choice",
+          "choices": [
+            "Reported on the application.",
+            "Mailing Address (Different than reported on the application):"
+          ]
+        },
+        {
+          "id": "email",
+          "label": "E-Mail",
+          "type": "choice",
+          "choices": [
+            "None reported.",
+            "Already on file.",
+            "Updated"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "HOUSEHOLD COMPOSITION",
+      "fields": [
+        {
+          "id": "householdMembers",
+          "label": "Household Members",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "relationship",
+              "label": "RELATIONSHIP",
+              "type": "text"
+            },
+            {
+              "id": "pregnancy",
+              "label": "PREGNANCY",
+              "type": "choice",
+              "choices": [
+                "Yes",
+                "No"
+              ]
+            },
+            {
+              "id": "expectedDateOfConfinement",
+              "label": "Expected Date of Confinement (EDC)",
+              "type": "date"
+            },
+            {
+              "id": "potentialCalworksEligibility",
+              "label": "Potential CalWORKs Eligibility (DP 44-205)",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_8",
+      "title": "SHARED EXPENSES & RESOURCES",
+      "fields": [
+        {
+          "id": "sharedExpensesResources",
+          "label": "SHARED EXPENSES & RESOURCES",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "Primary applicant only",
+            "SHARED EXPENSES & RESOURCES (List all persons who share expenses and resources with the primary applicant):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_9",
+      "title": "SOCIAL SECURITY NUMBER (SSN)",
+      "fields": [
+        {
+          "id": "socialSecurityNumberSsn",
+          "label": "SOCIAL SECURITY NUMBER (SSN)",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "Not applicable. Needs Unit is composed of only non-citizens without SSNs.",
+            "SOCIAL SECURITY NUMBER (SSN) (Copy the information for each person):"
+          ]
+        },
+        {
+          "id": "ssnEntries",
+          "label": "SSN Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_10",
+      "title": "CITIZENSHIP",
+      "fields": [
+        {
+          "id": "citizenshipEntries",
+          "label": "Citizenship Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "nonCitizenType",
+              "label": "Non-Citizen Type",
+              "type": "text"
+            },
+            {
+              "id": "alienNumber",
+              "label": "Alien Number",
+              "type": "text"
+            },
+            {
+              "id": "documentNumber",
+              "label": "Document Number",
+              "type": "text"
+            },
+            {
+              "id": "categoryCode",
+              "label": "Category Code",
+              "type": "text"
+            },
+            {
+              "id": "entryDate",
+              "label": "Entry Date",
+              "type": "date"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_11",
+      "title": "RESPONSIBLE RELATIVES",
+      "fields": [
+        {
+          "id": "responsibleRelatives",
+          "label": "Responsible Relatives",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "responsibleRelative",
+              "label": "Responsible Relative",
+              "type": "text"
+            },
+            {
+              "id": "relationship",
+              "label": "Relationship",
+              "type": "text"
+            },
+            {
+              "id": "sponsor",
+              "label": "Sponsor",
+              "type": "text"
+            },
+            {
+              "id": "letter",
+              "label": "Responsible Relative / Sponsor Letter (DPSS 23)",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_12",
+      "title": "RESIDENCY",
+      "fields": [
+        {
+          "id": "residency",
+          "label": "RESIDENCY",
+          "type": "choice",
+          "choices": [
+            "Family has moved to another county in California. No longer a resident of Riverside County.",
+            "Family moved out of state. No longer a California resident."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_13",
+      "title": "NON-COMPLIANCE",
+      "fields": [
+        {
+          "id": "nonComplianceEntries",
+          "label": "Non-Compliance Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "type",
+              "label": "Type",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_14",
+      "title": "TIME LIMITS",
+      "fields": [
+        {
+          "id": "timeLimitsEntries",
+          "label": "Time Limits Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "previous12MonthPeriodStartDate",
+              "label": "Previous 12 Month Period Start Date",
+              "type": "date"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_15",
+      "title": "WORK PARTICIPATION",
+      "fields": [
+        {
+          "id": "workParticipationEntries",
+          "label": "Work Participation Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "workParticipationOption",
+              "label": "Work Participation Option",
+              "type": "choice",
+              "choices": [
+                "Work Participation Option: Pending",
+                "Work Participation Option: Independent Job Search",
+                "Work Participation Option: Job Training/Readiness Tool",
+                "Work Participation Option: Work Fare Program",
+                "Work Participation Option: CalFresh Employment & Training (CFET)"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_16",
+      "title": "SCHOOL ATTENDANCE",
+      "fields": [
+        {
+          "id": "schoolAttendanceEntries",
+          "label": "School Attendance Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "schoolName",
+              "label": "School Name",
+              "type": "text"
+            },
+            {
+              "id": "schoolType",
+              "label": "School Type",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            },
+            {
+              "id": "needsMetBySchool",
+              "label": "Needs Met by School",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_17",
+      "title": "LIVING ARRANGEMENTS",
+      "fields": [
+        {
+          "id": "livingArrangements",
+          "label": "LIVING ARRANGEMENTS",
+          "type": "choice",
+          "choices": [
+            "Unable to determine. Clarification needed.",
+            "None reported. No discrepancies.",
+            "Drug and Alcohol Rehabilitation Center. Program participation pending.",
+            "Drug and Alcohol Rehabilitation Center. Program participation verification:",
+            "Homeless: Self-Certification on the application accepted. No discrepancies.",
+            "Other (Specify living arrangement and verification used, if unable to participate in work activites):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_18",
+      "title": "EMERGENCY SHELTER REFERRAL PROGRAM",
+      "fields": [
+        {
+          "id": "emergencyShelterEntries",
+          "label": "Emergency Shelter Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "roi",
+              "label": "Release of Information (ROI)",
+              "type": "text"
+            },
+            {
+              "id": "serviceReferral",
+              "label": "Service Referral (CSF 136)",
+              "type": "text"
+            },
+            {
+              "id": "referralStatus",
+              "label": "Referral Status",
+              "type": "text"
+            },
+            {
+              "id": "potentialHomelessHousingBenefit",
+              "label": "Potential Homeless Housing Benefit",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_19",
+      "title": "POTENTIALLY AVAILABLE INCOME",
+      "fields": [
+        {
+          "id": "potentiallyAvailableIncomeEntries",
+          "label": "Potentially Available Income Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "howDetermined",
+              "label": "How was Potential Eligibility Determined",
+              "type": "text"
+            },
+            {
+              "id": "proofOfApplication",
+              "label": "Proof of Application Verification",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_20",
+      "title": "MILITARY / VETERANS",
+      "fields": [
+        {
+          "id": "militaryEntries",
+          "label": "Military / Veterans Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "branch",
+              "label": "Branch",
+              "type": "text"
+            },
+            {
+              "id": "enlistmentDate",
+              "label": "Enlistment Date",
+              "type": "date"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_21",
+      "title": "UNEMPLOYABLE / EXEMPT",
+      "fields": [
+        {
+          "id": "unemployableEntries",
+          "label": "Unemployable / Exempt Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "exemption",
+              "label": "Exemption",
+              "type": "text"
+            },
+            {
+              "id": "unemployableStatus",
+              "label": "Unemployable Status",
+              "type": "text"
+            },
+            {
+              "id": "duration",
+              "label": "Duration of Unemployable Status",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_22",
+      "title": "INTERIM ASSISTANCE (IA)",
+      "fields": [
+        {
+          "id": "interimAssistanceEntries",
+          "label": "Interim Assistance Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "potentialEligibility",
+              "label": "Potential Eligibility Determination",
+              "type": "text"
+            },
+            {
+              "id": "authReimbursement",
+              "label": "Authorization for Reimbursement (SSP 14)",
+              "type": "text"
+            },
+            {
+              "id": "supplementalAgreement",
+              "label": "IA Supplemental Agreement (DPSS 2424)",
+              "type": "text"
+            },
+            {
+              "id": "proofVerification",
+              "label": "Proof of Application Verification / Current Status Verification",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_23",
+      "title": "HDAP REFERRAL",
+      "fields": [
+        {
+          "id": "hdapEntries",
+          "label": "HDAP Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "hdapScreening",
+              "label": "HDAP Screening (DPSS 4698)",
+              "type": "text"
+            },
+            {
+              "id": "hdapApplication",
+              "label": "HDAP Application (DPSS 4697)",
+              "type": "text"
+            },
+            {
+              "id": "authReimbursement",
+              "label": "Authorization for Reimbursement (SSP 14)",
+              "type": "text"
+            },
+            {
+              "id": "potentialHomelessHousingBenefit",
+              "label": "Potential Homeless Housing Benefit",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_24",
+      "title": "OTHER PROGRAM ASSISTANCE",
+      "fields": [
+        {
+          "id": "otherProgramEntries",
+          "label": "Other Program Assistance Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "source",
+              "label": "Source",
+              "type": "text"
+            },
+            {
+              "id": "frequency",
+              "label": "Frequency",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            },
+            {
+              "id": "amountUsed",
+              "label": "Amount Used",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_25",
+      "title": "EMPLOYMENT",
+      "fields": [
+        {
+          "id": "currentEmploymentEntries",
+          "label": "Current Employment Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "employer",
+              "label": "Employer",
+              "type": "text"
+            },
+            {
+              "id": "startDate",
+              "label": "Start Date",
+              "type": "date"
+            },
+            {
+              "id": "hourlyRate",
+              "label": "Hourly Rate",
+              "type": "text"
+            },
+            {
+              "id": "avgHoursWeekly",
+              "label": "Average Hours Weekly",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_26",
+      "title": "EMPLOYMENT HISTORY",
+      "fields": [
+        {
+          "id": "employmentHistoryEntries",
+          "label": "Employment History Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "employer",
+              "label": "Employer",
+              "type": "text"
+            },
+            {
+              "id": "lastDateWorked",
+              "label": "Late Date Worked",
+              "type": "date"
+            },
+            {
+              "id": "lastDatePaid",
+              "label": "Last Date Paid",
+              "type": "date"
+            },
+            {
+              "id": "reasonEnded",
+              "label": "Reason Employment Ended",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_27",
+      "title": "INCOME",
+      "fields": [
+        {
+          "id": "incomeEntries",
+          "label": "Income Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "source",
+              "label": "Source",
+              "type": "text"
+            },
+            {
+              "id": "frequency",
+              "label": "Frequency",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            },
+            {
+              "id": "amountUsed",
+              "label": "Amount Used (Specify how income was calculated)",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_28",
+      "title": "PROPERTY",
+      "fields": [
+        {
+          "id": "propertyEntries",
+          "label": "Property Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "propertyType",
+              "label": "Property Type",
+              "type": "choice",
+              "choices": [
+                "Real Property",
+                "Vehicle",
+                "Bank Account",
+                "Retirement Account",
+                "Pay Card",
+                "Cash on Hand",
+                "Other"
+              ]
+            },
+            {
+              "id": "owner",
+              "label": "Owner",
+              "type": "text"
+            },
+            {
+              "id": "type",
+              "label": "Type / Make / Model / Year",
+              "type": "text"
+            },
+            {
+              "id": "encumbrance",
+              "label": "Encumbrance",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            },
+            {
+              "id": "value",
+              "label": "Value",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_29",
+      "title": "SPECIAL NEEDS",
+      "fields": [
+        {
+          "id": "specialNeedsEntries",
+          "label": "Special Needs Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            },
+            {
+              "id": "amount",
+              "label": "Amount",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_30",
+      "title": "NEEDS",
+      "fields": [
+        {
+          "id": "needsEntries",
+          "label": "Needs Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "frequency",
+              "label": "Frequency",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            },
+            {
+              "id": "amount",
+              "label": "Amount Paid by Needs Unit (Explain how amount was determined)",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_31",
+      "title": "EXPENSES",
+      "fields": [
+        {
+          "id": "expensesEntries",
+          "label": "Expenses Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "type",
+              "label": "Type",
+              "type": "text"
+            },
+            {
+              "id": "frequency",
+              "label": "Frequency",
+              "type": "text"
+            },
+            {
+              "id": "verification",
+              "label": "Verification",
+              "type": "text"
+            },
+            {
+              "id": "amount",
+              "label": "Amount",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_32",
+      "title": "IEVS / PVS / NHR / MEDS",
+      "fields": [
+        {
+          "id": "incomeAndEligibilityVerificationSystemIevs",
+          "label": "INCOME AND ELIGIBILITY VERIFICATION SYSTEM (IEVS)",
+          "type": "text"
+        },
+        {
+          "id": "ievsApplicantReport",
+          "label": "IEVS Applicant Report",
+          "type": "choice",
+          "choices": [
+            "Received and reviewed. No discrepancies.",
+            "Reports closed. No discrepancies.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "paymentVerificationSystemPvs",
+          "label": "Payment Verification System (PVS)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "newHireRegistryNhr",
+          "label": "New Hire Registry (NHR)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        },
+        {
+          "id": "medicalEligibilityDataSystemMedsAlerts",
+          "label": "Medi-Cal Eligibility Data System (MEDS) Alerts",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Alerts closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_33",
+      "title": "FIRST CONTACT RESOLUTION",
+      "fields": [
+        {
+          "id": "firstContactResolution",
+          "label": "FIRST CONTACT RESOLUTION",
+          "type": "text"
+        },
+        {
+          "id": "electronicVerificationSources",
+          "label": "Electronic Verification Sources",
+          "type": "choice",
+          "choices": [
+            "Not required. No pending verifications.",
+            "Attempted. Unable to obtain verifications."
+          ]
+        },
+        {
+          "id": "otherProgramsReview",
+          "label": "Other Programs Review",
+          "type": "choice",
+          "choices": [
+            "No other open programs.",
+            "No action required. Programs are current.",
+            "Action required for another program. Family declined to resolve.",
+            "Action required for another program. Unable to assist due to lack of skill. Family connected to team member skilled for that program.",
+            "Action required for another program. See separate Journal Entry for resolution."
+          ]
+        },
+        {
+          "id": "impactToOtherPrograms",
+          "label": "Impact to Other Programs",
+          "type": "choice",
+          "choices": [
+            "No other open programs.",
+            "No impact as family did not provide verifications.",
+            "Unable to determine due to lack of skill. Team member skilled for that program notified.",
+            "See separate Journal Entry for impact determination."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_34",
+      "title": "PENDING VERIFICATIONS",
+      "fields": [
+        {
+          "id": "pendingVerificationItems",
+          "label": "Pending Verification Items",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "item",
+              "label": "Verification Item",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_35",
+      "title": "TASKS DUE FUTURE",
+      "fields": [
+        {
+          "id": "tasksDueItems",
+          "label": "Tasks",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "task",
+              "label": "Task",
+              "type": "text"
+            },
+            {
+              "id": "dueDate",
+              "label": "Due Date",
+              "type": "date"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_36",
+      "title": "EBT ACCOUNT",
+      "fields": [
+        {
+          "id": "electronicBenefitTransferEbtAccount",
+          "label": "ELECTRONIC BENEFIT TRANSFER (EBT) ACCOUNT",
+          "type": "choice",
+          "choices": [
+            "Cash account will need to be reactivated.",
+            "Cash account is active."
+          ]
+        },
+        {
+          "id": "electronicBenefitTransferEbtCard",
+          "label": "Electronic Benefit Transfer (EBT) Card",
+          "type": "choice",
+          "choices": [
+            "Family stated to have an EBT card in good, working order.",
+            "Family requested a replacement."
+          ]
+        },
+        {
+          "id": "designatedCardHolder",
+          "label": "Designated Card Holder",
+          "type": "choice",
+          "choices": [
+            "None requested.",
+            "Designated Card Holder (Specify who was requested and how request was verified):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_37",
+      "title": "BUDGET WORKSHEET",
+      "fields": [
+        {
+          "id": "budgetWorksheet",
+          "label": "BUDGET WORKSHEET",
+          "type": "choice",
+          "choices": [
+            "Not required for determination.",
+            "Pending",
+            "To be completed by an Eligibility Technician.",
+            "Completed and imaged."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_38",
+      "title": "EDBC / NOA",
+      "fields": [
+        {
+          "id": "eligibilityDeterminationBenefitCalculationEdbcResults",
+          "label": "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS",
+          "type": "choice",
+          "choices": [
+            "Not required. Reported change does not lead to a determination change.",
+            "Discontinued (Specify reason):",
+            "Pending",
+            "Ready to process. Task set for Eligibility Technician to process.",
+            "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS (List each month run and the allotment that was issued):"
+          ]
+        },
+        {
+          "id": "noticeOfActionNoa",
+          "label": "NOTICE OF ACTION (NOA)",
+          "type": "choice",
+          "choices": [
+            "Not required. Reported change does not lead to a determination change.",
+            "Pending",
+            "To be completed by an Eligibility Technician.",
+            "Completed and imaged, then provided to the family."
+          ]
+        }
+      ]
+    }
+  ]
+}

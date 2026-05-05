@@ -1,0 +1,201 @@
+{
+  "id": "ga_discontinuance",
+  "name": "General Assistance – Discontinuance",
+  "file": "GA_Discontinuance.json",
+  "program": "General Assistance",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "discontinuanceAction",
+          "label": "DISCONTINUANCE ACTION",
+          "type": "choice",
+          "choices": [
+            "GA: Case Discontinued",
+            "GA: Case Reviewed by Eligibility Technician"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "REVIEW",
+      "fields": [
+        {
+          "id": "reviewCause",
+          "label": "REVIEW CAUSE",
+          "type": "choice",
+          "choices": [
+            "Time limit exceeded.",
+            "Work participation non-compliance.",
+            "Period of eligibility ending for employable."
+          ]
+        },
+        {
+          "id": "effectiveMonth",
+          "label": "EFFECTIVE MONTH",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "TIME LIMITS",
+      "fields": [
+        {
+          "id": "timeLimitsEntries",
+          "label": "Time Limits Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "WORK PARTICIPATION",
+      "fields": [
+        {
+          "id": "workParticipationEntries",
+          "label": "Work Participation Records",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "id": "verificationOfNoncompliance",
+              "label": "Verification of Non-Compliance",
+              "type": "text"
+            },
+            {
+              "id": "sanctionMonth",
+              "label": "Non-Compliance Sanction Month",
+              "type": "text"
+            },
+            {
+              "id": "periodOfEligibility",
+              "label": "Period of Eligibility (POE)",
+              "type": "text"
+            },
+            {
+              "id": "seeJournalEntry",
+              "label": "See Journal Entry on (Specify date)",
+              "type": "date"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "FIRST CONTACT RESOLUTION",
+      "fields": [
+        {
+          "id": "firstContactResolution",
+          "label": "FIRST CONTACT RESOLUTION",
+          "type": "text"
+        },
+        {
+          "id": "impactToOtherPrograms",
+          "label": "Impact to Other Programs",
+          "type": "choice",
+          "choices": [
+            "No other open programs.",
+            "No impact as family did not provide verifications.",
+            "Unable to determine due to lack of skill. Team member skilled for that program notified.",
+            "See separate Journal Entry for impact determination."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "IEVS / PVS / NHR / MEDS",
+      "fields": [
+        {
+          "id": "ievsApplicantReport",
+          "label": "IEVS Applicant Report",
+          "type": "choice",
+          "choices": [
+            "Received and reviewed for this application. No discrepancies.",
+            "Pending. Task set for 10 days.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "paymentVerificationSystemPvs",
+          "label": "Payment Verification System (PVS)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "newHireRegistryNhr",
+          "label": "New Hire Registry (NHR)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        },
+        {
+          "id": "medicalEligibilityDataSystemMedsAlerts",
+          "label": "Medi-Cal Eligibility Data System (MEDS) Alerts",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Alerts closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "EDBC / NOA",
+      "fields": [
+        {
+          "id": "eligibilityDeterminationBenefitCalculationEdbcResults",
+          "label": "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS",
+          "type": "choice",
+          "choices": [
+            "Discontinued: 3 - Month Time Limit",
+            "Discontinued: Failed to Meet Work Requirements",
+            "Discontinued: End of Certification Period",
+            "Ready to process. Task set for Eligibility Technician to process."
+          ]
+        },
+        {
+          "id": "noticeOfActionNoa",
+          "label": "NOTICE OF ACTION (NOA)",
+          "type": "choice",
+          "choices": [
+            "To be completed by an Eligibility Technician.",
+            "Completed and imaged, then provided to the family."
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "id": "ga_reapplication_interview_scheduled",
+  "name": "General Assistance – Reapplication Interview Scheduled",
+  "file": "General/GA_Reapplication_Interview_Scheduled.json",
+  "program": "General",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "GENERAL",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "ga",
+          "label": "GA",
+          "type": "note",
+          "content": "Reapplication Interview Scheduled"
+        },
+        {
+          "id": "longDescription",
+          "label": "LONG DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "reapplicationMonth",
+          "label": "REAPPLICATION MONTH",
+          "type": "text"
+        },
+        {
+          "id": "language",
+          "label": "LANGUAGE",
+          "type": "choice",
+          "choices": [
+            "English",
+            "Spanish- Certified SSO worker assisted- DPSS 1764 requirements fulfilled. Worker #:",
+            "Other (DPSS 1764 required) (Specify the requested language and how the request was accommodated):"
+          ]
+        },
+        {
+          "id": "scheduledInterviewMethod",
+          "label": "SCHEDULED INTERVIEW METHOD",
+          "type": "choice",
+          "choices": [
+            "Telephone",
+            "In-Person. No phone number provided on the application."
+          ]
+        },
+        {
+          "id": "scheduledInterviewDateAndTime",
+          "label": "SCHEDULED INTERVIEW DATE AND TIME",
+          "type": "text"
+        },
+        {
+          "id": "firstCall",
+          "label": "FIRST CALL",
+          "type": "choice",
+          "choices": [
+            "Unable to call. No phone number provided.",
+            "FIRST CALL (Copy the information for each phone number on file) (Specify time called):"
+          ]
+        },
+        {
+          "id": "phoneNumber",
+          "label": "Phone Number",
+          "type": "text"
+        },
+        {
+          "id": "result",
+          "label": "Result",
+          "type": "choice",
+          "choices": [
+            "Call unanswered. Unable to leave a message. No voicemail available.",
+            "Call unanswered. Unable to leave a message. Voicemail is full.",
+            "Call unanswered. Left the scripted message on voicemail.",
+            "Call answered by non-case person. Call recipient denied association to the family. No further action taken.",
+            "Call answered by non-case person. Call recipient confirmed association to the family. Left a message for the family.",
+            "Call answered by family. Family was authenticated. Family is unable to conduct an interview at this time. Family scheduled for an interview.",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "secondCall",
+          "label": "SECOND CALL",
+          "type": "choice",
+          "choices": [
+            "Unable to call. No phone number provided.",
+            "SECOND CALL (Copy the information for each phone number on file) (Specify time called):"
+          ]
+        },
+        {
+          "id": "phoneNumber2",
+          "label": "Phone Number",
+          "type": "text"
+        },
+        {
+          "id": "result2",
+          "label": "Result",
+          "type": "choice",
+          "choices": [
+            "Call unanswered. Unable to leave a message. No voicemail available.",
+            "Call unanswered. Unable to leave a message. Voicemail is full.",
+            "Call unanswered. Left the scripted message on voicemail.",
+            "Call answered by non-case person. Call recipient denied association to the family. No further action taken.",
+            "Call answered by non-case person. Call recipient confirmed association to the family. Left a message for the family.",
+            "Call answered by family. Family was authenticated. Family is unable to conduct an interview at this time. Family scheduled for an interview.",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "eligibilityDeterminationBenefitCalculationEdbcResults",
+          "label": "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS",
+          "type": "choice",
+          "choices": [
+            "$0 allotment for discontinuance month.",
+            "Ready to process. Task set for Eligibility Technician to process."
+          ]
+        },
+        {
+          "id": "appointmentLetterDpss1366m",
+          "label": "APPOINTMENT LETTER (DPSS 1366M)",
+          "type": "note",
+          "content": "Generated and provided to the family."
+        },
+        {
+          "id": "mandatoryFormsProvided",
+          "label": "MANDATORY FORMS PROVIDED",
+          "type": "note",
+          "content": "DPSS 1354B, DPSS 2824, Voter Registration Card"
+        }
+      ]
+    }
+  ]
+}

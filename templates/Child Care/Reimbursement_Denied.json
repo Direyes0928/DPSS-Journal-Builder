@@ -1,0 +1,88 @@
+{
+  "id": "reimbursement_denied",
+  "name": "Child Care – Reimbursement Denied",
+  "file": "Reimbursement_Denied.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "REIMBURSEMENT DENIED",
+      "fields": [
+        {
+          "id": "dateChooseAnItemWasReceived",
+          "label": "Date Choose an item was received",
+          "type": "choice",
+          "choices": [
+            "CSF 141",
+            "CCP 2145"
+          ]
+        },
+        {
+          "id": "dateChooseAnItemWasDeniedreturned",
+          "label": "Date Choose an item was denied/returned",
+          "type": "choice",
+          "choices": [
+            "CSF 141",
+            "CCP 2145"
+          ]
+        },
+        {
+          "id": "forTheFollowingProvider",
+          "label": "For the following provider",
+          "type": "text"
+        },
+        {
+          "id": "providerReviewDate",
+          "label": "Provider review date",
+          "type": "text"
+        },
+        {
+          "id": "nameOfChildren",
+          "label": "Name of child(ren)",
+          "type": "text"
+        },
+        {
+          "id": "monthyearReimbursementWasDeniedFor",
+          "label": "Month/year reimbursement was denied for",
+          "type": "text"
+        },
+        {
+          "id": "reasonForDenial",
+          "label": "Reason for denial",
+          "type": "text"
+        },
+        {
+          "id": "dateNa834MailedToParentIfApplicable",
+          "label": "Date NA 834 mailed to parent (if applicable)",
+          "type": "text"
+        },
+        {
+          "id": "dateDpss3173MailedToParentIfApplicable",
+          "label": "Date DPSS 3173 mailed to parent (if applicable)",
+          "type": "text"
+        },
+        {
+          "id": "dateDpss3173MailedToProviderIfApplicable",
+          "label": "Date DPSS 3173 mailed to provider (if applicable)",
+          "type": "text"
+        },
+        {
+          "id": "dueDateForCompletedcorrectedChooseAnItem",
+          "label": "Due date for completed/corrected Choose an item",
+          "type": "choice",
+          "choices": [
+            "CSF 141",
+            "CCP 2145"
+          ]
+        },
+        {
+          "id": "additionalInformationAndComments",
+          "label": "Additional information and comments",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

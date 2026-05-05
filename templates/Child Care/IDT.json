@@ -1,0 +1,40 @@
+{
+  "id": "idt",
+  "name": "Child Care – IDT",
+  "file": "IDT.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "IDT INFORMATION",
+      "fields": [
+        {
+          "id": "erCase",
+          "label": "Employee/Employee Relative Case?",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "reDueDate",
+          "label": "RE Due Date",
+          "type": "date"
+        },
+        {
+          "id": "language",
+          "label": "Language",
+          "type": "text"
+        },
+        {
+          "id": "fundingSource",
+          "label": "Funding Source",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

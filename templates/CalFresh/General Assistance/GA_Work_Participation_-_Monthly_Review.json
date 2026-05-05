@@ -1,0 +1,161 @@
+{
+  "id": "ga_work_participation_-_monthly_review",
+  "name": "General Assistance – Work Participation - Monthly Review",
+  "file": "General/GA_Work_Participation_-_Monthly_Review.json",
+  "program": "General",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "GENERAL",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "action",
+          "label": "ACTION",
+          "type": "choice",
+          "choices": [
+            "GA: Work Participation Verified",
+            "GA: Work Participation Incomplete"
+          ]
+        },
+        {
+          "id": "longDescription",
+          "label": "LONG DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "applicationDate",
+          "label": "APPLICATION DATE",
+          "type": "date"
+        },
+        {
+          "id": "approvalDate",
+          "label": "APPROVAL DATE",
+          "type": "date"
+        },
+        {
+          "id": "benefitMonthReviewed",
+          "label": "BENEFIT MONTH REVIEWED",
+          "type": "text"
+        },
+        {
+          "id": "employableCopyTheInformationForEachEmployablePerson",
+          "label": "EMPLOYABLE (Copy the information for each employable person)",
+          "type": "text"
+        },
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "independentJobSearch",
+          "label": "Independent Job Search",
+          "type": "choice",
+          "choices": [
+            "Supervised Job Search: Completed. Journals and DPSS 283 provided. (Specify count provided and required):",
+            "Supervised Job Search: Not Completed. Journal entries and DPSS 283 provided, but did not complete enough job searches. (Specify count provided and required):",
+            "Supervised Job Search: Not Completed. No journals or DPSS 283 found."
+          ]
+        },
+        {
+          "id": "jobTrainingReadinessTool",
+          "label": "Job Training / Readiness Tool",
+          "type": "choice",
+          "choices": [
+            "Completed. Journals and GATE packets provided. (Specify week numbers):",
+            "Not completed. Journal entries and GATE packets provided, but did not complete enough packets. (Specify week numbers):",
+            "Not completed. No journals or GATE packets found."
+          ]
+        },
+        {
+          "id": "workFareProgramWfp",
+          "label": "Work Fare Program (WFP)",
+          "type": "choice",
+          "choices": [
+            "Completed. Verified with DPSS 1132 imaged (Specify date):",
+            "Not completed. DPSS 1132 not found."
+          ]
+        },
+        {
+          "id": "calfreshEmploymentAndTrainingCfet",
+          "label": "CalFresh Employment and Training (CFET)",
+          "type": "choice",
+          "choices": [
+            "Completed. Verified with open CFET program segment in CalSAWS.",
+            "Not completed. Verified with no open CFET program segment in CalSAWS."
+          ]
+        },
+        {
+          "id": "goodCause",
+          "label": "Good Cause",
+          "type": "choice",
+          "choices": [
+            "Yes (Specify reason):",
+            "No"
+          ]
+        },
+        {
+          "id": "firstContactResolution",
+          "label": "FIRST CONTACT RESOLUTION",
+          "type": "text"
+        },
+        {
+          "id": "impactToOtherPrograms",
+          "label": "Impact to Other Programs",
+          "type": "choice",
+          "choices": [
+            "No other open programs.",
+            "No impact as family did not provide verifications.",
+            "Unable to determine due to lack of skill. Team member skilled for that program notified.",
+            "See separate Journal Entry for impact determination."
+          ]
+        },
+        {
+          "id": "tasksDueFuture",
+          "label": "TASKS DUE FUTURE",
+          "type": "choice",
+          "choices": [
+            "None",
+            "TASKS DUE FUTURE (List task and due date):"
+          ]
+        },
+        {
+          "id": "eligibilityDeterminationBenefitCalculationEdbcResults",
+          "label": "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS",
+          "type": "choice",
+          "choices": [
+            "Discontinued: Failed to meet work req.",
+            "Ready to process. Task set for Eligibility Technician to process.",
+            "None. No change to benefit allotment."
+          ]
+        },
+        {
+          "id": "noticeOfActionNoa",
+          "label": "NOTICE OF ACTION (NOA)",
+          "type": "choice",
+          "choices": [
+            "Completed and imaged, then provided to the family.",
+            "Pending for Eligibility Technician.",
+            "None. No change to allotment."
+          ]
+        },
+        {
+          "id": "discontinuanceMonth",
+          "label": "DISCONTINUANCE MONTH",
+          "type": "choice",
+          "choices": [
+            "DISCONTINUANCE MONTH (Specify month):",
+            "None. Case remains active."
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,404 @@
+{
+  "id": "recertification_parent",
+  "name": "Child Care – Recertification Parent",
+  "file": "Recertification_Parent.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "GENERAL",
+      "fields": [
+        {
+          "id": "familyAuthenticatedWith",
+          "label": "Family authenticated with",
+          "type": "choice",
+          "choices": [
+            "Full name of:",
+            "Last 4 digits of SSN for:",
+            "DOB for:",
+            "Address",
+            "Telephone number",
+            "SSN of child:",
+            "DOB of child:",
+            "Case number",
+            "ID number for:"
+          ]
+        },
+        {
+          "id": "attendees",
+          "label": "Attendee(s)",
+          "type": "text"
+        },
+        {
+          "id": "secondParentAttendeeClarification",
+          "label": "Second Parent Attendee Clarification",
+          "type": "choice",
+          "choices": [
+            "Second Parent Not In home",
+            "Second Parent Attended Interview",
+            "Second Parent Did Not Attend Interview - Reason"
+          ]
+        },
+        {
+          "id": "language",
+          "label": "Language",
+          "type": "text"
+        },
+        {
+          "id": "ccp7Status",
+          "label": "CCP 7 Status",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "CCP 7 Received - Signed on",
+            "CCP 7 Received - Refused to sign on",
+            "CCP 7 Not Returned"
+          ]
+        },
+        {
+          "id": "didTheParentcaretakerRequestPtOrFtCareVerballyOrWrittenClickOrTapToSelect",
+          "label": "Did the parent/caretaker request PT or FT care (verbally or written)? Click or tap to select",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Part Time",
+            "Full Time"
+          ]
+        },
+        {
+          "id": "ccp8Status",
+          "label": "CCP 8 Status",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "CCP 8 Received - Signed on",
+            "CCP 8 Not Received"
+          ]
+        },
+        {
+          "id": "dateEesd9600Signed",
+          "label": "Date EESD 9600 signed",
+          "type": "text"
+        },
+        {
+          "id": "physicalAddress",
+          "label": "Physical Address",
+          "type": "choice",
+          "choices": [
+            "Reported is the same as listed in CalSAWS",
+            "Change reported and CalSAWS updated."
+          ]
+        },
+        {
+          "id": "mailingAddress",
+          "label": "Mailing Address",
+          "type": "choice",
+          "choices": [
+            "Reported is the same as listed in CalSAWS",
+            "Change reported and CalSAWS updated."
+          ]
+        },
+        {
+          "id": "ivrPinLetter",
+          "label": "IVR PIN Letter",
+          "type": "choice",
+          "choices": [
+            "No action. Previously provided to the family.",
+            "Generated and provided to the family."
+          ]
+        },
+        {
+          "id": "outboundInteractiveVoiceResponseIvrSystem",
+          "label": "Outbound Interactive Voice Response (IVR) System",
+          "type": "choice",
+          "choices": [
+            "Declined",
+            "Pending. CSF 139 provided to the family.",
+            "Verification: CSF 139 previously completed.",
+            "Verification: CSF 139 completed."
+          ]
+        },
+        {
+          "id": "textMessage",
+          "label": "Text Message",
+          "type": "choice",
+          "choices": [
+            "Declined",
+            "Pending. Text Messages updated to complete the verification process.",
+            "Verification: Phone number verified through electronic verification process."
+          ]
+        },
+        {
+          "id": "email",
+          "label": "E-Mail",
+          "type": "choice",
+          "choices": [
+            "Declined",
+            "Pending. E-Mail updated to complete the verification process.",
+            "Verification: E-Mail verified through electronic verification process."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "PARENT/CARETAKER NEED",
+      "fields": [
+        {
+          "id": "namesOfParentscaretakersReapplyingForCcServices",
+          "label": "Name(s) of parent(s)/caretaker(s) Re-applying for CC services",
+          "type": "text"
+        },
+        {
+          "id": "parentcaretakerStatus",
+          "label": "Parent/Caretaker Status",
+          "type": "choice",
+          "choices": [
+            "Parent/Caretaker: WTW mandatory",
+            "Parent/Caretaker: WTW exempt and intends to participate",
+            "Parent/Caretaker: WTW sanctioned and intends to cure",
+            "Parent/Caretaker: Former Recipient (During RCOE Closure Only)",
+            "Parent/Caretaker: Employed (WTW Eligible)"
+          ]
+        },
+        {
+          "id": "secondParentcaretakerStatus",
+          "label": "Second Parent/Caretaker Status",
+          "type": "choice",
+          "choices": [
+            "Second Parent/Caretaker: WTW mandatory",
+            "Second Parent/Caretaker: WTW exempt and intends to participate",
+            "Second Parent/Caretaker: WTW sanctioned and intends to cure",
+            "Second Parent/Caretaker: Former Recipient (During RCOE Closure Only)",
+            "Second Parent/Caretaker: Unavailable (Enter Reason)",
+            "Second Parent/Caretaker: N/A"
+          ]
+        },
+        {
+          "id": "scheduleOfChildCareHoursRequested",
+          "label": "Schedule of Child Care Hours Requested",
+          "type": "text"
+        },
+        {
+          "id": "listTheNamesOfAllChildrenTheParentscaretakersAreApplyingFor",
+          "label": "List the name(s) of all child(ren) the parent(s)/caretaker(s) are applying for",
+          "type": "text"
+        },
+        {
+          "id": "childCareNeedsListPageUpdatedForAllHhMembersClickOrTapToSelect",
+          "label": "Child Care Needs List page updated for all HH members?  Click or tap to select",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "nameOfChildage",
+          "label": "Name of child/age",
+          "type": "text"
+        },
+        {
+          "id": "nameOfSchoolDistrict",
+          "label": "Name of school district",
+          "type": "text"
+        },
+        {
+          "id": "nameOfSchool",
+          "label": "Name of school",
+          "type": "text"
+        },
+        {
+          "id": "schoolSchedule",
+          "label": "School schedule",
+          "type": "text"
+        },
+        {
+          "id": "minimumDaysSchedule",
+          "label": "Minimum days schedule",
+          "type": "text"
+        },
+        {
+          "id": "dpss3927OnFile",
+          "label": "DPSS 3927 on file",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "nameOfChildage2",
+          "label": "Name of child/age",
+          "type": "text"
+        },
+        {
+          "id": "nameOfSchoolDistrict2",
+          "label": "Name of school district",
+          "type": "text"
+        },
+        {
+          "id": "nameOfSchool2",
+          "label": "Name of school",
+          "type": "text"
+        },
+        {
+          "id": "schoolSchedule2",
+          "label": "School schedule",
+          "type": "text"
+        },
+        {
+          "id": "minimumDaysSchedule2",
+          "label": "Minimum days schedule",
+          "type": "text"
+        },
+        {
+          "id": "dpss3927OnFile2",
+          "label": "DPSS 3927 on file",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes",
+            "No"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "INCOME",
+      "fields": [
+        {
+          "id": "nameOfPersonsWithIncome",
+          "label": "Name of person(s) with income",
+          "type": "text"
+        },
+        {
+          "id": "incomeSources",
+          "label": "Income source(s)",
+          "type": "text"
+        },
+        {
+          "id": "incomeFrequency",
+          "label": "Income frequency",
+          "type": "text"
+        },
+        {
+          "id": "monthlyIncomeAmount",
+          "label": "Monthly Income amount",
+          "type": "text"
+        },
+        {
+          "id": "eligibilityDetailPageUpdatedClickOrTapToSelect",
+          "label": "Eligibility Detail page updated?   Click or tap to select",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "incomeEligible",
+          "label": "Income Eligible",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes - CalWORKs Recipient",
+            "No - Former Recipient Over 85% SMI",
+            "Yes - Former Recipient Under 85% SMI"
+          ]
+        },
+        {
+          "id": "waiveFamilyFee",
+          "label": "Waive Family Fee",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "ifWaiveFamilyFeeIsNoAlsoEnter",
+          "label": "If Waive Family Fee is No, also enter",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "OTHER",
+      "fields": [
+        {
+          "id": "rcDate",
+          "label": "RC date",
+          "type": "text"
+        },
+        {
+          "id": "dateParentscaretakersSentgivenCsf103",
+          "label": "Date parent(s)/caretaker(s) sent/given CSF 103",
+          "type": "text"
+        },
+        {
+          "id": "listOfVerificationsRequestedIfAny",
+          "label": "List of verifications requested (if any)",
+          "type": "text"
+        },
+        {
+          "id": "verificationDueDate",
+          "label": "Verification due date",
+          "type": "text"
+        },
+        {
+          "id": "taskDueDate",
+          "label": "Task due date",
+          "type": "text"
+        },
+        {
+          "id": "adobeSignOffered",
+          "label": "Adobe sign offered",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes - Declined",
+            "No",
+            "Yes - Accepted"
+          ]
+        },
+        {
+          "id": "additionalInformationAndComments",
+          "label": "Additional information and comments",
+          "type": "text"
+        },
+        {
+          "id": "childCareTimeLimitUpdated",
+          "label": "Child Care Time Limit Updated",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "monthsRemainingOf24monthStageTwoEligibility",
+          "label": "Months remaining of 24-Month Stage Two Eligibility",
+          "type": "text"
+        },
+        {
+          "id": "stageTwoTransferStatus",
+          "label": "Stage Two Transfer Status",
+          "type": "choice",
+          "choices": [
+            "Transfer Needed",
+            "Transfer Sent - RCOE Pick Up Effective"
+          ]
+        }
+      ]
+    }
+  ]
+}

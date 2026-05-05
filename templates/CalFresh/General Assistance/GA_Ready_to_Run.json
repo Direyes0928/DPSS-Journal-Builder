@@ -1,0 +1,193 @@
+{
+  "id": "ga_ready_to_run",
+  "name": "General Assistance – Ready to Run",
+  "file": "General/GA_Ready_to_Run.json",
+  "program": "General",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "GENERAL",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "action",
+          "label": "ACTION",
+          "type": "choice",
+          "choices": [
+            "GA: Application Denied",
+            "GA: Application Approved - Employable",
+            "GA: Application Approved - Unemployable",
+            "GA: Application Approved - Interim Assistance",
+            "GA: Case Reviewed",
+            "GA: Case Discontinued",
+            "GA: Reapplication Denied",
+            "GA: Reapplication Approved - Unemployable",
+            "GA: Reapplication Approved - Interim Assistance"
+          ]
+        },
+        {
+          "id": "longDescription",
+          "label": "LONG DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "followUpAction",
+          "label": "FOLLOW UP ACTION",
+          "type": "choice",
+          "choices": [
+            "APPLICATION DATE:",
+            "REAPPLICATION MONTH:",
+            "CASE REVIEW DATE:"
+          ]
+        },
+        {
+          "id": "seeJournalEntryOnSpecifyDate",
+          "label": "See Journal Entry on (Specify date)",
+          "type": "date"
+        },
+        {
+          "id": "workParticipation",
+          "label": "WORK PARTICIPATION",
+          "type": "choice",
+          "choices": [
+            "Not applicable. Exempt/Unemployable",
+            "WORK PARTICIPATION (Copy the information for each non-exempt / employable person):"
+          ]
+        },
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "type",
+          "label": "type",
+          "type": "choice",
+          "choices": [
+            "Work Participation Option: Pending",
+            "Work Participation Option: Independent Job Search",
+            "Work Participation Option: Job Training/Readiness Tool",
+            "Work Participation Option: Work Fare Program",
+            "Work Participation Option: CalFresh Employment & Training (CFET) (Only available if receiving CalFresh)"
+          ]
+        },
+        {
+          "id": "propertyDetermination",
+          "label": "PROPERTY DETERMINATION",
+          "type": "choice",
+          "choices": [
+            "PROPERTY DETERMINATION ($500 limit): Ineligible",
+            "PROPERTY DETERMINATION ($500 limit): Eligible"
+          ]
+        },
+        {
+          "id": "specialNeedsSpecifyAmount",
+          "label": "SPECIAL NEEDS (Specify amount)",
+          "type": "text"
+        },
+        {
+          "id": "needs",
+          "label": "NEEDS",
+          "type": "note",
+          "content": "Needs Standard Chart (DP 90-001)"
+        },
+        {
+          "id": "housingSpecifyAmount",
+          "label": "Housing (Specify amount)",
+          "type": "text"
+        },
+        {
+          "id": "foodSpecifyAmount",
+          "label": "Food (Specify amount)",
+          "type": "text"
+        },
+        {
+          "id": "personalNeedsSpecifyAmount",
+          "label": "Personal Needs (Specify amount)",
+          "type": "text"
+        },
+        {
+          "id": "firstContactResolution",
+          "label": "FIRST CONTACT RESOLUTION",
+          "type": "text"
+        },
+        {
+          "id": "impactToOtherPrograms",
+          "label": "Impact to Other Programs",
+          "type": "choice",
+          "choices": [
+            "No other open programs.",
+            "No impact as family did not provide verifications.",
+            "Unable to determine due to lack of skill. Team member skilled for that program notified.",
+            "See separate Journal Entry for impact determination."
+          ]
+        },
+        {
+          "id": "tasksDueFutureListTaskAndDueDate",
+          "label": "TASKS DUE FUTURE (List task and due date)",
+          "type": "text"
+        },
+        {
+          "id": "budgetWorksheet",
+          "label": "BUDGET WORKSHEET",
+          "type": "choice",
+          "choices": [
+            "Not required for determination.",
+            "Completed and imaged."
+          ]
+        },
+        {
+          "id": "eligibilityDeterminationBenefitCalculationEdbcResults",
+          "label": "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS",
+          "type": "choice",
+          "choices": [
+            "Denied (Specify reason):",
+            "Discontinued (Specify reason):",
+            "$0 allotment for reapplication process.",
+            "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS (List each month run and the allotment that was issued):"
+          ]
+        },
+        {
+          "id": "periodOfEligibility",
+          "label": "PERIOD OF ELIGIBILITY",
+          "type": "text"
+        },
+        {
+          "id": "beginningDateOfAid",
+          "label": "Beginning Date of Aid",
+          "type": "date"
+        },
+        {
+          "id": "lastDateOfAid",
+          "label": "Last Date of Aid",
+          "type": "date"
+        },
+        {
+          "id": "reapplicationMonthYear",
+          "label": "REAPPLICATION MONTH / YEAR",
+          "type": "choice",
+          "choices": [
+            "None. Not exempt/unemployable case.",
+            "Pending"
+          ]
+        },
+        {
+          "id": "noticeOfActionNoa",
+          "label": "NOTICE OF ACTION (NOA)",
+          "type": "choice",
+          "choices": [
+            "Not required. DPSS 1366M previously provided.",
+            "Not required. Reapplication process pending.",
+            "Completed and imaged, then provided to the family."
+          ]
+        }
+      ]
+    }
+  ]
+}

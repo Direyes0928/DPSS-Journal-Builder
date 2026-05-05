@@ -57,13 +57,6 @@
       "updated": "2025-12-02"
     },
     {
-      "id": "cf_incoming_ict_processed",
-      "name": "CalFresh – Incoming ICT Processed",
-      "file": "CF_Incoming_ICT_Processed.json",
-      "program": "CalFresh",
-      "updated": "2025-12-02"
-    },
-    {
       "id": "cf_missed_interview",
       "name": "CalFresh – Missed Interview",
       "file": "CF_Missed_Interview.json",
@@ -92,118 +85,116 @@
       "updated": "2025-12-02"
     }
   ],
-
   "CalWORKs": [
     {
-      "id": "CW_Application",
+      "id": "cw_application",
       "name": "CalWORKs – Application",
       "file": "CW_Application.json",
       "program": "CalWORKs",
       "updated": "2025-12-01"
     },
     {
-      "id": "CW_Application_Interview_Scheduled",
+      "id": "cw_application_interview_scheduled",
       "name": "CalWORKs – Application Interview Scheduled",
       "file": "CW_Application_Interview_Scheduled.json",
       "program": "CalWORKs",
       "updated": "2025-12-02"
     },
     {
-      "id": "CW_Application_Withdrawal",
+      "id": "cw_application_withdrawal",
       "name": "CalWORKs – Application Withdrawal",
       "file": "CW_Application_Withdrawal.json",
       "program": "CalWORKs",
       "updated": "2025-12-02"
     },
     {
-      "id": "CW_Changes",
+      "id": "cw_changes",
       "name": "CalWORKs – Changes",
       "file": "CW_Changes.json",
       "program": "CalWORKs",
       "updated": "2025-12-02"
     },
     {
-      "id": "CW_Failure_To_Provide",
+      "id": "cw_failure_to_provide",
       "name": "CalWORKs – Failure to Provide",
-      "file": "CW_Failure_To_Provide.json",
+      "file": "CW_Failure_to_Provide.json",
       "program": "CalWORKs",
       "updated": "2025-12-01"
     },
     {
-      "id": "CW_Immediate_Need_Screening",
+      "id": "cw_immediate_need_screening",
       "name": "CalWORKs – Immediate Need Screening",
       "file": "CW_Immediate_Need_Screening.json",
       "program": "CalWORKs",
       "updated": "2025-12-02"
     },
     {
-      "id": "CW_Incoming_ICT_Processed",
-      "name": "CalWORKs – Incoming ICT Processed",
-      "file": "CW_Incoming_ICT_Processed.json",
-      "program": "CalWORKs",
-      "updated": "2025-12-02"
-    },
-    {
-      "id": "CW_Missed_Interview",
+      "id": "cw_missed_interview",
       "name": "CalWORKs – Missed Interview",
       "file": "CW_Missed_Interview.json",
       "program": "CalWORKs",
       "updated": "2025-12-02"
     },
     {
-      "id": "CW_No_Change",
+      "id": "cw_no_change",
       "name": "CalWORKs – No Change",
       "file": "CW_No_Change.json",
       "program": "CalWORKs",
       "updated": "2025-12-02"
     },
     {
-      "id": "CW_Redetermination",
+      "id": "cw_redetermination",
       "name": "CalWORKs – Redetermination",
       "file": "CW_Redetermination.json",
       "program": "CalWORKs",
       "updated": "2025-12-02"
     },
     {
-      "id": "CW_SAR",
+      "id": "cw_sar",
       "name": "CalWORKs – SAR 7",
       "file": "CW_SAR.json",
       "program": "CalWORKs",
       "updated": "2025-12-02"
     },
     {
-      "id": "CW_THA_Application",
+      "id": "cw_tha_application",
       "name": "CalWORKs – THA Application",
-      "file": "CW_THA_Application.json",
+      "file": "THA_Application.json",
       "program": "CalWORKs",
       "updated": "2025-12-02"
     },
     {
-      "id": "CW_WTW_Sanctions",
+      "id": "cw_wtw_sanctions",
       "name": "CalWORKs – WTW Sanctions",
-      "file": "CW_WTW_Sanctions.json",
+      "file": "WTW_Sanctions.json",
       "program": "CalWORKs",
       "updated": "2025-12-02"
     },
     {
-      "id": "FC_ARC_IPT",
+      "id": "cw_pha_application",
+      "name": "CalWORKs – PHA Application",
+      "file": "PHA_Application.json",
+      "program": "CalWORKs",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "fc_arc_ipt",
       "name": "Foster Care – ARC IPT",
-      "file": "FC_ARC_IPT.json",
+      "file": "CW-FC-ARC_IPTs.json",
       "program": "CalWORKs",
       "updated": "2025-12-02"
     }
   ],
-
   "Medi-Cal": [
     {
-      "id": "MC_application",
+      "id": "mc_application",
       "name": "Medi-Cal – Application",
       "file": "MC_Application.json",
       "program": "Medi-Cal",
       "updated": "2025-12-02"
     },
     {
-      "id": "MC_changes",
+      "id": "mc_changes",
       "name": "Medi-Cal – Changes",
       "file": "MC_Changes.json",
       "program": "Medi-Cal",
@@ -212,14 +203,7 @@
     {
       "id": "mc_failure_to_provide",
       "name": "Medi-Cal – Failure to Provide",
-      "file": "MC_FailureToProvide.json",
-      "program": "Medi-Cal",
-      "updated": "2025-12-02"
-    },
-    {
-      "id": "mc_Incoming_ICT_Processed",
-      "name": "Medi-Cal – Incoming ICT Processed",
-      "file": "MC_IncomingICTProcessed.json",
+      "file": "MC_Failure_to_Provide.json",
       "program": "Medi-Cal",
       "updated": "2025-12-02"
     },
@@ -231,36 +215,401 @@
       "updated": "2025-12-02"
     },
     {
-      "id": "mc_re_advanced",
-      "name": "Medi-Cal – RE Advanced",
-      "file": "MC_RE_Advanced.json",
+      "id": "mc_re_advanced_not_advanced",
+      "name": "Medi-Cal – RE Advanced / Not Advanced",
+      "file": "MC_RE_Advanced-Not_Advanced_Journal.json",
       "program": "Medi-Cal",
       "updated": "2025-12-02"
     },
     {
-      "id": "mc_re_not_advanced",
-      "name": "Medi-Cal – RE Not Advanced Journal",
-      "file": "MC_RE_Not_Advanced.json",
+      "id": "mc_re_abbreviated",
+      "name": "Medi-Cal – RE Processed (Abbreviated)",
+      "file": "MC_RE_Processed_-_Abbreviated.json",
       "program": "Medi-Cal",
       "updated": "2025-12-02"
     },
     {
-  "id": "mc_re_abbreviated",
-  "name": "Medi-Cal – RE Processed (Abbreviated)",
-  "file": "MC_RE_Abbreviated.json",
-  "program": "Medi-Cal",
-  "updated": "2025-12-02"
+      "id": "mc_redetermination",
+      "name": "Medi-Cal – Redetermination",
+      "file": "MC_Redetermination.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
     },
     {
-  "id": "mc_redetermination",
-  "name": "Medi-Cal – Redetermination",
-  "file": "MC_Redetermination.json",
-  "program": "Medi-Cal",
-  "updated": "2025-12-02"
+      "id": "mc_redetermination_covid",
+      "name": "Medi-Cal – Redetermination (COVID)",
+      "file": "MC_Redetermination__COVID_.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "mc_ssi_qmb_redetermination",
+      "name": "Medi-Cal – SSI QMB Redetermination",
+      "file": "MC_SSI_QMB_Redetermination.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "mc_second_verification",
+      "name": "Medi-Cal – Second Verification",
+      "file": "MC_Second_Verification.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "mc_simplified_denial",
+      "name": "Medi-Cal – Simplified Denial / Discontinuance",
+      "file": "MC_Simplified_Denial-Discontinuance.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "mc_telephonic_affidavit",
+      "name": "Medi-Cal – Telephonic Affidavit",
+      "file": "MC_Telephonic_Affidavit.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "mc_telephonic_signature",
+      "name": "Medi-Cal – Telephonic Signature",
+      "file": "MC_Telephonic_Signature.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "mc_withdrawal",
+      "name": "Medi-Cal – Withdrawal",
+      "file": "MC_Withdrawal.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "mc_non_magi_re_abbreviated",
+      "name": "Medi-Cal – Non-MAGI RE Processed (Abbreviated)",
+      "file": "Non-MAGI_MC_RE_Processed__-_Abbreviated.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
+    },
+    {
+      "id": "mc_mixed_re_abbreviated",
+      "name": "Medi-Cal – Mixed MC RE Processed (Abbreviated)",
+      "file": "Mixed_MC_RE_Processed_-_Abbreviated.json",
+      "program": "Medi-Cal",
+      "updated": "2025-12-02"
     }
   ],
-
-  "ChildCare": [],
-
-  "General": []
+  "Child Care": [
+    {
+      "id": "authorization_approved",
+      "name": "Child Care – Authorization Approved",
+      "file": "Authorization_Approved.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "authorization_denied",
+      "name": "Child Care – Authorization Denied",
+      "file": "Authorization_Denied.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "authorization_discontinued",
+      "name": "Child Care – Authorization Discontinued",
+      "file": "Authorization_Discontinued.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "certificates",
+      "name": "Child Care – Certificates",
+      "file": "Certificates.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "change_of_provider",
+      "name": "Child Care – Change of Provider",
+      "file": "Change_of_Provider.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "child_care_overpayment",
+      "name": "Child Care – Overpayment Journal",
+      "file": "Child_Care_Overpayment_Journal.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "csf_136",
+      "name": "Child Care – CSF 136",
+      "file": "CSF_136.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "dpss_4150",
+      "name": "Child Care – DPSS 4150",
+      "file": "DPSS_4150.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "cc_ict",
+      "name": "Child Care – ICT",
+      "file": "ICT.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "cc_idt",
+      "name": "Child Care – IDT",
+      "file": "IDT.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "intake_license_exempt",
+      "name": "Child Care – Intake (License-Exempt Provider)",
+      "file": "Intake_-_Parent_and_License-Exempt_Provider.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "intake_license_exempt_trustline",
+      "name": "Child Care – Intake (License-Exempt TrustLine)",
+      "file": "Intake_-_Parent_and_License-Exempt_TrustLine_Required_Provider.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "intake_licensed_provider",
+      "name": "Child Care – Intake (Licensed Provider)",
+      "file": "Intake_-_Parent_and_Licensed_Provider.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "recertification_parent",
+      "name": "Child Care – Recertification (Parent)",
+      "file": "Recertification_Parent.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "recertification_provider",
+      "name": "Child Care – Recertification (Provider)",
+      "file": "Recertification_Provider.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "recertification_scheduled",
+      "name": "Child Care – Recertification Scheduled",
+      "file": "Recertification_Scheduled.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "reimbursement_denied",
+      "name": "Child Care – Reimbursement Denied",
+      "file": "Reimbursement_Denied.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "reimbursement_issued",
+      "name": "Child Care – Reimbursement Issued",
+      "file": "Reimbursement_Issued.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "shell_case_contact",
+      "name": "Child Care – Shell Case Contact",
+      "file": "Shell_Case_Contact.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "stage_two_transfer",
+      "name": "Child Care – Stage Two Transfer",
+      "file": "Stage_Two_Transfer.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "adobe_sign",
+      "name": "Child Care – Adobe Sign (Send and Receive)",
+      "file": "Adobe_Sign__Send_and_Receive_.json",
+      "program": "Child Care",
+      "updated": "2026-05-05"
+    }
+  ],
+  "CFET": [
+    {
+      "id": "cfet_job_searching",
+      "name": "CFET – Job Searching",
+      "file": "CFET_Job_Searching.json",
+      "program": "CFET",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "cfet_monthly_case_management",
+      "name": "CFET – Monthly Case Management",
+      "file": "CFET_Monthly_Case_Management.json",
+      "program": "CFET",
+      "updated": "2026-05-05"
+    }
+  ],
+  "Inter-County Transfers (ICT)": [
+    {
+      "id": "cf_incoming_ict",
+      "name": "CalFresh – Incoming ICT Processed",
+      "file": "CF_Incoming_ICT_Processed.json",
+      "program": "Inter-County Transfers (ICT)",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "cw_incoming_ict",
+      "name": "CalWORKs – Incoming ICT Processed",
+      "file": "CW_Incoming_ICT_Processed.json",
+      "program": "Inter-County Transfers (ICT)",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "mc_incoming_ict",
+      "name": "Medi-Cal – Incoming ICT Processed",
+      "file": "MC_Incoming_ICT_Processed.json",
+      "program": "Inter-County Transfers (ICT)",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "ict_summary",
+      "name": "ICT – Summary Journal",
+      "file": "ICT_Summary_Journal.json",
+      "program": "Inter-County Transfers (ICT)",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "outgoing_ict",
+      "name": "ICT – Outgoing Journal",
+      "file": "Outgoing_ICT_Journal.json",
+      "program": "Inter-County Transfers (ICT)",
+      "updated": "2026-05-05"
+    }
+  ],
+  "Inter-District Transfers (IDT)": [
+    {
+      "id": "idt_journal",
+      "name": "IDT – Journal Template",
+      "file": "IDT_Journal_Template.json",
+      "program": "Inter-District Transfers (IDT)",
+      "updated": "2026-05-05"
+    }
+  ],
+  "General Programs": [
+    {
+      "id": "family_contact_action_requested",
+      "name": "All Programs – Family Contact (Action Requested)",
+      "file": "All_Programs-_Family_Contact_-_Action_Requested.json",
+      "program": "All Programs",
+      "updated": "2026-05-05"
+    }
+  ],
+  "General Assistance": [
+    {
+      "id": "ga_application_interview_scheduled",
+      "name": "General Assistance – Application Interview Scheduled",
+      "file": "GA_Application_Interview_Scheduled.json",
+      "program": "General Assistance",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "ga_application_orientation_and_interview",
+      "name": "General Assistance – Application Orientation and Interview",
+      "file": "GA_Application_Orientation_and_Interview.json",
+      "program": "General Assistance",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "ga_changes",
+      "name": "General Assistance – Changes",
+      "file": "GA_Changes.json",
+      "program": "General Assistance",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "ga_discontinuance",
+      "name": "General Assistance – Discontinuance",
+      "file": "GA_Discontinuance.json",
+      "program": "General Assistance",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "ga_failure_to_provide",
+      "name": "General Assistance – Failure to Provide",
+      "file": "GA_Failure_to_Provide.json",
+      "program": "General Assistance",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "ga_missed_interview",
+      "name": "General Assistance – Missed Interview",
+      "file": "GA_Missed_Interview.json",
+      "program": "General Assistance",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "ga_no_change",
+      "name": "General Assistance – No Change",
+      "file": "GA_No_Change.json",
+      "program": "General Assistance",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "ga_ready_to_run",
+      "name": "General Assistance – Ready to Run",
+      "file": "GA_Ready_to_Run.json",
+      "program": "General Assistance",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "ga_reapplication_orientation_and_interview",
+      "name": "General Assistance – Reapplication - Orientation and Interview",
+      "file": "GA_Reapplication_-_Orientation_and_Interview.json",
+      "program": "General Assistance",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "ga_reapplication_interview_scheduled",
+      "name": "General Assistance – Reapplication Interview Scheduled",
+      "file": "GA_Reapplication_Interview_Scheduled.json",
+      "program": "General Assistance",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "ga_work_participation_job_readiness",
+      "name": "General Assistance – Work Participation - Job Readiness",
+      "file": "GA_Work_Participation_-Job_Readiness.json",
+      "program": "General Assistance",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "ga_work_participation_job_search",
+      "name": "General Assistance – Work Participation - Job Search",
+      "file": "GA_Work_Participation_-_Job_Search.json",
+      "program": "General Assistance",
+      "updated": "2026-05-05"
+    },
+    {
+      "id": "ga_work_participation_monthly_review",
+      "name": "General Assistance – Work Participation - Monthly Review",
+      "file": "GA_Work_Participation_-_Monthly_Review.json",
+      "program": "General Assistance",
+      "updated": "2026-05-05"
+    }
+  ]
 }

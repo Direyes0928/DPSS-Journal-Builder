@@ -1,0 +1,124 @@
+{
+  "id": "authorization_approved",
+  "name": "Child Care – Authorization Approved",
+  "file": "Authorization_Approved.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "PARENT/CARETAKER STATUS",
+      "fields": [
+        {
+          "id": "parentcaretakerStatus",
+          "label": "Parent/Caretaker Status",
+          "type": "choice",
+          "choices": [
+            "Parent/Caretaker: WTW mandatory",
+            "Parent/Caretaker: WTW exempt and intends to participate",
+            "Parent/Caretaker: WTW sanctioned and intends to cure",
+            "Parent/Caretaker: Former Recipient (During RCOE Closure Only)",
+            "Parent/Caretaker: Employed (WTW Eligible)"
+          ]
+        },
+        {
+          "id": "secondParentcaretakerStatus",
+          "label": "Second Parent/Caretaker Status",
+          "type": "choice",
+          "choices": [
+            "Second Parent/Caretaker: WTW mandatory",
+            "Second Parent/Caretaker: WTW exempt and intends to participate",
+            "Second Parent/Caretaker: WTW sanctioned and intends to cure",
+            "Second Parent/Caretaker: Former Recipient (During RCOE Closure Only)",
+            "Second Parent/Caretaker: Unavailable (Enter Reason)",
+            "Second Parent/Caretaker: N/A"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "AUTHORIZATION DETAILS",
+      "fields": [
+        {
+          "id": "ccp7CompletedsignedDate",
+          "label": "CCP 7 completed/signed date",
+          "type": "text"
+        },
+        {
+          "id": "didCustomerRequestPtOrFt",
+          "label": "Did customer request PT or FT",
+          "type": "text"
+        },
+        {
+          "id": "dateParentPacketSentgiven",
+          "label": "Date Parent Packet Sent/Given",
+          "type": "text"
+        },
+        {
+          "id": "dateProviderPacketSentgiven",
+          "label": "Date Provider Packet Sent/Given",
+          "type": "text"
+        },
+        {
+          "id": "providerNameIfKnown",
+          "label": "Provider Name (If Known)",
+          "type": "text"
+        },
+        {
+          "id": "providerTypeIfKnown",
+          "label": "Provider Type (If Known)",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "STAGE TWO",
+      "fields": [
+        {
+          "id": "parentcaretakerStatus",
+          "label": "Parent/Caretaker Status",
+          "type": "choice",
+          "choices": [
+            "Parent/Caretaker: WTW mandatory",
+            "Parent/Caretaker: WTW exempt and intends to participate",
+            "Parent/Caretaker: WTW sanctioned and intends to cure",
+            "Parent/Caretaker: Former Recipient (During RCOE Closure Only)",
+            "Parent/Caretaker: Employed (WTW Eligible)"
+          ]
+        },
+        {
+          "id": "2ndParentcaretakerStatus",
+          "label": "2nd Parent/Caretaker Status",
+          "type": "choice",
+          "choices": [
+            "2nd Parent/Caretaker Not in Home",
+            "2nd Parent/Caretaker WTW mandatory",
+            "2nd Parent/Caretaker WTW exempt and intends to participate",
+            "2nd Parent/Caretaker WTW sanctioned and intends to cure"
+          ]
+        },
+        {
+          "id": "parentcaretakerPacket",
+          "label": "Parent/Caretaker Packet",
+          "type": "choice",
+          "choices": [
+            "Parent/Caretaker Packet Mailed",
+            "Parent/Caretaker Packet Handgiven"
+          ]
+        },
+        {
+          "id": "providerStatus",
+          "label": "Provider Status",
+          "type": "choice",
+          "choices": [
+            "Family has a provider",
+            "Family does not have a provider"
+          ]
+        }
+      ]
+    }
+  ]
+}

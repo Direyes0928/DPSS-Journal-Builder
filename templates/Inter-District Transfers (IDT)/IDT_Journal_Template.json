@@ -1,0 +1,108 @@
+{
+  "id": "idt_journal_template",
+  "name": "IDT – Journal Template",
+  "file": "General/IDT_Journal_Template.json",
+  "program": "General",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "GENERAL",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "idtType",
+          "label": "IDT Type",
+          "type": "choice",
+          "choices": [
+            "MC IDT",
+            "CF IDT",
+            "CW IDT",
+            "MC/CF IDT",
+            "CW/CF IDT",
+            "CW/CF/MC",
+            "CC IDT"
+          ]
+        },
+        {
+          "id": "longDescription",
+          "label": "LONG DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "program",
+          "label": "Program",
+          "type": "choice",
+          "choices": [
+            "MC IDT",
+            "CF IDT",
+            "CW IDT",
+            "MC/CF IDT",
+            "CW/CF IDT",
+            "CW/CF/MC",
+            "CC IDT"
+          ]
+        },
+        {
+          "id": "idtExceptionReasonAsIdentifiedInDp23203InterdistrictTransfers",
+          "label": "IDT Exception reason as identified in DP 23-203, Inter-District Transfers",
+          "type": "choice",
+          "choices": [
+            "Select IDT Reason",
+            "IDT to/from RUHS, COB, DART, IHSS, ASD. Explain:",
+            "family requested to keep case in a specific district office due to extenuating circumstances. Explain:",
+            "companion MC/CF or CF/CW case assigned to a different office"
+          ]
+        },
+        {
+          "id": "receivingDistrictOffice",
+          "label": "Receiving District Office",
+          "type": "choice",
+          "choices": [
+            "Select Office",
+            "Banning",
+            "Blythe",
+            "Cathedral City",
+            "Coachella",
+            "Desert Hot Springs",
+            "Hemet",
+            "Indio",
+            "Jurupa",
+            "La Sierra",
+            "Lake Elsinore",
+            "Moreno Valley",
+            "Norco",
+            "Perris",
+            "Temecula"
+          ]
+        },
+        {
+          "id": "employeeRelative",
+          "label": "Employee Relative",
+          "type": "choice",
+          "choices": [
+            "Select",
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "language",
+          "label": "Language",
+          "type": "choice",
+          "choices": [
+            "Select Language",
+            "English",
+            "Spanish",
+            "Other- Explain:"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "id": "cfet_job_searching",
+  "name": "CFET – Job Searching",
+  "file": "CFET/CFET_Job_Searching.json",
+  "program": "CFET",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "GENERAL",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "cfetCustomerNameactiontelephoneCall",
+          "label": "CFET <CUSTOMER NAME><ACTION>Telephone Call",
+          "type": "choice",
+          "choices": [
+            "CFET <CUSTOMER NAME><ACTION>Telephone Call",
+            "CFET <CUSTOMER NAME><ACTION>In Person",
+            "CFET <CUSTOMER NAME><ACTION>Written"
+          ]
+        },
+        {
+          "id": "longDescription",
+          "label": "LONG DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "sjsCfetMonthCount",
+          "label": "SJS CFET Month Count",
+          "type": "text"
+        },
+        {
+          "id": "contactSheetsDpss4879Provided",
+          "label": "Contact Sheets (DPSS 4879) provided",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "datesOfDpss4879",
+          "label": "Dates of DPSS 4879",
+          "type": "text"
+        },
+        {
+          "id": "reviewedForCompleteness",
+          "label": "Reviewed for completeness",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "imaged",
+          "label": "Imaged",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "attendanceUpdated",
+          "label": "Attendance updated",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "lengthOfTimeToCompleteEachContact",
+          "label": "Length of time to complete each contact",
+          "type": "text"
+        },
+        {
+          "id": "dateOfDpss4879",
+          "label": "Date of DPSS 4879",
+          "type": "date"
+        },
+        {
+          "id": "supportiveServices",
+          "label": "Supportive Services",
+          "type": "choice",
+          "choices": [
+            "Offered and accepted: customer understood and agreed that any SS issued under the CFET program is to be used for CFET activities only.",
+            "Offered and declined."
+          ]
+        },
+        {
+          "id": "transportation",
+          "label": "Transportation",
+          "type": "choice",
+          "choices": [
+            "Transportation bus pass generated/issued. <amount issued> NOA sent.",
+            "Transportation CIL generated/issued. <amount issued> NOA sent.",
+            "Transportation gas card/voucher generated/issued. <amount issued> NOA sent.",
+            "Transportation not requested."
+          ]
+        },
+        {
+          "id": "dateProvided",
+          "label": "Date Provided",
+          "type": "date"
+        },
+        {
+          "id": "clothingVoucherancillary",
+          "label": "Clothing Voucher/Ancillary",
+          "type": "choice",
+          "choices": [
+            "generated <Amount issued> NOA sent.",
+            "Clothing Voucher/Ancillary not requested."
+          ]
+        },
+        {
+          "id": "dateProvided2",
+          "label": "Date Provided",
+          "type": "date"
+        },
+        {
+          "id": "schoolSuppliesbookReimbursement",
+          "label": "School Supplies/Book Reimbursement",
+          "type": "choice",
+          "choices": [
+            "School supplies/book reimbursement generated <amount issued> NOA sent.",
+            "School supplies/book reimbursement not requested."
+          ]
+        },
+        {
+          "id": "dateProvided3",
+          "label": "Date Provided",
+          "type": "date"
+        },
+        {
+          "id": "parkingFeestestingRecertificationFees",
+          "label": "Parking Fees/Testing & Recertification Fees",
+          "type": "choice",
+          "choices": [
+            "Parking fees/testing & recertification fees generated <amount issued> NOA sent.",
+            "Not Requested."
+          ]
+        },
+        {
+          "id": "dateProvided4",
+          "label": "Date Provided",
+          "type": "date"
+        }
+      ]
+    }
+  ]
+}

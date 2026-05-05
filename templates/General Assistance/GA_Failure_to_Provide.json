@@ -1,0 +1,196 @@
+{
+  "id": "ga_failure_to_provide",
+  "name": "General Assistance – Failure to Provide",
+  "file": "GA_Failure_to_Provide.json",
+  "program": "General Assistance",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "action",
+          "label": "ACTION",
+          "type": "choice",
+          "choices": [
+            "GA: Case Reviewed by Eligibility Clerk",
+            "GA: Application Denied",
+            "GA: Reapplication Denied",
+            "GA: Case Discontinued"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "FOLLOW UP",
+      "fields": [
+        {
+          "id": "followUpAction",
+          "label": "FOLLOW UP ACTION",
+          "type": "choice",
+          "choices": [
+            "APPLICATION DATE:",
+            "REAPPLICATION MONTH:",
+            "VERIFICATION REQUEST DATE:"
+          ]
+        },
+        {
+          "id": "seeJournalEntryOnSpecifyDate",
+          "label": "See Journal Entry on (Specify date)",
+          "type": "date"
+        },
+        {
+          "id": "pendingVerificationsListVerificationsNotProvided",
+          "label": "PENDING VERIFICATIONS (List verifications not provided)",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "FIRST CONTACT RESOLUTION",
+      "fields": [
+        {
+          "id": "firstContactResolution",
+          "label": "FIRST CONTACT RESOLUTION",
+          "type": "text"
+        },
+        {
+          "id": "impactToOtherPrograms",
+          "label": "Impact to Other Programs",
+          "type": "choice",
+          "choices": [
+            "No other open programs.",
+            "No impact as family did not provide verifications.",
+            "Unable to determine due to lack of skill. Team member skilled for that program notified.",
+            "See separate Journal Entry for impact determination."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "BUDGET WORKSHEET",
+      "fields": [
+        {
+          "id": "budgetWorksheet",
+          "label": "BUDGET WORKSHEET",
+          "type": "choice",
+          "choices": [
+            "Not required for determination.",
+            "Pending for Eligibility Technician.",
+            "Completed and imaged."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "IEVS / PVS / NHR / MEDS",
+      "fields": [
+        {
+          "id": "ievsApplicantReport",
+          "label": "IEVS Applicant Report",
+          "type": "choice",
+          "choices": [
+            "Received and reviewed for this application. No discrepancies.",
+            "Pending. Task set for 10 days.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "paymentVerificationSystemPvs",
+          "label": "Payment Verification System (PVS)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "newHireRegistryNhr",
+          "label": "New Hire Registry (NHR)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        },
+        {
+          "id": "medicalEligibilityDataSystemMedsAlerts",
+          "label": "Medi-Cal Eligibility Data System (MEDS) Alerts",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Alerts closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "EDBC / NOA",
+      "fields": [
+        {
+          "id": "eligibilityDeterminationBenefitCalculationEdbcResults",
+          "label": "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS",
+          "type": "choice",
+          "choices": [
+            "Denied: FTP Eligibility Forms",
+            "Discontinued: FTP Eligibility Forms",
+            "Discontinued: Failed to Complete Redetermination",
+            "Ready to process. Task set for Eligibility Technician to process.",
+            "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS (List each month run and the allotment that was issued):"
+          ]
+        },
+        {
+          "id": "noticeOfActionNoa",
+          "label": "NOTICE OF ACTION (NOA)",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "Pending for Eligibility Technician.",
+            "Completed and imaged, then provided to the family."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "RESTORATION DATES",
+      "fields": [
+        {
+          "id": "fullRestorationDateClickOrTapToEnterADate",
+          "label": "FULL RESTORATION DATE Click or tap to enter a date.",
+          "type": "choice",
+          "choices": [
+            "FULL APPLICATION RESTORATION DATE (Specify date):",
+            "FULL RECERTIFICATION RESTORATION DATE (Specify date):",
+            "FULL DISCONTINUANCE RESTORATION DATE (Specify date):"
+          ]
+        },
+        {
+          "id": "adjustedRestorationDateClickOrTapToEnterADate",
+          "label": "ADJUSTED RESTORATION DATE Click or tap to enter a date.",
+          "type": "choice",
+          "choices": [
+            "ADJUSTED APPLICATION RESTORATION DATE (Specify date):",
+            "ADJUSTED RECERTIFICATION RESTORATION DATE (Specify date):",
+            "ADJUSTED DISCONTINUANCE RESTORATION DATE (Specify date):"
+          ]
+        }
+      ]
+    }
+  ]
+}

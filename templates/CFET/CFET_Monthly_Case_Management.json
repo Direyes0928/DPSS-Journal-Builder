@@ -1,0 +1,304 @@
+{
+  "id": "cfet_monthly_case_management",
+  "name": "CFET – Monthly Case Management",
+  "file": "CFET/CFET_Monthly_Case_Management.json",
+  "program": "CFET",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "GENERAL",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "cfetAction",
+          "label": "CFET ACTION",
+          "type": "choice",
+          "choices": [
+            "CFET <CUSTOMER NAME><ACTION>Telephone Call",
+            "CFET <CUSTOMER NAME><ACTION>In Person"
+          ]
+        },
+        {
+          "id": "longDescription",
+          "label": "LONG DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "supportiveServices",
+          "label": "Supportive Services",
+          "type": "choice",
+          "choices": [
+            "Offered and accepted: customer understood and agreed that any SS issued under the CFET program is to be used for CFET activities only.",
+            "Offered and declined."
+          ]
+        },
+        {
+          "id": "transportation",
+          "label": "Transportation",
+          "type": "choice",
+          "choices": [
+            "Transportation bus pass generated/issued. <amount issued> NOA sent.",
+            "Transportation CIL generated/issued. <amount issued> NOA sent.",
+            "Transportation gas card/voucher generated/issued. <amount issued> NOA sent.",
+            "Transportation not requested."
+          ]
+        },
+        {
+          "id": "dateProvided",
+          "label": "Date Provided",
+          "type": "date"
+        },
+        {
+          "id": "clothingVoucherancillary",
+          "label": "Clothing Voucher/Ancillary",
+          "type": "choice",
+          "choices": [
+            "generated <Amount issued> NOA sent.",
+            "Clothing Voucher/Ancillary not requested."
+          ]
+        },
+        {
+          "id": "dateProvided2",
+          "label": "Date Provided",
+          "type": "date"
+        },
+        {
+          "id": "schoolSuppliesbookReimbursement",
+          "label": "School Supplies/Book Reimbursement",
+          "type": "choice",
+          "choices": [
+            "School supplies/book reimbursement generated <amount issued> NOA sent.",
+            "School supplies/book reimbursement not requested."
+          ]
+        },
+        {
+          "id": "dateProvided3",
+          "label": "Date Provided",
+          "type": "date"
+        },
+        {
+          "id": "parkingFeestestingRecertificationFees",
+          "label": "Parking Fees/Testing & Recertification Fees",
+          "type": "choice",
+          "choices": [
+            "Parking fees/testing & recertification fees generated <amount issued> NOA sent.",
+            "Not requested"
+          ]
+        },
+        {
+          "id": "dateProvided4",
+          "label": "Date Provided",
+          "type": "date"
+        },
+        {
+          "id": "attendingSchool",
+          "label": "Attending School",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "nameOfSchool",
+          "label": "Name of School",
+          "type": "text"
+        },
+        {
+          "id": "attendanceUpdated",
+          "label": "Attendance Updated",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "monthOfAttendance",
+          "label": "Month of Attendance",
+          "type": "text"
+        },
+        {
+          "id": "imaged",
+          "label": "Imaged",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "employed",
+          "label": "Employed",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "nameOfEmployer",
+          "label": "Name of Employer",
+          "type": "text"
+        },
+        {
+          "id": "paystubsProvided",
+          "label": "Paystubs Provided",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "numberOfHoursEmployed",
+          "label": "Number of Hours Employed",
+          "type": "text"
+        },
+        {
+          "id": "frequencyOfPay",
+          "label": "Frequency of Pay",
+          "type": "choice",
+          "choices": [
+            "Weekly",
+            "Bi-weekly",
+            "Bi-monthly",
+            "Monthly",
+            "Other:"
+          ]
+        },
+        {
+          "id": "retentionMonthUsed",
+          "label": "Retention Month Used",
+          "type": "text"
+        },
+        {
+          "id": "sjsCfetMonthCount",
+          "label": "SJS CFET Month Count",
+          "type": "text"
+        },
+        {
+          "id": "contactSheetsDpss4879Provided",
+          "label": "Contact Sheets (DPSS 4879) provided",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "datesOfDpss4879",
+          "label": "Dates of DPSS 4879",
+          "type": "text"
+        },
+        {
+          "id": "reviewedForCompleteness",
+          "label": "Reviewed for completeness",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "discussed",
+          "label": "Discussed",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "imaged2",
+          "label": "Imaged",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "attendanceUpdated2",
+          "label": "Attendance updated",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "lengthOfTimeToCompleteEachContact",
+          "label": "Length of time to complete each contact",
+          "type": "text"
+        },
+        {
+          "id": "dateOfDpss4879",
+          "label": "Date of DPSS 4879",
+          "type": "date"
+        },
+        {
+          "id": "complyingWithProgramRequirements",
+          "label": "Complying with program requirements",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "followupNeeded",
+          "label": "Follow-up needed",
+          "type": "choice",
+          "choices": [
+            "Yes:  task set <reason>",
+            "No: no action"
+          ]
+        },
+        {
+          "id": "meeting12hourMonthlyRequirementForNonabawdParticipant",
+          "label": "Meeting 12-hour monthly requirement for non-ABAWD participant",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "meetingTheAbawdMonthlyRequirement",
+          "label": "Meeting the ABAWD monthly requirement",
+          "type": "choice",
+          "choices": [
+            "Not applicable, participant is non-ABAWD.",
+            "Yes, participant is an ABAWD and averaged 80 hours monthly (36 hours maximum SJS).",
+            "Yes, participant is an ABAWD and averaged 80 hours monthly in SJS through WIOA.",
+            "Yes, participant is an ABAWD and has met the requirement through the Education component.",
+            "Yes, participant is an ABAWD and has met the requirement through the Work Experience component.",
+            "Yes, participant is an ABAWD and has met the requirement through the Workfare component.",
+            "No, participant is an ABAWD and did not average 80 hours monthly."
+          ]
+        },
+        {
+          "id": "nextFollowUpDate",
+          "label": "Next follow up date",
+          "type": "date"
+        },
+        {
+          "id": "taskSet",
+          "label": "Task Set",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        }
+      ]
+    }
+  ]
+}

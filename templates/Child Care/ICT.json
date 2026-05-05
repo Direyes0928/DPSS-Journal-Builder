@@ -1,0 +1,56 @@
+{
+  "id": "ict",
+  "name": "Child Care – ICT",
+  "file": "ICT.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "INTER-COUNTY TRANSFER (ICT)",
+      "fields": [
+        {
+          "id": "dateWorkerNotifiedOfTheNeedForIct",
+          "label": "Date worker notified of the need for ICT",
+          "type": "text"
+        },
+        {
+          "id": "dateCustomerMovedOrWillMove",
+          "label": "Date customer moved or will move",
+          "type": "text"
+        },
+        {
+          "id": "dateNa835SentToInformCustomerToApplyInTheNewCountyForContinuedServices",
+          "label": "Date NA 835 sent to inform customer to apply in the new county for continued services",
+          "type": "text"
+        },
+        {
+          "id": "dateTimelyNoticeSentToCurrentChildCareProviderForDiscontinuance",
+          "label": "Date timely notice sent to current Child Care provider for discontinuance",
+          "type": "text"
+        },
+        {
+          "id": "effectiveDateOfChildCareDiscontinuance",
+          "label": "Effective date of Child Care discontinuance",
+          "type": "text"
+        },
+        {
+          "id": "effectiveDateForPickup",
+          "label": "Effective date for pickup",
+          "type": "text"
+        },
+        {
+          "id": "generalCaseReview",
+          "label": "General case review",
+          "type": "text"
+        },
+        {
+          "id": "additionalInformationAndComments",
+          "label": "Additional information and comments",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

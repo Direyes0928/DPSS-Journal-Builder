@@ -1,0 +1,245 @@
+{
+  "id": "recertification_provider",
+  "name": "Child Care – Recertification Provider",
+  "file": "Recertification_Provider.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "GENERAL",
+      "fields": [
+        {
+          "id": "thisJournalMayBe",
+          "label": "This journal may be",
+          "type": "text"
+        },
+        {
+          "id": "providerAuthenticatedWith",
+          "label": "Provider authenticated with",
+          "type": "choice",
+          "choices": [
+            "Provider Name",
+            "Name of facility",
+            "Parents name",
+            "Parents case number",
+            "Parents address",
+            "Parents telephone number"
+          ]
+        },
+        {
+          "id": "attendees",
+          "label": "Attendee(s)",
+          "type": "text"
+        },
+        {
+          "id": "language",
+          "label": "Language",
+          "type": "text"
+        },
+        {
+          "id": "physicalAddress",
+          "label": "Physical Address",
+          "type": "choice",
+          "choices": [
+            "Reported is the same as listed in the RDB",
+            "Change reported and ACO process explained to provider"
+          ]
+        },
+        {
+          "id": "mailingAddress",
+          "label": "Mailing Address",
+          "type": "choice",
+          "choices": [
+            "Reported is the same as listed in the RDB",
+            "Change reported and ACO process explained"
+          ]
+        },
+        {
+          "id": "phoneNumber",
+          "label": "Phone Number",
+          "type": "choice",
+          "choices": [
+            "Reported is the same as listed in the RDB",
+            "Change reported and 3085 submitted to CPU on"
+          ]
+        },
+        {
+          "id": "email",
+          "label": "E-Mail",
+          "type": "choice",
+          "choices": [
+            "Reported is the same as listed in the RDB",
+            "Change reported and 3085 submitted to CPU on",
+            "Provider does not have an email"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "LICENSED PROVIDER INFORMATION",
+      "fields": [
+        {
+          "id": "nameOfTheProvider",
+          "label": "Name of the provider",
+          "type": "text"
+        },
+        {
+          "id": "resourceIdIfEstablished",
+          "label": "Resource ID (if established)",
+          "type": "text"
+        },
+        {
+          "id": "doesTheLicenseNumberReportedOnTheDpss3007bMatchWhatIsInTheRdb",
+          "label": "Does the license number reported on the DPSS 3007B match what is in the RDB",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "registrationFee",
+          "label": "Registration Fee",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "dpss3007bQuestion3",
+          "label": "DPSS 3007B – Question 3",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "siblingDiscount",
+          "label": "Sibling Discount",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "isTheFacilityPolicyOnFileClickOrTapToSelect",
+          "label": "Is the facility policy on file? Click or tap to select",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "didTheProviderSubmitANewRateSheetClickOrTapToSelect",
+          "label": "Did the provider submit a new rate sheet? Click or tap to select",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "isALicenseOnFileForAllAgeGroupsListedOnTheFacilityRateSheetClickOrTapToSelect",
+          "label": "Is a license on file for all age groups listed on the facility rate sheet? Click or tap to select",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "dateTheDpss3007bWasSigned",
+          "label": "Date the DPSS 3007B was signed",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "LICENSED EXEMPT PROVIDER INFORMATION",
+      "fields": [
+        {
+          "id": "nameOfTheProvider",
+          "label": "Name of the provider",
+          "type": "text"
+        },
+        {
+          "id": "currentIdOnFile",
+          "label": "Current ID on file",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "resourceIdIfEstablished",
+          "label": "Resource ID (if established)",
+          "type": "text"
+        },
+        {
+          "id": "ifYesRelationshipOfOtherKidsToCcp",
+          "label": "If yes, relationship of other kids to CCP",
+          "type": "text"
+        },
+        {
+          "id": "dateTheDpss3007aWasSigned",
+          "label": "Date the DPSS 3007A was signed",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "OTHER",
+      "fields": [
+        {
+          "id": "listOfVerificationsRequestedIfAny",
+          "label": "List of verifications requested (if any)",
+          "type": "text"
+        },
+        {
+          "id": "verificationDueDate",
+          "label": "Verification due date",
+          "type": "text"
+        },
+        {
+          "id": "taskDueDate",
+          "label": "Task due date",
+          "type": "text"
+        },
+        {
+          "id": "adobeSignOffered",
+          "label": "Adobe sign offered",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Yes - Declined",
+            "No",
+            "Yes - Accepted. Email address verified and the following forms sent:"
+          ]
+        },
+        {
+          "id": "additionalInformationAndComments",
+          "label": "Additional information and comments",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "ga_work_participation_-job_readiness",
+  "name": "General Assistance – Work Participation- Job Readiness",
+  "file": "General/GA_Work_Participation_-Job_Readiness.json",
+  "program": "General",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "GENERAL",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "ga",
+          "label": "GA",
+          "type": "note",
+          "content": "Job Readiness"
+        },
+        {
+          "id": "longDescription",
+          "label": "LONG DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "verifiedGatePacketSpecifyWeekNumber",
+          "label": "VERIFIED GATE PACKET (Specify Week Number)",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

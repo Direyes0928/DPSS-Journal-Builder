@@ -1,0 +1,73 @@
+{
+  "id": "recertification_scheduled",
+  "name": "Child Care – Recertification Scheduled",
+  "file": "Recertification_Scheduled.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "APPOINTMENT INFORMATION",
+      "fields": [
+        {
+          "id": "interviewMethodPhoneInperson",
+          "label": "Interview Method (Phone, In-Person)",
+          "type": "text"
+        },
+        {
+          "id": "nameOfParentcaretakers",
+          "label": "Name of Parent/caretaker(s)",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "PROVIDER INFORMATION",
+      "fields": [
+        {
+          "id": "nameOfCurrentProvider",
+          "label": "Name of Current provider",
+          "type": "text"
+        },
+        {
+          "id": "currentProviderType",
+          "label": "Current provider type",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Licensed",
+            "TrustLine Exempt",
+            "TrustLine Required",
+            "Exempt Center"
+          ]
+        },
+        {
+          "id": "alternateProviderType",
+          "label": "Alternate provider type",
+          "type": "choice",
+          "choices": [
+            "Click or tap to select",
+            "Licensed",
+            "TrustLine Exempt",
+            "TrustLine Required",
+            "Exempt Center",
+            "N/A - No Alternate Provider"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "FORMS",
+      "fields": [
+        {
+          "id": "theFollowingFormsIncluded",
+          "label": "The following forms included",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

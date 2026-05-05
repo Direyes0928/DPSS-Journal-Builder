@@ -1,0 +1,38 @@
+{
+  "id": "ga_work_participation_-_job_search",
+  "name": "General Assistance – Work Participation - Job Search",
+  "file": "GA_Work_Participation_-_Job_Search.json",
+  "program": "General Assistance",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "ga",
+          "label": "GA",
+          "type": "note",
+          "content": "Job Searches"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "JOB SEARCH",
+      "fields": [
+        {
+          "id": "jobSearchesCompletedReferToDp90001SpecifyCount",
+          "label": "JOB SEARCHES COMPLETED (Refer to DP 90-001) (Specify count)",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

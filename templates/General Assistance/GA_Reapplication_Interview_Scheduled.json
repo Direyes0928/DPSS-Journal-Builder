@@ -1,0 +1,151 @@
+{
+  "id": "ga_reapplication_interview_scheduled",
+  "name": "General Assistance – Reapplication Interview Scheduled",
+  "file": "GA_Reapplication_Interview_Scheduled.json",
+  "program": "General Assistance",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "ga",
+          "label": "GA",
+          "type": "note",
+          "content": "Reapplication Interview Scheduled"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "REAPPLICATION INFORMATION",
+      "fields": [
+        {
+          "id": "reapplicationMonth",
+          "label": "REAPPLICATION MONTH",
+          "type": "text"
+        },
+        {
+          "id": "language",
+          "label": "LANGUAGE",
+          "type": "choice",
+          "choices": [
+            "English",
+            "Spanish- Certified SSO worker assisted- DPSS 1764 requirements fulfilled. Worker #:",
+            "Other (DPSS 1764 required) (Specify the requested language and how the request was accommodated):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "INTERVIEW INFORMATION",
+      "fields": [
+        {
+          "id": "scheduledInterviewMethod",
+          "label": "SCHEDULED INTERVIEW METHOD",
+          "type": "choice",
+          "choices": [
+            "Telephone",
+            "In-Person. No phone number provided on the application."
+          ]
+        },
+        {
+          "id": "scheduledInterviewDateAndTime",
+          "label": "SCHEDULED INTERVIEW DATE AND TIME",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "CONTACT ATTEMPTS",
+      "fields": [
+        {
+          "id": "firstCall",
+          "label": "FIRST CALL",
+          "type": "choice",
+          "choices": [
+            "Unable to call. No phone number provided.",
+            "FIRST CALL (Copy the information for each phone number on file) (Specify time called):"
+          ]
+        },
+        {
+          "id": "callAttempts",
+          "label": "Call Attempts",
+          "type": "repeatable",
+          "fields": [
+            {
+              "id": "callType",
+              "label": "Call Type",
+              "type": "choice",
+              "choices": [
+                "FIRST CALL (Copy the information for each phone number on file) (Specify time called):",
+                "Unable to call. No phone number provided."
+              ]
+            },
+            {
+              "id": "phoneNumber",
+              "label": "Phone Number",
+              "type": "text"
+            },
+            {
+              "id": "result",
+              "label": "Result",
+              "type": "choice",
+              "choices": [
+                "Call unanswered. Unable to leave a message. No voicemail available.",
+                "Call unanswered. Unable to leave a message. Voicemail is full.",
+                "Call unanswered. Left the scripted message on voicemail.",
+                "Call answered by non-case person. Call recipient denied association to the family. No further action taken.",
+                "Call answered by non-case person. Call recipient confirmed association to the family. Left a message for the family.",
+                "Call answered by family. Family was authenticated. Family is unable to conduct an interview at this time. Family scheduled for an interview.",
+                "Other (Specify):"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "EDBC",
+      "fields": [
+        {
+          "id": "eligibilityDeterminationBenefitCalculationEdbcResults",
+          "label": "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS",
+          "type": "choice",
+          "choices": [
+            "$0 allotment for discontinuance month.",
+            "Ready to process. Task set for Eligibility Technician to process."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "NOTICE",
+      "fields": [
+        {
+          "id": "appointmentLetterDpss1366m",
+          "label": "APPOINTMENT LETTER (DPSS 1366M)",
+          "type": "note",
+          "content": "Generated and provided to the family."
+        },
+        {
+          "id": "mandatoryFormsProvided",
+          "label": "MANDATORY FORMS PROVIDED",
+          "type": "note",
+          "content": "DPSS 1354B, DPSS 2824, Voter Registration Card"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "adobe_sign__send_and_receive_",
+  "name": "Child Care – Adobe Sign (Send and Receive)",
+  "file": "ChildCare/Adobe_Sign__Send_and_Receive_.json",
+  "program": "ChildCare",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "ADOBE SIGN (SEND)",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "Short Description",
+          "type": "note",
+          "content": "Adobe Sign Document(s) Sent"
+        },
+        {
+          "id": "customerConsent",
+          "label": "Customer Consent Date",
+          "type": "date"
+        },
+        {
+          "id": "emailVerified",
+          "label": "E-mail Address Verified",
+          "type": "choice",
+          "choices": ["Yes", "No"]
+        },
+        {
+          "id": "verifiedEmail",
+          "label": "Verified E-mail Address",
+          "type": "text"
+        },
+        {
+          "id": "formNameSent",
+          "label": "Form(s) Name",
+          "type": "text"
+        },
+        {
+          "id": "sentOn",
+          "label": "Sent On",
+          "type": "date"
+        },
+        {
+          "id": "dueOn",
+          "label": "Due On",
+          "type": "date"
+        },
+        {
+          "id": "taskSet",
+          "label": "Task Set to Review",
+          "type": "note",
+          "content": "Task set to review."
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "ADOBE SIGN (RECEIVE)",
+      "fields": [
+        {
+          "id": "shortDescription2",
+          "label": "Short Description",
+          "type": "note",
+          "content": "Adobe Sign Document(s) Received"
+        },
+        {
+          "id": "formNameReceived",
+          "label": "Form(s) Name",
+          "type": "text"
+        },
+        {
+          "id": "receivedOn",
+          "label": "Received On",
+          "type": "date"
+        },
+        {
+          "id": "imagedOn",
+          "label": "Imaged into CalSAWS On",
+          "type": "date"
+        }
+      ]
+    }
+  ]
+}

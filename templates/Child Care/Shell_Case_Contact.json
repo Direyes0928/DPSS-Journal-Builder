@@ -1,0 +1,42 @@
+{
+  "id": "shell_case_contact",
+  "name": "Child Care – Shell Case Contact",
+  "file": "Shell_Case_Contact.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "CONTACT 1",
+      "fields": [
+        {
+          "id": "longDescription",
+          "label": "Long Description",
+          "type": "text"
+        },
+        {
+          "id": "additionalInformation",
+          "label": "Additional Information",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "CONTACT 2",
+      "fields": [
+        {
+          "id": "longDescription2",
+          "label": "Long Description",
+          "type": "text"
+        },
+        {
+          "id": "additionalInformation2",
+          "label": "Additional Information",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

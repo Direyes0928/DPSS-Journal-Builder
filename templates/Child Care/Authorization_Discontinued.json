@@ -1,0 +1,85 @@
+{
+  "id": "authorization_discontinued",
+  "name": "Child Care – Authorization Discontinued",
+  "file": "Authorization_Discontinued.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "DISCONTINUANCE INFORMATION",
+      "fields": [
+        {
+          "id": "nameOfAllIndividualsTheDiscontinuanceIsApplicableTo",
+          "label": "Name of all individuals the discontinuance is applicable to",
+          "type": "text"
+        },
+        {
+          "id": "discontinuanceReason",
+          "label": "Discontinuance reason",
+          "type": "choice",
+          "choices": [
+            "Family transferred to Stage Two CC.",
+            "Recertification completed for a former recipient and the family’s income exceeds of 85% of the SMI for the family size.",
+            "Parent/Caretaker was authorized as an exempt participant and failed to sign the WTW 2.",
+            "Parent/Caretaker was authorized with an intent to cure and failed to subsequently sign the WTW 29.",
+            "Parent/Caretaker requested to discontinue the CC authorization.",
+            "No eligible child - Only eligible child became ineligible.",
+            "Family Reunification participant with no children in the home.",
+            "Family Exhausted Stage Two 24-Month Time Limit",
+            "Failed to Complete the Recertification",
+            "Family moved to another county and the CalWORKS ICT is complete.",
+            "Family moved to another county and the CalWORKS ICT is not complete.",
+            "Family no longer meets the residency requirements."
+          ]
+        },
+        {
+          "id": "discontinuanceEffectiveDate",
+          "label": "Discontinuance effective date",
+          "type": "date"
+        },
+        {
+          "id": "dateNa835MailedToParentcaretaker",
+          "label": "Date NA 835 mailed to parent/caretaker",
+          "type": "date"
+        },
+        {
+          "id": "dateCertificatesCompletedAndIssuedToParentscaretakersAndProviders",
+          "label": "Date Certificates completed and issued to parent(s)/caretaker(s) and provider(s)",
+          "type": "date"
+        },
+        {
+          "id": "dpss3057MailedToProvider",
+          "label": "DPSS 3057 mailed to provider",
+          "type": "choice",
+          "choices": [
+            "Yes - Mailed on:",
+            "N/A - No active certification"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "DOCUMENTATION",
+      "fields": [
+        {
+          "id": "listOfPagesReviewedAndUpdatedInCalsaws",
+          "label": "List of pages reviewed and updated in CalSAWS",
+          "type": "text"
+        },
+        {
+          "id": "listOfDocumentsverificationsImaged",
+          "label": "List of documents/verifications imaged",
+          "type": "text"
+        },
+        {
+          "id": "additionalInformationAndComments",
+          "label": "Additional information and comments",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

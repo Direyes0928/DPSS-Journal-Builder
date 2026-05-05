@@ -1,0 +1,150 @@
+{
+  "id": "csf_136",
+  "name": "Child Care – CSF 136",
+  "file": "CSF_136.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "AUTHENTICATION",
+      "fields": [
+        {
+          "id": "familyAuthenticatedWith",
+          "label": "Family authenticated with",
+          "type": "choice",
+          "choices": [
+            "Full name of:",
+            "Last 4 digits of SSN for:",
+            "DOB for:",
+            "Address",
+            "Telephone number",
+            "SSN of child:",
+            "DOB of child:",
+            "Case number",
+            "ID number for:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "REQUEST INFORMATION",
+      "fields": [
+        {
+          "id": "cwApprovalDate",
+          "label": "CW Approval Date",
+          "type": "text"
+        },
+        {
+          "id": "ccRequestDate",
+          "label": "CC Request Date",
+          "type": "text"
+        },
+        {
+          "id": "parentIsRequestingFulltimeOrParttime",
+          "label": "Parent is requesting full-time or part-time",
+          "type": "choice",
+          "choices": [
+            "FT",
+            "PT"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "PARENT/CARETAKER STATUS",
+      "fields": [
+        {
+          "id": "statusOfParent",
+          "label": "Status of Parent",
+          "type": "choice",
+          "choices": [
+            "WTW Mandatory",
+            "WTW Exempt - Intends to Participate",
+            "WTW Sanctioned - Intends to Cure",
+            "Former CW Recipient - RCOE Closure"
+          ]
+        },
+        {
+          "id": "secondParentInHome",
+          "label": "Second parent in home",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "statusOfSecondParentIfApplicable",
+          "label": "Status of second parent, if applicable",
+          "type": "choice",
+          "choices": [
+            "WTW Mandatory",
+            "WTW Exempt - Intends to Participate",
+            "WTW Sanctioned - Intends to Cure",
+            "Former CW Recipient - RCOE Closure",
+            "Not Applicable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "PROVIDER INFORMATION",
+      "fields": [
+        {
+          "id": "parentPacket",
+          "label": "Parent Packet",
+          "type": "choice",
+          "choices": [
+            "Hand given",
+            "Mailed",
+            "Not given"
+          ]
+        },
+        {
+          "id": "providersNameIfKnown",
+          "label": "Providers Name (if known)",
+          "type": "text"
+        },
+        {
+          "id": "typeOfProvider",
+          "label": "Type of Provider",
+          "type": "choice",
+          "choices": [
+            "Licensed",
+            "Licensed Exempt - TrustLine Exempt",
+            "Licensed Exempt - TrustLine Required",
+            "Unknown"
+          ]
+        },
+        {
+          "id": "providerPacket",
+          "label": "Provider Packet",
+          "type": "choice",
+          "choices": [
+            "Hand Given - Licensed",
+            "Mailed - Licensed",
+            "Hand Given - Licensed-Exempt",
+            "Mailed - Licensed-Exempt",
+            "Not Given"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "ADDITIONAL INFORMATION",
+      "fields": [
+        {
+          "id": "additionalInformation",
+          "label": "Additional Information",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

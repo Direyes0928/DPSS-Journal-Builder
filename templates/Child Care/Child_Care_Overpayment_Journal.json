@@ -1,0 +1,88 @@
+{
+  "id": "child_care_overpayment_journal",
+  "name": "Child Care – Child Care Overpayment Journal",
+  "file": "Child_Care_Overpayment_Journal.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "OVERPAYMENT 1",
+      "fields": [
+        {
+          "id": "responsibleParty",
+          "label": "Responsible Party",
+          "type": "text"
+        },
+        {
+          "id": "causeOfTheOp",
+          "label": "Cause of the OP",
+          "type": "text"
+        },
+        {
+          "id": "timeframeOfTheOp",
+          "label": "Timeframe of the OP",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "OVERPAYMENT 2",
+      "fields": [
+        {
+          "id": "responsibleParty2",
+          "label": "Responsible Party",
+          "type": "text"
+        },
+        {
+          "id": "causeOfTheOp2",
+          "label": "Cause of the OP",
+          "type": "text"
+        },
+        {
+          "id": "timeframeOfTheOp2",
+          "label": "Timeframe of the OP",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "RECOVERY ACCOUNTS",
+      "fields": [
+        {
+          "id": "recoveryAccountNumber",
+          "label": "Recovery account number",
+          "type": "text"
+        },
+        {
+          "id": "hardshipReason",
+          "label": "Hardship reason",
+          "type": "text"
+        },
+        {
+          "id": "recoveryAccountNumber2",
+          "label": "Recovery account number",
+          "type": "text"
+        },
+        {
+          "id": "hardshipReason2",
+          "label": "Hardship reason",
+          "type": "text"
+        },
+        {
+          "id": "recoveryAccountNumber3",
+          "label": "Recovery account number",
+          "type": "text"
+        },
+        {
+          "id": "activateRaReason",
+          "label": "Activate RA Reason",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

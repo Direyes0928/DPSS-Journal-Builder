@@ -1,0 +1,1100 @@
+{
+  "id": "mc_incoming_ict_processed",
+  "name": "Medi-Cal – Incoming ICT Processed",
+  "file": "MC_Incoming_ICT_Processed.json",
+  "program": "Inter-County Transfers (ICT)",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "applicationAction",
+          "label": "APPLICATION ACTION",
+          "type": "choice",
+          "choices": [
+            "MC Incoming ICT Processed",
+            "MC Incoming ICT Processed Pending Verifications"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "APPLICATION INFORMATION",
+      "fields": [
+        {
+          "id": "applicationDate",
+          "label": "APPLICATION DATE",
+          "type": "date"
+        },
+        {
+          "id": "initiatedDate",
+          "label": "INITIATED DATE",
+          "type": "date"
+        },
+        {
+          "id": "beginningDateOfAid",
+          "label": "BEGINNING DATE OF AID",
+          "type": "choice",
+          "choices": [
+            "Case denied.",
+            "Pending"
+          ]
+        },
+        {
+          "id": "sendingCounty",
+          "label": "SENDING COUNTY",
+          "type": "choice",
+          "choices": [
+            "Alameda County",
+            "Alpine County",
+            "Amador County",
+            "Butte County",
+            "Calaveras County",
+            "Colusa County",
+            "Contra Costa County",
+            "Del Norte County",
+            "El Dorado County",
+            "Fresno County",
+            "Glenn County",
+            "Humboldt County",
+            "Imperial County",
+            "Inyo County",
+            "Kern County",
+            "Kings County",
+            "Lake County",
+            "Lassen County",
+            "Los Angeles County",
+            "Madera County",
+            "Marin County",
+            "Mariposa County",
+            "Mendocino County",
+            "Merced County",
+            "Modoc County",
+            "Mono County",
+            "Monterey County",
+            "Napa County",
+            "Nevada County",
+            "Orange County",
+            "Placer County",
+            "Plumas County",
+            "Sacramento County",
+            "San Benito County",
+            "San Diego County",
+            "San Bernardino County",
+            "San Francisco County",
+            "San Joaquin County",
+            "San Luis Obispo County",
+            "San Mateo County",
+            "Santa Barbara County",
+            "Santa Clara County",
+            "Santa Cruz County",
+            "Shasta County",
+            "Sierra County",
+            "Siskiyou County",
+            "Solano County",
+            "Sonoma County",
+            "Stanislaus County",
+            "Sutter County",
+            "Tehama County",
+            "Trinity County",
+            "Tulare County",
+            "Tuolumne County",
+            "Ventura County",
+            "Yolo County",
+            "Yuba County"
+          ]
+        },
+        {
+          "id": "calheersCaseNumber",
+          "label": "CALHEERS CASE NUMBER",
+          "type": "choice",
+          "choices": [
+            "Not required.",
+            "Pending"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "LANGUAGE",
+      "fields": [
+        {
+          "id": "language",
+          "label": "LANGUAGE",
+          "type": "choice",
+          "choices": [
+            "English",
+            "Spanish: DPSS 1764 completed.",
+            "Other (DPSS 1764 required) (Specify the requested language and how the request was accommodated):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "AUTHORIZED REPRESENTATIVE",
+      "fields": [
+        {
+          "id": "authorizedRepresentative",
+          "label": "AUTHORIZED REPRESENTATIVE",
+          "type": "choice",
+          "choices": [
+            "None requested.",
+            "AUTHORIZED REPRESENTATIVE (Specify who was requested and how the request was verified):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "VOTER REGISTRATION",
+      "fields": [
+        {
+          "id": "voterRegistration",
+          "label": "VOTER REGISTRATION",
+          "type": "choice",
+          "choices": [
+            "VOTER REGISTRATION (Copy the information for each person over 15 years of age): E-Application received. Voter Preference Form is not required.",
+            "VOTER REGISTRATION (Copy the information for each person over 15 years of age): Voter Preference Form provided to the family.",
+            "VOTER REGISTRATION (Copy the information for each person over 15 years of age): Voter Preference Form completed."
+          ]
+        },
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "voterPreference",
+          "label": "Voter Preference",
+          "type": "choice",
+          "choices": [
+            "Unable to determine.",
+            "Declined to register to vote.",
+            "Already registered to vote.",
+            "Requested to register to vote. Voter Registration Card provided to the family."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "IVR",
+      "fields": [
+        {
+          "id": "ivr",
+          "label": "IVR",
+          "type": "note",
+          "content": "CSF 139 mailed centrally"
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "HOUSEHOLD COMPOSITION",
+      "fields": [
+        {
+          "id": "householdCompositionListEachPersonLivingInTheHomeWithAges",
+          "label": "HOUSEHOLD COMPOSITION (List each person living in the home with ages)",
+          "type": "text"
+        },
+        {
+          "id": "relationship",
+          "label": "RELATIONSHIP",
+          "type": "choice",
+          "choices": [
+            "Primary applicant only.",
+            "RELATIONSHIP (Define the relationships to establish the household):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_8",
+      "title": "PREGNANCY",
+      "fields": [
+        {
+          "id": "pregnancy",
+          "label": "PREGNANCY",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "PREGNANCY (Copy the information for each pregnant person):"
+          ]
+        },
+        {
+          "id": "name2",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "numberOfUnbornChildren",
+          "label": "Number of Unborn Children",
+          "type": "text"
+        },
+        {
+          "id": "expectedDateOfConfinementEdc",
+          "label": "Expected Date of Confinement (EDC)",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_9",
+      "title": "TAX HOUSEHOLD",
+      "fields": [
+        {
+          "id": "taxHousehold",
+          "label": "TAX HOUSEHOLD",
+          "type": "choice",
+          "choices": [
+            "Pending: Request for Tax Household Information (RFTHI) (DPSS 4373) provided to the family.",
+            "TAX HOUSEHOLD (Copy the information for each Tax Household):"
+          ]
+        },
+        {
+          "id": "sourceOfAttestation",
+          "label": "Source of Attestation",
+          "type": "text"
+        },
+        {
+          "id": "primaryTaxFiler",
+          "label": "Primary Tax Filer",
+          "type": "text"
+        },
+        {
+          "id": "filingStatus",
+          "label": "Filing Status",
+          "type": "text"
+        },
+        {
+          "id": "dependents",
+          "label": "Dependents",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_10",
+      "title": "LINKAGE",
+      "fields": [
+        {
+          "id": "linkage",
+          "label": "LINKAGE",
+          "type": "choice",
+          "choices": [
+            "Not required. Application denied.",
+            "Pending",
+            "Modified Adjusted Gross Income (MAGI)",
+            "Advanced Premium Tax Credits (APTC)",
+            "Cost-Sharing Reduction (CSR)",
+            "Non-Modified Adjusted Gross Income (Non-MAGI)",
+            "Medicare Premium Payment Program (MPPP)",
+            "Social Security Income (SSI) Qualifed Medicare Beneficiary (QMB)",
+            "Former Foster Youth (FFY)",
+            "Other (Specify):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_11",
+      "title": "CASE IDENTITY",
+      "fields": [
+        {
+          "id": "caseIdentity",
+          "label": "CASE IDENTITY",
+          "type": "choice",
+          "choices": [
+            "CASE IDENTITY (Primary applicant required): Pending",
+            "CASE IDENTITY (Primary applicant required): Verification:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_12",
+      "title": "REMOTE IDENTITY PROOFING (RIDP)",
+      "fields": [
+        {
+          "id": "remoteIdentityProofingRidp",
+          "label": "REMOTE IDENTITY PROOFING (RIDP)",
+          "type": "choice",
+          "choices": [
+            "Not required.",
+            "REMOTE IDENTITY PROOFING (RIDP) (Primary applicant required): Pending",
+            "REMOTE IDENTITY PROOFING (RIDP) (Primary applicant required): Verification: Application includes the handwritten, telephonic, or electronic signature of the primary applicant.",
+            "REMOTE IDENTITY PROOFING (RIDP) (Primary applicant required): Verification:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_13",
+      "title": "SOCIAL SECURITY NUMBER (SSN)",
+      "fields": [
+        {
+          "id": "socialSecurityNumberSsn",
+          "label": "SOCIAL SECURITY NUMBER (SSN)",
+          "type": "choice",
+          "choices": [
+            "Not applicable. HH is composed of only non-citizens without SSNs.",
+            "SOCIAL SECURITY NUMBER (SSN) (Copy the information for each person):"
+          ]
+        },
+        {
+          "id": "name3",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "verification",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_14",
+      "title": "VITAL STATISTICS",
+      "fields": [
+        {
+          "id": "vitalStatistics",
+          "label": "VITAL STATISTICS",
+          "type": "choice",
+          "choices": [
+            "Not applicable. HH is composed of only non-citizens.",
+            "VITAL STATISTICS (Copy the information for each U.S. citizen):"
+          ]
+        },
+        {
+          "id": "name4",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "deficitReductionActDraCitizenship",
+          "label": "Deficit Reduction Act (DRA) Citizenship",
+          "type": "text"
+        },
+        {
+          "id": "deficitReductionActDraIdentity",
+          "label": "Deficit Reduction Act (DRA) Identity",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_15",
+      "title": "CITIZENSHIP",
+      "fields": [
+        {
+          "id": "citizenship",
+          "label": "CITIZENSHIP",
+          "type": "choice",
+          "choices": [
+            "All applicants are reported as U.S.-born citizens. No discrepancies.",
+            "CITIZENSHIP (Copy the information for each naturalized citizen and non-citizen):"
+          ]
+        },
+        {
+          "id": "name5",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "noncitizenType",
+          "label": "Non-Citizen Type",
+          "type": "text"
+        },
+        {
+          "id": "alienNumber",
+          "label": "Alien Number",
+          "type": "text"
+        },
+        {
+          "id": "documentNumber",
+          "label": "Document Number",
+          "type": "text"
+        },
+        {
+          "id": "categoryCode",
+          "label": "Category Code",
+          "type": "text"
+        },
+        {
+          "id": "entryDate",
+          "label": "Entry Date",
+          "type": "text"
+        },
+        {
+          "id": "verification2",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "systematicAlienVerificationForEntitlementsSave",
+          "label": "Systematic Alien Verification for Entitlements (SAVE)",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "Received and reviewed for this application. No discrepancies.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "statementOfCitizenshipMc13",
+          "label": "Statement of Citizenship (MC 13)",
+          "type": "choice",
+          "choices": [
+            "Not required.",
+            "Pending",
+            "Received",
+            "Discrepant:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_16",
+      "title": "CITIZEN / ALIEN INDICATOR",
+      "fields": [
+        {
+          "id": "citizenAlienIndicator",
+          "label": "CITIZEN / ALIEN INDICATOR",
+          "type": "choice",
+          "choices": [
+            "MEDS checked. No discrepancies found.",
+            "MEDS checked. Discrepancies found. EW 12 transaction entered into MEDS."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_17",
+      "title": "RESIDENCY",
+      "fields": [
+        {
+          "id": "residency",
+          "label": "RESIDENCY",
+          "type": "note",
+          "content": "Verification: Self-attestation of state residency with no discrepancies, per temporary suspension of verification."
+        }
+      ]
+    },
+    {
+      "id": "section_18",
+      "title": "CUSTOMER OPTIONS",
+      "fields": [
+        {
+          "id": "customerOptions",
+          "label": "CUSTOMER OPTIONS",
+          "type": "text"
+        },
+        {
+          "id": "verificationConsent",
+          "label": "Verification Consent",
+          "type": "choice",
+          "choices": [
+            "Verification Consent (Non-MAGI): Not required.",
+            "Verification Consent (MAGI / Mixed HH) (Primary applicant required): Pending",
+            "Verification Consent (MAGI / Mixed HH) (Primary applicant required): Verification: Application includes the handwritten, telephonic, or electronic signature of the primary applicant."
+          ]
+        },
+        {
+          "id": "maintainVerificationsPrimaryApplicantRequiredSpecifyHowManyYears",
+          "label": "Maintain Verifications (Primary applicant required) (Specify how many years)",
+          "type": "text"
+        },
+        {
+          "id": "fullMedicalHierarchyCopyTheInformationForEachPersonRequestingToBeScreened",
+          "label": "Full Medi-Cal Hierarchy (Copy the information for each person requesting to be screened)",
+          "type": "text"
+        },
+        {
+          "id": "name6",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "fullMedicalHierarchyRequested",
+          "label": "Full Medi-Cal Hierarchy Requested",
+          "type": "choice",
+          "choices": [
+            "No",
+            "Yes (Specify how request was received):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_19",
+      "title": "LIVING ARRANGEMENT",
+      "fields": [
+        {
+          "id": "livingArrangement",
+          "label": "LIVING ARRANGEMENT",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "LIVING ARRANGEMENT (Copy the information for each person in a facility): Long Term Care / Skilled Nursing Facility",
+            "LIVING ARRANGEMENT (Copy the information for each person in a facility): Board and Care",
+            "Incarceration",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "name7",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "facilityName",
+          "label": "Facility Name",
+          "type": "text"
+        },
+        {
+          "id": "verification3",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_20",
+      "title": "POTENTIALLY AVAILABLE INCOME",
+      "fields": [
+        {
+          "id": "potentiallyAvailableIncome",
+          "label": "POTENTIALLY AVAILABLE INCOME",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "POTENTIALLY AVAILABLE INCOME (Copy the information for each source):"
+          ]
+        },
+        {
+          "id": "name8",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "howWasPotentialEligibilityDetermined",
+          "label": "How was Potential Eligibility Determined",
+          "type": "text"
+        },
+        {
+          "id": "proofOfApplicationVerification",
+          "label": "Proof of Application Verification",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_21",
+      "title": "MILITARY / VETERANS",
+      "fields": [
+        {
+          "id": "militaryVeterans",
+          "label": "MILITARY / VETERANS",
+          "type": "choice",
+          "choices": [
+            "None reported with no discrepancies.",
+            "MILITARY / VETERANS (Copy the information for each military / veteran person):"
+          ]
+        },
+        {
+          "id": "name9",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "branch",
+          "label": "Branch",
+          "type": "text"
+        },
+        {
+          "id": "enlistmentDate",
+          "label": "Enlistment Date",
+          "type": "text"
+        },
+        {
+          "id": "verification4",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_22",
+      "title": "ABSENT PARENT",
+      "fields": [
+        {
+          "id": "absentParent",
+          "label": "ABSENT PARENT",
+          "type": "choice",
+          "choices": [
+            "Not applicable. No minor children reported in HH.",
+            "Exempt:",
+            "Pending: CW 2.1 NA and CW 2.1 Q provided to the family.",
+            "Verification: CW 2.1 NA and CW 2.1 Q information provided verbally.",
+            "Verification: CW 2.1 NA and CW 2.1 Q completed."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_23",
+      "title": "MEDICAL CONDITION",
+      "fields": [
+        {
+          "id": "medicalCondition",
+          "label": "MEDICAL CONDITION",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "MEDICAL CONDITION (Copy the information for each disabled person):"
+          ]
+        },
+        {
+          "id": "name10",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "medicalConditionTypeDoNotIncludeDiagnosisInformationPerHippa",
+          "label": "Medical Condition Type (Do not include diagnosis information per HIPPA)",
+          "type": "text"
+        },
+        {
+          "id": "verification5",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_24",
+      "title": "OTHER PROGRAM ASSISTANCE",
+      "fields": [
+        {
+          "id": "otherProgramAssistance",
+          "label": "OTHER PROGRAM ASSISTANCE",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "OTHER PROGRAM ASSISTANCE (Copy the information for each source of assistance):"
+          ]
+        },
+        {
+          "id": "name11",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "source",
+          "label": "Source",
+          "type": "text"
+        },
+        {
+          "id": "frequency",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "verification6",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "amountUsed",
+          "label": "Amount Used",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_25",
+      "title": "EMPLOYMENT & INCOME",
+      "fields": [
+        {
+          "id": "employment",
+          "label": "EMPLOYMENT",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "EMPLOYMENT (Copy the information for each employer):"
+          ]
+        },
+        {
+          "id": "name12",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "employer",
+          "label": "Employer",
+          "type": "text"
+        },
+        {
+          "id": "startDate",
+          "label": "Start Date",
+          "type": "text"
+        },
+        {
+          "id": "hourlyRate",
+          "label": "Hourly Rate",
+          "type": "text"
+        },
+        {
+          "id": "averageHoursWeekly",
+          "label": "Average Hours Weekly",
+          "type": "text"
+        },
+        {
+          "id": "income",
+          "label": "INCOME",
+          "type": "choice",
+          "choices": [
+            "HH only has the income reported under Other Program Assistance.",
+            "INCOME (Copy the information for each person, including persons with no income):"
+          ]
+        },
+        {
+          "id": "name13",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "source2",
+          "label": "Source",
+          "type": "text"
+        },
+        {
+          "id": "frequency2",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "verification7",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "amount",
+          "label": "Amount",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_26",
+      "title": "PROPERTY",
+      "fields": [
+        {
+          "id": "property",
+          "label": "PROPERTY",
+          "type": "choice",
+          "choices": [
+            "Review not required for a determination.",
+            "None reported. No discrepancies."
+          ]
+        },
+        {
+          "id": "nonmagiPropertySupplementalForms",
+          "label": "Non-MAGI Property Supplemental Forms",
+          "type": "choice",
+          "choices": [
+            "Pending. Forms provided to the family.",
+            "Completed. Information provided verbally.",
+            "Completed. Forms received."
+          ]
+        },
+        {
+          "id": "realPropertyCopyTheInformationForEachPropertyIncludingDiscrepancies",
+          "label": "Real Property (Copy the information for each property, including discrepancies)",
+          "type": "text"
+        },
+        {
+          "id": "owner",
+          "label": "Owner",
+          "type": "text"
+        },
+        {
+          "id": "verification8",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "value",
+          "label": "Value",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_27",
+      "title": "EXPENSES",
+      "fields": [
+        {
+          "id": "expenses",
+          "label": "EXPENSES",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "EXPENSES (Copy the information for each expense):"
+          ]
+        },
+        {
+          "id": "name14",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "type4",
+          "label": "Type",
+          "type": "text"
+        },
+        {
+          "id": "frequency3",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "verification15",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "amount2",
+          "label": "Amount",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_28",
+      "title": "MEDICARE",
+      "fields": [
+        {
+          "id": "medicare",
+          "label": "MEDICARE",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "MEDICARE (Copy the information for each Medicare recipient):"
+          ]
+        },
+        {
+          "id": "name15",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "verification16",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "amount3",
+          "label": "Amount",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_29",
+      "title": "THIRD PARTY LIABILITY",
+      "fields": [
+        {
+          "id": "thirdPartyLiability",
+          "label": "THIRD PARTY LIABILITY",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "THIRD PARTY LIABILITY (Copy the information for each person):"
+          ]
+        },
+        {
+          "id": "name16",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "dateOfInjury",
+          "label": "Date of Injury",
+          "type": "text"
+        },
+        {
+          "id": "workRelated",
+          "label": "Work Related",
+          "type": "choice",
+          "choices": [
+            "No",
+            "Yes"
+          ]
+        },
+        {
+          "id": "departmentOfHealthCareServicesDhcsReferral",
+          "label": "Department of Health Care Services (DHCS) Referral",
+          "type": "choice",
+          "choices": [
+            "No",
+            "Yes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_30",
+      "title": "OTHER HEALTH CARE (OHC)",
+      "fields": [
+        {
+          "id": "otherHealthCareOhc",
+          "label": "OTHER HEALTH CARE (OHC)",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "OTHER HEALTH CARE (OHC) (Copy the information for each insurance):"
+          ]
+        },
+        {
+          "id": "name17",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "insuranceCompany",
+          "label": "Insurance Company",
+          "type": "text"
+        },
+        {
+          "id": "verification17",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_31",
+      "title": "IEVS / PVS / NHR / MEDS",
+      "fields": [
+        {
+          "id": "ievsApplicantReport",
+          "label": "IEVS Applicant Report",
+          "type": "choice",
+          "choices": [
+            "Received and reviewed for this application. No discrepancies.",
+            "Not required.",
+            "IEVS Applicant Report (non-MAGI): Pending. Reports due within 10 days.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "paymentVerificationSystemPvs",
+          "label": "Payment Verification System (PVS)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "newHireRegistryNhr",
+          "label": "New Hire Registry (NHR)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        },
+        {
+          "id": "medicalEligibilityDataSystemMedsAlerts",
+          "label": "Medi-Cal Eligibility Data System (MEDS) Alerts",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Alerts closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_32",
+      "title": "TASKS DUE FUTURE",
+      "fields": [
+        {
+          "id": "tasksDueFuture",
+          "label": "TASKS DUE FUTURE",
+          "type": "choice",
+          "choices": [
+            "None",
+            "TASKS DUE FUTURE (List task and due date):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_33",
+      "title": "EDBC / CERTIFICATION",
+      "fields": [
+        {
+          "id": "eligibilityDeterminationBenefitCalculationEdbcResults",
+          "label": "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS",
+          "type": "choice",
+          "choices": [
+            "Denied (Specify reason):",
+            "Pending",
+            "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS (List each month, aid code by person, and the share of cost, if applicable):"
+          ]
+        },
+        {
+          "id": "interagencyTransferIatSummary",
+          "label": "INTER-AGENCY TRANSFER (IAT) SUMMARY",
+          "type": "choice",
+          "choices": [
+            "Not required.",
+            "Pending",
+            "Completed"
+          ]
+        },
+        {
+          "id": "redeterminationMonthYear",
+          "label": "REDETERMINATION MONTH / YEAR",
+          "type": "choice",
+          "choices": [
+            "Pending"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_34",
+      "title": "NOTICE OF ACTION (NOA)",
+      "fields": [
+        {
+          "id": "noticeOfActionNoa",
+          "label": "NOTICE OF ACTION (NOA)",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "Generated, reviewed, and appended, if applicable, then provided to the family."
+          ]
+        }
+      ]
+    }
+  ]
+}

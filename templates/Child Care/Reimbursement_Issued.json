@@ -1,0 +1,204 @@
+{
+  "id": "reimbursement_issued",
+  "name": "Child Care – Reimbursement Issued",
+  "file": "Reimbursement_Issued.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "REIMBURSEMENT INFORMATION",
+      "fields": [
+        {
+          "id": "dateChooseAnItemWasReceived",
+          "label": "Date Choose an item was received",
+          "type": "choice",
+          "choices": [
+            "CSF 141",
+            "CCP 2145"
+          ]
+        },
+        {
+          "id": "dateChooseAnItemWasProcessed",
+          "label": "Date Choose an item. was processed",
+          "type": "choice",
+          "choices": [
+            "CSF 141",
+            "CCP 2145"
+          ]
+        },
+        {
+          "id": "reimbursedToTheFollowingProvider",
+          "label": "Reimbursed to the following provider",
+          "type": "text"
+        },
+        {
+          "id": "isANewW9RequiredChooseAnItem",
+          "label": "Is a new W-9 required?  Choose an item.",
+          "type": "choice",
+          "choices": [
+            "Yes - Reason:",
+            "No"
+          ]
+        },
+        {
+          "id": "calworksProgramStatus",
+          "label": "CalWORKs Program Status",
+          "type": "choice",
+          "choices": [
+            "Active - Family",
+            "Active - Parent/Caretaker Discontinued",
+            "Discontinued - Family"
+          ]
+        },
+        {
+          "id": "ccHoursApproved",
+          "label": "CC hours approved",
+          "type": "choice",
+          "choices": [
+            "FT",
+            "PT"
+          ]
+        },
+        {
+          "id": "nameOfChild",
+          "label": "Name of child",
+          "type": "text"
+        },
+        {
+          "id": "reimbursementAmountExceeds90000",
+          "label": "Reimbursement amount exceeds $900.00",
+          "type": "choice",
+          "choices": [
+            "Yes - sent to ES for approval",
+            "No"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "CHILD ABSENCES / PROVIDER CONTACT",
+      "fields": [
+        {
+          "id": "childAbsencesDuringTheMonthChooseAnItem",
+          "label": "Child Absences During the Month Choose an item.",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "providerContact",
+          "label": "Provider Contact",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No/Not Needed"
+          ]
+        },
+        {
+          "id": "providerAuthenticatedWith",
+          "label": "Provider Authenticated with",
+          "type": "choice",
+          "choices": [
+            "Name:",
+            "Name of Facility (if applicable):",
+            "Parent's Name:",
+            "Parent's Case Number (if known):",
+            "Parent's Address or phone number (if case number is not known):"
+          ]
+        },
+        {
+          "id": "providerOpenAndAvailableDuringChildAbsences",
+          "label": "Provider Open and Available During Child Absences",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "Not open and available on the following days:",
+            "Non-Applicable"
+          ]
+        },
+        {
+          "id": "additionalInformationAndComments",
+          "label": "Additional information and comments",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "INCOMPLETE / CORRECTIONS",
+      "fields": [
+        {
+          "id": "anItemReturnedToParentproviderAsIncompleteWithDpss3173",
+          "label": "an item. returned to parent/provider as incomplete with DPSS 3173:",
+          "type": "choice",
+          "choices": [
+            "CSF 141",
+            "CCP 2145"
+          ]
+        },
+        {
+          "id": "dueDateForCompletedcorrectedChooseAnItem",
+          "label": "Due date for completed/corrected Choose an item.",
+          "type": "choice",
+          "choices": [
+            "CSF 141",
+            "CCP 2145"
+          ]
+        },
+        {
+          "id": "taskSetForReview",
+          "label": "Task set for review",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "STATUS",
+      "fields": [
+        {
+          "id": "nonoperationalDaysRequested",
+          "label": "Non-Operational days requested",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "dpss4150OnFile",
+          "label": "DPSS 4150 on file",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "childCareTimeLimitUpdated",
+          "label": "Child Care Time Limit Updated",
+          "type": "choice",
+          "choices": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "stageTwoTransferStatus",
+          "label": "Stage Two Transfer Status",
+          "type": "choice",
+          "choices": [
+            "Transfer Needed",
+            "Transfer Sent - RCOE Pick Up Effective",
+            "Transfer Needed - GEN 107 Sent on"
+          ]
+        }
+      ]
+    }
+  ]
+}

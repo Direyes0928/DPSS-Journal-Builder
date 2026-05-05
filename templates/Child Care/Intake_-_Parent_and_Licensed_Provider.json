@@ -1,0 +1,342 @@
+{
+  "id": "intake_-_parent_and_licensed_provider",
+  "name": "Child Care – Intake - Parent and Licensed Provider",
+  "file": "Intake_-_Parent_and_Licensed_Provider.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "PARENT/CARETAKER INTAKE/APPROVAL – LICENSED PROVIDER",
+      "fields": [
+        {
+          "id": "familyAuthenticatedWith",
+          "label": "Family authenticated with",
+          "type": "choice",
+          "choices": [
+            "Full name of:",
+            "Last 4 digits of SSN for:",
+            "DOB for:",
+            "Address",
+            "Telephone number",
+            "SSN of child:",
+            "DOB of child:",
+            "Case number",
+            "ID number for:"
+          ]
+        },
+        {
+          "id": "dateOfCsf136",
+          "label": "Date of CSF 136",
+          "type": "text"
+        },
+        {
+          "id": "dateCcp7Signed",
+          "label": "Date CCP 7 signed",
+          "type": "text"
+        },
+        {
+          "id": "dateRefusedToSignCcp7IfApplicable",
+          "label": "Date refused to sign CCP7 (if applicable)",
+          "type": "text"
+        },
+        {
+          "id": "didParentcaretakerRequestPtOrFt",
+          "label": "Did parent/caretaker request PT or FT",
+          "type": "text"
+        },
+        {
+          "id": "dateCcp8Signed",
+          "label": "Date CCP 8 signed",
+          "type": "text"
+        },
+        {
+          "id": "dateRefusedToSignCcp8IfApplicable",
+          "label": "Date refused to sign CCP 8 (if applicable)",
+          "type": "text"
+        },
+        {
+          "id": "dateEesd9600Signed",
+          "label": "Date EESD 9600 signed",
+          "type": "text"
+        },
+        {
+          "id": "attendees",
+          "label": "Attendees",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "PARENT/CARETAKER",
+      "fields": [
+        {
+          "id": "namesOfParentscaretakersApplyingForChildcareServices",
+          "label": "Name(s) of parent(s)/caretaker(s) applying for childcare services",
+          "type": "text"
+        },
+        {
+          "id": "householdSize",
+          "label": "Household size",
+          "type": "text"
+        },
+        {
+          "id": "ifYesListTheNameOfTheParentAndTheirRelationshipToTheChildrenInTheHome",
+          "label": "If yes, list the name of the parent and their relationship to the children in the home",
+          "type": "text"
+        },
+        {
+          "id": "listTheNamesOfAllChildrenrenTheParentscaretakersAreApplyingFor",
+          "label": "List the name(s) of all children(ren) the parent(s)/caretaker(s) are applying for",
+          "type": "text"
+        },
+        {
+          "id": "physicalAddress",
+          "label": "Physical Address",
+          "type": "choice",
+          "choices": [
+            "Reported is the same as listed in CalSAWS",
+            "Change reported and CalSAWS updated."
+          ]
+        },
+        {
+          "id": "mailingAddress",
+          "label": "Mailing Address",
+          "type": "choice",
+          "choices": [
+            "Reported is the same as listed in CalSAWS",
+            "Change reported and CalSAWS updated."
+          ]
+        },
+        {
+          "id": "ivrPinLetter",
+          "label": "IVR PIN Letter",
+          "type": "choice",
+          "choices": [
+            "No action. Previously provided to the family.",
+            "Generated and provided to the family."
+          ]
+        },
+        {
+          "id": "outboundInteractiveVoiceResponseIvrSystem",
+          "label": "Outbound Interactive Voice Response (IVR) System",
+          "type": "choice",
+          "choices": [
+            "Declined",
+            "Pending. CSF 139 provided to the family.",
+            "Verification: CSF 139 previously completed.",
+            "Verification: CSF 139 completed."
+          ]
+        },
+        {
+          "id": "textMessage",
+          "label": "Text Message",
+          "type": "choice",
+          "choices": [
+            "Declined",
+            "Pending. Text Messages updated to complete the verification process.",
+            "Verification: Phone number verified through electronic verification process."
+          ]
+        },
+        {
+          "id": "email",
+          "label": "E-Mail",
+          "type": "choice",
+          "choices": [
+            "Declined",
+            "Pending. E-Mail updated to complete the verification process.",
+            "Verification: E-Mail verified through electronic verification process."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "ELIGIBILITY",
+      "fields": [
+        {
+          "id": "ifYesDateLastReceivedCalworks",
+          "label": "If yes, date last received CalWORKs",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "INCOME",
+      "fields": [
+        {
+          "id": "nameOfPersonsWithIncome",
+          "label": "Name of person(s) with income",
+          "type": "text"
+        },
+        {
+          "id": "incomeType",
+          "label": "Income type",
+          "type": "text"
+        },
+        {
+          "id": "incomeFrequency",
+          "label": "Income frequency",
+          "type": "text"
+        },
+        {
+          "id": "payRate",
+          "label": "Pay rate",
+          "type": "text"
+        },
+        {
+          "id": "incomeAmount",
+          "label": "Income amount",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "PARENT/CARETAKER NEED",
+      "fields": [
+        {
+          "id": "scheduleOfCcHoursRequested",
+          "label": "Schedule of CC hours requested",
+          "type": "text"
+        },
+        {
+          "id": "scheduleOfCcHoursApproved",
+          "label": "Schedule of CC hours approved",
+          "type": "text"
+        },
+        {
+          "id": "dateNeedBegan",
+          "label": "Date need began",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "CHILD(REN)",
+      "fields": [
+        {
+          "id": "nameOfChildage",
+          "label": "Name of child/age",
+          "type": "text"
+        },
+        {
+          "id": "nameOfSchool",
+          "label": "Name of school",
+          "type": "text"
+        },
+        {
+          "id": "schoolSchedule",
+          "label": "School schedule",
+          "type": "text"
+        },
+        {
+          "id": "minimumDayshoursSchedule",
+          "label": "Minimum days/hours schedule",
+          "type": "text"
+        },
+        {
+          "id": "nameOfChildage2",
+          "label": "Name of child/age",
+          "type": "text"
+        },
+        {
+          "id": "nameOfSchool2",
+          "label": "Name of school",
+          "type": "text"
+        },
+        {
+          "id": "schoolSchedule2",
+          "label": "School schedule",
+          "type": "text"
+        },
+        {
+          "id": "minimumDayshoursSchedule2",
+          "label": "Minimum days/hours schedule",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "OTHER",
+      "fields": [
+        {
+          "id": "dateParentscaretakersSentgivenCsf103",
+          "label": "Date parent(s)/caretaker(s) sent/given CSF 103",
+          "type": "text"
+        },
+        {
+          "id": "listOfVerificationsRequested",
+          "label": "List of verifications requested",
+          "type": "text"
+        },
+        {
+          "id": "verificationDueDate",
+          "label": "Verification due date",
+          "type": "text"
+        },
+        {
+          "id": "reDate",
+          "label": "RE date",
+          "type": "text"
+        },
+        {
+          "id": "additionalInformationAndComments",
+          "label": "Additional information and comments",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_8",
+      "title": "CERTIFICATES",
+      "fields": [
+        {
+          "id": "dateCertificatesCompletedIssuedToParentscaretakersAndProviders",
+          "label": "Date certificates completed & issued to parent(s)/caretaker(s) and provider(s)",
+          "type": "date"
+        },
+        {
+          "id": "dateDpss3057MailedToProvidersAndImaged",
+          "label": "Date DPSS 3057 mailed to provider(s) and imaged",
+          "type": "date"
+        },
+        {
+          "id": "certificateId",
+          "label": "Certificate ID",
+          "type": "text"
+        },
+        {
+          "id": "rates",
+          "label": "Rates",
+          "type": "text"
+        },
+        {
+          "id": "variableOrSetSchedule",
+          "label": "Variable or Set Schedule",
+          "type": "text"
+        },
+        {
+          "id": "certificatePeriodForEachChildprovider",
+          "label": "Certificate period for each child/provider",
+          "type": "text"
+        },
+        {
+          "id": "amountOfFamilyFeeIfApplicable",
+          "label": "Amount of family fee (if applicable)",
+          "type": "text"
+        },
+        {
+          "id": "amountOfCopaymentIfApplicable",
+          "label": "Amount of co-payment (if applicable)",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1150 @@
+{
+  "id": "cf_incoming_ict_processed",
+  "name": "CalFresh – Incoming ICT Processed",
+  "file": "CF_Incoming_ICT_Processed.json",
+  "program": "Inter-County Transfers (ICT)",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "applicationAction",
+          "label": "APPLICATION ACTION",
+          "type": "choice",
+          "choices": [
+            "CF Incoming ICT Processed",
+            "CF Incoming ICT Processed Pending Verifications"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "APPLICATION INFORMATION",
+      "fields": [
+        {
+          "id": "sendingCounty",
+          "label": "SENDING COUNTY",
+          "type": "choice",
+          "choices": [
+            "Alameda County",
+            "Alpine County",
+            "Amador County",
+            "Butte County",
+            "Calaveras County",
+            "Colusa County",
+            "Contra Costa County",
+            "Del Norte County",
+            "El Dorado County",
+            "Fresno County",
+            "Glenn County",
+            "Humboldt County",
+            "Imperial County",
+            "Inyo County",
+            "Kern County",
+            "Kings County",
+            "Lake County",
+            "Lassen County",
+            "Los Angeles County",
+            "Madera County",
+            "Marin County",
+            "Mariposa County",
+            "Mendocino County",
+            "Merced County",
+            "Modoc County",
+            "Mono County",
+            "Monterey County",
+            "Napa County",
+            "Nevada County",
+            "Orange County",
+            "Placer County",
+            "Plumas County",
+            "Sacramento County",
+            "San Benito County",
+            "San Diego County",
+            "San Bernardino County",
+            "San Francisco County",
+            "San Joaquin County",
+            "San Luis Obispo County",
+            "San Mateo County",
+            "Santa Barbara County",
+            "Santa Clara County",
+            "Santa Cruz County",
+            "Shasta County",
+            "Sierra County",
+            "Siskiyou County",
+            "Solano County",
+            "Sonoma County",
+            "Stanislaus County",
+            "Sutter County",
+            "Tehama County",
+            "Trinity County",
+            "Tulare County",
+            "Tuolumne County",
+            "Ventura County",
+            "Yolo County",
+            "Yuba County"
+          ]
+        },
+        {
+          "id": "initiatedDate",
+          "label": "INITIATED DATE",
+          "type": "date"
+        },
+        {
+          "id": "applicationDate",
+          "label": "APPLICATION DATE",
+          "type": "date"
+        },
+        {
+          "id": "beginningDateOfAid",
+          "label": "BEGINNING DATE OF AID",
+          "type": "choice",
+          "choices": [
+            "Case denied.",
+            "Pending"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "LANGUAGE",
+      "fields": [
+        {
+          "id": "language",
+          "label": "LANGUAGE",
+          "type": "choice",
+          "choices": [
+            "English",
+            "Spanish: DPSS 1764 completed.",
+            "Other (DPSS 1764 required) (Specify the requested language and how the request was accommodated):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "AUTHORIZED REPRESENTATIVE",
+      "fields": [
+        {
+          "id": "authorizedRepresentative",
+          "label": "AUTHORIZED REPRESENTATIVE",
+          "type": "choice",
+          "choices": [
+            "None requested.",
+            "(Specify who was requested and how the request was verified):",
+            "Other (Refer to policy for Drug / Alcohol Treatment Centers, Group Living Arrangements, Battered / Homeless Shelters):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "VOTER REGISTRATION",
+      "fields": [
+        {
+          "id": "voterRegistration",
+          "label": "VOTER REGISTRATION",
+          "type": "choice",
+          "choices": [
+            "VOTER REGISTRATION (Copy the information for each person over 15 years of age): E-Application received. Voter Preference Form is not required.",
+            "VOTER REGISTRATION (Copy the information for each person over 15 years of age): Voter Preference Form provided to the family.",
+            "VOTER REGISTRATION (Copy the information for each person over 15 years of age): Voter Preference Form completed."
+          ]
+        },
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "voterPreference",
+          "label": "Voter Preference",
+          "type": "choice",
+          "choices": [
+            "Declined to register to vote.",
+            "Already registered to vote.",
+            "Requested to register to vote. Voter Registration Card provided to the family."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_6",
+      "title": "HOUSEHOLD COMPOSITION",
+      "fields": [
+        {
+          "id": "householdCompositionListEachPersonLivingInTheHomeWithAges",
+          "label": "HOUSEHOLD COMPOSITION (List each person living in the home with ages)",
+          "type": "text"
+        },
+        {
+          "id": "relationship",
+          "label": "RELATIONSHIP",
+          "type": "choice",
+          "choices": [
+            "Primary applicant only.",
+            "RELATIONSHIP (Define the relationships to establish the household):"
+          ]
+        },
+        {
+          "id": "purchasePreparePp",
+          "label": "PURCHASE & PREPARE (P&P)",
+          "type": "choice",
+          "choices": [
+            "Primary applicant only.",
+            "PURCHASE & PREPARE (P&P) (Copy the information for each person in the household):"
+          ]
+        },
+        {
+          "id": "name2",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "status",
+          "label": "Status",
+          "type": "choice",
+          "choices": [
+            "P&P with the primary applicant.",
+            "P&P separately from the primary applicant."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_7",
+      "title": "CASE IDENTITY",
+      "fields": [
+        {
+          "id": "caseIdentity",
+          "label": "CASE IDENTITY",
+          "type": "choice",
+          "choices": [
+            "CASE IDENTITY (Primary applicant required): Pending",
+            "CASE IDENTITY (Primary applicant required): Verification:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_8",
+      "title": "SOCIAL SECURITY NUMBER (SSN)",
+      "fields": [
+        {
+          "id": "socialSecurityNumberSsn",
+          "label": "SOCIAL SECURITY NUMBER (SSN)",
+          "type": "choice",
+          "choices": [
+            "Not applicable. HH is composed of only non-citizens without SSNs.",
+            "Pending",
+            "Verification: Categorically Eligible (CE) Household. Receiving CE Public Assistance and was verified by the other program.",
+            "SOCIAL SECURITY NUMBER (SSN) (Copy the information for each person):"
+          ]
+        },
+        {
+          "id": "name3",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "verification",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_9",
+      "title": "CITIZENSHIP",
+      "fields": [
+        {
+          "id": "citizenship",
+          "label": "CITIZENSHIP",
+          "type": "choice",
+          "choices": [
+            "All applicants are reported as U.S.-born citizens. No discrepancies.",
+            "CITIZENSHIP (Copy the information for each naturalized citizen and non-citizen):"
+          ]
+        },
+        {
+          "id": "name4",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "naturalizedCitizenNoncitizenType",
+          "label": "Naturalized Citizen / Non-Citizen Type",
+          "type": "text"
+        },
+        {
+          "id": "noncitizenOption",
+          "label": "Non-Citizen Option",
+          "type": "choice",
+          "choices": [
+            "Opting out for benefits.",
+            "Opting in for benefits."
+          ]
+        },
+        {
+          "id": "alienNumber",
+          "label": "Alien Number",
+          "type": "text"
+        },
+        {
+          "id": "documentNumber",
+          "label": "Document Number",
+          "type": "text"
+        },
+        {
+          "id": "categoryCode",
+          "label": "Category Code",
+          "type": "text"
+        },
+        {
+          "id": "entryDate",
+          "label": "Entry Date",
+          "type": "text"
+        },
+        {
+          "id": "sponsor",
+          "label": "Sponsor",
+          "type": "choice",
+          "choices": [
+            "Not required. Categorically Eligible (CE). Receiving CE Public Assistance and was verified by the other program.",
+            "Not required. Non-citizen is under 18 years of age.",
+            "Not required. Entry date is before amnesty date of 12/19/97.",
+            "Not required. Non-citizen has 40 quarter of work.",
+            "Not required. Sponsor is deceased.",
+            "Not required. Non-citizen is determined to be indigent. Refer to DP 63-405D."
+          ]
+        },
+        {
+          "id": "verification2",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "systematicAlienVerificationForEntitlementsSave",
+          "label": "Systematic Alien Verification for Entitlements (SAVE)",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "Received and reviewed for this application. No discrepancies.",
+            "Discrepant:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_10",
+      "title": "SPONSORSHIP",
+      "fields": [
+        {
+          "id": "sponsorship",
+          "label": "SPONSORSHIP",
+          "type": "choice",
+          "choices": [
+            "No one in CF HH is sponsored.",
+            "Categorically Eligible (CE). Receiving CE Public Assistance and was verified by the other program.",
+            "SPONSORSHIP (Copy the information for each sponsored non-citizen):"
+          ]
+        },
+        {
+          "id": "name5",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "verification3",
+          "label": "Verification",
+          "type": "choice",
+          "choices": [
+            "None. Non-citizen is determined to be indigent.",
+            "None. Opted out.",
+            "Pending. SAR 22 provided to the family.",
+            "SAR 22 completed."
+          ]
+        },
+        {
+          "id": "deemedIncomeSpecifyHowIncomeWasCalculated",
+          "label": "Deemed Income (Specify how income was calculated)",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_11",
+      "title": "RESIDENCY",
+      "fields": [
+        {
+          "id": "residency",
+          "label": "RESIDENCY",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "Verification: Categorically Eligible (CE) Household: Receiving CE Public Assistance and was verified by the other program.",
+            "Verification: Homeless: Self-Certification on the application is accepted.  No discrepancies.",
+            "Verification: Eligible to Migrant Seasonal Farmworker status.",
+            "Verification: Self-Certification accepted as CF HH is new to the community and attempted to provide verification with County assistance without success.",
+            "Verification:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_12",
+      "title": "SCHOOL ATTENDANCE",
+      "fields": [
+        {
+          "id": "schoolAttendance",
+          "label": "SCHOOL ATTENDANCE",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "SCHOOL ATTENDANCE (Copy the information for each student over 15 years of age):"
+          ]
+        },
+        {
+          "id": "name6",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "schoolName",
+          "label": "School Name",
+          "type": "text"
+        },
+        {
+          "id": "schoolType",
+          "label": "School Type",
+          "type": "text"
+        },
+        {
+          "id": "unitsEnrolled",
+          "label": "Units Enrolled",
+          "type": "text"
+        },
+        {
+          "id": "calfreshStudentDetermination",
+          "label": "CalFresh Student Determination",
+          "type": "choice",
+          "choices": [
+            "No. Reported School does not meet criteria for Higher Education.",
+            "No. Student is under 18 years of age or over 49 years of age.",
+            "No. Student states to be physically or mentally unfit for work.",
+            "No. Student is determined to be attending less than half-time.",
+            "Yes"
+          ]
+        },
+        {
+          "id": "studentExemption",
+          "label": "Student Exemption",
+          "type": "choice",
+          "choices": [
+            "Student exerts parental control over a dependent HH member who is under 6 years of age.",
+            "Student exerts parental control over a dependent HH member age 6 through 11 and adequate child care services are not available.",
+            "Student is a single parent responsible for the care of a child under the age of 12.",
+            "Student is employed an average of at least 20 hours per week or 80 hours per month.",
+            "Student is self-employed an average of at least of 20 hours per week or 80 hours per month.",
+            "Student is participating in an employment and training program.",
+            "Student is enrolled in the following local program that increases employability:",
+            "Student was approved, awarded, or accepted for state or federally financed work study for the current school term, anticipates working during the term, and has not refused a work assignment.",
+            "Student receives CalWORKs benefits.",
+            "Student receives Tribal TANF benefits.",
+            "Student receives TANF funded Cal Grants A or B.",
+            "Student Exemption (PA 005-2021): Student is eligible for a federal or state work study program during the regular school year.",
+            "Student Exemption (PA 005-2021): Student has a zero Expected Family Contribution determined by the California Student Aid Commission during the current academic year."
+          ]
+        },
+        {
+          "id": "financialAid",
+          "label": "Financial Aid",
+          "type": "choice",
+          "choices": [
+            "No",
+            "Yes"
+          ]
+        },
+        {
+          "id": "verification4",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_13",
+      "title": "LIVING ARRANGEMENTS",
+      "fields": [
+        {
+          "id": "livingArrangements",
+          "label": "LIVING ARRANGEMENTS",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "Drug and Alcohol Rehabilitation Center. Program participation pending.",
+            "Drug and Alcohol Rehabilitation Center. Program participation verification:",
+            "Homeless. Verification: Self-Certification on the application accepted. No discrepancies.",
+            "Other (Specify living arrangement and verification used):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_14",
+      "title": "MEDICAL CONDITION",
+      "fields": [
+        {
+          "id": "medicalCondition",
+          "label": "MEDICAL CONDITION",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "MEDICAL CONDITION (Copy the information for each disabled person):"
+          ]
+        },
+        {
+          "id": "name7",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "medicalConditionTypeDoNotIncludeDiagnosisInformationPerHippa",
+          "label": "Medical Condition Type (Do not include diagnosis information per HIPPA)",
+          "type": "text"
+        },
+        {
+          "id": "verification5",
+          "label": "Verification",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_15",
+      "title": "OTHER PROGRAM ASSISTANCE",
+      "fields": [
+        {
+          "id": "otherProgramAssistance",
+          "label": "OTHER PROGRAM ASSISTANCE",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "OTHER PROGRAM ASSISTANCE (Copy the information for each source of assistance):"
+          ]
+        },
+        {
+          "id": "name8",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "source",
+          "label": "Source",
+          "type": "text"
+        },
+        {
+          "id": "frequency",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "verification6",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "amountUsed",
+          "label": "Amount Used",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_16",
+      "title": "EMPLOYMENT & INCOME",
+      "fields": [
+        {
+          "id": "employment",
+          "label": "EMPLOYMENT",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "EMPLOYMENT (Copy the information for each employer):"
+          ]
+        },
+        {
+          "id": "income",
+          "label": "INCOME",
+          "type": "choice",
+          "choices": [
+            "Zero Income reported. No discrepancies.",
+            "CF HH only has the income reported under Other Program Assistance.",
+            "(Copy the information for each source of income):"
+          ]
+        },
+        {
+          "id": "name9",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "employersource",
+          "label": "Employer/Source",
+          "type": "text"
+        },
+        {
+          "id": "startDate",
+          "label": "Start Date",
+          "type": "text"
+        },
+        {
+          "id": "hourlyRate",
+          "label": "Hourly Rate",
+          "type": "text"
+        },
+        {
+          "id": "averageHoursWeekly",
+          "label": "Average Hours Weekly",
+          "type": "text"
+        },
+        {
+          "id": "frequency2",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "verification7",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "amountUsedSpecifyHowIncomeWasCalculated",
+          "label": "Amount Used (Specify how income was calculated)",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_17",
+      "title": "WINS / WORK REGISTRATION",
+      "fields": [
+        {
+          "id": "wins",
+          "label": "WINS",
+          "type": "choice",
+          "choices": [
+            "Ineligible",
+            "Pending",
+            "Eligible"
+          ]
+        },
+        {
+          "id": "workRegistration",
+          "label": "WORK REGISTRATION",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "WORK REGISTRATION (Copy the information for each person aided):"
+          ]
+        },
+        {
+          "id": "name10",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "workRegistrationStatus",
+          "label": "Work Registration Status",
+          "type": "choice",
+          "choices": [
+            "Exempt. Not applicable. Not aided for CF.",
+            "Exempt. 16/17 and school requirements met or not required.",
+            "Exempt. 60 years of age or older.",
+            "Exempt. Applied for or receiving unemployment.",
+            "Exempt. Cares for HH member mentally / physically impaired.",
+            "Exempt. Child under 16.",
+            "Exempt. Cares for dependent child under 6.",
+            "Exempt. Drug / alcohol program participant.",
+            "Exempt. Student half time or more.",
+            "Exempt. Welfare to Work participant.",
+            "Exempt. Weekly Earnings = Federal minimum wage x 30 hours.",
+            "Exempt. Working 30 hours or more weekly.",
+            "Exempt. Unfit for employment - Medically verified.",
+            "Mandatory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_18",
+      "title": "ABAWD",
+      "fields": [
+        {
+          "id": "ablebodiedAdultsWithoutDependentsAbawd",
+          "label": "ABLE-BODIED ADULTS WITHOUT DEPENDENTS (ABAWD)",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "ABLE-BODIED ADULTS WITHOUT DEPENDENTS (ABAWD) (Copy the information for each person aided):"
+          ]
+        },
+        {
+          "id": "name11",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "abawdStatus",
+          "label": "ABAWD Status",
+          "type": "choice",
+          "choices": [
+            "Exempt. Work Registration exempted.",
+            "Exempt. Age 50 or older.",
+            "Exempt. Child in the home.",
+            "Exempt. Disability",
+            "Exempt. Pregnant",
+            "Exempt. Unfit for employment:",
+            "Mandatory. Waived until further notice."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_19",
+      "title": "ADDITIONAL INFORMATION",
+      "fields": [
+        {
+          "id": "additionalInformation",
+          "label": "ADDITIONAL INFORMATION",
+          "type": "note",
+          "content": "Per ICT, no one in the household is a drug/fleeing felon, no one is in violation of probation or parole, no one has any warrants for their arrest, and no one has any welfare fraud convictions or sanctions."
+        }
+      ]
+    },
+    {
+      "id": "section_20",
+      "title": "PROPERTY",
+      "fields": [
+        {
+          "id": "property",
+          "label": "PROPERTY",
+          "type": "choice",
+          "choices": [
+            "Exempt due to CE.  None reported. No discrepancies.",
+            "Exempt due to CE.",
+            "Exempt due to MCE / BBCE.  None reported. No discrepancies.",
+            "Exempt due to MCE / BBCE.",
+            "Not exempt due to Income over 200% of the Federal Poverty Level (FPL). None reported. No discrepancies.",
+            "Not exempt due to income over 200% of the Federal Poverty Level (FPL). Verification required."
+          ]
+        },
+        {
+          "id": "realPropertyCopyTheInformationForEachProperty",
+          "label": "Real Property (Copy the information for each property)",
+          "type": "text"
+        },
+        {
+          "id": "owner",
+          "label": "Owner",
+          "type": "text"
+        },
+        {
+          "id": "verification8",
+          "label": "Verification",
+          "type": "choice",
+          "choices": [
+            "Verification (CE or MCE / BBCE): Exempt. Verification not required.",
+            "Verification (Over 200% of the FPL): Pending",
+            "Verification (Over 200% of the FPL):"
+          ]
+        },
+        {
+          "id": "vehiclesCopyTheInformationForEachVehicle",
+          "label": "Vehicles (Copy the information for each vehicle)",
+          "type": "text"
+        },
+        {
+          "id": "owner2",
+          "label": "Owner",
+          "type": "text"
+        },
+        {
+          "id": "make",
+          "label": "Make",
+          "type": "text"
+        },
+        {
+          "id": "model",
+          "label": "Model",
+          "type": "text"
+        },
+        {
+          "id": "year",
+          "label": "Year",
+          "type": "text"
+        },
+        {
+          "id": "verification9",
+          "label": "Verification",
+          "type": "choice",
+          "choices": [
+            "Verification (CE or MCE / BBCE): Exempt. Verification not required.",
+            "Verification (Over 200% of the FPL): Pending",
+            "Verification (Over 200% of the FPL):"
+          ]
+        },
+        {
+          "id": "bankAccountsCopyTheInformationForEachAccount",
+          "label": "Bank Accounts (Copy the information for each account)",
+          "type": "text"
+        },
+        {
+          "id": "owner3",
+          "label": "Owner",
+          "type": "text"
+        },
+        {
+          "id": "type",
+          "label": "Type",
+          "type": "text"
+        },
+        {
+          "id": "verification10",
+          "label": "Verification",
+          "type": "choice",
+          "choices": [
+            "Verification (CE or MCE / BBCE): Exempt. Verification not required.",
+            "Verification (Over 200% of the FPL): Pending",
+            "Verification (Over 200% of the FPL):"
+          ]
+        },
+        {
+          "id": "value",
+          "label": "Value",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_21",
+      "title": "EXPENSES",
+      "fields": [
+        {
+          "id": "expenses",
+          "label": "EXPENSES",
+          "type": "text"
+        },
+        {
+          "id": "housingExpense",
+          "label": "Housing Expense",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "Housing Expense (Copy the information for each expense):"
+          ]
+        },
+        {
+          "id": "name12",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "frequency3",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "verification15",
+          "label": "Verification",
+          "type": "choice",
+          "choices": [
+            "Not required. Information is not questionable.",
+            "Pending. Expense reported is questionable because:"
+          ]
+        },
+        {
+          "id": "amountPaidByHouseholdExplainHowAmountWasDetermined",
+          "label": "Amount Paid by Household (Explain how amount was determined)",
+          "type": "text"
+        },
+        {
+          "id": "utilityAllowance",
+          "label": "Utility Allowance",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "Standard Utility Allowance (SUA): CF HH incurs costs for heating and / or cooling.",
+            "Limited Utility Allowance (LUA): CF HH incurs costs for at least two utility expenses, but not for heating and / or cooling.",
+            "Telephone Utility Allowance (TUA): CF HH does not incur a cost for a housing utility but pays for a telephone, cell phone, fax line, or e-mail access."
+          ]
+        },
+        {
+          "id": "standardUtilityAllowanceSubsidySuas",
+          "label": "Standard Utility Allowance Subsidy (SUAS)",
+          "type": "choice",
+          "choices": [
+            "Not eligible. CF HH is eligible to SUA.",
+            "Not eligible. CF HH does not have income.",
+            "Not eligible. Giving SUAS does not increase the CF allotment.",
+            "Eligible. CF HH is not eligible to SUA, has income, and giving SUAS will increase the CF allotment."
+          ]
+        },
+        {
+          "id": "selfemploymentExpenses",
+          "label": "Self-Employment Expenses",
+          "type": "choice",
+          "choices": [
+            "Self-Employment Expenses None reported. No discrepancies.",
+            "Self-Employment Expenses (Copy the information for each expense):"
+          ]
+        },
+        {
+          "id": "name13",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "type4",
+          "label": "Type",
+          "type": "choice",
+          "choices": [
+            "Standard self-employment expenses claimed.",
+            "Actual self-employment expenses claimed."
+          ]
+        },
+        {
+          "id": "frequency4",
+          "label": "Frequency",
+          "type": "text"
+        },
+        {
+          "id": "verification16",
+          "label": "Verification",
+          "type": "choice",
+          "choices": [
+            "Not required. Standard self-employment expenses claimed.",
+            "Pending. Actual self-employment expenses claimed."
+          ]
+        },
+        {
+          "id": "amount",
+          "label": "Amount",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_22",
+      "title": "MEDICARE",
+      "fields": [
+        {
+          "id": "medicare",
+          "label": "MEDICARE",
+          "type": "choice",
+          "choices": [
+            "None reported. No discrepancies.",
+            "MEDICARE (Copy the information for each Medicare recipient):"
+          ]
+        },
+        {
+          "id": "name17",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "id": "verification19",
+          "label": "Verification",
+          "type": "choice",
+          "choices": [
+            "Pending"
+          ]
+        },
+        {
+          "id": "amount4",
+          "label": "Amount",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_23",
+      "title": "INCOME VERSUS EXPENSES",
+      "fields": [
+        {
+          "id": "incomeVersusExpenses",
+          "label": "INCOME VERSUS EXPENSES",
+          "type": "choice",
+          "choices": [
+            "No discrepancies. Information is not questionable.",
+            "Questionable. Resolution:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_24",
+      "title": "IEVS / PVS / NHR / MEDS",
+      "fields": [
+        {
+          "id": "ievsApplicantReport",
+          "label": "IEVS Applicant Report",
+          "type": "choice",
+          "choices": [
+            "Received and reviewed for this application. No discrepancies.",
+            "Pending. Task set for 10 days.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "paymentVerificationSystemPvs",
+          "label": "Payment Verification System (PVS)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "newHireRegistryNhr",
+          "label": "New Hire Registry (NHR)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        },
+        {
+          "id": "medicalEligibilityDataSystemMedsAlerts",
+          "label": "Medi-Cal Eligibility Data System (MEDS) Alerts",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Alerts closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_25",
+      "title": "EBT ACCOUNT",
+      "fields": [
+        {
+          "id": "electronicBenefitTransferEbtAccount",
+          "label": "ELECTRONIC BENEFIT TRANSFER (EBT) ACCOUNT",
+          "type": "choice",
+          "choices": [
+            "New account created.",
+            "Reactivated",
+            "Active"
+          ]
+        },
+        {
+          "id": "electronicBenefitTransferEbtCard",
+          "label": "Electronic Benefit Transfer (EBT) Card",
+          "type": "choice",
+          "choices": [
+            "Family stated to have an EBT card in good, working order.",
+            "Family requested a replacement."
+          ]
+        },
+        {
+          "id": "designatedCardHolder",
+          "label": "Designated Card Holder",
+          "type": "choice",
+          "choices": [
+            "None requested.",
+            "Designated Card Holder (Specify who was requested and how request was verified):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_26",
+      "title": "RESTAURANT MEALS PROGRAM",
+      "fields": [
+        {
+          "id": "restaurantMealsProgram",
+          "label": "RESTAURANT MEALS PROGRAM",
+          "type": "choice",
+          "choices": [
+            "Ineligible. Primary applicant is not homeless and is not elderly / disabled.",
+            "Eligible. Primary applicant is homeless. Family informed of the information provided on the DPSS 4715.",
+            "Eligible. Primary applicant is elderly / disabled. Family informed of the information provided on the DPSS 4715."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_27",
+      "title": "EDBC / CERTIFICATION",
+      "fields": [
+        {
+          "id": "esReviewed",
+          "label": "ES REVIEWED",
+          "type": "note",
+          "content": "ICT- HH not eligible as no break in benefits"
+        },
+        {
+          "id": "eligibleMembers",
+          "label": "ELIGIBLE MEMBER(S)",
+          "type": "note",
+          "content": "XXXXXXXXXXX"
+        },
+        {
+          "id": "edbcRan",
+          "label": "EDBC RAN",
+          "type": "note",
+          "content": "______ and HH is eligible $_____monthly allotment (Matched to incoming ICT/CF215)"
+        },
+        {
+          "id": "recertificationMonthYear",
+          "label": "RECERTIFICATION MONTH / YEAR",
+          "type": "choice",
+          "choices": [
+            "Pending"
+          ]
+        },
+        {
+          "id": "reportingType",
+          "label": "REPORTING TYPE",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "Semi-Annual Reporting (SAR)",
+            "Semi-Annual Reporting Annually (SARA)",
+            "Elderly Simplified Application Project (ESAP)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_28",
+      "title": "NOTICE OF ACTION (NOA)",
+      "fields": [
+        {
+          "id": "noticeOfActionNoa",
+          "label": "NOTICE OF ACTION (NOA)",
+          "type": "choice",
+          "choices": [
+            "Pending",
+            "Generated, reviewed, and appended, if applicable, then provided to the family."
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "id": "ga_no_change",
+  "name": "General Assistance – No Change",
+  "file": "GA_No_Change.json",
+  "program": "General Assistance",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "SHORT DESCRIPTION",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "ga",
+          "label": "GA",
+          "type": "note",
+          "content": "Case Reviewed"
+        }
+      ]
+    },
+    {
+      "id": "section_2",
+      "title": "CONTACT INFORMATION",
+      "fields": [
+        {
+          "id": "source",
+          "label": "SOURCE",
+          "type": "choice",
+          "choices": [
+            "Telephone",
+            "In-Person",
+            "Reported by another program.",
+            "Reported to another program.",
+            "Assigned Task",
+            "Exception List",
+            "External Communication (Specify):",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "familyContactDate",
+          "label": "Family Contact Date",
+          "type": "date"
+        },
+        {
+          "id": "familyContactConductedWith",
+          "label": "Family Contact Conducted With",
+          "type": "text"
+        },
+        {
+          "id": "familyAuthenticationSpecifyWhatAuthenticationFactorsWereUsed",
+          "label": "Family Authentication (Specify what authentication factors were used)",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "section_3",
+      "title": "INFORMATION REVIEW",
+      "fields": [
+        {
+          "id": "informationProvidedListTheInformationBeingEvaluated",
+          "label": "INFORMATION PROVIDED (List the information being evaluated)",
+          "type": "text"
+        },
+        {
+          "id": "reasonForNoChange",
+          "label": "REASON FOR NO CHANGE",
+          "type": "choice",
+          "choices": [
+            "Information is already known to the case.",
+            "Information is not a factor of eligibility for this program.",
+            "Information is not discrepant to previously reported information.",
+            "Other (Specify):"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_4",
+      "title": "IEVS / PVS / NHR / MEDS",
+      "fields": [
+        {
+          "id": "ievsApplicantReport",
+          "label": "IEVS Applicant Report",
+          "type": "choice",
+          "choices": [
+            "Received and reviewed for this application. No discrepancies.",
+            "Pending. Task set for 10 days.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "paymentVerificationSystemPvs",
+          "label": "Payment Verification System (PVS)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepant:"
+          ]
+        },
+        {
+          "id": "newHireRegistryNhr",
+          "label": "New Hire Registry (NHR)",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Reports closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        },
+        {
+          "id": "medicalEligibilityDataSystemMedsAlerts",
+          "label": "Medi-Cal Eligibility Data System (MEDS) Alerts",
+          "type": "choice",
+          "choices": [
+            "None found.",
+            "Alerts closed. No discrepancies.",
+            "Discrepancy:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_5",
+      "title": "EDBC",
+      "fields": [
+        {
+          "id": "eligibilityDeterminationBenefitCalculationEdbcResults",
+          "label": "ELIGIBILITY DETERMINATION BENEFIT CALCULATION (EDBC) RESULTS",
+          "type": "note",
+          "content": "No action required."
+        }
+      ]
+    }
+  ]
+}

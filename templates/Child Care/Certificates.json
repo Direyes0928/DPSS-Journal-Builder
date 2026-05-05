@@ -1,0 +1,96 @@
+{
+  "id": "certificates",
+  "name": "Child Care – Certificates",
+  "file": "Certificates.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "CERTIFICATES",
+      "fields": [
+        {
+          "id": "provider",
+          "label": "Provider",
+          "type": "text"
+        },
+        {
+          "id": "hoursOfOperation",
+          "label": "Hours of Operation",
+          "type": "text"
+        },
+        {
+          "id": "children",
+          "label": "Child(ren)",
+          "type": "text"
+        },
+        {
+          "id": "certificateId",
+          "label": "Certificate ID",
+          "type": "text"
+        },
+        {
+          "id": "rates",
+          "label": "Rates",
+          "type": "text"
+        },
+        {
+          "id": "nontraditionalRatesIfApplicable",
+          "label": "Non-traditional rates (if applicable)",
+          "type": "text"
+        },
+        {
+          "id": "variableOrSetSchedule",
+          "label": "Variable or Set Schedule",
+          "type": "text"
+        },
+        {
+          "id": "dateCertificatesCompletedIssuedToParentscaretakersAndProviders",
+          "label": "Date certificates completed & issued to parent(s)/caretaker(s) and providers",
+          "type": "date"
+        },
+        {
+          "id": "dateDpss3057MailedToProvidersAndImaged",
+          "label": "Date DPSS 3057 mailed to provider(s) and imaged",
+          "type": "date"
+        },
+        {
+          "id": "current12monthAuthorizationPeriod",
+          "label": "Current 12-month authorization period",
+          "type": "text"
+        },
+        {
+          "id": "certificatePeriodForEachChildprovider",
+          "label": "Certificate period for each child/provider",
+          "type": "text"
+        },
+        {
+          "id": "amountOfFamilyFeeIfApplicable",
+          "label": "Amount of family fee (if applicable)",
+          "type": "text"
+        },
+        {
+          "id": "amountOfCopaymentIfApplicable",
+          "label": "Amount of co-payment (if applicable)",
+          "type": "text"
+        },
+        {
+          "id": "scheduleOfChildCareHoursRequested",
+          "label": "Schedule of Child Care Hours Requested",
+          "type": "text"
+        },
+        {
+          "id": "scheduleOfChildCareHoursApproved",
+          "label": "Schedule of Child Care Hours Approved",
+          "type": "text"
+        },
+        {
+          "id": "additionalInformation",
+          "label": "Additional Information",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

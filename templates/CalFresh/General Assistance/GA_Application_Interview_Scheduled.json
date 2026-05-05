@@ -1,0 +1,134 @@
+{
+  "id": "ga_application_interview_scheduled",
+  "name": "General Assistance – Application Interview Scheduled",
+  "file": "General/GA_Application_Interview_Scheduled.json",
+  "program": "General",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "GENERAL",
+      "fields": [
+        {
+          "id": "shortDescription",
+          "label": "SHORT DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "ga",
+          "label": "GA",
+          "type": "note",
+          "content": "Application Interview Scheduled"
+        },
+        {
+          "id": "longDescription",
+          "label": "LONG DESCRIPTION",
+          "type": "text"
+        },
+        {
+          "id": "applicationDate",
+          "label": "APPLICATION DATE",
+          "type": "date"
+        },
+        {
+          "id": "applicationType",
+          "label": "APPLICATION TYPE",
+          "type": "choice",
+          "choices": [
+            "DPSS 1354",
+            "DPSS 1354B (Untimely Reapplication)",
+            "SAWS 2 Plus and DPSS 1354C"
+          ]
+        },
+        {
+          "id": "language",
+          "label": "LANGUAGE",
+          "type": "choice",
+          "choices": [
+            "English",
+            "Spanish- Certified SSO worker assisted- DPSS 1764 requirements fulfilled. Worker #:",
+            "Other (DPSS 1764 required) (Specify the requested language and how the request was accommodated):"
+          ]
+        },
+        {
+          "id": "scheduledInterviewMethod",
+          "label": "SCHEDULED INTERVIEW METHOD",
+          "type": "choice",
+          "choices": [
+            "Telephone",
+            "In-Person. Family requested.",
+            "In-Person. No phone number provided on the application."
+          ]
+        },
+        {
+          "id": "scheduledInterviewDateAndTime",
+          "label": "SCHEDULED INTERVIEW DATE AND TIME",
+          "type": "text"
+        },
+        {
+          "id": "firstCall",
+          "label": "FIRST CALL",
+          "type": "choice",
+          "choices": [
+            "Unable to call. No phone number provided.",
+            "FIRST CALL (Copy the information for each phone number on file) (Specify time called):"
+          ]
+        },
+        {
+          "id": "phoneNumber",
+          "label": "Phone Number",
+          "type": "text"
+        },
+        {
+          "id": "result",
+          "label": "Result",
+          "type": "choice",
+          "choices": [
+            "Call unanswered. Unable to leave a message. No voicemail available.",
+            "Call unanswered. Unable to leave a message. Voicemail is full.",
+            "Call unanswered. Left the scripted message on voicemail.",
+            "Call answered by non-case person. Call recipient denied association to the family. No further action taken.",
+            "Call answered by non-case person. Call recipient confirmed association to the family. Left a message for the family.",
+            "Call answered by family. Family was authenticated. Family is unable to conduct an interview at this time. Family scheduled for an interview.",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "secondCall",
+          "label": "SECOND CALL",
+          "type": "choice",
+          "choices": [
+            "Unable to call. No phone number provided.",
+            "SECOND CALL (Copy the information for each phone number on file) (Specify time called):"
+          ]
+        },
+        {
+          "id": "phoneNumber2",
+          "label": "Phone Number",
+          "type": "text"
+        },
+        {
+          "id": "result2",
+          "label": "Result",
+          "type": "choice",
+          "choices": [
+            "Call unanswered. Unable to leave a message. No voicemail available.",
+            "Call unanswered. Unable to leave a message. Voicemail is full.",
+            "Call unanswered. Left the scripted message on voicemail.",
+            "Call answered by non-case person. Call recipient denied association to the family. No further action taken.",
+            "Call answered by non-case person. Call recipient confirmed association to the family. Left a message for the family.",
+            "Call answered by family. Family was authenticated. Family is unable to conduct an interview at this time. Family scheduled for an interview.",
+            "Other (Specify):"
+          ]
+        },
+        {
+          "id": "appointmentLetterGen102",
+          "label": "APPOINTMENT LETTER (GEN 102)",
+          "type": "note",
+          "content": "Generated and provided to the family."
+        }
+      ]
+    }
+  ]
+}

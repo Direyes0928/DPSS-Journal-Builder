@@ -1,0 +1,106 @@
+{
+  "id": "change_of_provider",
+  "name": "Child Care – Change of Provider",
+  "file": "Change_of_Provider.json",
+  "program": "Child Care",
+  "version": "2026-05-05T00:00:00Z",
+  "imported": false,
+  "sections": [
+    {
+      "id": "section_1",
+      "title": "PROVIDER CHANGE REPORTED",
+      "fields": [
+        {
+          "id": "dateChangeReported",
+          "label": "Date change reported",
+          "type": "text"
+        },
+        {
+          "id": "currentProvider",
+          "label": "Current provider",
+          "type": "text"
+        },
+        {
+          "id": "resourceId",
+          "label": "Resource ID",
+          "type": "text"
+        },
+        {
+          "id": "lastDayOfCareAtCurrentProvider",
+          "label": "Last day of care at current provider",
+          "type": "text"
+        },
+        {
+          "id": "dateParentGave2weekNotice",
+          "label": "Date parent gave 2-week notice",
+          "type": "text"
+        },
+        {
+          "id": "dateDpss3057SentToCurrentProvider",
+          "label": "Date DPSS 3057 sent to current provider",
+          "type": "date"
+        },
+        {
+          "id": "dateCertificatesCompletedAndIssuedToParentscaretakersAndProviders",
+          "label": "Date certificates completed and issued to parent(s)/caretaker(s) and provider(s)",
+          "type": "date"
+        },
+        {
+          "id": "newProvider",
+          "label": "New provider",
+          "type": "text"
+        },
+        {
+          "id": "resourceIdIfApplicable",
+          "label": "Resource ID (if applicable)",
+          "type": "text"
+        },
+        {
+          "id": "reviewDate",
+          "label": "Review Date",
+          "type": "text"
+        },
+        {
+          "id": "typeOfProvider",
+          "label": "Type of provider",
+          "type": "text"
+        },
+        {
+          "id": "addressWhereServicesWillBeProvided",
+          "label": "Address where services will be provided",
+          "type": "text"
+        },
+        {
+          "id": "dateServicesWillBegin",
+          "label": "Date services will begin",
+          "type": "text"
+        },
+        {
+          "id": "dateProviderPacketMailedOut",
+          "label": "Date provider packet mailed out",
+          "type": "text"
+        },
+        {
+          "id": "dateOfFacetofaceAppointmentWithNewProviderIfApplicable",
+          "label": "Date of Face-to-Face appointment with new provider (if applicable)",
+          "type": "text"
+        },
+        {
+          "id": "listOfPagesReviewedAndUpdatedInCalsaws",
+          "label": "List of pages reviewed and updated in CalSAWS",
+          "type": "text"
+        },
+        {
+          "id": "dateAndListOfDocumentsverificationSentForImaging",
+          "label": "Date and list of documents/verification sent for imaging",
+          "type": "text"
+        },
+        {
+          "id": "additionalInformationAndComments",
+          "label": "Additional information and comments",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
